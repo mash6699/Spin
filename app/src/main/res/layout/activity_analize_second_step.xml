@@ -41,10 +41,12 @@
                 android:textStyle="bold" />
 
             <LinearLayout
+                android:id="@+id/liner_clorodpd"
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="2">
+                android:weightSum="2"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -96,10 +98,12 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/liner_cloro_libre"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="2">
+                android:weightSum="2"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -149,7 +153,34 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/liner_bromo"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:visibility="gone">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/lbl_bromo"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1" />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sp_bromo"
+                    android:prompt="@string/lbl_select_bromo"
+                    android:layout_centerVertical="true"
+                    android:spinnerMode="dialog"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"

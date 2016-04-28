@@ -13,6 +13,7 @@ public class SpingApplication extends Application{
     private String idUsuario;
     private String name;
     private String date;
+    private int tipoPiscina;
 
     private String fs_11;
     private int fsp_11;
@@ -87,6 +88,14 @@ public class SpingApplication extends Application{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getTipoPiscina() {
+        return tipoPiscina;
+    }
+
+    public void setTipoPiscina(int tipoPiscina) {
+        this.tipoPiscina = tipoPiscina;
     }
 
     public String getFs_11() {

@@ -30,6 +30,7 @@ public class AnalizeSecondStepActivity extends AppCompatActivity {
 
 
     private List<String> metalesList;
+    private int idTipoPiscina = 0;
 
     @Nullable
     @Bind(R.id.toolbar)
@@ -55,6 +56,9 @@ public class AnalizeSecondStepActivity extends AppCompatActivity {
     @Bind(R.id.sp_cloramidas)
     Spinner sp_cloramidas ;
     @Nullable
+    @Bind(R.id.sp_bromo)
+    Spinner sp_bromo ;
+    @Nullable
     @Bind(R.id.sp_clorolibre)
     Spinner sp_clorolibre ;
     @Nullable
@@ -64,10 +68,21 @@ public class AnalizeSecondStepActivity extends AppCompatActivity {
     @Bind(R.id.sp_cya)
     Spinner sp_cya ;
 
-
     @Nullable
     @Bind(R.id.sp_metales)
     Spinner sp_metales;
+
+    @Nullable
+    @Bind(R.id.liner_clorodpd)
+    View liner_clorodpd ;
+
+    @Nullable
+    @Bind(R.id.liner_cloro_libre)
+    View liner_cloro_libre ;
+
+    @Nullable
+    @Bind(R.id.liner_bromo)
+    View liner_bromo;
 
 
     @Nullable
@@ -88,6 +103,7 @@ public class AnalizeSecondStepActivity extends AppCompatActivity {
 
         pool_name.setText(spingApplication.getName());
         pool_date.setText(spingApplication.getDate());
+        idTipoPiscina = spingApplication.getTipoPiscina();
 
         setAdaptersInView();
 
@@ -95,6 +111,13 @@ public class AnalizeSecondStepActivity extends AppCompatActivity {
 
     void setAdaptersInView(){
         Log.d(TAG, "setAdaptersInView");
+
+        if(idTipoPiscina == 1){
+            liner_clorodpd.setVisibility(View.VISIBLE);
+            liner_cloro_libre.setVisibility(View.VISIBLE);
+        }else{
+            liner_bromo.setVisibility(View.VISIBLE);
+        }
 
 
         List<String> listCloroDpd = new ArrayList<String>();
@@ -121,6 +144,14 @@ public class AnalizeSecondStepActivity extends AppCompatActivity {
         ArrayAdapter<String> arrayAdapterCloroLibre = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listCloroLibre);
         arrayAdapterCloroLibre.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_clorolibre.setAdapter(arrayAdapterCloroLibre);
+
+        List<String> listBromo = new ArrayList<String>();
+        for(float d = 0f ; d <= 40 ; d = d + 0.05f){
+            listBromo.add("" + String.format(Constants.TWO_DECIMAL, d) + " ppm");
+        }
+        ArrayAdapter<String> arrayAdapterBromo = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listBromo);
+        arrayAdapterBromo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_bromo.setAdapter(arrayAdapterBromo);
 
         List<String> listCloramidas = new ArrayList<String>();
         for(float m = 0f ; m <= 20 ; m = m + 0.05f){

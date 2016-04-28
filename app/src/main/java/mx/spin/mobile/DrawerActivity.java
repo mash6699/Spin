@@ -56,15 +56,11 @@ public class DrawerActivity extends AppCompatActivity implements OnNavigationIte
 
         navigationView.inflateHeaderView(R.layout.drawer_header);
         navigationView.setNavigationItemSelectedListener(this);
-//        navigationView.setItemTextColor(getColorStateList(R.color.white));
+    //    navigationView.setItemTextColor(getColorStateList(R.color.white));
 
         if (getIntent().getExtras() != null && getIntent().getExtras().getInt("showFragment", 0) == 2) {
             changeFragment(new WhereBuyFragment(), getSupportFragmentManager());
         } else {
-            /*FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frame, new PoolsFragment());
-            fragmentTransaction.commit();*/
-
             updateFragment(HOME);
         }
 
@@ -91,12 +87,9 @@ public class DrawerActivity extends AppCompatActivity implements OnNavigationIte
         } else {
             item.setChecked(true);
         }
-
         drawerLayout.closeDrawers();
-
         updateFragment(getMenuPosition(item));
         return true;
-
     }
 
     private int getMenuPosition(MenuItem item){
@@ -108,9 +101,9 @@ public class DrawerActivity extends AppCompatActivity implements OnNavigationIte
             case R.id.drawerAnalize:
                 position =  1;
                 break;
-           /* case R.id.drawerWhereBuy:
+            case R.id.drawerWhereBuy:
                 position =  2;
-                break;*/
+                break;
             case R.id.drawerConcepts:
                 position = 3;
                 break;

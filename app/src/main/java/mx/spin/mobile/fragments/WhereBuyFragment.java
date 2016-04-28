@@ -59,11 +59,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 import io.realm.Realm;
-
 import mx.spin.mobile.R;
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class WhereBuyFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private static String TAG = AnalizeFragment.class.getName();
@@ -138,10 +135,9 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
                             Uri.parse("http://maps.google.com/maps?daddr=" + latLngSeleccionado.latitude + "," + latLngSeleccionado.longitude + ""));
                     startActivity(intent);
                 }
-
-
             }
         });
+
         mMapa.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -241,7 +237,7 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
                     mMapa.moveCamera(CameraUpdateFactory.newLatLngZoom(posicion, 16));
                     obtenerTiendas(posicion);
                 } else {
-                    Toast.makeText(getActivity(), "Localizacion vacia", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Localización vacía", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -335,8 +331,6 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
 
             }
         });
-
-
     }
 
 

@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.loopj.android.http.TextHttpResponseHandler;
 
+import mx.spin.mobile.R;
+
 public abstract class TextHttpResponseHandlerMessage extends TextHttpResponseHandler {
 	private ProgressDialog dialog;
 	

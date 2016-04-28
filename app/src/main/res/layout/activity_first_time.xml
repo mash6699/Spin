@@ -83,8 +83,7 @@
                 card_view:cardCornerRadius="21dp"
                 card_view:cardElevation="6dp"
                 android:layout_marginTop="17dp"
-                android:layout_marginBottom="17dp"
-                android:visibility="gone">
+                android:layout_marginBottom="17dp">
 
                 <Button
                     android:id="@+id/btnRegisGl"

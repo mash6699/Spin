@@ -177,6 +177,7 @@
     <string name="lbl_cloro_dpd">Cloro (DPD1)</string>
     <string name="lbl_metales_cloro">Metales / Cloro</string>
     <string name="lbl_cloramidas">Cloramidas</string>
+    <string name="lbl_bromo">Bromo</string>
     <string name="lbl_turbidez">Turbidez</string>
     <string name="lbl_indice_saturacion">Índice de saturación:  </string>
     <string name="lbl_agua_en_balance">Agua en Balance</string>
@@ -201,19 +202,19 @@
 
     <string name="lbl_select_clorodpd">Selecciona el cloro dpd1</string>
     <string name="lbl_select_clorolibre">Selecciona el cloro libre</string>
+    <string name="lbl_select_bromo">Selecciona el bromo</string>
     <string name="lbl_select_cloramidas">Selecciona las cloramidas</string>
     <string name="lbl_select_turbidez">Selecciona la turbidez</string>
     <string name="lbl_select_cya">Selecciona la cya</string>
 
 
-    <string name="facebook_app_id">506568802801601</string>
-    <!--AIzaSyBkj8LrKpDkeGLiooEtCGNyXanHvLKsIiE-->
-    <string name="maps_apy_key">AIzaSyB6-nzQZiLRnA-N-cUa3sb2ulAij2N37d4</string>
+    <string name="facebook_app_id">1689859307920046</string>
+    <string name="maps_apy_key">AIzaSyBmZ7ue7T23S6luSX4H1qE04OirWdR9I3Q</string>
 
     <string name="token_mapbox">pk.eyJ1IjoiZ29ycm90b3dpIiwiYSI6ImNpamlyZTkxdTAyd210c2x0cTkxazFxamsifQ.Hd7OeMivc4FObe8o40aZ0A</string>
     <string name="acces_token_g">AIzaSyAGhRRS0ZhEOLHh2RFwZj2GImWLAO9R2Y8</string>
 
-    <string name="auth_google">279774397586-2h05s0nk4qgouonhdg6dmpjuk7u3ma0n.apps.googleusercontent.com</string>
+    <string name="auth_google">76976375361-nq7cep2tcs7hhn3k4h2hsv4p9a94llfs.apps.googleusercontent.com</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

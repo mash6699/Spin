@@ -100,6 +100,7 @@ public class PoolsFragment extends Fragment {
         spingApplication.setIdPiscina(piscina.getId());
         spingApplication.setName(piscina.getNombre());
         spingApplication.setDate(utilViews.getDatePool());
+        spingApplication.setTipoPiscina(piscina.getIdTipoPiscina());
         Intent detailIntent = new Intent(getActivity(), PoolDetailActivity.class);
         startActivity(detailIntent);
     }

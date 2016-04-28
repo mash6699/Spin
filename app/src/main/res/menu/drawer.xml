@@ -16,12 +16,12 @@
             android:title="@string/title_analisis"
             android:tint="@color/white"/>
 
-<!--        <item
+        <item
             android:id="@+id/drawerWhereBuy"
             android:checked="false"
             android:icon="@drawable/icon_comprar"
             android:title="@string/title_buy"
-            android:tint="@color/white"/>-->
+            android:tint="@color/white"/>
 
         <item
             android:id="@+id/drawerConcepts"
