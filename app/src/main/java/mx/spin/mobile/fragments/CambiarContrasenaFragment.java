@@ -13,7 +13,7 @@ import android.widget.Toast;
 import mx.spin.mobile.R;
 
 import mx.spin.mobile.network.NetConnection;
-import mx.spin.mobile.utils.KEYS;
+import mx.spin.mobile.utils.Constants.ServiceKeys;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 import mx.spin.mobile.utils.Utils;
 
@@ -88,8 +88,8 @@ public class CambiarContrasenaFragment extends Fragment {
                     Boolean success = jsonObject.getBoolean("success");
                     if (success) {
 
-                        if (jsonObject.has(KEYS.RESPONSE_CODE)) {
-                            int rc = jsonObject.getInt(KEYS.RESPONSE_CODE);
+                        if (jsonObject.has(ServiceKeys.RESPONSE_CODE)) {
+                            int rc = jsonObject.getInt(ServiceKeys.RESPONSE_CODE);
                             showMessageToast(rc);
                         }else{
                             showMessageToast(5);

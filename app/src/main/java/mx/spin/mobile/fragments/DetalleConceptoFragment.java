@@ -15,7 +15,7 @@ import mx.spin.mobile.R;
 import mx.spin.mobile.SpinApp;
 import mx.spin.mobile.entitys.ItemConcepts;
 import mx.spin.mobile.network.NetConnection;
-import mx.spin.mobile.utils.Constants;
+import mx.spin.mobile.utils.Constants.Constants;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 import com.nostra13.universalimageloader.core.ImageLoader;
 

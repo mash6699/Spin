@@ -22,7 +22,7 @@ import mx.spin.mobile.adapters.AdapterConcept;
 import mx.spin.mobile.entitys.ItemConcepts;
 import mx.spin.mobile.interfaces.ConceptoSelector;
 import mx.spin.mobile.network.NetConnection;
-import mx.spin.mobile.utils.Constants;
+import mx.spin.mobile.utils.Constants.Constants;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 
 import org.json.JSONArray;
@@ -98,7 +98,6 @@ public class ConceptsFragment extends android.support.v4.app.Fragment implements
          recList.setLayoutManager(llm);
          adapterConcept = new AdapterConcept(new ArrayList<ItemConcepts>(),getActivity(),this);
      }
-
     void setConceptsInView(){
         recList.setAdapter(adapterConcept);
     }

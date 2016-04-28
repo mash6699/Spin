@@ -16,7 +16,7 @@ import android.widget.TextView;
 import mx.spin.mobile.entitys.Usuario;
 import mx.spin.mobile.network.NetConnection;
 import mx.spin.mobile.singleton.SpingApplication;
-import mx.spin.mobile.utils.KEYS;
+import mx.spin.mobile.utils.Constants.ServiceKeys;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 import mx.spin.mobile.utils.UtilViews;
 import mx.spin.mobile.utils.Utils;
@@ -109,23 +109,23 @@ public class LoginActivity extends AppCompatActivity {
                 hideMessage();
                 try {
                     JSONObject jsonObject = new JSONObject(responseString);
-                    if (jsonObject.optBoolean(KEYS.EXITO)) {
-                        JSONObject sesion = jsonObject.optJSONObject(KEYS.SESSION);
+                    if (jsonObject.optBoolean(ServiceKeys.EXITO)) {
+                        JSONObject sesion = jsonObject.optJSONObject(ServiceKeys.SESSION);
                         Log.d("LoginOK", responseString);
 
                         Realm realm = Realm.getInstance(LoginActivity.this);
                         realm.beginTransaction();
 
                         Usuario user = realm.createObject(Usuario.class);
-                        user.setId(sesion.optString(KEYS.ID_USER));
-                        user.setNombre(sesion.optString(KEYS.NAME));
-                        user.setEstado(sesion.optString(KEYS.STATE));
-                        user.setPais(sesion.optString(KEYS.COUNTRY));
-                        user.setEmail(sesion.optString(KEYS.EMAIL));
-                        user.setTelefono(sesion.optString(KEYS.PHONE));
-                        user.setCantPiscinas(Integer.parseInt(sesion.optString(KEYS.TOTAL_POOLS)));
+                        user.setId(sesion.optString(ServiceKeys.ID_USER));
+                        user.setNombre(sesion.optString(ServiceKeys.NAME));
+                        user.setEstado(sesion.optString(ServiceKeys.STATE));
+                        user.setPais(sesion.optString(ServiceKeys.COUNTRY));
+                        user.setEmail(sesion.optString(ServiceKeys.EMAIL));
+                        user.setTelefono(sesion.optString(ServiceKeys.PHONE));
+                        user.setCantPiscinas(Integer.parseInt(sesion.optString(ServiceKeys.TOTAL_POOLS)));
 
-                        spingApplication.setIdUsuario(sesion.optString(KEYS.ID_USER));
+                        spingApplication.setIdUsuario(sesion.optString(ServiceKeys.ID_USER));
 
                         realm.commitTransaction();
 

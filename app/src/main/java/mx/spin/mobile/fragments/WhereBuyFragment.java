@@ -63,7 +63,7 @@ import mx.spin.mobile.R;
 
 public class WhereBuyFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
-    private static String TAG = AnalizeFragment.class.getName();
+    private static String TAG = WhereBuyFragment.class.getName();
 
     @Nullable
     @Bind(R.id.toolbar)
@@ -74,7 +74,7 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
 
     private GoogleMap mMapa;
     private GeoLocalization geoLocalization;
-    private ArrayList<LatLng> listadoTiendas;
+    private ArrayList<LatLng> listadoTiendas = new ArrayList<>();
     private Button btnComollegar;
     private LocationManager mLocManager;
     private Location mLastLocation;
@@ -87,7 +87,16 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
     private static final long MIN_TIME_BW_UPDATES = 1000 * 5; // 5 Segundos
 
     private GoogleApiClient mGoogleApiClient;
-    private TextView infoTienda;
+    /* @Nullable
+     @Bind(R.id.infoMarcador)*/
+    TextView infoTienda;
+   /* @Nullable
+    @Bind(R.id.btnComollegar)*/
+    Button getBtnComollegar;
+   /* @Nullable
+    @Bind(R.id.btnSendEmail)*/
+    Button btnSendEmail;
+
     private Integer REQUEST_CHECK_SETTINGS = 0;
 
     private View rootView;
@@ -95,18 +104,19 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.fragment_where_buy, container, false);
 
+        rootView = inflater.inflate(R.layout.fragment_where_buy, container, false);
         ButterKnife.bind(this,rootView);
 
-        listadoTiendas = new ArrayList<>();
-        infoTienda = (TextView) rootView.findViewById(R.id.infoMarcador);
-        toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
-        mMapa = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map)).getMap();
-        btnComollegar = (Button) rootView.findViewById(R.id.btnComollegar);
-        txt_titleToolbar.setText("¿" + getResources().getString(R.string.title_buy) +"?");
+        //  listadoTiendas = new ArrayList<>();
 
+        mMapa = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map)).getMap();
+           btnComollegar = (Button) rootView.findViewById(R.id.btnComollegar);
+        btnSendEmail = (Button) rootView.findViewById(R.id.btnSendEmail);
+            infoTienda = (TextView) rootView.findViewById(R.id.infoMarcador);
+        //  toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
+
+        txt_titleToolbar.setText("¿" + getResources().getString(R.string.title_buy) +"?");
         toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -147,6 +157,37 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
                 return false;
             }
         });
+
+        btnSendEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sendEmailIntent = new Intent(Intent.ACTION_SEND);
+
+                sendEmailIntent.setData(Uri.parse("mailto:"));
+                sendEmailIntent.setType("text/plain");
+
+                sendEmailIntent.putExtra(Intent.EXTRA_EMAIL, "miguel.ash.14@gmail.com");
+                sendEmailIntent.putExtra(Intent.EXTRA_CC, "miguel.ash.14@gmail.com");
+                sendEmailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
+                sendEmailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
+
+                try {
+                   // startActivity(Intent.createChooser(sendEmailIntent, "Send mail..."));
+                   // finish();
+                   // if (sendEmailIntent.resolveActivity(getPackageManager()) != null) {
+                        startActivity(sendEmailIntent);
+                  //  }
+                    Log.i(TAG, "finish");
+                }
+                catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(getActivity(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+            }
+        });
+
 
         return rootView;
     }

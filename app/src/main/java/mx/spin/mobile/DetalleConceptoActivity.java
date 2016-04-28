@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import mx.spin.mobile.entitys.ItemConcepts;
 import mx.spin.mobile.fragments.DetalleConceptoFragment;
-import mx.spin.mobile.utils.Constants;
+import mx.spin.mobile.utils.Constants.Constants;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

@@ -1,5 +1,7 @@
 package mx.spin.mobile.utils;
 
+import mx.spin.mobile.utils.Constants.Constants;
+
 /**
  * Created by gorro on 06/02/16.
  */

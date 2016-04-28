@@ -1,9 +1,9 @@
-package mx.spin.mobile.utils;
+package mx.spin.mobile.utils.Constants;
 
 /**
  * Created by miguelangel on 08/04/2016.
  */
-public class KEYS {
+public class ServiceKeys {
 
     //BOOLEANS
     public static final String EXITO    = "exito";

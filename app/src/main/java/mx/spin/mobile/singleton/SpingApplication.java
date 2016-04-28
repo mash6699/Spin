@@ -58,6 +58,24 @@ public class SpingApplication extends Application{
         return INSTANCE;
     }
 
+    public void resetAllValues(){
+        System.out.println("resetsAllValues:...");
+        this.setFsp_11(0);
+        this.setFsp_12(0);
+        this.setFsp_13(0);
+        this.setFsp_14(0);
+        this.setFsp_15(0);
+
+        this.setSsp_21(0);
+        this.setSsp_22(0);
+        this.setSsp_23(0);
+        this.setSsp_24(0);
+        this.setSsp_25(0);
+        this.setSsp_26(0);
+        this.setSsp_27(0);
+    }
+
+
     public int getIdPiscina() {
         return idPiscina;
     }

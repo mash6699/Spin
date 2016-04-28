@@ -5,12 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import mx.spin.mobile.R;
 import mx.spin.mobile.entitys.ItemConcepts;
 import mx.spin.mobile.interfaces.ConceptoSelector;
 import mx.spin.mobile.utils.RecyclerViewHeaderFooterAdapter;
-import mx.spin.mobile.viewholders.ConceptoViewHolder;
 
 import java.util.List;
 
@@ -42,5 +42,27 @@ public class AdapterConcept extends RecyclerViewHeaderFooterAdapter<ItemConcepts
         ItemConcepts concepts = info.get(position);
         ConceptoViewHolder vh = (ConceptoViewHolder) holder;
         vh.bindConcepto(concepts);
+    }
+
+    class ConceptoViewHolder extends RecyclerView.ViewHolder {
+        private TextView vNombre;
+        private Context context;
+        private ConceptoSelector selector;
+
+        public ConceptoViewHolder(View itemView, ConceptoSelector selector, Context context) {
+            super(itemView);
+            vNombre= (TextView) itemView.findViewById( R.id.txtItemConcept);
+            this.selector = selector;
+            this.context = context;
+        }
+        public void bindConcepto(final ItemConcepts concepts){
+            vNombre.setText(concepts.getTitulo());
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    selector.seleccionarConcepto(concepts);
+                }
+            });
+        }
     }
 }

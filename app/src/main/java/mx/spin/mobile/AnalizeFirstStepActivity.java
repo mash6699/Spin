@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -21,7 +20,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import mx.spin.mobile.singleton.SpingApplication;
-import mx.spin.mobile.utils.Constants;
+import mx.spin.mobile.utils.Constants.Constants;
 import mx.spin.mobile.utils.UtilViews;
 
 public class AnalizeFirstStepActivity extends AppCompatActivity implements  AdapterView.OnItemSelectedListener {

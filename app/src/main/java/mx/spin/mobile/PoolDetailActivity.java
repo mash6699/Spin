@@ -111,6 +111,7 @@ public class PoolDetailActivity extends AppCompatActivity {
 
     void setPoolInView(){
         Log.d(TAG, "setPoolInView");
+        spingApplication.resetAllValues();
         txt_titleToolbar.setText(R.string.title_activity_pool_detail);
         txt_nombre.setText(piscina.getNombre());
         txt_instalacion.setText(piscina.getTipoInstalacion());

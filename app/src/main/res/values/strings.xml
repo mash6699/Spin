@@ -32,6 +32,7 @@
     <string name="lbl_btn_registarte">REGÍSTRATE</string>
     <string name="lbl_btn_guardar">GUARDAR</string>
     <string name="lbl_btn_como_llegar">CÓMO LLEGAR</string>
+    <string name="lbl_btn_enviar">Enviar Email</string>
     <string name="lbl_btn_recuperar">RECUPERAR</string>
     <string name="lbl_btn_ok">Ok</string>
     <string name="lbl_btn_calcelar">CANCELAR</string>
@@ -67,7 +68,7 @@
     <!--   <string name="lbl_empty_cantidad">Debes ingresar la cantidada.</string>
        <string name="lbl_empty_caballaje">Debes ingresar el caballaje.</string>-->
     <string name="lbl_empty_uso">Debes seleccionar el uso de la Piscina\n</string>
-   <string name="lbl_empty_piscina">Debes seleccionar el tipo de Piscina\n</string>
+    <string name="lbl_empty_piscina">Debes seleccionar el tipo de Piscina\n</string>
     <string name="lbl_empty_instalacion">Debes seleccionar el tipo de Instalación\n</string>
     <string name="lbl_empty_dosificador">Debes seleccionar el tipo de Dosificador\n</string>
     <string name="lbl_empty_calefaccion">Debes seleccionar el tipo de Calefacción\n</string>
