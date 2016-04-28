@@ -1,0 +1,22 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+
+    <item
+        android:left="-11dp"
+        android:right="-11dp"
+        android:top="-11dp">
+        <shape>
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:width="6dp"
+                android:color="@color/bluetextligth"
+                android:dashWidth="10px" />
+        </shape>
+    </item>
+
+</layer-list>

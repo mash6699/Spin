@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#51afd1</color>
+    <color name="colorPrimaryDark">#46a0c2</color>
+    <color name="colorPrimaryLight">#B2EBF2</color>
+    <color name="colorAccent">#fcfcfc</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="darkblue">#56a4ce</color>
+    <color name="darkskyblue">#4a90e2</color>
+    <color name="darkskyblueshadow">#3d7ac2</color>
+    <color name="bluetextligth">#95e3ff</color>
+    <color name="outside_range">#f3bdbd</color>
+    <color name="blush">#f78181</color>
+    <color name="blush_shadow">#c66161</color>
+
+    <color name="transparent">#00000000</color>
+    <!-- card colors -->
+    <color name="card_background">#ffffff</color>
+    <color name="card_shadow_1">#d4d4d4</color>
+    <color name="card_shadow_2">#dddddd</color>
+    <color name="card_detailing">#eee</color>
+    <!-- TOAST MESSAGES COLORS -->
+    <color name="red_gradient_top">#A71A14</color>
+    <color name="red_gradient_bottom">#860907</color>
+    <color name="blue_gradient_top">#257AB9</color>
+    <color name="blue_gradient_bottom">#12609A</color>
+    <color name="anahuacActionBar">#DB6931</color>
+    <color name="naranjaOscuro">#ffc06030</color>
+    <color name="naranjaClaro">#ffffc106</color>
+    <color name="naranjaClaro2">#45ffc106</color>
+    <color name="naranjaRegistro">#FBD8BC</color>
+    <color name="naranjaBtn">#ffdb7b0c</color>
+    <color name="rojo">#ffdb052c</color>
+    <color name="verde">#ff329d7b</color>
+    <color name="verdeClaro">#E7ECD1</color>
+    <color name="amarillo">#ffe8e80f</color>
+    <color name="negroTransparente">#64000000</color>
+    <color name="gris">#9C9A9D</color>
+
+    <color name="black">#ffffff</color>
+    <color name="btnBlue">#0073e6</color>
+
+    <!--
+    <color name="segmentedBorderSelected">@color/papayaOrange</color>
+    <color name="segmentedBorder">@color/papayaOrange</color>
+    <color name="segmentedFillSelected">@color/papayaOrange</color>
+    <color name="segmentedFill">@color/papayaLightGray</color>
+
+    <color name="papayaRed">#e25437</color>
+    <color name="papayaOrange">#f08b2f</color>
+    <color name="papayaBlack">#181a1d</color>
+    <color name="papayaDarkGray">#999999</color>
+    <color name="papayaLightGray">#e0e2e2</color>
+    -->
+    <color name="segmentedBorderSelected">@color/naranjaClaro</color>
+    <color name="segmentedBorder">@color/naranjaClaro</color>
+    <color name="segmentedFillSelected">@color/naranjaClaro</color>
+    <color name="segmentedFill">@color/naranjaOscuro</color>
+    <color name="foreground_material_light">#fbf9f9</color>
+    <color name="colorBackground">#edeaea</color>
+    <color name="secondary_text_material_light">#fcf9f9</color>
+
+</resources>

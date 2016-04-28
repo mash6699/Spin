@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/drawerPools"
+            android:checked="false"
+            android:icon="@drawable/pool"
+            android:title="@string/title_piscinas"
+            android:tint="@color/white"/>
+
+        <item
+            android:id="@+id/drawerAnalize"
+            android:checked="false"
+            android:icon="@drawable/icon_analisis"
+            android:title="@string/title_analisis"
+            android:tint="@color/white"/>
+
+<!--        <item
+            android:id="@+id/drawerWhereBuy"
+            android:checked="false"
+            android:icon="@drawable/icon_comprar"
+            android:title="@string/title_buy"
+            android:tint="@color/white"/>-->
+
+        <item
+            android:id="@+id/drawerConcepts"
+            android:checked="false"
+            android:icon="@drawable/icon_conceptos"
+            android:title="@string/title_conceptos"
+            android:tint="@color/white"/>
+      </group>
+
+</menu>

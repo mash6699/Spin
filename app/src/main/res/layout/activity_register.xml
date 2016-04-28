@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="mx.spin.mobile.RegisterActivity"
+    android:theme="@style/AppTheme">
+
+    <include
+        android:id="@+id/include_toolbar"
+        layout="@layout/custom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/include_toolbar"
+        android:paddingTop="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="95dp"
+                android:id="@+id/imagePerfil"
+                android:layout_height="95dp"
+                android:src="@drawable/user_placeholder"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nombreUsuario"
+                    android:hint="Nombre completo"
+                    android:textColor="@color/white"
+                    android:inputType="textPersonName"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Correo electrónico"
+                    android:id="@+id/emailUsuario"
+                    android:textColor="@color/white"
+                    android:inputType="textEmailAddress" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Contraseña"
+                    android:id="@+id/contrasenaUsuario"
+                    android:textColor="@color/white"
+                    android:inputType="textPassword" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Teléfono"
+                        android:id="@+id/telefonoUsuario"
+                        android:textColor="@color/white"
+                        android:inputType="phone" />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+            <Spinner
+                android:id="@+id/spinnerPais"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                />
+
+            <!--android:theme="@style/AppTheme"-->
+
+            <Spinner
+                android:id="@+id/spinnerEstado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:visibility="invisible"
+                android:layout_marginTop="10dp"/>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardCornerRadius="21dp"
+                card_view:cardElevation="6dp"
+                android:layout_marginTop="17dp">
+
+                <Button
+                    android:id="@+id/btnRegistrate"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/lbl_btn_registarte"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:background="@android:color/transparent"
+                    android:padding="12dp"
+                    android:textColor="@android:color/holo_blue_dark"/>/>
+
+
+            </android.support.v7.widget.CardView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imgBottomFoo"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:contentDescription="@string/contdescBottomImg"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/waves_down" />
+
+                <TextView
+                    android:id="@+id/txtYaTengoCuenta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="45dp"
+                    android:text="@string/lbl_ya_tengo_cuenta"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

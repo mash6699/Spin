@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    style="@style/AppTheme"
+    tools:context="mx.spin.mobile.RegisterActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/imgTopHead"
+        android:paddingTop="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/correoCambiar"
+                    android:textColor="@color/white"
+                    android:hint="Correo electrónico"
+                    android:inputType="textEmailAddress" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <!--<Spinner-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:layout_marginTop="10dp" />-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+            </LinearLayout>
+
+            <!--  &lt;!&ndash;style="@style/btn_rounded_white"&ndash;&gt;
+              <Button
+                  android:id="@+id/btnRecuperar"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginBottom="20dp"
+                  android:layout_marginTop="20dp"
+                  android:onClick="sendMain"
+                  android:text="@string/lbl_btn_recuperar" />-->
+
+            <android.support.v7.widget.CardView
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardCornerRadius="21dp"
+                card_view:cardElevation="6dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp">
+
+                <Button
+                    android:id="@+id/btnRecuperar"
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="sendMain"
+                    android:text="@string/lbl_btn_recuperar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:background="@android:color/transparent"
+                    android:padding="12dp"
+                    android:textColor="@android:color/holo_blue_dark"/>/>
+
+
+            </android.support.v7.widget.CardView>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/imgBottomFoo"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:contentDescription="@string/contdescBottomImg"
+        android:scaleType="centerCrop"
+        android:src="@drawable/waves_down"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

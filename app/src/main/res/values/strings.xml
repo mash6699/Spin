@@ -1,0 +1,225 @@
+<resources>
+    <string name="app_name">Spin Piscinas</string>
+
+
+    <string name="topimgview">TopImgView</string>
+    <string name="contdescBottomImg">BottomImgView</string>
+    <string name="logodescr">LogoDescr</string>
+    <string name="regis_now">Regístrate ahora y comienza a\nanalizar el estatus de tus piscinas</string>
+    <string name="withfb">Con Facebook</string>
+    <string name="withgl">con google</string>
+    <string name="withmail">Correo Electrónico</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_registro">Registro</string>
+    <string name="descrimgtoolbar">imgToolbar</string>
+
+    <string name="opendrawer">opendrawer</string>
+    <string name="closedrawer">closedrawer</string>
+
+    <string name="title_login">Inicio de Sesión</string>
+    <string name="title_new_user">Crear mi Cuenta</string>
+    <string name="title_piscinas">Mis Piscinas</string>
+    <string name="title_buy">Dónde Comprar</string>
+    <string name="title_conceptos">Conceptos</string>
+    <string name="title_analisis">Análisis</string>
+    <string name="title_profile">Mi Perfíl</string>
+    <string name="title_edit_profile">Edición de Perfíl</string>
+    <string name="title_forget_password">Recuperar Contraseña</string>
+    <string name="title_menu">Menú</string>
+    <string name="title_volumen">Cálculo del Volumen</string>
+
+    <string name="lbl_btn_ingresar">INGRESAR</string>
+    <string name="lbl_btn_registarte">REGÍSTRATE</string>
+    <string name="lbl_btn_guardar">GUARDAR</string>
+    <string name="lbl_btn_como_llegar">CÓMO LLEGAR</string>
+    <string name="lbl_btn_recuperar">RECUPERAR</string>
+    <string name="lbl_btn_ok">Ok</string>
+    <string name="lbl_btn_calcelar">CANCELAR</string>
+    <string name="lbl_btn_analizar">ANALIZAR</string>
+    <string name="lbl_btn_bitacora">BITÁCORA</string>
+    <string name="lbl_btn_siguiente">SIGUIENTE</string>
+    <string name="lbl_btn_resultados">VER RESULTADOS</string>
+    <string name="lbl_btn_calcular">Calcular</string>
+
+    <string name="lbl_btn_guardar_analisis">GUARDAR ESTE ANÁLISIS</string>
+    <string name="lbl_btn_enviar_analisis">ENVIAR ESTE ANÁLISIS</string>
+    <string name="lbl_btn_donde_comprar_analisis">¿DÓNDE COMPRO LOS QUÍMICOS?</string>
+    <string name="lbl_btn_usar_volume">USAR ESTE VOLUMEN</string>
+    <string name="lbl_btn_mantenimiento">Realizar Mantenimiento</string>
+
+    <string name="lbl_recovery_1">No existe el email.</string>
+    <string name="lbl_recovery_2">Se envió un correo con la clave nueva.</string>
+    <string name="lbl_recovery_3">Lo sentimos no cambio su contraseña.</string>
+    <string name="lbl_recovery_4">Lo sentimos no se pudo enviar el correo de recuperación.</string>
+    <string name="lbl_recovery_5">Por favor inténtalo más tarde.</string>
+
+    <string name="lbl_add_picture">Agregar foto</string>
+    <string name="lbl_editar">Editar</string>
+    <string name="lbl_analizar">ANALIZAR</string>
+    <string name="lbl_cerrar_session">Cerrar sesión</string>
+    <string name="lbl_ya_tengo_cuenta">Ya tengo cuenta, quiero usarla</string>
+
+    <string name="lbl_nombre_piscina">Nombre de la Piscina</string>
+    <string name="lbl_equipo">Equipo</string>
+
+    <string name="lbl_empty_name">Debes ingresar el nombre de la piscina.</string>
+    <string name="lbl_empty_volume">Debes ingresar el volumen de la piscina.</string>
+    <!--   <string name="lbl_empty_cantidad">Debes ingresar la cantidada.</string>
+       <string name="lbl_empty_caballaje">Debes ingresar el caballaje.</string>-->
+    <string name="lbl_empty_uso">Debes seleccionar el uso de la Piscina\n</string>
+   <string name="lbl_empty_piscina">Debes seleccionar el tipo de Piscina\n</string>
+    <string name="lbl_empty_instalacion">Debes seleccionar el tipo de Instalación\n</string>
+    <string name="lbl_empty_dosificador">Debes seleccionar el tipo de Dosificador\n</string>
+    <string name="lbl_empty_calefaccion">Debes seleccionar el tipo de Calefacción\n</string>
+    <string name="lbl_empty_filtracion">Debes seleccionar el tipo de Filtración\n</string>
+    <string name="lbl_empty_caballaje">Debes ingresar el caballaje de la Motobomba\n</string>
+    <string name="lbl_empty_cantidad">Debes ingresar la cantidad de la Motobomba\n</string>
+
+    <string name="lbl_volumen">Volumen</string>
+    <string name="lbl_tiempo_rotacion">Tiempo de Rotación: </string>
+    <string name="lbl_velocidad_flujo">Velocidad de Flujo:</string>
+
+    <string name="lbl_mis_piscinas">Piscinas Registradas: </string>
+    <string name="lbl_pscina_circular">Circular</string>
+    <string name="lbl_pscina_rec">Rectangular\nCuadrada</string>
+    <string name="lbl_pscina_rec_oval">Rectangular\nOvalada</string>
+    <string name="lbl_pscina_frijol">Frijol</string>
+    <string name="lbl_pscina_oval">Ovalada</string>
+
+    <string name="lbl_diametro">Diámetro</string>
+    <string name="lbl_radio">Radio</string>
+    <string name="lbl_largo">Largo</string>
+    <string name="lbl_ancho">Ancho</string>
+    <string name="lbl_diametro_g">Diámetro Grande</string>
+    <string name="lbl_diametro_c">Diámetro Chico</string>
+    <string name="lbl_radio_g">Radio Grande</string>
+    <string name="lbl_radio_c">Radio Chico</string>
+    <string name="lbl_alto_a">Alto A</string>
+    <string name="lbl_alto_b">Alto B</string>
+    <string name="lbl_prof">Profundidad</string>
+    <string name="lbl_prof_m">Profundidad +</string>
+
+    <string name="lbl_tipo_piscina">Tipo de piscina</string>
+    <string name="lbl_tipo_instalacion">Tipo de Instalación</string>
+    <string name="lbl_uso_piscina">Uso de la piscina</string>
+    <string name="lbl_combo_equipment">¿De qué tipo?</string>
+    <string name="lbl_cantidad">Cantidad</string>
+    <string name="lbl_caballaje">Hp</string>
+
+    <string name="menu_editar">Editar Perfíl</string>
+    <string name="menu_cerrar">Cerrar sesión</string>
+
+
+    <string name="lbl_forget_password">Recuperar contraseña</string>
+    <string name="lbl_register">No tengo cuenta, quiero registrarme</string>
+
+    <string name="title_activity_add_pool">Agregar Piscina</string>
+    <string name="title_activity_pool_detail">Detalle Piscina</string>
+    <string name="title_activity_bitacora">Bitácora</string>
+    <string name="title_activity_analize_first_step">Análisis 1 de 2</string>
+    <string name="title_activity_analize_second_step">Análisis 2 de 2</string>
+    <string name="title_activity_analize_result">Resultados del Análisis</string>
+    <string name="title_activity_mantenimiento">Mantenimiento</string>
+    <string name="title_activity_send_analize">Enviar Análisis</string>
+    <string name="title_activity_detalle_concepto">Detalle Concepto</string>
+
+    <string name="msg_generic_error">Lo sentimos ocurrió un error</string>
+    <string name="msg_send">Enviando</string>
+    <string name="msg_intenet_connection">No tiene conexión a internet.</string>
+    <string name="msg_incomplete_data">Por favor verifica tus datos.</string>
+    <string name="msg_incorrect_data">Datos incorrectos. Intente de nuevo.</string>
+    <string name="msg_progress_dialog">Obteniendo información</string>
+    <string name="msg_load">Cargando</string>
+    <string name="msg_load_data">Cargando Datos</string>
+    <string name="msg_sin_equipos">No tiene equipos asociados</string>
+    <string name="msg_tipo_pscina">Debes seleccionar un tipo de piscina.</string>
+    <string name="msg_volume_error">Debes ingresar todos los datos, para realizar el cálculo del volumen.</string>
+
+    <string name="lbl_na">N/A</string>
+    <string name="lbl_dosi">Dosificación</string>
+    <string name="lbl_dosi_5">Manual</string>
+    <string name="lbl_dosi_6">Líquidos</string>
+    <string name="lbl_dosi_7">Tabletas</string>
+    <string name="lbl_dosi_8">Gas</string>
+
+    <string name="lbl_cale">Calefacción</string>
+    <string name="lbl_cale_9">Eléctrico</string>
+    <string name="lbl_cale_10">Gas</string>
+    <string name="lbl_cale_11">Calentador solar</string>
+    <string name="lbl_cale_12">Bomba calor</string>
+    <string name="lbl_cale_13">Sin equipo</string>
+
+    <string name="lbl_filt">Filtración</string>
+    <string name="lbl_filt_14">Arena sílica</string>
+    <string name="lbl_filt_15">Zeolita</string>
+    <string name="lbl_filt_16">Cartucho</string>
+    <string name="lbl_filt_17">Tierra de diatomea</string>
+    <string name="lbl_filt_18">Vidrio</string>
+    <string name="lbl_filt_19">Sin equipo</string>
+
+    <string name="lbl_motobomba">Motobomba</string>
+
+    <string name="lbl_pies">ft</string>
+    <string name="lbl_gal">gal</string>
+    <string name="lbl_m3">m</string>
+    <string name="lbl_lpm">LPM</string>
+    <string name="lbl_balance">Balance</string>
+    <string name="lbl_ph">pH</string>
+    <string name="lbl_alcalinidad">Alcalinidad</string>
+    <string name="lbl_dureza">Dureza</string>
+    <string name="lbl_temp">Temp.</string>
+    <string name="lbl_temperatura">Temperatura</string>
+    <string name="lbl_std">STD</string>
+    <string name="lbl_cya">CYA</string>
+    <string name="lbl_desinfeccion">Desinfección</string>
+    <string name="lbl_">Balance</string>
+    <string name="lbl_cloro_libre">Cloro libre</string>
+    <string name="lbl_cloro_dpd">Cloro (DPD1)</string>
+    <string name="lbl_metales_cloro">Metales / Cloro</string>
+    <string name="lbl_cloramidas">Cloramidas</string>
+    <string name="lbl_turbidez">Turbidez</string>
+    <string name="lbl_indice_saturacion">Índice de saturación:  </string>
+    <string name="lbl_agua_en_balance">Agua en Balance</string>
+    <string name="lbl_riesgo_agua_incrustante">Riesgo Agua Incrustante</string>
+    <string name="lbl_riesgo_Agua_corrosiva">Riesgo Agua Corrosiva</string>
+    <string name="lbl_dentro_rango">Dentro del rango</string>
+    <string name="lbl_fuera_rango">Fuera del rango</string>
+    <string name="lbl_ppm">ppm</string>
+    <string name="lbl_grados_centrigrados">°C</string>
+    <string name="lbl_mas_parametos">Más parámetros</string>
+    <string name="lbl_positivo">Positivo</string>
+    <string name="lbl_negativo">Negativo</string>
+
+    <string name="lbl_default_ppm">0 ppm</string>
+
+
+    <string name="lbl_select_ph">Selecciona el pH</string>
+    <string name="lbl_select_alcali">Selecciona la Alcalinidad</string>
+    <string name="lbl_select_dureza">Selecciona la Dureza</string>
+    <string name="lbl_select_temp">Selecciona la Temperatura</string>
+    <string name="lbl_select_std">Selecciona el STD</string>
+
+    <string name="lbl_select_clorodpd">Selecciona el cloro dpd1</string>
+    <string name="lbl_select_clorolibre">Selecciona el cloro libre</string>
+    <string name="lbl_select_cloramidas">Selecciona las cloramidas</string>
+    <string name="lbl_select_turbidez">Selecciona la turbidez</string>
+    <string name="lbl_select_cya">Selecciona la cya</string>
+
+
+    <string name="facebook_app_id">506568802801601</string>
+    <!--AIzaSyBkj8LrKpDkeGLiooEtCGNyXanHvLKsIiE-->
+    <string name="maps_apy_key">AIzaSyB6-nzQZiLRnA-N-cUa3sb2ulAij2N37d4</string>
+
+    <string name="token_mapbox">pk.eyJ1IjoiZ29ycm90b3dpIiwiYSI6ImNpamlyZTkxdTAyd210c2x0cTkxazFxamsifQ.Hd7OeMivc4FObe8o40aZ0A</string>
+    <string name="acces_token_g">AIzaSyAGhRRS0ZhEOLHh2RFwZj2GImWLAO9R2Y8</string>
+
+    <string name="auth_google">279774397586-2h05s0nk4qgouonhdg6dmpjuk7u3ma0n.apps.googleusercontent.com</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_detalle_pisicina">DetallePisicinaActivity</string>
+
+
+
+</resources>

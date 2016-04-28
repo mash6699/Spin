@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="installType">
+        <item>@string/lbl_tipo_instalacion</item>
+        <item>Pública</item>
+        <item>Privada</item>
+    </string-array>
+
+    <string-array name="poolType">
+        <item>@string/lbl_tipo_piscina</item>
+        <item>Abierta</item>
+        <item>Techada</item>
+    </string-array>
+
+
+    <string-array name="poolTypeDefault">
+        <item>@string/lbl_uso_piscina</item>
+    </string-array>
+
+    <string-array name="poolTypePrivate">
+        <item>@string/lbl_uso_piscina</item>
+        <item>Piscina privada</item>
+        <item>SPA privado</item>
+    </string-array>
+
+    <string-array name="poolTypePublic">
+        <item>@string/lbl_uso_piscina</item>
+        <item>Piscina terapéutica (publica)</item>
+        <item>Piscina de hotel (publica)</item>
+        <item>Piscina de Club o Escuela (publica)</item>
+        <item>SPA (publica)</item>
+        <item>Chapoteadero (publica)</item>
+        <item>Parque acuático (publica)</item>
+    </string-array>
+
+    <string-array name="poolUse">
+        <item>Piscina privada</item>
+        <item>SPA privado</item>
+        <item>Piscina terapéutica (publica)</item>
+        <item>Piscina de hotel (publica)</item>
+        <item>Piscina de Club o Escuela (publica)</item>
+        <item>SPA (publica)</item>
+        <item>Chapoteadero (publica)</item>
+        <item>Parque acuático (publica)</item>
+    </string-array>
+
+    <string-array name="systemMetric">
+        <item>(m3)</item>
+        <item>(gal)</item>
+    </string-array>
+
+    <string-array name="listCaballaje">
+          <item>0.5 HP</item>
+        <item>0.75 HP</item>
+         <item>1 HP</item>
+         <item>1.5 HP</item>
+         <item>2 HP</item>
+         <item>2.5 HP</item>
+         <item>3 HP</item>
+         <item>4 HP</item>
+         <item>5 HP</item>
+        <item>7.5 HP</item>
+        <item>10 HP</item>
+        <item>15 HP</item>
+        <item>20 HP</item>
+    </string-array>
+
+    <string-array name="systemMetricVolumen">
+        <item>Sistema Métrico Decimal</item>
+        <item>Sistema Internacional</item>
+    </string-array>
+
+    <string-array name="motobombaType">
+        <item>@string/lbl_combo_equipment</item>
+        <item>caballaje 1</item>
+        <item>caballaje 2</item>
+        <item>caballaje 3</item>
+    </string-array>
+
+    <string-array name="filtracionType">
+        <item>@string/lbl_combo_equipment</item>
+        <item>Arena sílica</item>
+        <item>Zeolita</item>
+        <item>Cartucho</item>
+        <item>Tierra de diatomea</item>
+        <item>Vidrio</item>
+        <item>Sin equipo</item>
+    </string-array>
+
+    <string-array name="calefaccionType">
+        <item>@string/lbl_combo_equipment</item>
+        <item>Eléctrico</item>
+        <item>Gas</item>
+        <item>Calentador solar</item>
+        <item>Bomba calor</item>
+        <item>Sin equipo</item>
+    </string-array>
+
+    <string-array name="dosificadorType">
+        <item>@string/lbl_combo_equipment</item>
+        <item>Manual</item>
+        <item>Líquidos</item>
+        <item>Tabletas</item>
+        <item>Gas</item>
+  <!--      <item>Eléctrico</item>-->
+    </string-array>
+
+    <string-array name="metalesType">
+        <item>@string/lbl_positivo</item>
+        <item>@string/lbl_negativo</item>
+    </string-array>
+
+
+</resources>

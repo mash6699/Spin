@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:fitsSystemWindows="true"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    style="@style/AppTheme"
+    tools:context="mx.spin.mobile.MantenimientoActivity">
+
+    <include
+        android:id="@+id/include_toolbar"
+        layout="@layout/custom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/include_toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/activity_horizontal_margin">
+
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/header_pool" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Mantenimiento Rutinario"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Encontramos 1 problema en tu piscina y está causando Agua Corrosiva."
+                android:textSize="14sp"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Es necesario aplicar el siguiente químico para que el agua de tu piscina esté en balance."
+                android:textSize="14sp"
+                android:textColor="@color/white"/>
+
+
+            <ListView
+                android:id="@+id/listMantenimiento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_list_mantenimiento">
+
+            </ListView>
+
+            <!--            <Button
+                            android:id="@+id/btnMantenimientoSave"
+                            android:text="@string/lbl_btn_guardar_analisis"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp" />-->
+
+            <android.support.v7.widget.CardView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardCornerRadius="21dp"
+                card_view:cardElevation="6dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp">
+
+                <Button
+                    android:id="@+id/btnMantenimientoSave"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/lbl_btn_guardar_analisis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:background="@android:color/transparent"
+                    android:padding="12dp"
+                    android:textColor="@android:color/holo_blue_dark"/>/>
+
+            </android.support.v7.widget.CardView>
+
+            <!--      <Button
+                      android:id="@+id/btnMantenimientoSend"
+                      android:text="@string/lbl_btn_enviar_analisis"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="10dp" />-->
+            <android.support.v7.widget.CardView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardCornerRadius="21dp"
+                card_view:cardElevation="6dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp">
+
+                <Button
+                    android:id="@+id/btnMantenimientoSend"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/lbl_btn_enviar_analisis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:background="@android:color/transparent"
+                    android:padding="12dp"
+                    android:textColor="@android:color/holo_blue_dark"/>/>
+
+            </android.support.v7.widget.CardView>
+
+            <!--   <Button
+                   android:id="@+id/btnMantenimientoWhere"
+                   android:text="@string/lbl_btn_donde_comprar_analisis"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="10dp" />-->
+
+            <android.support.v7.widget.CardView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardCornerRadius="21dp"
+                card_view:cardElevation="6dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp">
+
+                <Button
+                    android:id="@+id/btnMantenimientoWhere"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/lbl_btn_donde_comprar_analisis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:background="@android:color/transparent"
+                    android:padding="12dp"
+                    android:textColor="@android:color/holo_blue_dark"/>/>
+
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

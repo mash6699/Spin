@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtItemMantenType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aplicación de Químico"
+        android:textSize="18sp"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/txtItemMantenNumberProblem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Problema 1: Alcalinidad fuera de Rango"
+        android:textColor="@color/bluetextligth"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imgItemMantenimiento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/clorize_example" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingStart="10dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Para resolverlo necesitas:"
+                android:textSize="12sp"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/txtItemMantenWhatNeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Clorizide 91"
+                android:textSize="16sp"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtItemMantenDescr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aplicar 1.3 litros de Clorizide 91. Los textos simulados son aquellos textos que, en ausencia de un texto definitivo, sirven como sustituto."
+        android:textSize="14sp"
+        android:textColor="@color/white"/>
+
+</LinearLayout>
