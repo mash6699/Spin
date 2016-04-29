@@ -1,4 +1,4 @@
-package mx.spin.mobile.utils.Constants;
+package mx.spin.mobile.utils.constants;
 
 /**
  * Created by miguelangel on 22/03/2016.

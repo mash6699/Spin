@@ -31,8 +31,8 @@
     <string name="lbl_btn_ingresar">INGRESAR</string>
     <string name="lbl_btn_registarte">REGÍSTRATE</string>
     <string name="lbl_btn_guardar">GUARDAR</string>
-    <string name="lbl_btn_como_llegar">CÓMO LLEGAR</string>
-    <string name="lbl_btn_enviar">Enviar Email</string>
+    <string name="lbl_btn_como_llegar">¿CÓMO LLEGAR?</string>
+    <string name="lbl_btn_enviar">SOLICITAR PEDIDO</string>
     <string name="lbl_btn_recuperar">RECUPERAR</string>
     <string name="lbl_btn_ok">Ok</string>
     <string name="lbl_btn_calcelar">CANCELAR</string>
@@ -53,6 +53,13 @@
     <string name="lbl_recovery_3">Lo sentimos no cambio su contraseña.</string>
     <string name="lbl_recovery_4">Lo sentimos no se pudo enviar el correo de recuperación.</string>
     <string name="lbl_recovery_5">Por favor inténtalo más tarde.</string>
+
+
+    <string name="lbl_dealder_"></string>
+    <string name="lbl_dealder_address">Dirección:</string>
+    <string name="lbl_dealder_city">Cuidad: </string>
+    <string name="lbl_dealder_phone">Teléfono:</string>
+    <string name="lbl_dealder_email">Email:</string>
 
     <string name="lbl_add_picture">Agregar foto</string>
     <string name="lbl_editar">Editar</string>

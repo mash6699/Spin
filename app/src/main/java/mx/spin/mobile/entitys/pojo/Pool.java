@@ -1,4 +1,4 @@
-package mx.spin.mobile.pojo;
+package mx.spin.mobile.entitys.pojo;
 
 import java.io.Serializable;
 

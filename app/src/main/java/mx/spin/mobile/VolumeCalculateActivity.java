@@ -18,7 +18,7 @@ import android.widget.Toast;
 import mx.spin.mobile.model.Volume;
 import mx.spin.mobile.singleton.VolumeSingleton;
 import mx.spin.mobile.utils.CalculateVolume;
-import mx.spin.mobile.utils.Constants.Constants;
+import mx.spin.mobile.utils.constants.Constants;
 import mx.spin.mobile.utils.UtilViews;
 
 import java.text.DecimalFormat;

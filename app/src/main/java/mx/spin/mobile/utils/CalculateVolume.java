@@ -1,6 +1,6 @@
 package mx.spin.mobile.utils;
 
-import mx.spin.mobile.utils.Constants.Constants;
+import mx.spin.mobile.utils.constants.Constants;
 
 /**
  * Created by gorro on 06/02/16.

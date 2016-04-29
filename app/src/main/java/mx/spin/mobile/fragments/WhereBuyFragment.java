@@ -54,12 +54,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 import io.realm.Realm;
 import mx.spin.mobile.R;
+import mx.spin.mobile.utils.constants.JSKeys;
 
 public class WhereBuyFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
@@ -79,7 +81,7 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
     private LocationManager mLocManager;
     private Location mLastLocation;
     private Boolean locationEnabled = false;
-    private LatLng latLng;
+
     private LatLng latLngSeleccionado = null;
     // The minimum distance to change Updates in meters
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 100; // 5 meters
@@ -90,12 +92,21 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
     /* @Nullable
      @Bind(R.id.infoMarcador)*/
     TextView infoTienda;
-   /* @Nullable
-    @Bind(R.id.btnComollegar)*/
+
+    TextView dealderName;
+    TextView dealderAddress;
+    TextView dealderCity;
+    TextView dealderPhone;
+    TextView dealderEmail;
+    /* @Nullable
+     @Bind(R.id.btnComollegar)*/
     Button getBtnComollegar;
-   /* @Nullable
-    @Bind(R.id.btnSendEmail)*/
+    /* @Nullable
+     @Bind(R.id.btnSendEmail)*/
     Button btnSendEmail;
+
+
+    List<Tienda> tiendaList = new ArrayList<>();
 
     private Integer REQUEST_CHECK_SETTINGS = 0;
 
@@ -111,13 +122,20 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
         //  listadoTiendas = new ArrayList<>();
 
         mMapa = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map)).getMap();
-           btnComollegar = (Button) rootView.findViewById(R.id.btnComollegar);
+        btnComollegar = (Button) rootView.findViewById(R.id.btnComollegar);
         btnSendEmail = (Button) rootView.findViewById(R.id.btnSendEmail);
-            infoTienda = (TextView) rootView.findViewById(R.id.infoMarcador);
-        //  toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
+        infoTienda = (TextView) rootView.findViewById(R.id.infoMarcador);
+
+        dealderName     = (TextView) rootView.findViewById(R.id.tv_dealderName);
+        dealderAddress  = (TextView) rootView.findViewById(R.id.tv_dealderAddress);
+        dealderCity     = (TextView) rootView.findViewById(R.id.tv_dealderCity);
+        dealderPhone    = (TextView) rootView.findViewById(R.id.tv_dealderPhone);
+        dealderEmail    = (TextView) rootView.findViewById(R.id.tv_dealderEmail);
 
         txt_titleToolbar.setText("¿" + getResources().getString(R.string.title_buy) +"?");
         toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
+
+        mLocManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +143,7 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
                 DrawerActivity.drawerLayout.openDrawer(Gravity.LEFT);
             }
         });
-        mLocManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
 
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
@@ -153,7 +171,11 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
             public boolean onMarkerClick(Marker marker) {
                 Log.d("MarcadorSel", marker.toString());
                 latLngSeleccionado = marker.getPosition();
+                System.out.println("MARKER ID --- Z " + marker.getId());
                 infoTienda.setText(marker.getSnippet());
+
+                setDealderInfo(marker);
+
                 return false;
             }
         });
@@ -161,22 +183,22 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
         btnSendEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent sendEmailIntent = new Intent(Intent.ACTION_SEND);
+                Intent sendEmailIntent = new Intent(Intent.ACTION_SENDTO);
 
                 sendEmailIntent.setData(Uri.parse("mailto:"));
                 sendEmailIntent.setType("text/plain");
 
-                sendEmailIntent.putExtra(Intent.EXTRA_EMAIL, "miguel.ash.14@gmail.com");
+              //  sendEmailIntent.putExtra(Intent.EXTRA_EMAIL, "miguel.ash.14@gmail.com");
                 sendEmailIntent.putExtra(Intent.EXTRA_CC, "miguel.ash.14@gmail.com");
                 sendEmailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
                 sendEmailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
 
                 try {
-                   // startActivity(Intent.createChooser(sendEmailIntent, "Send mail..."));
-                   // finish();
-                   // if (sendEmailIntent.resolveActivity(getPackageManager()) != null) {
-                        startActivity(sendEmailIntent);
-                  //  }
+                    // startActivity(Intent.createChooser(sendEmailIntent, "Send mail..."));
+                    // finish();
+                    // if (sendEmailIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(sendEmailIntent);
+                    //  }
                     Log.i(TAG, "finish");
                 }
                 catch (android.content.ActivityNotFoundException ex) {
@@ -191,6 +213,24 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
 
         return rootView;
     }
+
+
+    void setDealderInfo(Marker marker){
+        dealderName.setText("");
+        dealderAddress.setText("");
+        dealderCity.setText("");
+        dealderPhone.setText("");
+        dealderEmail.setText("");
+    }
+    /*
+// TODO HACER ESTA FUNCIONALIDAD
+    Tienda getInfoTienda(Marker marker){
+        double lat = marker.getPosition().latitude;
+        double lon = marker.getPosition().longitude;
+
+       // if()
+
+    }*/
 
     protected void createLocationRequest() {
         LocationRequest mLocationRequest = new LocationRequest();
@@ -276,7 +316,7 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
 //                    LatLng posicion = new LatLng(19.39, -99.14);
                     mMapa.addMarker(new MarkerOptions().position(posicion).title("Aqui estoy"));
                     mMapa.moveCamera(CameraUpdateFactory.newLatLngZoom(posicion, 16));
-                    obtenerTiendas(posicion);
+                    getDealders(posicion);
                 } else {
                     Toast.makeText(getActivity(), "Localización vacía", Toast.LENGTH_SHORT).show();
                 }
@@ -327,7 +367,7 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
     }
 
 
-    private void obtenerTiendas(final LatLng latLng) {
+    private void getDealders(final LatLng latLng) {
         NetConnection.getTiendas(latLng.latitude, latLng.longitude, new TextHttpResponseHandlerMessage() {
             @Override
             public void onStart() {
@@ -345,27 +385,54 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 hideMessage();
                 try {
+
                     JSONObject jsonObject = new JSONObject(responseString);
-                    Boolean success = jsonObject.getBoolean("success");
+                    Boolean success = jsonObject.getBoolean(JSKeys.SUCCESS);
+
                     if (success) {
-                        JSONArray dealers = jsonObject.getJSONArray("dealers");
+                        JSONArray dealersArray = jsonObject.getJSONArray(JSKeys.DEALDERS);
                         Log.d("JsonTiendas", responseString);
-                        for (int i = 0; i < dealers.length(); i++) {
-                            JSONObject tiendaJson = dealers.getJSONObject(i);
-                            LatLng latLng1 = new LatLng(dealers.optJSONObject(i).getDouble("dealer_lat"), dealers.optJSONObject(i).getDouble("dealer_lon"));
+                        for (int i = 0; i < dealersArray.length(); i++) {
+
+                            JSONObject tiendaJson = dealersArray.getJSONObject(i);
+
+                            double latitude     = dealersArray.optJSONObject(i).getDouble(JSKeys.DEALDER_LAT);
+                            double longitude    = dealersArray.optJSONObject(i).getDouble(JSKeys.DEALDER_LON);
+
+                            LatLng latLng1 = new LatLng(latitude, longitude);
                             listadoTiendas.add(latLng1);
+
                             Realm realm = Realm.getInstance(getActivity());
                             realm.beginTransaction();
+
                             Tienda tienda = realm.createObject(Tienda.class);
-                            tienda.setNombre(tiendaJson.optString("dealer"));
-                            tienda.setTelefono(tiendaJson.optString("dealer_phone"));
-                            tienda.setEmail(tiendaJson.optString("dealer_email"));
-                            tienda.setPk(tiendaJson.optInt("dealer_id"));
-                            tienda.setDireccion(tiendaJson.optString("dealer_address"));
+
+                            tienda.setPk(tiendaJson.optInt(JSKeys.DEALDER_ID));
+                            tienda.setNombre(tiendaJson.optString(JSKeys.DEALDER));
+                            tienda.setDireccion(tiendaJson.optString(JSKeys.DEALDER_ADDRESS));
+                            tienda.setCodigoPostal(tiendaJson.optString(JSKeys.DEALDER_ZIPCODE));
+                            tienda.setContacto(tiendaJson.optString(JSKeys.DEALDER_CONTACT));
+                            tienda.setEmail(tiendaJson.optString(JSKeys.DEALDER_EMAIL));
+                            tienda.setLat(tiendaJson.optString(JSKeys.DEALDER_LAT));
+                            tienda.setLon(tiendaJson.optString(JSKeys.DEALDER_LON));
+                            tienda.setTelefono(tiendaJson.optString(JSKeys.DEALDER_PHONE));
+                            tienda.setCiudad(tiendaJson.optString(JSKeys.DEALDER_CITY));
+                            tienda.setDireccion(tiendaJson.optString(JSKeys.DEALDER_ADDRESS));
+
                             realm.commitTransaction();
-                            mMapa.addMarker(new MarkerOptions().position(latLng1).title(dealers.optJSONObject(i).getString("dealer")).snippet(tiendaJson.optString("dealer_address") + " \n Telef: " + tiendaJson.optString("dealer_phone") + "\n Email: " + tiendaJson.optString("dealer_email")));
+
+                            tiendaList.add(tienda);
+
+                            mMapa.addMarker(new MarkerOptions()
+                                    .position(latLng1)
+                                    .title(tienda.getNombre())
+                                    .snippet(
+                                            tienda.getDireccion() + " \n Tel: " + tienda.getTelefono() + "\n Email: " + tienda.getEmail()
+                                         //   tiendaJson.optString("dealer_address") + " \n Tel: " + tiendaJson.optString("dealer_phone") + "\n Email: " + tiendaJson.optString("dealer_email")
+                                    ));
                         }
                     }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

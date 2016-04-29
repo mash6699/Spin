@@ -26,7 +26,7 @@ import mx.spin.mobile.entitys.Estado;
 import mx.spin.mobile.entitys.Pais;
 import mx.spin.mobile.entitys.Usuario;
 import mx.spin.mobile.network.NetConnection;
-import mx.spin.mobile.utils.Constants.Constants;
+import mx.spin.mobile.utils.constants.Constants;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 import mx.spin.mobile.utils.Utils;
 

@@ -20,7 +20,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import mx.spin.mobile.singleton.SpingApplication;
-import mx.spin.mobile.utils.Constants.Constants;
+import mx.spin.mobile.utils.constants.Constants;
 import mx.spin.mobile.utils.UtilViews;
 
 public class AnalizeFirstStepActivity extends AppCompatActivity implements  AdapterView.OnItemSelectedListener {

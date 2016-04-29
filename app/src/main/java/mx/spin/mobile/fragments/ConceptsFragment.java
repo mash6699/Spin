@@ -22,7 +22,7 @@ import mx.spin.mobile.adapters.AdapterConcept;
 import mx.spin.mobile.entitys.ItemConcepts;
 import mx.spin.mobile.interfaces.ConceptoSelector;
 import mx.spin.mobile.network.NetConnection;
-import mx.spin.mobile.utils.Constants.Constants;
+import mx.spin.mobile.utils.constants.Constants;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 
 import org.json.JSONArray;
