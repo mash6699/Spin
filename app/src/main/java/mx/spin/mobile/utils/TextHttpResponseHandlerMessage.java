@@ -12,10 +12,12 @@ public abstract class TextHttpResponseHandlerMessage extends TextHttpResponseHan
 	
 	protected void showMessage(Context c, String message) {
 		dialog = new ProgressDialog(c);
+		dialog.show();
+		dialog.setContentView(R.layout.costum_progress_dialog);
 		dialog.setIndeterminate(true);
         dialog.setCancelable(false); 
-		dialog.setMessage(message);
-		dialog.show();
+		//dialog.setMessage(message);
+
 	}
 	
 	protected void hideMessage() {

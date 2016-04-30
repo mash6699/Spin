@@ -13,6 +13,12 @@ android {
             keyAlias properties['keyAlias']
             keyPassword properties['keyPassword']
         }
+        debugSigned {
+            storeFile rootProject.file(properties['keystore'])
+            storePassword properties['storePassword']
+            keyAlias properties['keyAlias']
+            keyPassword properties['keyPassword']
+        }
     }
 
     compileSdkVersion 23
@@ -41,6 +47,12 @@ android {
             shrinkResources true
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+        }
+        debug{
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
             debuggable true
         }
     }
@@ -88,6 +100,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
     compile 'com.jakewharton:butterknife:7.0.1'
 }
+
 
 def getDate() {
     def date = new Date()

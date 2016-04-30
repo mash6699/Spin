@@ -35,4 +35,9 @@ public class Constants {
     public final static int POOL_OVAL = 4;
 
     public final static String DATE_FORMAT = "dd/MM/yyyy  HH:mm  a";
+
+    public final static String MAPS_URL = "http://maps.google.com/maps?daddr=";
+
+    public final static String MY_POSITION = "Aqui estoy";
+
 }

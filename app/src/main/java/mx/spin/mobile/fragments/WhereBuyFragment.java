@@ -53,7 +53,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import butterknife.Bind;
@@ -61,6 +63,7 @@ import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 import io.realm.Realm;
 import mx.spin.mobile.R;
+import mx.spin.mobile.utils.constants.Constants;
 import mx.spin.mobile.utils.constants.JSKeys;
 
 public class WhereBuyFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
@@ -74,12 +77,15 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
     @Bind(R.id.txtToolbarTitle)
     TextView txt_titleToolbar;
 
-    private GoogleMap mMapa;
+    private GoogleMap map;
     private GeoLocalization geoLocalization;
-    private ArrayList<LatLng> listadoTiendas = new ArrayList<>();
-    private Button btnComollegar;
     private LocationManager mLocManager;
     private Location mLastLocation;
+
+    private ArrayList<LatLng> listadoTiendas = new ArrayList<>();
+
+    private Button btnComollegar;
+
     private Boolean locationEnabled = false;
 
     private LatLng latLngSeleccionado = null;
@@ -105,10 +111,12 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
      @Bind(R.id.btnSendEmail)*/
     Button btnSendEmail;
 
-
+    String email;
     List<Tienda> tiendaList = new ArrayList<>();
 
     private Integer REQUEST_CHECK_SETTINGS = 0;
+
+    View dealderContent;
 
     private View rootView;
 
@@ -119,13 +127,13 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
         rootView = inflater.inflate(R.layout.fragment_where_buy, container, false);
         ButterKnife.bind(this,rootView);
 
-        //  listadoTiendas = new ArrayList<>();
+        map = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map)).getMap();
 
-        mMapa = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map)).getMap();
-        btnComollegar = (Button) rootView.findViewById(R.id.btnComollegar);
-        btnSendEmail = (Button) rootView.findViewById(R.id.btnSendEmail);
-        infoTienda = (TextView) rootView.findViewById(R.id.infoMarcador);
+        btnComollegar   = (Button) rootView.findViewById(R.id.btnComollegar);
+        btnSendEmail    = (Button) rootView.findViewById(R.id.btnSendEmail);
+        infoTienda      = (TextView) rootView.findViewById(R.id.infoMarcador);
 
+        dealderContent  = rootView.findViewById(R.id.dealderContent);
         dealderName     = (TextView) rootView.findViewById(R.id.tv_dealderName);
         dealderAddress  = (TextView) rootView.findViewById(R.id.tv_dealderAddress);
         dealderCity     = (TextView) rootView.findViewById(R.id.tv_dealderCity);
@@ -144,8 +152,7 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
             }
         });
 
-
-        if (mGoogleApiClient == null) {
+        if (map != null) {
             mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
@@ -160,132 +167,94 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
                     Toast.makeText(getActivity(), "Debe seleccionar una tienda en el mapa antes de comenzar el recorrido", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                            Uri.parse("http://maps.google.com/maps?daddr=" + latLngSeleccionado.latitude + "," + latLngSeleccionado.longitude + ""));
+                            Uri.parse(Constants.MAPS_URL + latLngSeleccionado.latitude + "," + latLngSeleccionado.longitude + ""));
                     startActivity(intent);
                 }
             }
         });
 
-        mMapa.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                Log.d("MarcadorSel", marker.toString());
-                latLngSeleccionado = marker.getPosition();
-                System.out.println("MARKER ID --- Z " + marker.getId());
-                infoTienda.setText(marker.getSnippet());
 
-                setDealderInfo(marker);
-
-                return false;
-            }
-        });
 
         btnSendEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent sendEmailIntent = new Intent(Intent.ACTION_SENDTO);
-
-                sendEmailIntent.setData(Uri.parse("mailto:"));
-                sendEmailIntent.setType("text/plain");
-
-              //  sendEmailIntent.putExtra(Intent.EXTRA_EMAIL, "miguel.ash.14@gmail.com");
-                sendEmailIntent.putExtra(Intent.EXTRA_CC, "miguel.ash.14@gmail.com");
-                sendEmailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
-                sendEmailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
-
-                try {
-                    // startActivity(Intent.createChooser(sendEmailIntent, "Send mail..."));
-                    // finish();
-                    // if (sendEmailIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(sendEmailIntent);
-                    //  }
-                    Log.i(TAG, "finish");
+                if(email != null){
+                    String [] to = new String[]{email};
+                    String subject = "Spin ";
+                    String message = "Mensaje";
+                    Intent email = new Intent(Intent.ACTION_SEND);
+                    email.putExtra(Intent.EXTRA_EMAIL, to);
+                    email.putExtra(Intent.EXTRA_SUBJECT, subject);
+                    email.putExtra(Intent.EXTRA_TEXT, message);
+                    email.setType("message/rfc822");
+                    try {
+                        startActivity(Intent.createChooser(email, "Enviar email"));
+                        Log.i(TAG, "finish");
+                    }
+                    catch (android.content.ActivityNotFoundException ex) {
+                        Toast.makeText(getActivity(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(getActivity(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
-                }
-
-
-
             }
         });
 
+        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Log.d("MarkerClick:  ", marker.getTitle());
+                if(!marker.getTitle().equals(Constants.MY_POSITION)){
+                    latLngSeleccionado = marker.getPosition();
+                    setDealderInfo(marker.getTitle());
+                }else{
+                    latLngSeleccionado = null;
+                    ocultaDatos();
+                }
+                return false;
+            }
+        });
 
         return rootView;
     }
 
 
-    void setDealderInfo(Marker marker){
-        dealderName.setText("");
-        dealderAddress.setText("");
-        dealderCity.setText("");
-        dealderPhone.setText("");
-        dealderEmail.setText("");
+
+
+    void setDealderInfo(String name){
+        Tienda datosTienda = getInfoTienda(name);
+        if(datosTienda != null ){
+            dealderContent.setVisibility(View.VISIBLE);
+            dealderName.setText(" " + datosTienda.getNombre());
+            dealderAddress.setText(" " + datosTienda.getDireccion());
+            dealderCity.setText(" " + datosTienda.getCiudad());
+            dealderPhone.setText(" " + datosTienda.getTelefono());
+            dealderEmail.setText(" " + datosTienda.getEmail());
+            email = datosTienda.getEmail();
+        }else{
+            email = null;
+            ocultaDatos();
+        }
     }
-    /*
-// TODO HACER ESTA FUNCIONALIDAD
-    Tienda getInfoTienda(Marker marker){
-        double lat = marker.getPosition().latitude;
-        double lon = marker.getPosition().longitude;
 
-       // if()
+    void ocultaDatos(){
+        email = null;
+        dealderContent.setVisibility(View.GONE);
+    }
 
-    }*/
-
-    protected void createLocationRequest() {
-        LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(10000);
-        mLocationRequest.setFastestInterval(10000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
-                .addLocationRequest(mLocationRequest);
-        PendingResult<LocationSettingsResult> result =
-                LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient,
-                        builder.build());
-
-        result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
-            @Override
-            public void onResult(LocationSettingsResult result) {
-                final Status status = result.getStatus();
-//                final LocationSettingsStates = result.getLocationSettingsStates();
-                switch (status.getStatusCode()) {
-                    case LocationSettingsStatusCodes.SUCCESS:
-                        // All location settings are satisfied. The client can
-                        // initialize location requests here.
-                        mGoogleApiClient.connect();
-                        break;
-                    case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-                        // Location settings are not satisfied, but this can be fixed
-                        // by showing the user a dialog.
-                        try {
-                            // Show the dialog by calling startResolutionForResult(),
-                            // and check the result in onActivityResult().
-                            status.startResolutionForResult(getActivity(), REQUEST_CHECK_SETTINGS);
-                        } catch (IntentSender.SendIntentException e) {
-                            // Ignore the error.
-                        }
-                        break;
-                    case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                        // Location settings are not satisfied. However, we have no way
-                        // to fix the settings so we won't show the dialog.
-
-                        break;
+    Tienda getInfoTienda(String name){
+        Tienda mTienda = new Tienda();
+        if(!tiendaList.isEmpty()) {
+            Iterator<Tienda> iterator = tiendaList.iterator();
+            while (iterator.hasNext()) {
+                mTienda = iterator.next();
+                if (mTienda.getNombre().equalsIgnoreCase(name)) {
+                    System.out.println("encontro tienda");
+                    break;
                 }
             }
-        });
+        }
+        return mTienda;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        mGoogleApiClient.connect();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        mGoogleApiClient.disconnect();
-    }
 
     @Override
     public void onConnected(Bundle connectionHint) {
@@ -308,34 +277,22 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
         } else {
             if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                     && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                //TODO
             } else {
                 mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
                 if (mLastLocation != null) {
                     LatLng posicion = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
-//                    LatLng posicion = new LatLng(19.39, -99.14);
-                    mMapa.addMarker(new MarkerOptions().position(posicion).title("Aqui estoy"));
-                    mMapa.moveCamera(CameraUpdateFactory.newLatLngZoom(posicion, 16));
+                    map.addMarker(new MarkerOptions().position(posicion).title("Aqui estoy"));
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(posicion, 16));
                     getDealders(posicion);
                 } else {
                     Toast.makeText(getActivity(), "Localización vacía", Toast.LENGTH_SHORT).show();
                 }
             }
         }
-
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mGoogleApiClient.connect();
     }
 
     public boolean checkLocation() {
         locationEnabled = true;
-        //mLocManager.removeUpdates(this);
-
         if (ActivityCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 &&
@@ -391,7 +348,7 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
 
                     if (success) {
                         JSONArray dealersArray = jsonObject.getJSONArray(JSKeys.DEALDERS);
-                        Log.d("JsonTiendas", responseString);
+                        //  Log.d("JsonTiendas", responseString);
                         for (int i = 0; i < dealersArray.length(); i++) {
 
                             JSONObject tiendaJson = dealersArray.getJSONObject(i);
@@ -423,13 +380,10 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
 
                             tiendaList.add(tienda);
 
-                            mMapa.addMarker(new MarkerOptions()
-                                    .position(latLng1)
+                            map.addMarker(new MarkerOptions()
                                     .title(tienda.getNombre())
-                                    .snippet(
-                                            tienda.getDireccion() + " \n Tel: " + tienda.getTelefono() + "\n Email: " + tienda.getEmail()
-                                         //   tiendaJson.optString("dealer_address") + " \n Tel: " + tiendaJson.optString("dealer_phone") + "\n Email: " + tiendaJson.optString("dealer_email")
-                                    ));
+                                    .snippet( tienda.getDireccion())
+                                    .position(latLng1));
                         }
                     }
 
@@ -440,7 +394,6 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
             }
         });
     }
-
 
     @Override
     public void onLocationChanged(Location location) {
@@ -460,5 +413,53 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+
+    protected void connectCliente(){
+        if(mGoogleApiClient != null){
+            mGoogleApiClient.connect();
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        connectCliente();
+    }
+
+    @Override
+    public void onStop() {
+        if(mGoogleApiClient != null){
+            mGoogleApiClient.disconnect();
+        }
+        super.onStop();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable("lista", (Serializable) tiendaList);
+        super.onSaveInstanceState(outState);
     }
 }
