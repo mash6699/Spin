@@ -44,7 +44,7 @@ public class DrawerActivity extends AppCompatActivity implements OnNavigationIte
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-        containerMyProfile = (LinearLayout) navigationView.findViewById(R.id.linearDrawerMyProfile);
+/*        containerMyProfile = (LinearLayout) navigationView.findViewById(R.id.linearDrawerMyProfile);
 
         containerMyProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +52,7 @@ public class DrawerActivity extends AppCompatActivity implements OnNavigationIte
                 drawerLayout.closeDrawers();
                 changeFragment(new ProfileFragment(), getSupportFragmentManager());
             }
-        });
+        });*/
 
         navigationView.inflateHeaderView(R.layout.drawer_header);
         navigationView.setNavigationItemSelectedListener(this);
@@ -107,6 +107,9 @@ public class DrawerActivity extends AppCompatActivity implements OnNavigationIte
             case R.id.drawerConcepts:
                 position = 3;
                 break;
+            case R.id.drawerProfile:
+                position = 4;
+                break;
         }
         return position;
     }
@@ -127,6 +130,9 @@ public class DrawerActivity extends AppCompatActivity implements OnNavigationIte
                 break;
             case 3:
                 fragment = new ConceptsFragment();
+                break;
+            case 4:
+                fragment = new ProfileFragment();
                 break;
         }
 

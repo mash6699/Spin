@@ -36,10 +36,11 @@
         android:layout_gravity="start"
         android:background="@color/darkblue"
         style="@style/AppTheme"
+        app:itemTextColor="@color/white"
         app:itemIconTint="@color/white"
         app:menu="@menu/drawer">
 
-        <LinearLayout
+<!--        <LinearLayout
             android:id="@+id/linearDrawerMyProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,7 +64,7 @@
                 android:textSize="14sp"
                 android:textColor="@color/white"/>
 
-        </LinearLayout>
+        </LinearLayout>-->
     </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

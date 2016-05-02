@@ -29,6 +29,13 @@
             android:icon="@drawable/icon_conceptos"
             android:title="@string/title_conceptos"
             android:tint="@color/white"/>
+
+        <item
+            android:id="@+id/drawerProfile"
+            android:checked="false"
+            android:icon="@drawable/user_icon"
+            android:title="@string/title_profile"
+            android:tint="@color/white"/>
       </group>
 
 </menu>

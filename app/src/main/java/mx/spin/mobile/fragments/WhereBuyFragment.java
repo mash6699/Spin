@@ -57,6 +57,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -178,23 +179,7 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
         btnSendEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(email != null){
-                    String [] to = new String[]{email};
-                    String subject = "Spin ";
-                    String message = "Mensaje";
-                    Intent email = new Intent(Intent.ACTION_SEND);
-                    email.putExtra(Intent.EXTRA_EMAIL, to);
-                    email.putExtra(Intent.EXTRA_SUBJECT, subject);
-                    email.putExtra(Intent.EXTRA_TEXT, message);
-                    email.setType("message/rfc822");
-                    try {
-                        startActivity(Intent.createChooser(email, "Enviar email"));
-                        Log.i(TAG, "finish");
-                    }
-                    catch (android.content.ActivityNotFoundException ex) {
-                        Toast.makeText(getActivity(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
-                    }
-                }
+              sendEmail();
             }
         });
 
@@ -217,22 +202,53 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
     }
 
 
+    void sendEmail(){
+        try {
+            if(email != null){
+                String [] to = new String[]{email};
+                String subject = "Spin ";
+                String message = "Mensaje";
+                Intent email = new Intent();
+
+                email.setAction(Intent.ACTION_SEND);
+                email.putExtra(Intent.EXTRA_EMAIL, to);
+                email.putExtra(Intent.EXTRA_SUBJECT, subject);
+                email.putExtra(Intent.EXTRA_TEXT, message);
+                email.setType("text/plain");
+
+                startActivity(Intent.createChooser(email, "Enviar email"));
+                //Log.i(TAG, "finish");
+              //  inish();
+            }
+        }
+        catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(getActivity(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
     void setDealderInfo(String name){
         Tienda datosTienda = getInfoTienda(name);
-        if(datosTienda != null ){
-            dealderContent.setVisibility(View.VISIBLE);
-            dealderName.setText(" " + datosTienda.getNombre());
-            dealderAddress.setText(" " + datosTienda.getDireccion());
-            dealderCity.setText(" " + datosTienda.getCiudad());
-            dealderPhone.setText(" " + datosTienda.getTelefono());
-            dealderEmail.setText(" " + datosTienda.getEmail());
-            email = datosTienda.getEmail();
-        }else{
-            email = null;
-            ocultaDatos();
-        }
+      try{
+          if(datosTienda != null ){
+              dealderContent.setVisibility(View.VISIBLE);
+              dealderName.setText(" " + datosTienda.getNombre());
+              dealderAddress.setText(" " + datosTienda.getDireccion());
+              dealderCity.setText(" " + datosTienda.getCiudad());
+              dealderPhone.setText(" " + datosTienda.getTelefono());
+              dealderEmail.setText(" " + datosTienda.getEmail());
+              email = datosTienda.getEmail();
+          }else{
+              email = null;
+              ocultaDatos();
+          }
+      }catch (Exception ex){
+          Log.e(TAG,ex.getMessage());
+          email = null;
+          ocultaDatos();
+      }
+
+
     }
 
     void ocultaDatos(){
@@ -459,7 +475,7 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putSerializable("lista", (Serializable) tiendaList);
+      //  outState.putSerializable("lista", (Serializable) tiendaList);
         super.onSaveInstanceState(outState);
     }
 }
