@@ -136,7 +136,8 @@
             <include
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                layout="@layout/rotation" />
+                layout="@layout/rotation"
+                android:visibility="gone"/>
 
 
             <TextView

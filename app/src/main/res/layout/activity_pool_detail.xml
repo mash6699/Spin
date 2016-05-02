@@ -85,21 +85,51 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/lbl_tipo_instalacion"
+                        android:text="@string/lbl_unidad_volumen"
                         android:textColor="@color/bluetextligth"
                         android:textSize="13sp" />
 
                     <TextView
-                        android:id="@+id/txt_instalacion"
+                        android:id="@+id/txt_um"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pública"
                         android:textSize="16sp"
                         android:textColor="@color/white" />
 
                 </LinearLayout>
 
             </LinearLayout>
+
+<!--            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_tipo_instalacion"
+                android:textColor="@color/bluetextligth"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/txt_instalacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pública"
+                android:textSize="16sp"
+                android:textColor="@color/white" />-->
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/rotation"/>
+
+
+            </LinearLayout>
+
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -214,14 +244,14 @@
                 android:layout_marginTop="30dp"
                 android:orientation="horizontal">
 
-              <!--  <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:onClick="goAnalize"
-                    android:text="@string/lbl_btn_analizar" />-->
+                <!--  <Button
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginEnd="10dp"
+                      android:layout_marginRight="10dp"
+                      android:layout_weight="1"
+                      android:onClick="goAnalize"
+                      android:text="@string/lbl_btn_analizar" />-->
 
                 <android.support.v7.widget.CardView
                     android:layout_weight="1"
@@ -251,14 +281,14 @@
                 </android.support.v7.widget.CardView>
 
 
-              <!--  <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="1"
-                    android:onClick="goBitacora"
-                    android:text="@string/lbl_btn_bitacora" />-->
+                <!--  <Button
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="10dp"
+                      android:layout_marginStart="10dp"
+                      android:layout_weight="1"
+                      android:onClick="goBitacora"
+                      android:text="@string/lbl_btn_bitacora" />-->
 
                 <android.support.v7.widget.CardView
                     android:layout_weight="1"

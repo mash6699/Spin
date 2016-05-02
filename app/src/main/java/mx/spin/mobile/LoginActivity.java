@@ -88,7 +88,6 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         txt_titleToolbar.setText(R.string.title_login);
         utilViews = new UtilViews().getInstance(getApplication());
-
     }
 
     void sendLogin(String email, String password){

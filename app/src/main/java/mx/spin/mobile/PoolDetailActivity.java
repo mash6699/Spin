@@ -40,9 +40,9 @@ public class PoolDetailActivity extends AppCompatActivity {
     @Nullable
     @Bind(R.id.txt_volumen)
     TextView txt_volumen;
-    @Nullable
+/*    @Nullable
     @Bind(R.id.txt_instalacion)
-    TextView txt_instalacion;
+    TextView txt_instalacion;*/
     @Nullable
     @Bind(R.id.txt_tipo_spa)
     TextView txt_tipo_spa;
@@ -79,6 +79,18 @@ public class PoolDetailActivity extends AppCompatActivity {
     @Bind(R.id.txt_empty_equipos)
     TextView txt_empty_equipos ;
 
+    @Nullable
+    @Bind(R.id.txt_um)
+    TextView txt_um;
+
+    @Nullable
+    @Bind(R.id.txt_tiempo_rotacion)
+    TextView txt_tiempoRotacion;
+
+    @Nullable
+    @Bind(R.id.txt_velocidad_flujo)
+    TextView txt_velociddadFlujo;
+
 
     @Nullable
     @OnClick(R.id.btn_bitacora)
@@ -114,9 +126,12 @@ public class PoolDetailActivity extends AppCompatActivity {
         spingApplication.resetAllValues();
         txt_titleToolbar.setText(R.string.title_activity_pool_detail);
         txt_nombre.setText(piscina.getNombre());
-        txt_instalacion.setText(piscina.getTipoInstalacion());
+//        txt_instalacion.setText(piscina.getTipoInstalacion());
         txt_tipo_spa.setText(piscina.getTipoSpa());
-        txt_volumen.setText("" +(int) piscina.getVolumen() + " " + utilViews.getUnidadMedida(piscina.getUm()));
+        txt_volumen.setText("" +(int) piscina.getVolumen());// + " " + utilViews.getUnidadMedida(piscina.getUm())
+        txt_um.setText(utilViews.getUnidadMedida(piscina.getUm()));
+        txt_tiempoRotacion.setText("" + piscina.getTiempoRotacion());
+        txt_velociddadFlujo.setText("" + piscina.getVelocidadFlujo());
 
         if(!piscina.getEquipos().isEmpty()){
             txt_empty_equipos.setVisibility(View.GONE);
