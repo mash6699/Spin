@@ -21,7 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import mx.spin.mobile.common.SpinCommon;
+import mx.spin.mobile.common.SpinBusinnes;
 import mx.spin.mobile.entitys.Estado;
 import mx.spin.mobile.entitys.Pais;
 import mx.spin.mobile.entitys.Usuario;
@@ -95,8 +95,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                SpinCommon spinCommon = new SpinCommon().getInstance(getApplicationContext());
-                spinCommon.cleanUser();
+                SpinBusinnes spinBusinnes = new SpinBusinnes().getInstance(getApplicationContext());
+                spinBusinnes.cleanUser();
 
                 //cleanUser();
 //                if (imageFile != null){

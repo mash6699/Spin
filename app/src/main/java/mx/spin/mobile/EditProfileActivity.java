@@ -17,7 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-
+import butterknife.OnClick;
+import mx.spin.mobile.common.SpinBusinnes;
 import mx.spin.mobile.entitys.Usuario;
 import mx.spin.mobile.network.NetConnection;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
@@ -34,6 +35,9 @@ import io.realm.Realm;
 public class EditProfileActivity extends AppCompatActivity {
 
     private static String TAG = EditProfileActivity.class.getName();
+    private SpinBusinnes spinBusinnes;
+    private Usuario usuario;
+
     @Nullable
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -41,57 +45,36 @@ public class EditProfileActivity extends AppCompatActivity {
     @Bind(R.id.txtToolbarTitle)
     TextView txt_titleToolbar;
 
-    private EditText nombre;
-    private EditText telefono;
-    private Button btnGuardar;
-    private CircleImageView imgProfileUser;
+    @Nullable
+    @Bind(R.id.nombreUsuario)
+    EditText nombre;
+    @Nullable
+    @Bind(R.id.telefonoUsuario)
+    EditText telefono;
+
+    @Nullable
+    @Bind(R.id.imgProfileEditar)
+    CircleImageView imgProfileUser;
+
     private static final int SELECT_PICTURE = 1;
     private String selectedImagePath;
     private Bitmap bitmap;
     private Integer flag = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        spinBusinnes = new SpinBusinnes();
+        usuario = spinBusinnes.loadUser();
+
         txt_titleToolbar.setText(R.string.title_edit_profile);
 
-        nombre = (EditText) findViewById(R.id.nombreUsuario);
-        telefono = (EditText) findViewById(R.id.telefonoUsuario);
-        btnGuardar = (Button) findViewById(R.id.btnGuardar);
-        imgProfileUser = (CircleImageView) findViewById(R.id.imgProfileEditar);
+        setUsuarioInView();
 
-        Realm realm = Realm.getInstance(EditProfileActivity.this);
-        realm.beginTransaction();
-        Usuario usuario = realm.where(Usuario.class).findFirst();
-        realm.commitTransaction();
-
-        if (!usuario.getPhoto().equals("")){
-            imgProfileUser.setImageURI(Uri.parse(usuario.getPhoto()));
-        }
-
-        nombre.setText(usuario.getNombre());
-        telefono.setText(usuario.getTelefono());
-
-        btnGuardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Realm realm = Realm.getInstance(EditProfileActivity.this);
-                realm.beginTransaction();
-                Usuario usuario = realm.where(Usuario.class).findFirst();
-                usuario.setNombre(nombre.getText().toString());
-//                usuario.setFotoFile(Utils.convertBitmapToBytes(bitmap));
-                if(flag == 1){
-                   usuario.setPhoto(selectedImagePath);
-                }
-                usuario.setTelefono(telefono.getText().toString());
-                realm.commitTransaction();
-                editarUsuario(usuario.getId(),nombre.getText().toString(), telefono.getText().toString());
-            }
-        });
         imgProfileUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +87,49 @@ public class EditProfileActivity extends AppCompatActivity {
         });
 
     }
+
+    void setUsuarioInView(){
+       try {
+           Log.d(TAG, "setUsuarioInView" );
+           if (usuario != null) {
+               nombre.setText(usuario.getNombre());
+               telefono.setText(usuario.getTelefono());
+               if (!usuario.getPhoto().equals("")){
+                   imgProfileUser.setImageURI(Uri.parse(usuario.getPhoto()));
+               }
+           }
+       }catch (Exception e){
+           Log.e(TAG, e.getMessage());
+       }
+    }
+
+
+    @Nullable
+    @OnClick(R.id.btn_guardar)
+    public void actualizarUsuario(View view){
+        Log.d(TAG, "actualizarUsuario");
+        Realm realm = Realm.getInstance(EditProfileActivity.this);
+        realm.beginTransaction();
+        Usuario usuario = realm.where(Usuario.class).findFirst();
+        usuario.setNombre(nombre.getText().toString());
+        if(flag == 1){
+            usuario.setPhoto(selectedImagePath);
+        }
+        usuario.setTelefono(telefono.getText().toString());
+        realm.commitTransaction();
+        editarUsuario(usuario.getId(),nombre.getText().toString(), telefono.getText().toString());
+    }
+
+
+
+    @Nullable
+    @OnClick(R.id.btn_cancelar)
+    public void cancelar(View view){
+        super.onBackPressed();
+    }
+
+
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {
@@ -125,9 +151,9 @@ public class EditProfileActivity extends AppCompatActivity {
         cursor.moveToFirst();
         return cursor.getString(column_index);
     }
-    public void sendMain(View view){
-        startActivity(new Intent(EditProfileActivity.this, DrawerActivity.class));
-    }
+
+
+
     private void editarUsuario(String id,final String nombre, final String telefono){
         NetConnection.editarUsuario(id,nombre,telefono,  new TextHttpResponseHandlerMessage() {
             @Override
@@ -174,4 +200,15 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        Log.d(TAG, "onBackPressed");
+       // super.onBackPressed();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+    }
 }

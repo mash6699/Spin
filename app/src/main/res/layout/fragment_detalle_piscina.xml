@@ -1,48 +1,53 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="mx.spin.mobile.fragments.DetalleConceptoFragment">
-<ImageView
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:id="@+id/imgDetalleConcepto"
-    android:src="@mipmap/ic_launcher"
-    android:visibility="visible"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/fechaConcepto"
-        android:text="Fecha"
-        android:layout_below="@+id/imgDetalleConcepto"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="10dp"
-        android:visibility="gone"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tituloConcepto"
-        android:text=""
-        android:textStyle="bold"
-        android:paddingLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/fechaConcepto"
-        android:textSize="25dp"
-        android:textColor="@color/white"
-        android:visibility="gone"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/descripcionConcepto"
-        android:text=""
-        android:layout_below="@+id/tituloConcepto"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="10dp"
-        android:textColor="@color/white"/>
+    android:layout_height="match_parent">
 
-</RelativeLayout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="mx.spin.mobile.fragments.DetalleConceptoFragment"
+        android:padding="12dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/imgDetalleConcepto"
+            android:src="@mipmap/ic_launcher"
+            android:visibility="visible"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fechaConcepto"
+            android:text="Fecha"
+            android:layout_below="@+id/imgDetalleConcepto"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tituloConcepto"
+            android:text=""
+            android:textStyle="bold"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/fechaConcepto"
+            android:textSize="25dp"
+            android:textColor="@color/white"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/descripcionConcepto"
+            android:text=""
+            android:layout_below="@+id/tituloConcepto"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:textColor="@color/white"/>
+
+    </RelativeLayout>
 </ScrollView>

@@ -6,22 +6,22 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import butterknife.OnClick;
 import mx.spin.mobile.DrawerActivity;
 import mx.spin.mobile.EditProfileActivity;
 import mx.spin.mobile.LoginActivity;
 
 import mx.spin.mobile.SpinApp;
-import mx.spin.mobile.common.SpinCommon;
+import mx.spin.mobile.common.SpinBusinnes;
 import mx.spin.mobile.entitys.Usuario;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -32,8 +32,10 @@ import mx.spin.mobile.R;
 
 public class ProfileFragment extends Fragment {
 
-
     private static String TAG = ProfileFragment.class.getName();
+    private SpinBusinnes spinBusinnes;
+    private Usuario usuario;
+    private View rootView;
 
     @Nullable
     @Bind(R.id.toolbar)
@@ -41,164 +43,122 @@ public class ProfileFragment extends Fragment {
     @Nullable
     @Bind(R.id.txtToolbarTitle)
     TextView txt_titleToolbar;
+    @Nullable
+    @Bind(R.id.imgProfileUser)
+    CircleImageView imgProfileUser;
+    @Nullable
+    @Bind(R.id.nombreUsuarioPerfil)
+    TextView nombreUsuarioPerfil;
+    @Nullable
+    @Bind(R.id.emailUsuarioPerfil)
+    TextView emailUsuarioPerfil;
+    @Nullable
+    @Bind(R.id.telefonoUsuarioPerfil)
+    TextView telefonoUsuarioPerfil;
+    @Nullable
+    @Bind(R.id.txtProfilePoolsRegistered)
+    TextView cantPisicnas;
+    @Nullable
+    @Bind(R.id.paisProfile)
+    TextView pais;
 
-
-    private  View rootView;
-    private Button btnCerrarSesion;
-    private Button btnEditarPerfil;
-    private CircleImageView imgProfileUser;
-    private TextView nombreUsuarioPerfil;
-    private TextView emailUsuarioPerfil;
-    private TextView telefonoUsuarioPerfil;
-    private TextView cantPisicnas;
-    private TextView pais;
-    private View optionMenu;
-
-    SpinCommon spinCommon;
-
-    private Usuario usuario;
+    @Nullable
+    @Bind(R.id.iv_option_menu)
+    View optionMenu;
 
     @Override
-    public void onStart() {
-        super.onStart();
-
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        spinBusinnes = new SpinBusinnes();
+        usuario = spinBusinnes.loadUser();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_profile, container, false);
-
         ButterKnife.bind(this,rootView);
-        setComponentsInView();
-
-        spinCommon = new SpinCommon().getInstance(getActivity());
-        usuario = spinCommon.getUsuario();
-        setUsuarioInView();
-
-
+        txt_titleToolbar.setText(getResources().getString(R.string.title_profile));
+        toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DrawerActivity.drawerLayout.openDrawer(Gravity.LEFT);
             }
         });
+        setUsuarioInView();
+        return rootView;
+    }
 
-
-     /*   Realm realm = Realm.getInstance(getActivity());
-        realm.beginTransaction();
-        Usuario usuario = realm.where(Usuario.class).findFirst();
-        realm.commitTransaction();*/
-
-
-
-
-
-        optionMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu popupMenu = new PopupMenu(getActivity(), optionMenu);
-                popupMenu.getMenuInflater().inflate(R.menu.popup, popupMenu.getMenu());
-              /*  TextView liveitem = (TextView)popupMenu.findItem(R.id.close);
-                liveitem.setTextColor(Color.RED);*/
-
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
-
-                        Toast.makeText(getActivity(),
-                                "You Clicked : " + item.getTitle(),
-                                Toast.LENGTH_SHORT).show();
-
-                        switch (item.getItemId()) {
-                            case R.id.edit:
-                                startActivity(new Intent(getActivity(), EditProfileActivity.class));
-                                break;
-                            case R.id.close:
-                                closeSession();
-                                break;
-
-                        }
-                        return true;
-                    }
-                });
-
-                popupMenu.show();
+    @Nullable
+    @OnClick(R.id.iv_option_menu)
+    public void optionMenuClick(View view){
+        PopupMenu popupMenu = new PopupMenu(getActivity(), optionMenu);
+        popupMenu.getMenuInflater().inflate(R.menu.popup, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                Log.d(TAG, "onMenuItemClick: " + item.getTitle());
+                switch (item.getItemId()) {
+                    case R.id.edit:
+                        startActivity(new Intent(getActivity(), EditProfileActivity.class));
+                        break;
+                    case R.id.close:
+                        closeSession();
+                        break;
+                }
+                return true;
             }
         });
-
-        return rootView;
-
+        popupMenu.show();
     }
 
 
     void setUsuarioInView(){
+        Log.d(TAG, "setUsuarioInView");
+        try{
+            if(usuario != null){
+                SpinApp.initCargarImagen(getActivity());
+                nombreUsuarioPerfil.setText(usuario.getNombre());
+                emailUsuarioPerfil.setText(usuario.getEmail());
 
-        SpinApp.initCargarImagen(getActivity());
-
-        if (usuario.getPais() !="-1"){
-            pais.setText(usuario.getPais());
-        }
-        nombreUsuarioPerfil.setText(usuario.getNombre());
-        emailUsuarioPerfil.setText(usuario.getEmail());
-
-        if (usuario.getCantPiscinas() > 0) {
-            cantPisicnas.setText(getResources().getString(R.string.lbl_mis_piscinas) + usuario.getCantPiscinas());
-        }
-        if (usuario.getTelefono() != null) {
-            telefonoUsuarioPerfil.setText(usuario.getTelefono());
-        }
-        if (!usuario.getPhoto().equals("")) {
-            imgProfileUser.setImageURI(Uri.parse(usuario.getPhoto()));
-        }
-
-
-        if (usuario.getOrigenLogin() != 0) {
-//            btnEditarPerfil.setVisibility(View.GONE);
-            ImageLoader loader = ImageLoader.getInstance();
-            loader.displayImage(usuario.getPhoto(), imgProfileUser);
+                if (usuario.getPais() !="-1"){
+                    pais.setText(usuario.getPais());
+                }
+                if (usuario.getCantPiscinas() > 0) {
+                    cantPisicnas.setText(getResources().getString(R.string.lbl_mis_piscinas) + usuario.getCantPiscinas());
+                }
+                if (usuario.getTelefono() != null) {
+                    telefonoUsuarioPerfil.setText(usuario.getTelefono());
+                }
+                if (!usuario.getPhoto().equals("")) {
+                    imgProfileUser.setImageURI(Uri.parse(usuario.getPhoto()));
+                }
+                if (usuario.getOrigenLogin() != 0) {
+                    ImageLoader loader = ImageLoader.getInstance();
+                    loader.displayImage(usuario.getPhoto(), imgProfileUser);
+                }
+            }
+        }catch (Exception e){
+            Log.e(TAG, e.getMessage());
         }
     }
 
     void closeSession(){
-
-
-       /* Realm realm = Realm.getInstance(getActivity());
-        realm.beginTransaction();
-        RealmResults usuario = realm.where(Usuario.class).findAll();
-        usuario.clear();
-        realm.commitTransaction();*/
-
-        spinCommon.cleanUser();
-
-        Intent loginIntent = new Intent(getActivity() , LoginActivity.class);
-        loginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(loginIntent);
         try {
-            finalize();
+            spinBusinnes.cleanUser();
+            Intent loginIntent = new Intent(getActivity() , LoginActivity.class);
+            loginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(loginIntent);
+            this.finalize();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
-      /*  getActivity().finish();
-        startActivity(new Intent(getActivity(), LoginActivity.class));
-        getActivity().finish();*/
     }
 
 
-    private void setComponentsInView() {
-
-        optionMenu              =   rootView.findViewById(R.id.iv_option_menu);
-        imgProfileUser          = (CircleImageView) rootView.findViewById(R.id.imgProfileUser);
-        nombreUsuarioPerfil     = (TextView) rootView.findViewById(R.id.nombreUsuarioPerfil);
-        emailUsuarioPerfil      = (TextView) rootView.findViewById(R.id.emailUsuarioPerfil);
-        telefonoUsuarioPerfil   = (TextView) rootView.findViewById(R.id.telefonoUsuarioPerfil);
-        cantPisicnas            = (TextView) rootView.findViewById(R.id.txtProfilePoolsRegistered);
-        pais                    = (TextView) rootView.findViewById(R.id.paisProfile);
-
-        txt_titleToolbar.setText(getResources().getString(R.string.title_profile));
-        toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
-
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
-
-
 }

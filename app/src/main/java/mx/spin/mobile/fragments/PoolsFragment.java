@@ -19,7 +19,7 @@ import mx.spin.mobile.DrawerActivity;
 import mx.spin.mobile.PoolDetailActivity;
 
 import mx.spin.mobile.adapters.AdapterPools;
-import mx.spin.mobile.common.SpinCommon;
+import mx.spin.mobile.common.SpinBusinnes;
 import mx.spin.mobile.entitys.Piscina;
 import mx.spin.mobile.singleton.SpingApplication;
 
@@ -41,7 +41,7 @@ public class PoolsFragment extends Fragment {
     private ArrayList<Piscina> misPiscinas = new ArrayList<>();
 
     private UtilViews utilViews;
-    private SpinCommon spinCommon;
+    private SpinBusinnes spinBusinnes;
     private SpingApplication spingApplication = SpingApplication.getInstance();
 
     @Nullable
@@ -62,8 +62,8 @@ public class PoolsFragment extends Fragment {
 
         utilViews =  new UtilViews().getInstance(getContext());
 
-        spinCommon  = new SpinCommon().getInstance(getContext());
-        misPiscinas = spinCommon.getListMyPools();
+        spinBusinnes = new SpinBusinnes().getInstance(getContext());
+        misPiscinas = spinBusinnes.getListMyPools();
 
         txt_titleToolbar.setText(getResources().getString(R.string.title_piscinas));
         toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);

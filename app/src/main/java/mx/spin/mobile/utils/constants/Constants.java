@@ -5,6 +5,8 @@ package mx.spin.mobile.utils.constants;
  */
 public class Constants {
 
+    public final static int SPLASH_SCREEN_DELAY = 1500;
+
     public final static int CODE_VOLUME = 100;
 
     public final static String KEY_MEX = "México";

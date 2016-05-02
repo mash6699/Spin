@@ -28,8 +28,8 @@ android {
         applicationId "mx.spin.mobile"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 16
-        versionName "1.0"
+        versionCode 18
+        versionName "1.2"
         signingConfig signingConfigs.release
     }
 

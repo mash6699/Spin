@@ -147,6 +147,10 @@ public class DrawerActivity extends AppCompatActivity implements OnNavigationIte
         startActivity(new Intent(DrawerActivity.this, AddPoolActivity.class));
     }
 
+    public void redirectHome(View v){
+        updateFragment(HOME);
+    }
+
     @Override
     public void onBackPressed() {
       //  super.onBackPressed();

@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 
 
-import mx.spin.mobile.common.SpinCommon;
+import mx.spin.mobile.common.SpinBusinnes;
 import mx.spin.mobile.entitys.Piscina;
 import mx.spin.mobile.singleton.SpingApplication;
 import mx.spin.mobile.utils.UtilViews;
@@ -24,7 +24,7 @@ public class PoolDetailActivity extends AppCompatActivity {
 
     private final static String TAG = PoolDetailActivity.class.getSimpleName();
     private SpingApplication spingApplication = SpingApplication.getInstance();
-    private SpinCommon spinCommon;
+    private SpinBusinnes spinBusinnes;
     private UtilViews utilViews;
     private Piscina piscina;
 
@@ -98,10 +98,10 @@ public class PoolDetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        spinCommon = new SpinCommon().getInstance(getApplicationContext());
+        spinBusinnes = new SpinBusinnes().getInstance(getApplicationContext());
         utilViews = new UtilViews().getInstance(getApplicationContext());
         int idPiscina = spingApplication.getIdPiscina();
-        piscina = spinCommon.getMyPool(idPiscina);
+        piscina = spinBusinnes.getMyPool(idPiscina);
         if(piscina != null){
             Log.d(TAG, "IdPiscina:: " + idPiscina + " Nombre:: " + piscina.getNombre());
             setPoolInView();
