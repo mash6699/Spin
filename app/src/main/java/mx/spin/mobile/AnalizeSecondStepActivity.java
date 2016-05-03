@@ -234,9 +234,10 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
         String cloroLibre = sp_clorolibre.getSelectedItem().toString();
 
         if(!cloroTotal.isEmpty() && !cloroLibre.isEmpty()){
-            double totalCloramidas = utilViews.replaceStringsToDouble(cloroTotal) + utilViews.replaceStringsToDouble(cloroLibre);
-            txt_cloramidas.setText(totalCloramidas + " ppm");
-            spingApplication.setSs_23(""+totalCloramidas);
+            double totalCloramidas = utilViews.replaceStringsToDouble(cloroTotal) - utilViews.replaceStringsToDouble(cloroLibre);
+            String sCloramidas = String.format(Constants.TWO_DECIMAL, totalCloramidas);
+            txt_cloramidas.setText(sCloramidas + " ppm");
+            spingApplication.setSs_23(""+sCloramidas);
         }
     }
 

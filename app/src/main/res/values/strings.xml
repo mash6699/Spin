@@ -188,7 +188,7 @@
     <string name="lbl_cloro_total">Cloro total</string>
     <string name="lbl_metales_cloro">Metales / Cloro</string>
     <string name="lbl_cloramidas">Cloramidas</string>
-    <string name="lbl_bromo">Bromo</string>
+    <string name="lbl_bromo">Bromo total(DPD1)</string>
     <string name="lbl_turbidez">Turbidez</string>
     <string name="lbl_indice_saturacion">Índice de saturación:  </string>
     <string name="lbl_agua_en_balance">Agua en Balance</string>
@@ -211,7 +211,7 @@
     <string name="lbl_select_temp">Selecciona la Temperatura</string>
     <string name="lbl_select_std">Selecciona el STD</string>
 
-    <string name="lbl_select_clorodpd">Selecciona el cloro dpd1</string>
+    <string name="lbl_select_clorodpd">Selecciona el cloro total</string>
     <string name="lbl_select_clorolibre">Selecciona el cloro libre</string>
     <string name="lbl_select_bromo">Selecciona el bromo</string>
     <string name="lbl_select_cloramidas">Selecciona las cloramidas</string>
