@@ -206,8 +206,8 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
         try {
             if(email != null){
                 String [] to = new String[]{email};
-                String subject = "Spin ";
-                String message = "Mensaje";
+                String subject = "Solicitud de pedido";
+                String message = "Estoy interesado en sus productos";
                 Intent email = new Intent();
 
                 email.setAction(Intent.ACTION_SEND);

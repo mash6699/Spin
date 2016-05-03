@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
                     android:layout_marginRight="5dp"
-                    android:text="@string/lbl_cloro_dpd"
+                    android:text="@string/lbl_cloro_total"
                     android:textColor="@color/white"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1" />
@@ -61,7 +61,7 @@
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/sp_clorodpd"
+                    android:id="@+id/sp_cloro_total"
                     android:prompt="@string/lbl_select_clorodpd"
                     android:layout_centerVertical="true"
                     android:spinnerMode="dialog"
@@ -70,7 +70,7 @@
             </LinearLayout>
 
 
-            <LinearLayout
+          <!--  <LinearLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                     android:layout_weight="1" />
 
             </LinearLayout>
-
+-->
             <LinearLayout
                 android:id="@+id/liner_cloro_libre"
                 android:layout_marginTop="10dp"
@@ -133,6 +133,7 @@
                 android:weightSum="2">
 
                 <TextView
+                    android:id="@+id/lbl_cloramidas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
@@ -142,13 +143,15 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1" />
 
-                <Spinner
+
+                <TextView
+                    android:id="@+id/txt_cloramidas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/sp_cloramidas"
-                    android:prompt="@string/lbl_select_alcali"
-                    android:layout_centerVertical="true"
-                    android:spinnerMode="dialog"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1" />
 
             </LinearLayout>

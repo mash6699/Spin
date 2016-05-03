@@ -1,8 +1,14 @@
 package mx.spin.mobile;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -12,10 +18,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import mx.spin.mobile.entitys.Usuario;
 import mx.spin.mobile.network.NetConnection;
+import mx.spin.mobile.services.RegistrationIntentService;
 import mx.spin.mobile.singleton.SpingApplication;
+import mx.spin.mobile.utils.SpinUtility;
 import mx.spin.mobile.utils.constants.JSKeys;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 import mx.spin.mobile.utils.UtilViews;
@@ -35,6 +45,11 @@ public class LoginActivity extends AppCompatActivity {
     private final static String TAG = LoginActivity.class.getSimpleName();
     private SpingApplication spingApplication = SpingApplication.getInstance();
     private UtilViews utilViews;
+
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+     BroadcastReceiver mRegistrationBroadcastReceiver;
+    private boolean isReceiverRegistered;
+    private SpinUtility spinUtility;
 
     @Nullable
     @Bind(R.id.toolbar)
@@ -82,12 +97,38 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        registerReceiver();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         txt_titleToolbar.setText(R.string.title_login);
         utilViews = new UtilViews().getInstance(getApplication());
+        spinUtility = SpinUtility.getInstance();
+
+        if (checkPlayServices()) {
+            // Start IntentService to register this application with GCM.
+            Intent intent = new Intent(getApplicationContext(), RegistrationIntentService.class);
+            startService(intent);
+        }
+
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                boolean sentToken = spinUtility
+                        .getBooleanValueDataStorage(getApplicationContext(), SpinUtility.SENT_TOKEN_TO_SERVER);
+                if (sentToken) {
+                  Log.d(TAG, "GET TOKEN");
+                } else {
+                   Log.d(TAG, "GET TOKEN ERROR");
+                }
+            }
+        };
     }
 
     void sendLogin(String email, String password){
@@ -166,4 +207,42 @@ public class LoginActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
+
+    private void registerReceiver(){
+        if(!isReceiverRegistered) {
+            LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                    new IntentFilter(SpinUtility.REGISTRATION_COMPLETE));
+            isReceiverRegistered = true;
+        }
+    }
+
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
+                        .show();
+            } else {
+                Log.i(TAG, "This device is not supported.");
+                finish();
+            }
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        isReceiverRegistered = false;
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver();
+    }
+
 }

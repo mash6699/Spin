@@ -15,6 +15,7 @@ import com.google.android.gms.iid.InstanceID;
 import java.io.IOException;
 
 import mx.spin.mobile.R;
+import mx.spin.mobile.utils.SpinUtility;
 
 /**
  * Created by ironbit on 2/05/16.
@@ -23,6 +24,7 @@ public class RegistrationIntentService extends IntentService {
 
     private static final String TAG = "RegIntentService";
     private static final String[] TOPICS = {"global"};
+    private SpinUtility spinUtility;
 
     public RegistrationIntentService() {
         super(TAG);
@@ -32,7 +34,9 @@ public class RegistrationIntentService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         System.out.println("onHandleIntent");
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        spinUtility = SpinUtility.getInstance();
+
+       // SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         try {
             System.out.println("start");
@@ -46,28 +50,31 @@ public class RegistrationIntentService extends IntentService {
             String token = instanceID.getToken(getString(R.string.gcm_defaultSenderId),
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
             // [END get_token]
-            Log.i(TAG, "GCM Registration Token: " + token);
-            System.out.println("TOEKm    " + token);
+            Log.d(TAG, "GCM Registration Token: " + token);
 
+          // sharedPreferences.edit().putString(SpinUtility.ANDROID_TOKEN, token);
+            spinUtility.setValueDataStorage(this,SpinUtility.ANDROID_TOKEN, token);
             // TODO: Implement this method to send any registration to your app's servers.
-            sendRegistrationToServer(token);
+            //sendRegistrationToServer(token);
 
             // Subscribe to topic channels
-            subscribeTopics(token);
+            //subscribeTopics(token);
 
             // You should store a boolean that indicates whether the generated token has been
             // sent to your server. If the boolean is false, send the token to your server,
             // otherwise your server should have already received the token.
-            sharedPreferences.edit().putBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, true).apply();
+          //  sharedPreferences.edit().putBoolean(SpinUtility.SENT_TOKEN_TO_SERVER, true).apply();
+            spinUtility.setValueDataStorage(this, SpinUtility.SENT_TOKEN_TO_SERVER, true);
             // [END register_for_gcm]
         } catch (Exception e) {
             Log.d(TAG, "Failed to complete token refresh", e);
             // If an exception happens while fetching the new token or updating our registration data
             // on a third-party server, this ensures that we'll attempt the update at a later time.
-            sharedPreferences.edit().putBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false).apply();
+        //    sharedPreferences.edit().putBoolean(SpinUtility.SENT_TOKEN_TO_SERVER, false).apply();
+            spinUtility.setValueDataStorage(this, SpinUtility.SENT_TOKEN_TO_SERVER, false);
         }
         // Notify UI that registration has completed, so the progress indicator can be hidden.
-        Intent registrationComplete = new Intent(QuickstartPreferences.REGISTRATION_COMPLETE);
+        Intent registrationComplete = new Intent(SpinUtility.REGISTRATION_COMPLETE);
         LocalBroadcastManager.getInstance(this).sendBroadcast(registrationComplete);
     }
 
@@ -81,7 +88,7 @@ public class RegistrationIntentService extends IntentService {
      */
     private void sendRegistrationToServer(String token) {
         // Add custom implementation, as needed.
-        System.out.println("sendddddddddddddd");
+        System.out.println("sendRegistrationToServer");
     }
 
     /**

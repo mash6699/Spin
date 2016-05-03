@@ -40,68 +40,51 @@ public class PoolDetailActivity extends AppCompatActivity {
     @Nullable
     @Bind(R.id.txt_volumen)
     TextView txt_volumen;
-/*    @Nullable
+    @Nullable
     @Bind(R.id.txt_instalacion)
-    TextView txt_instalacion;*/
+    TextView txt_instalacion;
+    @Nullable
+    @Bind(R.id.txt_tipo_piscina)
+    TextView txt_tipoPiscina;
     @Nullable
     @Bind(R.id.txt_tipo_spa)
     TextView txt_tipo_spa;
-
     @Nullable
     @Bind(R.id.txt_moto)
     TextView txt_moto;
     @Nullable
     @Bind(R.id.txt_moto_val)
     TextView txt_moto_val;
-
     @Nullable
     @Bind(R.id.txt_filt)
     TextView txt_filt;
     @Nullable
     @Bind(R.id.txt_filt_val)
     TextView txt_filt_val;
-
     @Nullable
     @Bind(R.id.txt_cale)
     TextView txt_cale;
     @Nullable
     @Bind(R.id.txt_cale_val)
     TextView txt_cale_val;
-
     @Nullable
     @Bind(R.id.txt_dosi)
     TextView txt_dosi;
     @Nullable
     @Bind(R.id.txt_dosi_val)
     TextView txt_dosi_val;
-
     @Nullable
     @Bind(R.id.txt_empty_equipos)
     TextView txt_empty_equipos ;
-
     @Nullable
     @Bind(R.id.txt_um)
     TextView txt_um;
-
     @Nullable
     @Bind(R.id.txt_tiempo_rotacion)
     TextView txt_tiempoRotacion;
-
     @Nullable
     @Bind(R.id.txt_velocidad_flujo)
     TextView txt_velociddadFlujo;
-
-
-    @Nullable
-    @OnClick(R.id.btn_bitacora)
-    void goToBitacora(View view){
-        startActivity(new Intent(PoolDetailActivity.this, BitacoraActivity.class));
-    }
-    @Nullable
-    @OnClick(R.id.btn_analizar)
-    void goToAnalizar(View view){
-        startActivity(new Intent(PoolDetailActivity.this, AnalizeFirstStepActivity.class));
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +101,17 @@ public class PoolDetailActivity extends AppCompatActivity {
             Log.d(TAG, "IdPiscina:: " + idPiscina + " Nombre:: " + piscina.getNombre());
             setPoolInView();
         }
+    }
 
+    @Nullable
+    @OnClick(R.id.btn_bitacora)
+    void goToBitacora(View view){
+        startActivity(new Intent(PoolDetailActivity.this, BitacoraActivity.class));
+    }
+    @Nullable
+    @OnClick(R.id.btn_analizar)
+    void goToAnalizar(View view){
+        startActivity(new Intent(PoolDetailActivity.this, AnalizeFirstStepActivity.class));
     }
 
     void setPoolInView(){
@@ -126,7 +119,8 @@ public class PoolDetailActivity extends AppCompatActivity {
         spingApplication.resetAllValues();
         txt_titleToolbar.setText(R.string.title_activity_pool_detail);
         txt_nombre.setText(piscina.getNombre());
-//        txt_instalacion.setText(piscina.getTipoInstalacion());
+        txt_instalacion.setText(piscina.getTipoPiscina());
+        txt_tipoPiscina.setText(piscina.getTipoInstalacion());
         txt_tipo_spa.setText(piscina.getTipoSpa());
         txt_volumen.setText("" +(int) piscina.getVolumen());// + " " + utilViews.getUnidadMedida(piscina.getUm())
         txt_um.setText(utilViews.getUnidadMedida(piscina.getUm()));
@@ -134,7 +128,8 @@ public class PoolDetailActivity extends AppCompatActivity {
         txt_velociddadFlujo.setText("" + piscina.getVelocidadFlujo());
 
         if(!piscina.getEquipos().isEmpty()){
-            txt_empty_equipos.setVisibility(View.GONE);
+            //txt_empty_equipos.setVisibility(View.GONE);
+            txt_empty_equipos.setText("Equipos");
             String [] equipos = piscina.getEquipos().toString().replace(",''","").split("\\|");
             for(String equipo: equipos){
                 parseEquipo(equipo);

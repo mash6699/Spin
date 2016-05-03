@@ -107,8 +107,9 @@
     <string name="lbl_prof">Profundidad</string>
     <string name="lbl_prof_m">Profundidad +</string>
 
+    <string name="lbl_piscina">Piscina</string>
     <string name="lbl_tipo_piscina">Tipo de piscina</string>
-    <string name="lbl_tipo_instalacion">Tipo de Instalación</string>
+    <string name="lbl_tipo_instalacion">Instalación</string>
     <string name="lbl_uso_piscina">Uso de la piscina</string>
     <string name="lbl_combo_equipment">¿De qué tipo?</string>
     <string name="lbl_cantidad">Cantidad</string>
@@ -184,6 +185,7 @@
     <string name="lbl_">Balance</string>
     <string name="lbl_cloro_libre">Cloro libre</string>
     <string name="lbl_cloro_dpd">Cloro (DPD1)</string>
+    <string name="lbl_cloro_total">Cloro total</string>
     <string name="lbl_metales_cloro">Metales / Cloro</string>
     <string name="lbl_cloramidas">Cloramidas</string>
     <string name="lbl_bromo">Bromo</string>
@@ -217,6 +219,40 @@
     <string name="lbl_select_cya">Selecciona la cya</string>
 
 
+    <!-- INTERPRETACION DE RESULTADOS -->
+
+
+    <string name="lbl_rango_arriba">POR ARRIBA DEL RANGO IDEAL PARA PISCINAS</string>
+    <string name="lbl_rango_debajo">POR DEBAJO DEL RANGO IDEAL PARA PISCINAS</string>
+    <string name="lbl_rango_dentro">DENTRO DEL RANGO IDEAL PARA UNA PISCINA</string>
+    <string name="lbl_rango_fuera">FUERA DEL RANGO IDEAL PARA PISCINAS</string>
+
+    <string name="lbl_bromo_debajo">ALERTA BROMO TOTAL DEBAJO DE NOM 245</string>
+    <string name="lbl_bromo_encima">VALOR POR ENCIMA DE LA NOM 245</string>
+    <string name="lbl_bromo_acorde">ACORDE A NOM 245</string>
+
+    <string name="lbl_cloro_debajo">ALERTA CLORO TOTAL DEBAJO DE NOM 245</string>
+    <string name="lbl_cloro_encima">VALOR POR ENCIMA DE LA NOM 245</string>
+    <string name="lbl_cloro_acorde">ACORDE A NOM 245</string>
+
+
+    <string name="lbl_cloramidas_ruptura">HACER UNA CLORACIÓN A PUNTO DE RUPTURA</string>
+    <string name="lbl_cloramidas_acorde">ACORDE A NOM 245</string>
+
+    <string name="lbl_metales_evaluar">EVALUAR ORIGEN DE LA PRESENCIA DE METALES Y ELIMINAR</string>
+    <string name="lbl_metales_ok">NO HAY PROBLEMA DE METALES</string>
+
+    <string name="lbl_estabilizador_fuera">FUERA DE NORMA 245</string>
+    <string name="lbl_estabilizador_dentro">DENTRO DE NORMA 245</string>
+    <string name="lbl_estabilizador_aire">AL AIRE LIBRE</string>
+
+    <!-- INTERPRETACION DE RESULTADOS -->
+
+
+
+
+
+
     <string name="facebook_app_id">1689859307920046</string>
     <string name="maps_apy_key">AIzaSyBmZ7ue7T23S6luSX4H1qE04OirWdR9I3Q</string>
 
@@ -234,4 +270,5 @@
     <string name="google_app_id">AIzaSyB7eta8vJk4AgxeSbdYw3nFfR7__I8aEtk</string>
     <string name="gcm_defaultSenderId">76976375361</string>
 
+    <string name="app_diskfile_name">spin_pref</string>
 </resources>
