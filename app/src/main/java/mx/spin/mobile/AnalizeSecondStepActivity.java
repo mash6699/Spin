@@ -60,9 +60,7 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
     @Nullable
     @Bind(R.id.sp_cloro_total)
     Spinner sp_cloroTotal ;
-/*    @Nullable
-    @Bind(R.id.sp_alcalinidad)
-    Spinner sp_alcalinidad ;*/
+
     @Nullable
     @Bind(R.id.txt_cloramidas)
     TextView txt_cloramidas;
@@ -71,9 +69,6 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
     @Bind(R.id.lbl_cloramidas)
     TextView lbl_cloramidas;
 
-    /*   @Nullable
-       @Bind(R.id.sp_cloramidas)
-       Spinner sp_cloramidas ;*/
     @Nullable
     @Bind(R.id.sp_bromo)
     Spinner sp_bromo ;
@@ -108,7 +103,7 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
     @OnClick(R.id.btnAnalizeSecondGoResults)
     public void gotoResult(View view){
         if(validateData()){
-            startActivity(new Intent(AnalizeSecondStepActivity.this, AnalizeResultActivity.class));
+            startActivity(new Intent(AnalizeSecondStepActivity.this, AnalizeResult.class));
         }
     }
 
@@ -155,15 +150,6 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
         arrayAdapterCloroDpd.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_cloroTotal.setAdapter(arrayAdapterCloroDpd);
 
-      /*  List<String> listAlcali = new ArrayList<String>();
-        for(int x = 0 ; x <= 500 ; x = x+10){
-            listAlcali.add(""+x + " ppm");
-        }
-        ArrayAdapter<String> arrayAdapterAlcali = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listAlcali);
-        arrayAdapterAlcali.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_alcalinidad.setAdapter(arrayAdapterAlcali);*/
-
-
         List<String> listCloroLibre = new ArrayList<String>();
         for(float l = 0f ; l <= 20 ; l = l + 0.05f){
             listCloroLibre.add(""+String.format(Constants.TWO_DECIMAL, l) + " ppm");
@@ -180,14 +166,6 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
         arrayAdapterBromo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_bromo.setAdapter(arrayAdapterBromo);
 
-     /*   List<String> listCloramidas = new ArrayList<String>();
-        for(float m = 0f ; m <= 20 ; m = m + 0.05f){
-            listCloramidas.add(""+ String.format(Constants.TWO_DECIMAL, m) + " ppm");
-        }
-        ArrayAdapter<String> arrayAdapterCloramidas = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listCloramidas);
-        arrayAdapterCloramidas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_cloramidas.setAdapter(arrayAdapterCloramidas);
-*/
         List<String> listTurbidez = new ArrayList<String>();
         for(float t = 0f ; t <= 5 ; t = t + 0.05f){
             listTurbidez.add(""+ String.format(Constants.TWO_DECIMAL, t) + " NTU");
@@ -220,8 +198,6 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
             sp_bromo.setOnItemSelectedListener(this);
         }
 
-     //   sp_metales.setOnItemSelectedListener(this);
-//        sp_alcalinidad.setOnItemSelectedListener(this);
         sp_turbidez.setOnItemSelectedListener(this);
         sp_cya.setOnItemSelectedListener(this);
     }
@@ -256,8 +232,6 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
                         cloroTotal = valueItem;
                         spingApplication.setSsp_21(position);
                         break;
-//                    case R.id.sp_alcalinidad:
-//                        break;
                     case R.id.sp_clorolibre:
                         setValueCloramidas();
                         cloroLibre = valueItem;
@@ -267,10 +241,6 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
                         turbidez = valueItem;
                         spingApplication.setSsp_24(position);
                         break;
-                  /*  case R.id.sp_metales:
-                        metales = valueItem;
-                        spingApplication.setSsp_25(position);
-                        break;*/
                     case R.id.sp_cya:
                         cya = valueItem;
                         spingApplication.setSsp_26(position);
@@ -305,14 +275,16 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
 
 
     boolean validateData(){
+
         Log.d(TAG, " :::validateData::: ");
+
         boolean validate = true;
         double comparator = 0d;
         StringBuilder message = new StringBuilder();
-       // spingApplication.setSsp_25(position);
         metales = sp_metales.getSelectedItemPosition();
         spingApplication.setSs_25(metales == 1 ? "Positivo": "Negativo");
-        //VALIDAR CLORO
+
+        //TODO VALIDAR CLORO
         if(idTipoPiscina == 1){
             if(cloroTotal == comparator){
                 validate = false;
@@ -322,7 +294,7 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
                 validate = false;
                 message.append("Tienes que seleccionar cloro libre\n");
             }
-        }else{
+        } else {
             if(bromo == comparator){
                 validate = false;
                 message.append("Tienes que seleccionar bromo\n");

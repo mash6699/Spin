@@ -163,6 +163,7 @@
 
                 </LinearLayout>
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -248,7 +249,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
                             android:gravity="center"
-                            android:text="7.2 - 7.6"
+                            android:text="@string/lbl_conideal_ph"
                             android:textColor="@color/white"/>
 
                         <TextView
@@ -256,7 +257,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="30dp"
                             android:gravity="center"
-                            android:text="200 - 300\nppm"
+                            android:text="@string/lbl_conideal_alcalinidad"
                             android:textColor="@color/white"/>
 
                         <TextView
@@ -264,7 +265,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
                             android:gravity="center"
-                            android:text="36 - 40 ºC"
+                            android:text="@string/lbl_conideal_temperatura"
                             android:textColor="@color/white"/>
 
                         <TextView
@@ -272,7 +273,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="30dp"
                             android:gravity="center"
-                            android:text="100 - 180\nppm"
+                            android:text="@string/lbl_conideal_dureza"
                             android:textColor="@color/white"/>
 
                         <TextView
@@ -280,12 +281,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
                             android:gravity="center"
-                            android:text="55 - 65 ppm"
+                            android:text="@string/lbl_conideal_std"
                             android:textColor="@color/white"/>
 
                     </LinearLayout>
 
                 </LinearLayout>
+-->
 
             </LinearLayout>
 

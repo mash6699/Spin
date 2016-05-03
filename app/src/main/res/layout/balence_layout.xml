@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tableLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+   <!-- android:background="@color/black"-->
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dip"
+        android:gravity="center">
+
+        <TextView
+            android:text=""
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/lbl_conideal"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/lbl_conactual"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+
+    </TableRow>
+
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip"
+        android:gravity="center">
+
+        <TextView
+            android:text="@string/lbl_ph"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/tv_ph"
+            android:text="0"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:gravity="center" />
+
+        <TextView
+            android:text="@string/lbl_conideal_ph"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+    </TableRow>
+
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="5dip"
+        android:gravity="center">
+
+        <TextView
+            android:text="@string/lbl_alcalinidad"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/tv_alcalinidad"
+            android:text="0"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:gravity="center" />
+
+        <TextView
+
+            android:gravity="center"
+            android:text="@string/lbl_conideal_alcalinidad"
+            android:textColor="@color/white"/>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip"
+        android:gravity="center">
+
+        <TextView
+            android:text="@string/lbl_std"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/tv_std"
+            android:text="0"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:gravity="center" />
+
+        <TextView
+            android:gravity="center"
+            android:text="@string/lbl_conideal_std"
+            android:textColor="@color/white"/>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip"
+        android:gravity="center">
+
+        <TextView
+            android:text="@string/lbl_dureza"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/tv_dureza"
+            android:text="0"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:gravity="center" />
+
+        <TextView
+            android:gravity="center"
+            android:text="@string/lbl_conideal_dureza"
+            android:textColor="@color/white"/>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip"
+        android:gravity="center">
+
+        <TextView
+            android:text="@string/lbl_temperatura"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/tv_temperatura"
+            android:text="0"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:gravity="center" />
+
+        <TextView
+            android:gravity="center"
+            android:text="@string/lbl_conideal_temperatura"
+            android:textColor="@color/white"/>
+    </TableRow>
+
+
+
+
+
+</TableLayout>

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import mx.spin.mobile.singleton.SpingApplication;
 
 public class AnalizeResultActivity extends AppCompatActivity {
@@ -58,10 +60,6 @@ public class AnalizeResultActivity extends AppCompatActivity {
     @Bind(R.id.cv_resultados)
     View cv_btn_result;
 
-    @Nullable
-    @Bind(R.id.btnAnalizeResultInitMantenimiento)
-    Button btnGoMantenimiento;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +70,7 @@ public class AnalizeResultActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
         pool_name.setText(spingApplication.getName());
         pool_date.setText(spingApplication.getDate());
 
@@ -79,8 +78,6 @@ public class AnalizeResultActivity extends AppCompatActivity {
         txtSegmentOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  txtSegmentOne.setBackground(getResources().getDrawable(R.drawable.bottom_border_line_strong));
-              //  txtSegmentTwo.setBackground(getResources().getDrawable(R.drawable.bottom_border_line_light));
 
                 containerBalance.setVisibility(View.VISIBLE);
                 containerDesinfeccion.setVisibility(View.GONE);
@@ -88,7 +85,6 @@ public class AnalizeResultActivity extends AppCompatActivity {
                 txtIndiceSaturacion.setVisibility(View.VISIBLE);
                 txtStateWater.setVisibility(View.VISIBLE);
 
-               // btnGoMantenimiento.setVisibility(View.GONE);
                 cv_btn_result.setVisibility(View.GONE);
             }
         });
@@ -106,18 +102,26 @@ public class AnalizeResultActivity extends AppCompatActivity {
                 txtIndiceSaturacion.setVisibility(View.GONE);
                 txtStateWater.setVisibility(View.GONE);
 
-               // btnGoMantenimiento.setVisibility(View.VISIBLE);
                 cv_btn_result.setVisibility(View.VISIBLE);
             }
         });
+    }
 
-        btnGoMantenimiento.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(AnalizeResultActivity.this, MantenimientoActivity.class));
-            }
-        });
+
+    @Nullable
+    @OnClick(R.id.btnAnalizeResultInitMantenimiento)
+    public void gotoMantenimiento(View view){
+        startActivity(new Intent(AnalizeResultActivity.this, MantenimientoActivity.class));
+    }
+
+    void setValuesResult(){
+      Log.d(TAG, "setValuesResult");
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+    }
 }

@@ -250,7 +250,28 @@
 
 
 
+    <string name="lbl_conideal_"></string>
 
+    <string name="lbl_conactual">Condición\nActual</string>
+    <string name="lbl_conideal">Condición\nIdeal</string>
+
+    <!--    BALANCE-->
+    <string name="lbl_conideal_ph">7.4-7.6</string>
+    <string name="lbl_conideal_alcalinidad">80-120 ppm</string>
+    <string name="lbl_conideal_std">+500 de origen</string>
+    <string name="lbl_conideal_dureza"> 150-250 ppm</string>
+    <string name="lbl_conideal_temperatura">Max 40°C</string>
+    <!--    BALANCE-->
+
+    <!--   DESINFECCION-->
+    <string name="lbl_conideal_cloro_libre">1-5 ppm</string>
+    <string name="lbl_conideal_cloro_total">N/A</string>
+    <string name="lbl_conideal_cloramidas">menor a 0.5ppm</string>
+    <string name="lbl_conideal_bromo">7.2-7.6</string>
+    <string name="lbl_conideal_turbidez">menor a 0.5 NTU</string>
+    <string name="lbl_conideal_metales">Negativos</string>
+    <string name="lbl_conideal_cya">Max 100 ppm</string>
+    <!--   DESINFECCION-->
 
 
     <string name="facebook_app_id">1689859307920046</string>
