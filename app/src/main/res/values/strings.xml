@@ -186,9 +186,10 @@
     <string name="lbl_cloro_libre">Cloro libre</string>
     <string name="lbl_cloro_dpd">Cloro (DPD1)</string>
     <string name="lbl_cloro_total">Cloro total</string>
-    <string name="lbl_metales_cloro">Metales / Cloro</string>
+    <string name="lbl_metales_cloro">Metales</string>
     <string name="lbl_cloramidas">Cloramidas</string>
     <string name="lbl_bromo">Bromo total(DPD1)</string>
+    <string name="lbl_bromo_sin">Bromo</string>
     <string name="lbl_turbidez">Turbidez</string>
     <string name="lbl_indice_saturacion">Índice de saturación:  </string>
     <string name="lbl_agua_en_balance">Agua en Balance</string>

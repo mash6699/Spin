@@ -55,17 +55,17 @@
                         android:layout_height="fill_parent">
 
                         <include
-                            android:id="@+id/ejemplo1"
+                            android:id="@+id/layout_balance"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             layout="@layout/balence_layout" />
 
 
-                        <LinearLayout
-                            android:id="@+id/ejemplo2"
+                        <include
+                            android:id="@+id/layout_desinfeccion"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"></LinearLayout>
+                            layout="@layout/desinfeccion_layout" />
 
 
                     </FrameLayout>

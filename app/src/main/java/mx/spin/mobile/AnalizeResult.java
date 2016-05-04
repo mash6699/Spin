@@ -54,10 +54,10 @@ public class AnalizeResult extends AppCompatActivity {
 
 
         tab1.setIndicator(getResources().getString(R.string.lbl_balance));    //qué queremos que aparezca en las pestañas
-        tab1.setContent(R.id.ejemplo1); //definimos el id de cada Tab (pestaña)
+        tab1.setContent(R.id.layout_balance); //definimos el id de cada Tab (pestaña)
 
         tab2.setIndicator(getResources().getString(R.string.lbl_desinfeccion));
-        tab2.setContent(R.id.ejemplo2);
+        tab2.setContent(R.id.layout_desinfeccion);
 
         TbH.addTab(tab1); //añadimos los tabs ya programados
         TbH.addTab(tab2);
