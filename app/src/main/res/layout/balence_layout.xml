@@ -7,257 +7,244 @@
     android:orientation="vertical">
 
 
-<TableLayout
-    android:id="@+id/tableLayout1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
-
-   <!-- android:background="@color/black"-->
-
-    <TableRow
-        android:id="@+id/tableRow1"
+    <TableLayout
+        android:id="@+id/tableLayout1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dip"
-        android:gravity="center">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:text=""
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_height="match_parent"
+        <TableRow
+            android:id="@+id/tableRow1"
             android:layout_width="match_parent"
-            android:gravity="center_vertical" />
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:gravity="center">
 
-        <TextView
-            android:layout_width="match_parent"
+            <TextView
+                android:text=""
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/lbl_conideal"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/lbl_conactual"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:gravity="center">
+
+            <TextView
+                android:text="@string/lbl_ph"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical" />
+
+            <TextView
+                android:id="@+id/tv_ph"
+                android:text="0"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:gravity="center" />
+
+            <TextView
+                android:text="@string/lbl_conideal_ph"
+                android:textColor="@color/white"
+                android:gravity="center"/>
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/lbl_conideal"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:gravity="center" />
+            android:padding="5dip"
+            android:gravity="center">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/lbl_conactual"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
+            <TextView
+                android:text="@string/lbl_alcalinidad"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:gravity="center_vertical" />
 
-    </TableRow>
+            <TextView
+                android:id="@+id/tv_alcalinidad"
+                android:text="0"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:gravity="center" />
 
+            <TextView
+                android:gravity="center"
+                android:text="@string/lbl_conideal_alcalinidad"
+                android:textColor="@color/white"/>
 
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dip"
-        android:gravity="center">
+        </TableRow>
 
-        <TextView
-            android:text="@string/lbl_ph"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:gravity="center_vertical" />
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:gravity="center">
 
-        <TextView
-            android:id="@+id/tv_ph"
-            android:text="0"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:gravity="center" />
+            <TextView
+                android:text="@string/lbl_std"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:gravity="center_vertical" />
 
-        <TextView
-            android:text="@string/lbl_conideal_ph"
-            android:textColor="@color/white"
-            android:gravity="center"/>
+            <TextView
+                android:id="@+id/tv_std"
+                android:text="0"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:gravity="center" />
 
-    </TableRow>
+            <TextView
+                android:gravity="center"
+                android:text="@string/lbl_conideal_std"
+                android:textColor="@color/white"/>
 
+        </TableRow>
 
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:padding="5dip"
-        android:gravity="center">
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:gravity="center">
 
-        <TextView
-            android:text="@string/lbl_alcalinidad"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:gravity="center_vertical" />
+            <TextView
+                android:text="@string/lbl_dureza"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
 
-        <TextView
-            android:id="@+id/tv_alcalinidad"
-            android:text="0"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:gravity="center" />
+            <TextView
+                android:id="@+id/tv_dureza"
+                android:text="0"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:gravity="center" />
 
-        <TextView
+            <TextView
+                android:gravity="center"
+                android:text="@string/lbl_conideal_dureza"
+                android:textColor="@color/white"/>
+        </TableRow>
 
-            android:gravity="center"
-            android:text="@string/lbl_conideal_alcalinidad"
-            android:textColor="@color/white"/>
-    </TableRow>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:gravity="center">
 
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dip"
-        android:gravity="center">
+            <TextView
+                android:text="@string/lbl_temperatura"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
 
-        <TextView
-            android:text="@string/lbl_std"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:gravity="center_vertical" />
+            <TextView
+                android:id="@+id/tv_temperatura"
+                android:text="0"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:gravity="center" />
 
-        <TextView
-            android:id="@+id/tv_std"
-            android:text="0"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:gravity="center" />
+            <TextView
+                android:gravity="center"
+                android:text="@string/lbl_conideal_temperatura"
+                android:textColor="@color/white"/>
+        </TableRow>
 
-        <TextView
-            android:gravity="center"
-            android:text="@string/lbl_conideal_std"
-            android:textColor="@color/white"/>
-    </TableRow>
+    </TableLayout>
 
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dip"
-        android:gravity="center">
-
-        <TextView
-            android:text="@string/lbl_dureza"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
-
-        <TextView
-            android:id="@+id/tv_dureza"
-            android:text="0"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:gravity="center" />
-
-        <TextView
-            android:gravity="center"
-            android:text="@string/lbl_conideal_dureza"
-            android:textColor="@color/white"/>
-    </TableRow>
-
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dip"
-        android:gravity="center">
-
-        <TextView
-            android:text="@string/lbl_temperatura"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
-
-        <TextView
-            android:id="@+id/tv_temperatura"
-            android:text="0"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:gravity="center" />
-
-        <TextView
-            android:gravity="center"
-            android:text="@string/lbl_conideal_temperatura"
-            android:textColor="@color/white"/>
-    </TableRow>
-
-</TableLayout>
-
-<TextView
-android:id="@+id/txtAnalizeResultIndiceSaturacion"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_gravity="center_horizontal"
-android:layout_marginTop="30dp"
-android:text="Indice de saturación: 0.027"
-android:textSize="16sp"
-android:textStyle="bold"
-android:textColor="@color/white"/>
-
-<TextView
-android:id="@+id/txtAnalizeResultStateWater"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_gravity="center_horizontal"
-android:text="Agua en Balance"
-android:textColor="@color/bluetextligth"
-android:textSize="14sp" />
-
-    <!--<Button
-        android:id="@+id/btnAnalizeResultInitMantenimiento"
+    <TextView
+        android:id="@+id/tv_indice_saturacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:text="REALIZAR MANTENIMIENTO"
-        android:visibility="gone" />
- -->
+        android:text="Indice de saturación: 0.027"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
 
-<android.support.v7.widget.CardView
-android:id="@+id/cv_resultados"
-android:layout_gravity="center_horizontal"
-android:layout_width="180dp"
-android:layout_height="wrap_content"
-android:clickable="true"
-android:layout_marginLeft="8dp"
-android:layout_marginRight="8dp"
-card_view:cardBackgroundColor="@android:color/white"
-card_view:cardCornerRadius="21dp"
-card_view:cardElevation="6dp"
-android:layout_marginTop="30dp"
-android:layout_marginBottom="15dp">
+    <TextView
+        android:id="@+id/tv_calidad_agua"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Agua en Balance"
+        android:textColor="@color/bluetextligth"
+        android:textSize="14sp" />
 
-<Button
-    android:id="@+id/btnAnalizeResultInitMantenimiento"
-    android:layout_gravity="center_horizontal"
-    android:text="@string/lbl_btn_mantenimiento"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_centerInParent="true"
-    android:background="@android:color/transparent"
-    android:padding="12dp"
-    android:textColor="@android:color/holo_blue_dark" />/>
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_resultados"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        card_view:cardBackgroundColor="@android:color/white"
+        card_view:cardCornerRadius="21dp"
+        card_view:cardElevation="6dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="15dp">
 
-</android.support.v7.widget.CardView>
+        <Button
+            android:id="@+id/btnAnalizeResultInitMantenimiento"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/lbl_btn_mantenimiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            android:padding="12dp"
+            android:textColor="@android:color/holo_blue_dark" />/>
+
+    </android.support.v7.widget.CardView>
 
 
 </LinearLayout>

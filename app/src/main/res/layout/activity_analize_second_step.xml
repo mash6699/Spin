@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:fitsSystemWindows="true"
-    style="@style/AppTheme"
     tools:context="mx.spin.mobile.AnalizeSecondStepActivity">
 
     <include

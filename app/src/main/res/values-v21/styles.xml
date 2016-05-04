@@ -4,10 +4,12 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <!--<item name="android:tabWidgetStyle">@android:style/Widget.TabWidget</item>-->
 
     </style>
 
     <style name="AppTheme.Widget.TextView" parent="android:Widget.Holo.Light.TextView">
         <item name="android:fontFamily">fonts/Roboto-Light.ttf</item>
     </style>
+
 </resources>

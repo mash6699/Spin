@@ -2,6 +2,7 @@ package mx.spin.mobile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
@@ -103,6 +104,7 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
     @OnClick(R.id.btnAnalizeSecondGoResults)
     public void gotoResult(View view){
         if(validateData()){
+            setValues();
             startActivity(new Intent(AnalizeSecondStepActivity.this, AnalizeResult.class));
         }
     }
@@ -250,10 +252,24 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
                         spingApplication.setSsp_27(position);
                         break;
                 }
+
             }
         }catch (Exception ex){
             Log.e(TAG, ex.getMessage());
         }
+    }
+
+    void setValues(){
+        Log.d(TAG, "setValues");
+        metales = sp_metales.getSelectedItemPosition();
+        spingApplication.setSsp_25((int) metales);
+        spingApplication.setSs_25(metales == 1 ?   "Negativo" : "Positivo");
+
+        spingApplication.setSs_21(String.valueOf(cloroTotal));
+        spingApplication.setSs_22(String.valueOf(cloroLibre));
+        spingApplication.setSs_24(String.valueOf(turbidez));
+        spingApplication.setSs_26(String.valueOf(cya));
+        spingApplication.setSs_27(String.valueOf(bromo));
     }
 
     void setDataInApp(){
@@ -281,8 +297,9 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
         boolean validate = true;
         double comparator = 0d;
         StringBuilder message = new StringBuilder();
-        metales = sp_metales.getSelectedItemPosition();
-        spingApplication.setSs_25(metales == 1 ? "Positivo": "Negativo");
+
+
+        //spingApplication.setSs_27(String.valueOf();
 
         //TODO VALIDAR CLORO
         if(idTipoPiscina == 1){
