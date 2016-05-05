@@ -139,7 +139,7 @@ public class AnalizeResult extends AppCompatActivity {
         txt_dureza.setText(spingApplication.getFs_13());
         txt_temperatura.setText(spingApplication.getFs_14());
         txt_std.setText(spingApplication.getFs_15());
-        txt_saturacion.setText(spingApplication.getFs_16());
+        txt_saturacion.setText(getResources().getString(R.string.lbl_indice_saturacion) + " " + spingApplication.getFs_16());
         txt_calidadAgua.setText(spingApplication.getFs_17());
 
         //TODO SET CLOROS
