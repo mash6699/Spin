@@ -1,51 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tableLayout1"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/black">
 
     <TableRow
-        android:id="@+id/tableRow1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dip"
-        android:gravity="center">
+        android:gravity="center"
+       android:weightSum="3" >
 
         <TextView
             android:text=""
-            android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:gravity="center_vertical" />
+            android:gravity="center"
+            android:layout_weight="1" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/lbl_conideal"
             android:textSize="12sp"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:gravity="center" />
+            android:gravity="center"
+            android:layout_weight="1" />
+
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/lbl_conactual"
             android:textSize="12sp"
             android:textStyle="bold"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:layout_weight="1" />
 
     </TableRow>
 
 
     <TableRow
+        android:id="@+id/tr_cloro_libre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dip"
-        android:gravity="center">
+
+        android:gravity="center"
+        android:visibility="gone">
 
         <TextView
             android:text="@string/lbl_cloro_libre"
@@ -54,7 +57,14 @@
             android:textColor="@color/white"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:gravity="center_vertical" />
+            android:gravity="center"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1" >
 
         <TextView
             android:id="@+id/tv_cloro_libre"
@@ -64,21 +74,33 @@
             android:textColor="@color/white"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:gravity="center" />
+            android:gravity="center"
+            android:layout_weight="1" />
+        <View
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_width="1dp" />
+
+    </LinearLayout>
 
         <TextView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
             android:text="@string/lbl_conideal_cloro_libre"
             android:textColor="@color/white"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:layout_weight="1" />
 
     </TableRow>
 
 
     <TableRow
+        android:id="@+id/tr_cloro_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dip"
-        android:gravity="center">
+
+        android:gravity="center"
+        android:visibility="gone">
 
         <TextView
             android:text="@string/lbl_cloro_total"
@@ -87,7 +109,14 @@
             android:textColor="@color/white"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:gravity="center_vertical" />
+            android:gravity="center"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1" >
 
         <TextView
             android:id="@+id/tv_cloro_total"
@@ -97,28 +126,48 @@
             android:textColor="@color/white"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:gravity="center" />
+            android:gravity="center"
+            android:layout_weight="1" />
+
+            <View
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:layout_width="1dp" />
+
+        </LinearLayout>
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/lbl_conideal_cloro_total"
             android:textColor="@color/white"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:layout_weight="1" />
 
     </TableRow>
 
 
     <TableRow
+        android:id="@+id/tr_cloramidas"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:padding="5dip"
-        android:gravity="center">
+
+        android:gravity="center"
+        android:visibility="gone">
 
         <TextView
             android:text="@string/lbl_cloramidas"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:gravity="center_vertical" />
+            android:gravity="center"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1" >
 
         <TextView
             android:id="@+id/tv_cloramidas"
@@ -128,27 +177,48 @@
             android:textColor="@color/white"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:gravity="center" />
+            android:gravity="center"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_width="1dp" />
+
+    </LinearLayout>
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/lbl_conideal_cloramidas"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:layout_weight="1" />
+
     </TableRow>
 
     <TableRow
+        android:id="@+id/tr_bromo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dip"
-        android:gravity="center">
+
+        android:gravity="center"
+        android:visibility="gone">
 
         <TextView
             android:text="@string/lbl_bromo_sin"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:gravity="center_vertical" />
+            android:gravity="center"
+            android:layout_weight="1" />
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1" >
         <TextView
             android:id="@+id/tv_bromo"
             android:text="0"
@@ -157,54 +227,127 @@
             android:textColor="@color/white"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:gravity="center" />
+            android:gravity="center"
+            android:layout_weight="1" />
+
+            <View
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:layout_width="1dp" />
+
+        </LinearLayout>
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/lbl_conideal_bromo"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:layout_weight="1" />
 
     </TableRow>
 
     <TableRow
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dip"
-        android:gravity="center">
+        android:gravity="center"
+        android:weightSum="3"
+        android:baselineAligned="false"
+        android:showDividers="none|end">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/lbl_turbidez"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:gravity="center" />
+
+            <TextView
+                android:textSize="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_bromo_debajo"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1" >
 
         <TextView
             android:id="@+id/tv_turbidez"
-            android:text="0"
+            android:text="00000"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:gravity="center" />
+            android:gravity="center"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_width="1dp" />
+
+    </LinearLayout>
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/lbl_conideal_turbidez"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:layout_weight="1" />
     </TableRow>
 
     <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dip"
+
         android:gravity="center">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_margin="5dp">
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:text="@string/lbl_metales_cloro"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_weight="1" />
+
+        <TextView
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/lbl_bromo_debajo"
+            android:gravity="center"/>
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1" >
 
         <TextView
             android:id="@+id/tv_metales"
@@ -214,25 +357,60 @@
             android:textColor="@color/white"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:gravity="center" />
+            android:gravity="center"
+            android:layout_weight="1" />
+
+            <View
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:layout_width="1dp" />
+
+        </LinearLayout>
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/lbl_conideal_metales"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:layout_weight="1" />
     </TableRow>
 
     <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dip"
+
         android:gravity="center">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_margin="5dp">
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:text="@string/lbl_cya"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:gravity="center"/>
+
+            <TextView
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/lbl_bromo_debajo"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1" >
 
         <TextView
             android:id="@+id/tv_cya"
@@ -242,12 +420,23 @@
             android:textColor="@color/white"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:gravity="center" />
+            android:gravity="center"
+            android:layout_weight="1" />
+        <View
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_width="1dp" />
+
+    </LinearLayout>
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/lbl_conideal_cya"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:layout_weight="1" />
+
     </TableRow>
 
 

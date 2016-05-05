@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
     style="@style/AppTheme"
     tools:context="mx.spin.mobile.AnalizeResult">
@@ -31,7 +30,6 @@
                 android:layout_height="wrap_content"
                 layout="@layout/header_pool" />
 
-
             <TabHost
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
@@ -47,7 +45,8 @@
                     <TabWidget
                         android:id="@android:id/tabs"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"></TabWidget>
+                        android:layout_height="wrap_content"
+                        style="@android:style/Theme.Holo.Light"></TabWidget>
 
                     <FrameLayout
                         android:id="@android:id/tabcontent"
@@ -58,8 +57,7 @@
                             android:id="@+id/layout_balance"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            layout="@layout/balence_layout" />
-
+                            layout="@layout/balance_layout" />
 
                         <include
                             android:id="@+id/layout_desinfeccion"
@@ -67,13 +65,11 @@
                             android:layout_height="wrap_content"
                             layout="@layout/desinfeccion_layout" />
 
-
                     </FrameLayout>
+
                 </LinearLayout>
+
             </TabHost>
-
-
-
 
         </LinearLayout>
 

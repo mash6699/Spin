@@ -18,7 +18,7 @@ import mx.spin.mobile.R;
 import mx.spin.mobile.utils.SpinUtility;
 
 /**
- * Created by ironbit on 2/05/16.
+ * Created by mash on 2/05/16.
  */
 public class RegistrationIntentService extends IntentService {
 

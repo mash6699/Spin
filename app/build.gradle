@@ -72,7 +72,7 @@ android {
                 nameFlavor = "RC"
             }
 
-            def newApkName = "Spin_" + getDate() + "_" + nameFlavor + "_" + versionApkName + ".apk";
+            def newApkName = "Spin_" + getDate() + "_" + versionApkName + ".apk";
             variant.outputs.each { output ->
                 output.outputFile = new File("${project.buildDir}/outputs/apk/", newApkName);
             }

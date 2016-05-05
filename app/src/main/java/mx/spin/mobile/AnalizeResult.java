@@ -1,5 +1,6 @@
 package mx.spin.mobile;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -7,11 +8,13 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.TabHost;
 import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import mx.spin.mobile.singleton.SpingApplication;
 
 /**
@@ -79,6 +82,19 @@ public class AnalizeResult extends AppCompatActivity {
     @Bind(R.id.tv_cya)
     TextView txt_cya;
 
+    @Nullable
+    @Bind(R.id.tr_cloro_total)
+    View tr_cloroTotal;
+    @Nullable
+    @Bind(R.id.tr_cloro_libre)
+    View tr_cloroLibre;
+    @Nullable
+    @Bind(R.id.tr_cloramidas)
+    View tr_cloramidas;
+    @Nullable
+    @Bind(R.id.tr_bromo)
+    View tr_bromo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,7 +130,7 @@ public class AnalizeResult extends AppCompatActivity {
     }
 
     protected void setAnalisiInView(){
-      Log.d(TAG, ":::setAnalisiInView:::");
+        Log.d(TAG, ":::setAnalisiInView:::");
         int tipoPiscina = spingApplication.getTipoPiscina();
 
 
@@ -128,10 +144,14 @@ public class AnalizeResult extends AppCompatActivity {
 
         //TODO SET CLOROS
         if(tipoPiscina == 1){
+            tr_cloroTotal.setVisibility(View.VISIBLE);
+            tr_cloroLibre.setVisibility(View.VISIBLE);
+            tr_cloramidas.setVisibility(View.VISIBLE);
             txt_cloroTotal.setText(spingApplication.getSs_21());
             txt_cloroLibre.setText(spingApplication.getSs_22());
             txt_cloramidas.setText(spingApplication.getSs_23());
         }else{
+            tr_bromo.setVisibility(View.VISIBLE);
             txt_bromo.setText(spingApplication.getSs_27());
         }
 
@@ -139,7 +159,13 @@ public class AnalizeResult extends AppCompatActivity {
         txt_turbidez.setText(spingApplication.getSs_24());
         txt_metales.setText(spingApplication.getSs_25());
         txt_cya.setText(spingApplication.getSs_26());
+    }
 
+
+    @Nullable
+    @OnClick(R.id.btn_mantenimiento)
+    public void gotoMantenimiento(View view){
+        startActivity(new Intent(AnalizeResult.this, MantenimientoActivity.class));
     }
 
     @Override

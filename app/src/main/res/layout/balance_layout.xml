@@ -4,29 +4,28 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    android:background="@color/black">
 
     <TableLayout
-        android:id="@+id/tableLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TableRow
-            android:id="@+id/tableRow1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dip"
             android:gravity="center">
 
             <TextView
-                android:text=""
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:gravity="center_vertical" />
+                android:text=""
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_weight="1" />
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -35,23 +34,25 @@
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
-                android:gravity="center" />
+                android:gravity="center"
+                android:layout_weight="1" />
+
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:text="@string/lbl_conactual"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_weight="1" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dip"
             android:gravity="center">
 
             <TextView
@@ -61,22 +62,41 @@
                 android:textColor="@color/white"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:gravity="center_vertical" />
+                android:gravity="center"
+                android:layout_weight="1" />
 
-            <TextView
-                android:id="@+id/tv_ph"
-                android:text="0"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_height="match_parent"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:gravity="center" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1" >
+                <TextView
+                    android:id="@+id/tv_ph"
+                    android:text="0"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1" />
+
+                <View
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:layout_width="1dp" />
+
+            </LinearLayout>
+
+
 
             <TextView
                 android:text="@string/lbl_conideal_ph"
                 android:textColor="@color/white"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_weight="1" />
 
         </TableRow>
 
@@ -84,7 +104,6 @@
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:padding="5dip"
             android:gravity="center">
 
             <TextView
@@ -92,29 +111,44 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
-                android:gravity="center_vertical" />
+                android:gravity="center"
+                android:layout_weight="1" />
 
-            <TextView
-                android:id="@+id/tv_alcalinidad"
-                android:text="0"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_height="match_parent"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:gravity="center" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1" >
+
+                <TextView
+                    android:id="@+id/tv_alcalinidad"
+                    android:text="0"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1" />
+                <View
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:layout_width="1dp" />
+
+            </LinearLayout>
 
             <TextView
                 android:gravity="center"
                 android:text="@string/lbl_conideal_alcalinidad"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:layout_weight="1" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dip"
+
             android:gravity="center">
 
             <TextView
@@ -122,79 +156,125 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
-                android:gravity="center_vertical" />
+                android:gravity="center"
+                android:layout_weight="1" />
 
-            <TextView
-                android:id="@+id/tv_std"
-                android:text="0"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_height="match_parent"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:gravity="center" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1" >
+
+                <TextView
+                    android:id="@+id/tv_std"
+                    android:text="0"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1" />
+                <View
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:layout_width="1dp" />
+
+            </LinearLayout>
 
             <TextView
                 android:gravity="center"
                 android:text="@string/lbl_conideal_std"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:layout_weight="1" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dip"
             android:gravity="center">
 
             <TextView
                 android:text="@string/lbl_dureza"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:id="@+id/tv_dureza"
-                android:text="0"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 android:textColor="@color/white"
-                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:gravity="center" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1" >
+
+                <TextView
+                    android:id="@+id/tv_dureza"
+                    android:text="0"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1" />
+                <View
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:layout_width="1dp" />
+
+            </LinearLayout>
 
             <TextView
                 android:gravity="center"
                 android:text="@string/lbl_conideal_dureza"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:layout_weight="1" />
+
         </TableRow>
 
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dip"
+
             android:gravity="center">
 
             <TextView
                 android:text="@string/lbl_temperatura"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:id="@+id/tv_temperatura"
-                android:text="0"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 android:textColor="@color/white"
-                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:gravity="center" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1" >
+                <TextView
+                    android:id="@+id/tv_temperatura"
+                    android:text="0"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1" />
+                <View
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:layout_width="1dp" />
+
+            </LinearLayout>
 
             <TextView
                 android:gravity="center"
                 android:text="@string/lbl_conideal_temperatura"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:layout_weight="1" />
         </TableRow>
 
     </TableLayout>
@@ -211,6 +291,7 @@
         android:textColor="@color/white"/>
 
     <TextView
+        android:layout_marginTop="10dp"
         android:id="@+id/tv_calidad_agua"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -230,11 +311,11 @@
         card_view:cardBackgroundColor="@android:color/white"
         card_view:cardCornerRadius="21dp"
         card_view:cardElevation="6dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="15dp">
 
         <Button
-            android:id="@+id/btnAnalizeResultInitMantenimiento"
+            android:id="@+id/btn_mantenimiento"
             android:layout_gravity="center_horizontal"
             android:text="@string/lbl_btn_mantenimiento"
             android:layout_width="match_parent"
