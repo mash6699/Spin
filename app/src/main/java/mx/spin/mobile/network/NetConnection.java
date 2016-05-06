@@ -126,7 +126,8 @@ public class NetConnection {
 
     public static void obtenerEstados(AsyncHttpResponseHandler responseHandler) {
         HashMap<String, String> postValues = new HashMap<>();
-        String url = "http://www.spinws.com/Login_rest/state?country?MX";
+        //String url = "http://www.spinws.com/Login_rest/state?country?MX";
+        String url = ServiceRequest.getUrlGetStates();
         postValues.put("country", "MX");
 
         client.post(url, new RequestParams(postValues), responseHandler);

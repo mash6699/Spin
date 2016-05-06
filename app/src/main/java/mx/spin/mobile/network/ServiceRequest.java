@@ -9,7 +9,11 @@ public class ServiceRequest {
 
     private static final String URL_ADD_POOL        = "pool_rest/register";
     private static final String URL_GET_ALL_POOL    = "pool_rest/pool_list";
+    private static final String URL_DELETE_POOL        = "Pool_rest/deletePool";
     private static final String URL_GET_EQUIPMENT   = "pool_rest/equipments";
+
+    private static final String URL_BITACORA            = "save_rest/bitacora";
+    private static final String URL_BITACORA_DETALLE    = "bitacoraDetail/" ;
 
     private static final String URL_SAVE_ANALYSIS = "Save_rest/save";
 
@@ -33,6 +37,11 @@ public class ServiceRequest {
     public static String getUrlAddPool() {
         return getSpinHost() + URL_ADD_POOL;
     }
+
+    public static String getUrlDeletePool() {
+        return getSpinHost() + URL_DELETE_POOL;
+    }
+
 
     public static String getUrlGetAllPool() {
         return getSpinHost() + URL_GET_ALL_POOL;
@@ -80,5 +89,13 @@ public class ServiceRequest {
 
     public static String getUrlGetCountry() {
         return getSpinHost() + URL_GET_COUNTRY;
+    }
+
+    public static String getUrlBitacora() {
+        return getSpinHost() + URL_BITACORA;
+    }
+
+    public static String getUrlBitacoraDetalle(int id) {
+        return getSpinHost() + URL_BITACORA_DETALLE + id;
     }
 }

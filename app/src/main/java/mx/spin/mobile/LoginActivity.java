@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private UtilViews utilViews;
 
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-     BroadcastReceiver mRegistrationBroadcastReceiver;
+    BroadcastReceiver mRegistrationBroadcastReceiver;
     private boolean isReceiverRegistered;
     private SpinUtility spinUtility;
 
@@ -64,37 +64,6 @@ public class LoginActivity extends AppCompatActivity {
     @Bind(R.id.contrasenaUsuarioLogin)
     EditText password;
 
-    @Nullable
-    @OnClick(R.id.btnLogin)
-    void login(View view ){
-        String mail = email.getText().toString().trim();
-        String pass = password.getText().toString().trim();
-        if (connection()){
-            if(TextUtils.isEmpty(mail) || TextUtils.isEmpty(pass)){
-                utilViews.showToastInView(getString(R.string.msg_incomplete_data));
-            }else {
-                if(Utils.isEmailValid(mail)){
-                    sendLogin(mail, pass);
-                }else{
-                    utilViews.showToastInView(getString(R.string.msg_incomplete_data));
-                }
-            }
-        }
-    }
-
-    @Nullable
-    @OnClick(R.id.recuperarContrasena)
-    void recuperarContrasenia(View view){
-        Intent i = new Intent(LoginActivity.this,CambiarContrasenaActivity.class);
-        startActivity(i);
-    }
-
-    @Nullable
-    @OnClick(R.id.txtQuieroRegistrarme)
-    void registrarme(View view){
-        startActivity(new Intent(LoginActivity.this, FirstTimeActivity.class));
-
-    }
 
     @Override
     protected void onStart() {
@@ -181,6 +150,38 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+    @Nullable
+    @OnClick(R.id.btnLogin)
+    void login(View view ){
+        String mail = email.getText().toString().trim();
+        String pass = password.getText().toString().trim();
+        if (connection()){
+            if(TextUtils.isEmpty(mail) || TextUtils.isEmpty(pass)){
+                utilViews.showToastInView(getString(R.string.msg_incomplete_data));
+            }else {
+                if(Utils.isEmailValid(mail)){
+                    sendLogin(mail, pass);
+                }else{
+                    utilViews.showToastInView(getString(R.string.msg_incomplete_data));
+                }
+            }
+        }
+    }
+
+    @Nullable
+    @OnClick(R.id.recuperarContrasena)
+    void recuperarContrasenia(View view){
+        Intent i = new Intent(LoginActivity.this,CambiarContrasenaActivity.class);
+        startActivity(i);
+    }
+
+    @Nullable
+    @OnClick(R.id.txtQuieroRegistrarme)
+    void registrarme(View view){
+        startActivity(new Intent(LoginActivity.this, FirstTimeActivity.class));
 
     }
 
