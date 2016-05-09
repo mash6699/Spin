@@ -102,6 +102,7 @@ public class SpinBusinnes extends Application implements SpinBussinesImp {
 
 
     public SpinBusinnes getInstance(Context context){
+     //   RealmCon realmConfiguration = new RealmConfiguration.Builder(this).build();
         setRealmInstance(context);
         synchronized (SpinBusinnes.class){
             if(INSTANCE == null){

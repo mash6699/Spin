@@ -8,7 +8,9 @@ import io.realm.RealmObject;
 public class Piscina extends RealmObject {
 
     private int id;
+    private int idUsuario;
     private String nombre;
+
     private String tipoPiscina;
     private int idTipoPiscina;
     private String tipoInstalacion;
@@ -157,5 +159,13 @@ public class Piscina extends RealmObject {
 
     public void setIdTipoPiscina(int idTipoPiscina) {
         this.idTipoPiscina = idTipoPiscina;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }

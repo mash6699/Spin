@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import mx.spin.mobile.R;
+import mx.spin.mobile.utils.constants.Constants;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -65,6 +66,15 @@ public class NetConnection {
         client.post(url, new RequestParams(postValues), responseHandler);
     }
 
+
+    public static void getMisPiscinas(String idUsuario, AsyncHttpResponseHandler responseHandler) {
+        HashMap<String, String> postValues = new HashMap<>();
+        String url = ServiceRequest.getUrlGetAllPool();
+        postValues.put("id_user", idUsuario);
+        client.post(url, new RequestParams(postValues), responseHandler);
+    }
+
+
     public static void registrarUsuario(String nombre, String email, String contrasena, String telefono, String tipoLogin,String pais,String estado, AsyncHttpResponseHandler responseHandler) {
         HashMap<String, String> postValues = new HashMap<>();
         String url = "http://spinws.com/Login_rest/register";
@@ -109,13 +119,24 @@ public class NetConnection {
 
     }
 
-    public static void login(String email, String contrasena, AsyncHttpResponseHandler responseHandler) {
+    public static void login(String email, String contrasena, String token, String device , AsyncHttpResponseHandler responseHandler) {
+        HashMap<String, String> postValues = new HashMap<>();
+        String url = "http://spinws.com/Login_rest/login";
+        postValues.put("userMail", email);
+        postValues.put("userCred", contrasena);
+        postValues.put("deviceid", device);
+        postValues.put("os", Constants.ANDROID_OS);
+        postValues.put("token", token);
+        client.post(url, new RequestParams(postValues), responseHandler);
+    }
+
+/*    public static void login(String email, String contrasena, AsyncHttpResponseHandler responseHandler) {
         HashMap<String, String> postValues = new HashMap<>();
         String url = "http://spinws.com/Login_rest/login";
         postValues.put("userMail", email);
         postValues.put("userCred", contrasena);
         client.post(url, new RequestParams(postValues), responseHandler);
-    }
+    }*/
     public static void cambiarContrasena(String email, AsyncHttpResponseHandler responseHandler) {
         HashMap<String, String> postValues = new HashMap<>();
         String url = "http://www.spinws.com/Login_rest/recuperarPass";

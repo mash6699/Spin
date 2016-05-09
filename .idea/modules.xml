@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Spin.iml" filepath="$PROJECT_DIR$/Spin.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spinmodel/spinmodel.iml" filepath="$PROJECT_DIR$/spinmodel/spinmodel.iml" />
     </modules>
   </component>
 </project>

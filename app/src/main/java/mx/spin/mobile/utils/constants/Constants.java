@@ -19,6 +19,8 @@ public class Constants {
     public final static String PISCINA = "PSCINA";
     public final static String ID_PISCINA = "ID_PSCINA";
 
+    public final static String ANDROID_OS = "android";
+
     public final static String PPM = " ppm";
     public final static String GRADOS_C = " °C";
     public final static String NTU = " NTU";

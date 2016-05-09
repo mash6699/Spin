@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
@@ -20,12 +21,17 @@ import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.gson.Gson;
 
+import mx.spin.mobile.connection.BoussinesSpin;
+import mx.spin.mobile.dao.Pool;
+import mx.spin.mobile.dao.User;
 import mx.spin.mobile.entitys.Usuario;
 import mx.spin.mobile.network.NetConnection;
 import mx.spin.mobile.services.RegistrationIntentService;
 import mx.spin.mobile.singleton.SpingApplication;
 import mx.spin.mobile.utils.SpinUtility;
+import mx.spin.mobile.utils.constants.Constants;
 import mx.spin.mobile.utils.constants.JSKeys;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 import mx.spin.mobile.utils.UtilViews;
@@ -33,6 +39,8 @@ import mx.spin.mobile.utils.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -45,6 +53,8 @@ public class LoginActivity extends AppCompatActivity {
     private final static String TAG = LoginActivity.class.getSimpleName();
     private SpingApplication spingApplication = SpingApplication.getInstance();
     private UtilViews utilViews;
+
+    private BoussinesSpin boussinesSpin;
 
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     BroadcastReceiver mRegistrationBroadcastReceiver;
@@ -80,8 +90,9 @@ public class LoginActivity extends AppCompatActivity {
         utilViews = new UtilViews().getInstance(getApplication());
         spinUtility = SpinUtility.getInstance();
 
+        boussinesSpin = new BoussinesSpin(this);
+
         if (checkPlayServices()) {
-            // Start IntentService to register this application with GCM.
             Intent intent = new Intent(getApplicationContext(), RegistrationIntentService.class);
             startService(intent);
         }
@@ -92,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                 boolean sentToken = spinUtility
                         .getBooleanValueDataStorage(getApplicationContext(), SpinUtility.SENT_TOKEN_TO_SERVER);
                 if (sentToken) {
+                    spinUtility.getValueDataStorage(getApplicationContext(),SpinUtility.ANDROID_TOKEN);
                   Log.d(TAG, "GET TOKEN");
                 } else {
                    Log.d(TAG, "GET TOKEN ERROR");
@@ -101,7 +113,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     void sendLogin(String email, String password){
-        NetConnection.login(email, password, new TextHttpResponseHandlerMessage() {
+
+        String token =  spinUtility.getValueDataStorage(getApplicationContext(),SpinUtility.ANDROID_TOKEN);
+        String deviceId =  Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+
+        NetConnection.login(email, password, token, deviceId, new TextHttpResponseHandlerMessage() {
             public void onStart() {
                 super.onStart();
                 showMessage(LoginActivity.this, getString(R.string.msg_progress_dialog));
@@ -118,11 +134,12 @@ public class LoginActivity extends AppCompatActivity {
                 hideMessage();
                 try {
                     JSONObject jsonObject = new JSONObject(responseString);
+
                     if (jsonObject.optBoolean(JSKeys.EXITO)) {
                         JSONObject sesion = jsonObject.optJSONObject(JSKeys.SESSION);
                         Log.d("LoginOK", responseString);
 
-                        Realm realm = Realm.getInstance(LoginActivity.this);
+                     /*   Realm realm = Realm.getInstance(LoginActivity.this);
                         realm.beginTransaction();
 
                         Usuario user = realm.createObject(Usuario.class);
@@ -134,9 +151,20 @@ public class LoginActivity extends AppCompatActivity {
                         user.setTelefono(sesion.optString(JSKeys.PHONE));
                         user.setCantPiscinas(Integer.parseInt(sesion.optString(JSKeys.TOTAL_POOLS)));
 
+
+*/
+                        User mUser = new Gson().fromJson(sesion.toString(), User.class);
+
+                        boussinesSpin.insertUser(mUser);
+
+                        if(jsonObject.getJSONArray("piscinas")!= null){
+                            List<Pool> mPools = (List<Pool>) new Gson().fromJson(jsonObject.getJSONArray("piscinas").toString(), Pool.class);
+                            boussinesSpin.insertPool(mPools);
+                        }
+
                         spingApplication.setIdUsuario(sesion.optString(JSKeys.ID_USER));
 
-                        realm.commitTransaction();
+                       // realm.commitTransaction();
 
                         gotoDrawer();
 
