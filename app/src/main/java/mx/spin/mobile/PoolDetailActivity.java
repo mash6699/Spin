@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 
 import mx.spin.mobile.common.SpinBusinnes;
+import mx.spin.mobile.connection.BoussinesSpin;
+import mx.spin.mobile.dao.Pool;
 import mx.spin.mobile.entitys.Piscina;
 import mx.spin.mobile.singleton.SpingApplication;
 import mx.spin.mobile.utils.UtilViews;
@@ -24,9 +26,10 @@ public class PoolDetailActivity extends AppCompatActivity {
 
     private final static String TAG = PoolDetailActivity.class.getSimpleName();
     private SpingApplication spingApplication = SpingApplication.getInstance();
-    private SpinBusinnes spinBusinnes;
+    //private SpinBusinnes spinBusinnes;
     private UtilViews utilViews;
-    private Piscina piscina;
+    private Pool piscina;
+    private BoussinesSpin boussinesSpin;
 
     @Nullable
     @Bind(R.id.toolbar)
@@ -93,12 +96,14 @@ public class PoolDetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        spinBusinnes = new SpinBusinnes().getInstance(getApplicationContext());
+      //  spinBusinnes = new SpinBusinnes().getInstance(getApplicationContext());
+        boussinesSpin = new BoussinesSpin(this);
         utilViews = new UtilViews().getInstance(getApplicationContext());
         int idPiscina = spingApplication.getIdPiscina();
-        piscina = spinBusinnes.getMyPool(idPiscina);
+        //piscina = spinBusinnes.getMyPool(idPiscina);
+        piscina = boussinesSpin.getPool(idPiscina);
         if(piscina != null){
-            Log.d(TAG, "IdPiscina:: " + idPiscina + " Nombre:: " + piscina.getNombre());
+            Log.d(TAG, "IdPiscina:: " + idPiscina + " Nombre:: " + piscina.getPool_name());
             setPoolInView();
         }
     }
@@ -118,16 +123,16 @@ public class PoolDetailActivity extends AppCompatActivity {
         Log.d(TAG, "setPoolInView");
         spingApplication.resetAllValues();
         txt_titleToolbar.setText(R.string.title_activity_pool_detail);
-        txt_nombre.setText(piscina.getNombre());
-        txt_instalacion.setText(piscina.getTipoPiscina());
-        txt_tipoPiscina.setText(piscina.getTipoInstalacion());
-        txt_tipo_spa.setText(piscina.getTipoSpa());
-        txt_volumen.setText("" +(int) piscina.getVolumen());// + " " + utilViews.getUnidadMedida(piscina.getUm())
-        txt_um.setText(utilViews.getUnidadMedida(piscina.getUm()));
-        txt_tiempoRotacion.setText("" + piscina.getTiempoRotacion());
-        txt_velociddadFlujo.setText("" + piscina.getVelocidadFlujo());
+        txt_nombre.setText(piscina.getPool_name());
+    //    txt_instalacion.setText(piscina.getTipoPiscina());
+        txt_tipoPiscina.setText(piscina.getPool_type());
+      //  txt_tipo_spa.setText(piscina.getTipoSpa());
+        txt_volumen.setText("" +piscina.getPool_volume());// + " " + utilViews.getUnidadMedida(piscina.getUm())
+        txt_um.setText(piscina.getPool_um());
+        txt_tiempoRotacion.setText("" + piscina.getPool_rotation());
+    //    txt_velociddadFlujo.setText("" + piscina.get); // TODO CALCULAR
 
-        if(!piscina.getEquipos().isEmpty()){
+     /*   if(!piscina.getEquipos().isEmpty()){
             //txt_empty_equipos.setVisibility(View.GONE);
             txt_empty_equipos.setText("Equipos");
             String [] equipos = piscina.getEquipos().toString().replace(",''","").split("\\|");
@@ -136,7 +141,7 @@ public class PoolDetailActivity extends AppCompatActivity {
             }
         }else{
             txt_empty_equipos.setVisibility(View.VISIBLE);
-        }
+        }*/
     }
 
     void parseEquipo(String mEquipo){

@@ -20,10 +20,14 @@ import mx.spin.mobile.PoolDetailActivity;
 
 import mx.spin.mobile.adapters.AdapterPools;
 import mx.spin.mobile.common.SpinBusinnes;
+import mx.spin.mobile.connection.BoussinesSpin;
+import mx.spin.mobile.dao.Pool;
 import mx.spin.mobile.entitys.Piscina;
 import mx.spin.mobile.singleton.SpingApplication;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import mx.spin.mobile.R;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,10 +42,12 @@ public class PoolsFragment extends Fragment {
     private final static String TAG = PoolsFragment.class.getSimpleName();
     private View rootView;
     private AdapterPools adapterPools;
-    private ArrayList<Piscina> misPiscinas = new ArrayList<>();
+    private List<Pool> misPiscinas = new ArrayList<>();
+
+    private BoussinesSpin boussinesSpin;
 
     private UtilViews utilViews;
-    private SpinBusinnes spinBusinnes;
+  //  private SpinBusinnes spinBusinnes;
     private SpingApplication spingApplication = SpingApplication.getInstance();
 
     @Nullable
@@ -61,9 +67,10 @@ public class PoolsFragment extends Fragment {
         ButterKnife.bind(this,rootView);
 
         utilViews =  new UtilViews().getInstance(getContext());
-
-        spinBusinnes = new SpinBusinnes().getInstance(getContext());
-        misPiscinas = spinBusinnes.getListMyPools();
+        boussinesSpin = new BoussinesSpin(getActivity());
+      //  spinBusinnes = new SpinBusinnes().getInstance(getContext());
+      //  misPiscinas = spinBusinnes.getListMyPools();
+        misPiscinas = boussinesSpin.getMyPools();
 
         txt_titleToolbar.setText(getResources().getString(R.string.title_piscinas));
         toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
@@ -96,11 +103,11 @@ public class PoolsFragment extends Fragment {
 
     void gotoDetailPool(int position){
         Log.d(TAG,"gotoDetailPool position::" + position);
-        Piscina piscina = misPiscinas.get(position);
-        spingApplication.setIdPiscina(piscina.getId());
-        spingApplication.setName(piscina.getNombre());
+        Pool piscina = misPiscinas.get(position);
+        spingApplication.setIdPiscina(piscina.getPool_id());
+        spingApplication.setName(piscina.getPool_name());
         spingApplication.setDate(utilViews.getDatePool());
-        spingApplication.setTipoPiscina(piscina.getIdTipoPiscina());
+        spingApplication.setTipoPiscina(Integer.parseInt(piscina.getPool_type()));
         Intent detailIntent = new Intent(getActivity(), PoolDetailActivity.class);
         startActivity(detailIntent);
     }

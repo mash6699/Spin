@@ -178,7 +178,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         Log.d("RegisterOK", responseString);
                         Realm realm = Realm.getInstance(EditProfileActivity.this);
                         realm.beginTransaction();
-//                        Usuario user = realm.createObject(Usuario.class);
+//                        ListaPiscinas user = realm.createObject(ListaPiscinas.class);
 //                        user.setToken(sesion.optString("user_id"));
 //                        user.setNombre(sesion.optString("name"));
 //                        user.setEmail(sesion.optString("mail"));

@@ -166,7 +166,7 @@ public class RegisterActivity extends AppCompatActivity {
 /*    private void cleanUser() {
         Realm realm = Realm.getInstance(RegisterActivity.this);
         realm.beginTransaction();
-        RealmResults usuario = realm.where(Usuario.class).findAll();
+        RealmResults usuario = realm.where(ListaPiscinas.class).findAll();
         usuario.clear();
         realm.commitTransaction();
     }*/

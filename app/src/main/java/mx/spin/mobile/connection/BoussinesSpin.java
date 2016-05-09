@@ -6,6 +6,8 @@ import android.util.Log;
 import java.util.List;
 
 import mx.spin.mobile.dao.DaoSession;
+import mx.spin.mobile.dao.Equipment;
+import mx.spin.mobile.dao.EquipmentDao;
 import mx.spin.mobile.dao.Pool;
 import mx.spin.mobile.dao.PoolDao;
 import mx.spin.mobile.dao.User;
@@ -94,6 +96,20 @@ public class BoussinesSpin extends SpinFactory implements SpinImpl {
         Log.d(TAG, "getMyPools");
         PoolDao poolDao = daoSession.getPoolDao();
         return poolDao.loadAll();
+    }
+
+    @Override
+    public void insertEquipment(Equipment equipment) {
+        Log.d(TAG, "insertEquipment");
+        EquipmentDao equipmentDao = daoSession.getEquipmentDao();
+        equipmentDao.insert(equipment);
+    }
+
+    @Override
+    public void insertAllEquipment(List<Equipment> equipment) {
+        Log.d(TAG, "insertAllEquipment");
+        EquipmentDao equipmentDao = daoSession.getEquipmentDao();
+        equipmentDao.insertInTx(equipment);
     }
 
     @Override

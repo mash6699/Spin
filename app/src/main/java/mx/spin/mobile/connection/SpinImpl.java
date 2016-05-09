@@ -2,6 +2,7 @@ package mx.spin.mobile.connection;
 
 import java.util.List;
 
+import mx.spin.mobile.dao.Equipment;
 import mx.spin.mobile.dao.Pool;
 import mx.spin.mobile.dao.User;
 import mx.spin.mobile.dao.countries;
@@ -26,6 +27,8 @@ public interface SpinImpl {
     void deletePool(int idPool);
     Pool getPool(int idPool);
     List<Pool> getMyPools();
+    void insertEquipment(Equipment equipment);
+    void insertAllEquipment(List<Equipment> equipment);
 
     //TODO DEALERS
     void insertDealers(dealers dealer);

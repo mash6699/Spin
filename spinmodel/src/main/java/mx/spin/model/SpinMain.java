@@ -18,13 +18,12 @@ public class SpinMain {
     public static void main(String[] args) throws Exception {
         Schema schema = new Schema(SPIN_VERSION, SPIN_PKG);
 
-      //  addUser(schema);
+        addUser(schema);
         addPool(schema);
-      //  addEquipment(schema);
-       /* addDealers(schema);
+        addEquipment(schema);
+        addDealers(schema);
         addState(schema);
-        addCountries(schema);*/
-
+        addCountries(schema);
         new DaoGenerator().generateAll(schema, SPIN_PATH);
     }
 
@@ -44,9 +43,8 @@ public class SpinMain {
     private static void addPool(Schema schema){
         Entity pool = schema.addEntity("Pool");
         pool.addIdProperty();
-
         pool.addIntProperty("pool_id");
-       // pool.addIntProperty("pool_user_id");
+        pool.addIntProperty("pool_user_id");
         pool.addStringProperty("pool_name");
         pool.addStringProperty("pool_customer");
         pool.addStringProperty("pool_address");
@@ -62,21 +60,6 @@ public class SpinMain {
         pool.addStringProperty("pool_delete");
         pool.addStringProperty("pool_status");
         pool.addStringProperty("analysis");
-
-        Property idPool = pool.addIntProperty("pool_user_id").getProperty();
-
-
-        Entity equipment = schema.addEntity("Equipment");
-        equipment.addIntProperty("pool_user_id");
-        equipment.addIdProperty();
-        equipment.addIntProperty("pooleq_id");
-        equipment.addIntProperty("pooleq_equipment_id");
-        equipment.addStringProperty("pooleq_qty");
-        equipment.addStringProperty("pooleq_hp");
-        equipment.addStringProperty("Equipment");
-
-
-        pool.addToMany(equipment, idPool);
     }
 
     private static void addEquipment(Schema schema){

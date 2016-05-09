@@ -136,7 +136,7 @@ public class Usuario extends RealmObject {
 
 /*    @Override
     public String toString() {
-        return "Usuario{" +
+        return "ListaPiscinas{" +
                 "id='" + id + '\'' +
                 ", token='" + token + '\'' +
                 ", email='" + email + '\'' +

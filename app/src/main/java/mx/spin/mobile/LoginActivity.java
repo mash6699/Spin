@@ -24,9 +24,11 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.gson.Gson;
 
 import mx.spin.mobile.connection.BoussinesSpin;
+import mx.spin.mobile.dao.Equipment;
 import mx.spin.mobile.dao.Pool;
 import mx.spin.mobile.dao.User;
 import mx.spin.mobile.entitys.Usuario;
+import mx.spin.mobile.entitys.pojo.ListaPiscinas;
 import mx.spin.mobile.network.NetConnection;
 import mx.spin.mobile.services.RegistrationIntentService;
 import mx.spin.mobile.singleton.SpingApplication;
@@ -37,6 +39,7 @@ import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 import mx.spin.mobile.utils.UtilViews;
 import mx.spin.mobile.utils.Utils;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -136,37 +139,38 @@ public class LoginActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(responseString);
 
                     if (jsonObject.optBoolean(JSKeys.EXITO)) {
-                        JSONObject sesion = jsonObject.optJSONObject(JSKeys.SESSION);
-                        Log.d("LoginOK", responseString);
 
-                     /*   Realm realm = Realm.getInstance(LoginActivity.this);
-                        realm.beginTransaction();
+                        //ONE LEVEL
+                        if(jsonObject.has(JSKeys.SESSION)){
 
-                        Usuario user = realm.createObject(Usuario.class);
-                        user.setId(sesion.optString(JSKeys.ID_USER));
-                        user.setNombre(sesion.optString(JSKeys.NAME));
-                        user.setEstado(sesion.optString(JSKeys.STATE));
-                        user.setPais(sesion.optString(JSKeys.COUNTRY));
-                        user.setEmail(sesion.optString(JSKeys.EMAIL));
-                        user.setTelefono(sesion.optString(JSKeys.PHONE));
-                        user.setCantPiscinas(Integer.parseInt(sesion.optString(JSKeys.TOTAL_POOLS)));
+                            JSONObject sesion = jsonObject.optJSONObject(JSKeys.SESSION);
+                            Log.d("LoginOK", responseString);
+                            JSONArray piscinas = (JSONArray) jsonObject.get("piscinas");
+
+                            User mUser = new Gson().fromJson(sesion.toString(), User.class);
+                            boussinesSpin.insertUser(mUser);
 
 
-*/
-                        User mUser = new Gson().fromJson(sesion.toString(), User.class);
+                            if(!piscinas.toString().trim().equals("[]")){
+                                Pool[] mPiscinas =  new Gson().fromJson(piscinas.toString(), Pool[].class);
 
-                        boussinesSpin.insertUser(mUser);
+                                if(mPiscinas.length > 0 ){
+                                    for(int i = 0; i < mPiscinas.length; i++){
+                                        boussinesSpin.insertPool(mPiscinas[i]);
+                                        List<Equipment> equipo = mPiscinas[i].equipos;
+                                        if(equipo != null){
+                                            Log.d(TAG, "INSERTA MUCHOS EQUIPOS");
+                                            boussinesSpin.insertAllEquipment(equipo);
+                                        }
+                                    }
+                                    Log.d("LoginOKK", responseString);
 
-                        if(jsonObject.getJSONArray("piscinas")!= null){
-                            List<Pool> mPools = (List<Pool>) new Gson().fromJson(jsonObject.getJSONArray("piscinas").toString(), Pool.class);
-                            boussinesSpin.insertPool(mPools);
+                                }
+                            }
+
+                            spingApplication.setIdUsuario(sesion.optString(JSKeys.ID_USER));
+                            gotoDrawer();
                         }
-
-                        spingApplication.setIdUsuario(sesion.optString(JSKeys.ID_USER));
-
-                       // realm.commitTransaction();
-
-                        gotoDrawer();
 
                     } else {
                         utilViews.showToastInView(getString(R.string.msg_incorrect_data));
