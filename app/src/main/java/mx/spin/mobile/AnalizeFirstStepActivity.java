@@ -110,7 +110,7 @@ public class AnalizeFirstStepActivity extends AppCompatActivity implements  Adap
     void loadSpinner() {
         try{
             List<String> listPh = new ArrayList<String>();
-            for(float p = 0f ; p <= 14.05f ; p  = p + 0.05f){
+            for(float p = 0f ; p <= 14.1f ; p  = p + 0.1f){
                 listPh.add( String.format(Constants.TWO_DECIMAL,p));
             }
             ArrayAdapter<String> arrayAdapterPh = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listPh);
@@ -155,14 +155,23 @@ public class AnalizeFirstStepActivity extends AppCompatActivity implements  Adap
     }
 
     void setAppValues(){
-        Log.d(TAG, "setAppValues");
-        sp_ph.setSelection(spingApplication.getFsp_11());
-        sp_alcani.setSelection(spingApplication.getFsp_12());
-        sp_dureza.setSelection(spingApplication.getFsp_13());
-        sp_temp.setSelection(spingApplication.getFsp_14());
-        sp_std.setSelection(spingApplication.getFsp_15());
-        indice_saturacion.setText(spingApplication.getFs_16());
-        calidad_agua.setText(spingApplication.getFs_17());
+        if(spingApplication.getFs_16()!= null){
+            Log.d(TAG, "setAppValues");
+            sp_ph.setSelection(spingApplication.getFsp_11());
+            sp_alcani.setSelection(spingApplication.getFsp_12());
+            sp_dureza.setSelection(spingApplication.getFsp_13());
+            sp_temp.setSelection(spingApplication.getFsp_14());
+            sp_std.setSelection(spingApplication.getFsp_15());
+            indice_saturacion.setText(spingApplication.getFs_16());
+            calidad_agua.setText(spingApplication.getFs_17());
+        }else{
+            Log.d(TAG, "setDefaultValues");
+            sp_ph.setSelection(75);
+            sp_alcani.setSelection(10);
+            sp_dureza.setSelection(10);
+            sp_temp.setSelection(30);
+            sp_std.setSelection(2);
+        }
     }
 
     void setListeners(){

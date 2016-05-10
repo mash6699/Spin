@@ -274,14 +274,41 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
 
     void setDataInApp(){
         Log.d(TAG, "setDataInApp");
-        sp_cloroTotal.setSelection(spingApplication.getSsp_21());
-        sp_clorolibre.setSelection(spingApplication.getSsp_22());
-        txt_cloramidas.setText(spingApplication.getSs_23());
-        sp_turbidez.setSelection(spingApplication.getSsp_24());
-        sp_metales.setSelection(spingApplication.getSsp_25());
+       // if(spingApplication.getSsp_26() ){
+            sp_cloroTotal.setSelection(spingApplication.getSsp_21());
+            sp_clorolibre.setSelection(spingApplication.getSsp_22());
 
-        sp_cya.setSelection(spingApplication.getSsp_26());
-        sp_bromo.setSelection(spingApplication.getSsp_27());
+
+            txt_cloramidas.setText(spingApplication.getSs_23());
+          //  sp_turbidez.setSelection(spingApplication.getSsp_24());
+            sp_metales.setSelection(spingApplication.getSsp_25());
+
+
+       //     sp_cya.setSelection(spingApplication.getSsp_26());
+      //      sp_bromo.setSelection(spingApplication.getSsp_27());
+      //  }else {
+
+        if(spingApplication.getSs_24() != null){
+            sp_turbidez.setSelection(spingApplication.getSsp_24());
+        }else{
+            sp_turbidez.setSelection(20);
+        }
+
+        if(spingApplication.getSsp_26() > 0){
+            sp_cya.setSelection(spingApplication.getSsp_26());
+        }else{
+            sp_cya.setSelection(5);
+        }
+
+
+        if(spingApplication.getSsp_27() > 0){
+            sp_bromo.setSelection(spingApplication.getSsp_27());
+        }else{
+            sp_bromo.setSelection(60);
+        }
+
+      //  }
+
     }
 
     @Override

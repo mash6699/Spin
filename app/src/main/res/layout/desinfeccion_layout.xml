@@ -150,7 +150,7 @@
             android:visibility="gone">
 
             <TextView
-                android:text="@string/lbl_cloramidas"
+                android:text="@string/lbl_cloraminas"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/white"

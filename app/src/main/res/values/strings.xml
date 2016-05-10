@@ -187,7 +187,7 @@
     <string name="lbl_cloro_dpd">Cloro (DPD1)</string>
     <string name="lbl_cloro_total">Cloro total</string>
     <string name="lbl_metales_cloro">Metales</string>
-    <string name="lbl_cloramidas">Cloramidas</string>
+    <string name="lbl_cloraminas">Cloraminas</string>
     <string name="lbl_bromo">Bromo total(DPD1)</string>
     <string name="lbl_bromo_sin">Bromo</string>
     <string name="lbl_turbidez">Turbidez</string>
@@ -259,8 +259,8 @@
     <!--    BALANCE-->
     <string name="lbl_conideal_ph">7.4-7.6</string>
     <string name="lbl_conideal_alcalinidad">80-120 ppm</string>
-    <string name="lbl_conideal_std">+500 de origen</string>
-    <string name="lbl_conideal_dureza"> 150-250 ppm</string>
+    <string name="lbl_conideal_std">+1500 de origen</string>
+    <string name="lbl_conideal_dureza">150-250 ppm</string>
     <string name="lbl_conideal_temperatura">Max 40°C</string>
     <!--    BALANCE-->
 
