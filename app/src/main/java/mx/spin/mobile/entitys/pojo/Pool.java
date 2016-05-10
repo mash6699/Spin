@@ -7,36 +7,41 @@ import java.io.Serializable;
  */
 public class Pool implements Serializable {
 
-    private int id;
+    private int idPiscina;
+    private int idUsuario;
     private String nombre;
+    private String tipoPiscina;
+    private int idTipoPiscina;
     private String tipoInstalacion;
+    private int idTipoInstalacion;
     private String tipoSpa;
+    private int idTipoSpa;
     private double volumen;
+    private int um;
+    private int figure;
     private double tiempoRotacion;
     private double velocidadFlujo;
     private String equipos;
+    private int estatus;
 
-    private Pool(){
+    public Pool(){
 
     }
 
-    public Pool(int id, String nombre, String tipoInstalacion, String tipoSpa, double volumen, double tiempoRotacion, double velocidadFlujo, String equipos) {
-        this.id = id;
-        this.nombre = nombre;
-        this.tipoInstalacion = tipoInstalacion;
-        this.tipoSpa = tipoSpa;
-        this.volumen = volumen;
-        this.tiempoRotacion = tiempoRotacion;
-        this.velocidadFlujo = velocidadFlujo;
-        this.equipos = equipos;
+    public int getIdPiscina() {
+        return idPiscina;
     }
 
-    public int getId() {
-        return id;
+    public void setIdPiscina(int idPiscina) {
+        this.idPiscina = idPiscina;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNombre() {
@@ -47,12 +52,36 @@ public class Pool implements Serializable {
         this.nombre = nombre;
     }
 
+    public String getTipoPiscina() {
+        return tipoPiscina;
+    }
+
+    public void setTipoPiscina(String tipoPiscina) {
+        this.tipoPiscina = tipoPiscina;
+    }
+
+    public int getIdTipoPiscina() {
+        return idTipoPiscina;
+    }
+
+    public void setIdTipoPiscina(int idTipoPiscina) {
+        this.idTipoPiscina = idTipoPiscina;
+    }
+
     public String getTipoInstalacion() {
         return tipoInstalacion;
     }
 
     public void setTipoInstalacion(String tipoInstalacion) {
         this.tipoInstalacion = tipoInstalacion;
+    }
+
+    public int getIdTipoInstalacion() {
+        return idTipoInstalacion;
+    }
+
+    public void setIdTipoInstalacion(int idTipoInstalacion) {
+        this.idTipoInstalacion = idTipoInstalacion;
     }
 
     public String getTipoSpa() {
@@ -63,12 +92,36 @@ public class Pool implements Serializable {
         this.tipoSpa = tipoSpa;
     }
 
+    public int getIdTipoSpa() {
+        return idTipoSpa;
+    }
+
+    public void setIdTipoSpa(int idTipoSpa) {
+        this.idTipoSpa = idTipoSpa;
+    }
+
     public double getVolumen() {
         return volumen;
     }
 
     public void setVolumen(double volumen) {
         this.volumen = volumen;
+    }
+
+    public int getUm() {
+        return um;
+    }
+
+    public void setUm(int um) {
+        this.um = um;
+    }
+
+    public int getFigure() {
+        return figure;
+    }
+
+    public void setFigure(int figure) {
+        this.figure = figure;
     }
 
     public double getTiempoRotacion() {
@@ -93,5 +146,13 @@ public class Pool implements Serializable {
 
     public void setEquipos(String equipos) {
         this.equipos = equipos;
+    }
+
+    public int getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(int estatus) {
+        this.estatus = estatus;
     }
 }

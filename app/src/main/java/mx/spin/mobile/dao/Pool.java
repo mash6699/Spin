@@ -33,6 +33,16 @@ public class Pool implements Parcelable{
     private String pool_status;
     private String analysis;
 
+    public String getmEquipos() {
+        return mEquipos;
+    }
+
+    public void setmEquipos(String mEquipos) {
+        this.mEquipos = mEquipos;
+    }
+
+    public String mEquipos;
+
     @SerializedName("equipos")
     public List<Equipment> equipos;
 

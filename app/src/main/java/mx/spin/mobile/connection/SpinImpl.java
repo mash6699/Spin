@@ -18,7 +18,7 @@ public interface SpinImpl {
     void insertUser(User user);
     void updateUser(User user);
     User getUser();
-    void deleteUser();
+    void deleteAllUser();
 
     //TODO POOL
     void insertPool(Pool pool);
@@ -26,9 +26,11 @@ public interface SpinImpl {
     void updatePool(Pool pool);
     void deletePool(int idPool);
     Pool getPool(int idPool);
+    void deleteAllPools();
     List<Pool> getMyPools();
     void insertEquipment(Equipment equipment);
     void insertAllEquipment(List<Equipment> equipment);
+    void deleteAllEquipment();
 
     //TODO DEALERS
     void insertDealers(dealers dealer);

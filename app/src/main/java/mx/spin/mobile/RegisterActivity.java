@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,11 +22,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.gson.Gson;
+
 import mx.spin.mobile.common.SpinBusinnes;
+import mx.spin.mobile.connection.BoussinesSpin;
+import mx.spin.mobile.dao.User;
 import mx.spin.mobile.entitys.Estado;
 import mx.spin.mobile.entitys.Pais;
-import mx.spin.mobile.entitys.Usuario;
+import mx.spin.mobile.entitys.pojo.UsuarioReg;
 import mx.spin.mobile.network.NetConnection;
+import mx.spin.mobile.utils.SpinUtility;
+import mx.spin.mobile.utils.UtilViews;
 import mx.spin.mobile.utils.constants.Constants;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 import mx.spin.mobile.utils.Utils;
@@ -41,10 +48,16 @@ import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.realm.Realm;
+import mx.spin.mobile.utils.constants.JSKeys;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private static String TAG = RegisterActivity.class.getName();
+    private BoussinesSpin boussinesSpin;
+    private UsuarioReg usuarioReg = new UsuarioReg();
+    private SpinUtility spinUtility;
+    private UtilViews utilViews;
+
     @Nullable
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -52,17 +65,38 @@ public class RegisterActivity extends AppCompatActivity {
     @Bind(R.id.txtToolbarTitle)
     TextView txt_titleToolbar;
 
-    private TextView txtYaTengoCuenta;
-    private EditText nombre;
-    private EditText email;
-    private EditText contrasena;
-    private EditText telefono;
-    private EditText emailForget;
+    @Nullable
+    @Bind(R.id.txtYaTengoCuenta)
+    TextView txtYaTengoCuenta;
+    @Nullable
+    @Bind(R.id.nombreUsuario)
+    EditText nombre;
+    @Nullable
+    @Bind(R.id.emailUsuario)
+    EditText email;
+    @Nullable
+    @Bind(R.id.contrasenaUsuario)
+    EditText contrasena;
+    @Nullable
+    @Bind(R.id.telefonoUsuario)
+    EditText telefono;
+    @Nullable
+    @Bind(R.id.correoCambiar)
+    EditText emailForget;
 
-    private Spinner spinerPais;
-    private Spinner spinerEstados;
-    private CircleImageView imagePerfil;
-    private Button btnRegistrate;
+    @Nullable
+    @Bind(R.id.spinnerPais)
+    Spinner spinerPais;
+    @Nullable
+    @Bind(R.id.spinnerEstado)
+    Spinner spinerEstados;
+    @Nullable
+    @Bind(R.id.imagePerfil)
+    CircleImageView imagePerfil;
+    @Nullable
+    @Bind(R.id.btnRegistrate)
+    Button btnRegistrate;
+
     private static final int SELECT_PICTURE = 1;
     private String selectedImagePath;
     private ArrayList<Pais> listadoPaises = new ArrayList<>();
@@ -73,43 +107,34 @@ public class RegisterActivity extends AppCompatActivity {
     private Integer estadoSeleccionado = null;
 
     private Bitmap imageFile = null;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (NetConnection.isOnline(this,true)){
+            obtenerPaises();
+            obtenerEstados();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        spinUtility = SpinUtility.getInstance();
+        utilViews = new UtilViews().getInstance(getApplication());
+        boussinesSpin = new BoussinesSpin(this);
+        initSpinners();
+        setActions();
+    }
 
-        initComponents();
 
+    void setActions(){
+        Log.d(TAG, "setActions");
 
-        if (NetConnection.isOnline(this,true)){
-            obtenerPaises();
-            obtenerEstados();
-        }
-
-        btnRegistrate = (Button) findViewById(R.id.btnRegistrate);
-        btnRegistrate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                SpinBusinnes spinBusinnes = new SpinBusinnes().getInstance(getApplicationContext());
-                spinBusinnes.cleanUser();
-
-                //cleanUser();
-//                if (imageFile != null){
-                if(!validateUserData()){
-                    registrarUsuario(nombre.getText().toString(),email.getText().toString(),contrasena.getText().toString(),telefono.getText().toString(), Constants.DEFAULT_LOGIN,listadoPaises.get(paisSeleccionado).getPk()+"",listadoEstados.get(estadoSeleccionado).getPk()+"");
-                }else{
-                    Toast.makeText(RegisterActivity.this,"Ingresa la información requerida.",Toast.LENGTH_SHORT).show();
-                }
-                //                }else{
-//                    Toast.makeText(RegisterActivity.this,"Debe subir una foto",Toast.LENGTH_SHORT).show();
-//                }
-            }
-        });
         spinerPais.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -161,28 +186,64 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        btnRegistrate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                SpinBusinnes spinBusinnes = new SpinBusinnes().getInstance(getApplicationContext());
+                spinBusinnes.cleanUser();
+
+                //cleanUser();
+//                if (imageFile != null){
+                if(!validateUserData()){
+                    //registrarUsuario(nombre.getText().toString(),email.getText().toString(),contrasena.getText().toString(),telefono.getText().toString(), Constants.DEFAULT_LOGIN,listadoPaises.get(paisSeleccionado).getPk()+"",listadoEstados.get(estadoSeleccionado).getPk()+"");
+                    registrarUsuario(usuarioReg);
+                }else{
+                 //   Toast.makeText(RegisterActivity.this,"Ingresa la información requerida.",Toast.LENGTH_SHORT).show();
+                    utilViews.showToastInView("Ingresa la información requerida.");
+                }
+                //                }else{
+//                    Toast.makeText(RegisterActivity.this,"Debe subir una foto",Toast.LENGTH_SHORT).show();
+//                }
+            }
+        });
+
     }
 
-/*    private void cleanUser() {
-        Realm realm = Realm.getInstance(RegisterActivity.this);
-        realm.beginTransaction();
-        RealmResults usuario = realm.where(ListaPiscinas.class).findAll();
-        usuario.clear();
-        realm.commitTransaction();
-    }*/
 
     boolean validateUserData(){
         boolean estatus = false;
         View focusView = null;
+
         try{
+            String nom      = nombre.getText().toString().trim();
+            String ema      = email.getText().toString().trim();
+            String pas      = contrasena.getText().toString().trim();
+            String tel      = telefono.getText().toString().trim();
+            String idPais   = listadoPaises.get(paisSeleccionado).getPk()+"";
+            String idEdo    = listadoEstados.get(estadoSeleccionado).getPk()+"";
+            String pais     = listadoPaises.get(paisSeleccionado).getNombre();
+            String edo      = listadoEstados.get(estadoSeleccionado).getNombre();
+            String token    = spinUtility.getValueDataStorage(getApplicationContext(), SpinUtility.ANDROID_TOKEN);
+            String deviceId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 
-            String nom = nombre.getText().toString().trim();
-            String ema = email.getText().toString().trim();
-            String pas = contrasena.getText().toString().trim();
-            String tel = telefono.getText().toString().trim();
-            String pai = listadoPaises.get(paisSeleccionado).getPk()+"";
-            String edo = listadoEstados.get(estadoSeleccionado).getPk()+"";
 
+            //TODO SET VALUES USER REG
+            usuarioReg.setNombre(nom);
+            usuarioReg.setEmail(ema);
+            usuarioReg.setIdPais(idPais);
+            usuarioReg.setNombrePais(pais);
+            usuarioReg.setIdEstado(idEdo);
+
+            usuarioReg.setTelefono(tel);
+            usuarioReg.setToken(token);
+            usuarioReg.setDiviceId(deviceId);
+
+            if(listadoPaises.get(paisSeleccionado).getNombre().equals(Constants.KEY_MEX)){
+                usuarioReg.setNombreEstado(edo);
+            }else{
+                usuarioReg.setNombreEstado(" ");
+            }
             if(TextUtils.isEmpty(nom)){
                 nombre.setError("Debes ingresar tu nombre");
                 focusView = nombre;
@@ -213,25 +274,13 @@ public class RegisterActivity extends AppCompatActivity {
         return estatus;
     }
 
-    void initComponents(){
-        txt_titleToolbar.setText(R.string.title_new_user);
-        txtYaTengoCuenta = (TextView) findViewById(R.id.txtYaTengoCuenta);
-        nombre          = (EditText) findViewById(R.id.nombreUsuario);
-        email           = (EditText) findViewById(R.id.emailUsuario);
-        contrasena      = (EditText) findViewById(R.id.contrasenaUsuario);
-        telefono        = (EditText) findViewById(R.id.telefonoUsuario);
-        emailForget        = (EditText) findViewById(R.id.correoCambiar);
-        imagePerfil     = (CircleImageView) findViewById(R.id.imagePerfil);
-        spinerEstados   = (Spinner) findViewById(R.id.spinnerEstado);
-        spinerPais      = (Spinner) findViewById(R.id.spinnerPais);
-
-
+    void initSpinners(){
+        Log.d(TAG, "initSpinners");
         adapterPaises   = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
         adapterEstados  = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
 
         spinerPais.setAdapter(adapterPaises);
         spinerEstados.setAdapter(adapterEstados);
-
     }
 
 
@@ -258,6 +307,7 @@ public class RegisterActivity extends AppCompatActivity {
         cursor.moveToFirst();
         return cursor.getString(column_index);
     }
+
     private void obtenerPaises(){
         NetConnection.obtenerPaises(new TextHttpResponseHandlerMessage() {
             @Override
@@ -269,7 +319,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 hideMessage();
-                Toast.makeText(RegisterActivity.this,getResources().getString(R.string.msg_generic_error),Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(RegisterActivity.this,getResources().getString(R.string.msg_generic_error),Toast.LENGTH_SHORT).show();
+                utilViews.showToastInView(getResources().getString(R.string.msg_generic_error));
             }
 
             @Override
@@ -286,7 +337,6 @@ public class RegisterActivity extends AppCompatActivity {
                             adapterPaises.add(p.getNombre());
                             adapterPaises.notifyDataSetChanged();
 
-                            //    spinerPais.setAdapter(UtilViews.getAdapterPHTitle(getApplicationContext(), adapterPaises));
                         }
                     }
                 } catch (JSONException e) {
@@ -306,13 +356,14 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 hideMessage();
-                Toast.makeText(RegisterActivity.this,getResources().getString(R.string.msg_generic_error),Toast.LENGTH_SHORT).show();
+               // Toast.makeText(RegisterActivity.this,getResources().getString(R.string.msg_generic_error),Toast.LENGTH_SHORT).show();
+                utilViews.showToastInView(getResources().getString(R.string.msg_generic_error));
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 hideMessage();
-                Log.d("Estados",responseString);
+                Log.d("Estados: ", " " +!responseString.isEmpty());
                 try {
                     JSONObject jsonObject = new JSONObject(responseString);
                     Boolean rc = jsonObject.optBoolean("success");
@@ -331,8 +382,10 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-    private void registrarUsuario(final String nombre, final String email, final String contrasena, final String telefono,String tipoLogin, String pais, String estado){
-        NetConnection.registrarUsuario(nombre, email, contrasena, telefono, tipoLogin, pais, estado,new TextHttpResponseHandlerMessage() {
+
+
+    private void registrarUsuario(UsuarioReg usuarioReg){
+        NetConnection.registrarUsuario(usuarioReg,new TextHttpResponseHandlerMessage() {
             @Override
             public void onStart() {
                 super.onStart();
@@ -342,7 +395,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 hideMessage();
-                Toast.makeText(RegisterActivity.this,getResources().getString(R.string.msg_generic_error),Toast.LENGTH_SHORT).show();
+               // Toast.makeText(RegisterActivity.this,getResources().getString(R.string.msg_generic_error),Toast.LENGTH_SHORT).show();
+                utilViews.showToastInView(getResources().getString(R.string.msg_generic_error));
             }
 
             @Override
@@ -350,39 +404,33 @@ public class RegisterActivity extends AppCompatActivity {
                 hideMessage();
                 try {
                     JSONObject jsonObject = new JSONObject(responseString);
-                    if (jsonObject.optBoolean("success")){
-                        JSONObject sesion = jsonObject.optJSONObject("session");
+                    if (jsonObject.optBoolean(JSKeys.SUCCESS)){
+                        JSONObject sesion = jsonObject.optJSONObject(JSKeys.SESSION);
                         Log.d("RegisterOK", responseString);
-                        Realm realm = Realm.getInstance(RegisterActivity.this);
-                        realm.beginTransaction();
-                        Usuario user = realm.createObject(Usuario.class);
-                        user.setToken(sesion.optString("id_user"));
-                        user.setId(sesion.optString("id_user"));
-                        user.setNombre(sesion.optString("name"));
-                        user.setEmail(sesion.optString("mail"));
-                        user.setTelefono(sesion.optString("phone"));
-                        user.setPais(listadoPaises.get(paisSeleccionado).getNombre());
-                        if (estadoSeleccionado != null){
-                            user.setEstado(listadoEstados.get(estadoSeleccionado).getNombre());
-                        }
-                        user.setContrasena(contrasena);
-                        if (selectedImagePath == null){
-                            user.setPhoto("");
-                        }else{
-                            user.setPhoto(selectedImagePath);
-                        }
-//                        user.setFotoFile(Utils.convertBitmapToBytes(imageFile));
-                        realm.commitTransaction();
+
+                        User mUser = new Gson().fromJson(sesion.toString(), User.class);
+                        boussinesSpin.insertUser(mUser);
+
                         startActivity(new Intent(RegisterActivity.this, DrawerActivity.class));
                         finish();
                     }else{
+                        String msj = jsonObject.get("msj").toString();
                         Log.d("RegisterFail",responseString);
-                        Toast.makeText(RegisterActivity.this,getResources().getString(R.string.msg_generic_error), Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(RegisterActivity.this, msj, Toast.LENGTH_SHORT).show();
+                        utilViews.showToastInView(msj);
                     }
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                   Log.e(TAG, e.getMessage());
                 }
             }
         });
+    }
+
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
     }
 }

@@ -361,6 +361,34 @@ public class UtilViews {
         return calidad;
     }
 
+
+    public static String getTipoSpa(int uso, int typo){
+        String spa = null;
+        if(uso == 1){
+            if(typo == 1){
+                spa = "Piscina terapéutica (publica)";
+            }else if(typo == 2){
+                spa = "Piscina de hotel (publica)";
+            }else if(typo == 3){
+                spa = "Piscina de Club o Escuela (publica)";
+            }else if(typo == 4){
+                spa = "SPA (publica)";
+            }else if(typo == 5){
+                spa = "Chapoteadero (publica)";
+            }else  if(typo == 6){
+                spa = "Parque acuático (publica)";
+            }
+        }else{
+            if(typo == 1){
+                spa = "Piscina privada";
+            }else if(typo == 2){
+                spa = "SPA privado";
+            }
+        }
+        System.out.println("getTipoSpa::: " + spa);
+        return spa;
+    }
+
 //TODO BALANCE
     /*
     PH

@@ -18,13 +18,13 @@ public class SpinMain {
     public static void main(String[] args) throws Exception {
         Schema schema = new Schema(SPIN_VERSION, SPIN_PKG);
 
-        addUser(schema);
+/*        addUser(schema);
         addPool(schema);
         addEquipment(schema);
         addDealers(schema);
         addState(schema);
         addCountries(schema);
-        new DaoGenerator().generateAll(schema, SPIN_PATH);
+        new DaoGenerator().generateAll(schema, SPIN_PATH);*/
     }
 
     private static void addUser(Schema schema){
@@ -60,6 +60,7 @@ public class SpinMain {
         pool.addStringProperty("pool_delete");
         pool.addStringProperty("pool_status");
         pool.addStringProperty("analysis");
+        pool.addStringProperty("pool_equipment");
     }
 
     private static void addEquipment(Schema schema){

@@ -16,6 +16,7 @@ import mx.spin.mobile.connection.BoussinesSpin;
 import mx.spin.mobile.dao.Pool;
 import mx.spin.mobile.entitys.Piscina;
 import mx.spin.mobile.singleton.SpingApplication;
+import mx.spin.mobile.utils.CalculateVolume;
 import mx.spin.mobile.utils.UtilViews;
 
 import butterknife.Bind;
@@ -121,16 +122,20 @@ public class PoolDetailActivity extends AppCompatActivity {
 
     void setPoolInView(){
         Log.d(TAG, "setPoolInView");
+
+        double volumen = Double.parseDouble(piscina.getPool_volume());
+        double rotacion = Double.parseDouble(piscina.getPool_rotation());
+        int um = Integer.parseInt(piscina.getPool_um());
         spingApplication.resetAllValues();
         txt_titleToolbar.setText(R.string.title_activity_pool_detail);
         txt_nombre.setText(piscina.getPool_name());
-    //    txt_instalacion.setText(piscina.getTipoPiscina());
-        txt_tipoPiscina.setText(piscina.getPool_type());
-      //  txt_tipo_spa.setText(piscina.getTipoSpa());
+        txt_instalacion.setText(piscina.getPool_category().equals("1")? "Abierta" : "Techada");
+        txt_tipoPiscina.setText(piscina.getPool_type().equals("1") ? "Pública" : "Privada");
+        txt_tipo_spa.setText(utilViews.getTipoSpa(Integer.parseInt(piscina.getPool_use()), Integer.parseInt(piscina.getPool_type())));
         txt_volumen.setText("" +piscina.getPool_volume());// + " " + utilViews.getUnidadMedida(piscina.getUm())
-        txt_um.setText(piscina.getPool_um());
+        txt_um.setText(utilViews.getUnidadMedida(um));
         txt_tiempoRotacion.setText("" + piscina.getPool_rotation());
-    //    txt_velociddadFlujo.setText("" + piscina.get); // TODO CALCULAR
+        txt_velociddadFlujo.setText(CalculateVolume.getVelocidadFlujo(volumen, rotacion, um)); // TODO CALCULAR
 
      /*   if(!piscina.getEquipos().isEmpty()){
             //txt_empty_equipos.setVisibility(View.GONE);

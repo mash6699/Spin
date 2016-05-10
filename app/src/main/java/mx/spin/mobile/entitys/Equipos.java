@@ -1,10 +1,13 @@
 package mx.spin.mobile.entitys;
 
+/*
 import io.realm.RealmObject;
 
+*/
 /**
  * Created by miguelangel on 04/04/2016.
- */
+ *//*
+
 public class Equipos  {
 
     private int pooleqId;
@@ -53,3 +56,4 @@ public class Equipos  {
         this.equipment = equipment;
     }
 }
+*/

@@ -18,13 +18,10 @@ public abstract class TextHttpResponseHandlerMessage extends TextHttpResponseHan
 
 		dialog.show();
 		dialog.setContentView(R.layout.costum_progress_dialog);
-	//	dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
-	//	dialog.setIndeterminate(true);
         dialog.setCancelable(false); 
 		//dialog.setMessage(message);
-
 	}
 	
 	protected void hideMessage() {

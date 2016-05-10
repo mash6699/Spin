@@ -7,6 +7,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import mx.spin.mobile.R;
+import mx.spin.mobile.dao.Pool;
+import mx.spin.mobile.dao.User;
+import mx.spin.mobile.entitys.Usuario;
+import mx.spin.mobile.entitys.pojo.UsuarioReg;
 import mx.spin.mobile.utils.constants.Constants;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -96,7 +100,27 @@ public class NetConnection {
         client.post(url, new RequestParams(postValues), responseHandler);
 
     }
- public static void editarUsuario(String id,String nombre,  String telefono,  AsyncHttpResponseHandler responseHandler) {
+
+
+    public static void registrarUsuario(UsuarioReg user, AsyncHttpResponseHandler responseHandler){
+        HashMap<String, String> postValues = new HashMap<>();
+        final String url = ServiceRequest.getUrlNewUser();
+        postValues.put("name", user.getNombre());
+        postValues.put("Id_country", user.getIdPais());
+        postValues.put("Id_state", user.getIdEstado());
+        postValues.put("phone", user.getTelefono());
+        postValues.put("userMail", user.getEmail());
+        postValues.put("userCred", user.getPassword());
+        postValues.put("RedLogin", user.getRegLogin());
+        postValues.put("status", "1");
+        postValues.put("os", user.getOs());
+        postValues.put("token",user.getToken());
+        postValues.put("deviceId", user.getDiviceId());
+        client.post(url, new RequestParams(postValues), responseHandler);
+    }
+
+
+    public static void editarUsuario(String id,String nombre,  String telefono,  AsyncHttpResponseHandler responseHandler) {
         HashMap<String, String> postValues = new HashMap<>();
         String url = "http://spinws.com/Login_rest/editProfile";
         postValues.put("name", nombre);
@@ -130,13 +154,6 @@ public class NetConnection {
         client.post(url, new RequestParams(postValues), responseHandler);
     }
 
-/*    public static void login(String email, String contrasena, AsyncHttpResponseHandler responseHandler) {
-        HashMap<String, String> postValues = new HashMap<>();
-        String url = "http://spinws.com/Login_rest/login";
-        postValues.put("userMail", email);
-        postValues.put("userCred", contrasena);
-        client.post(url, new RequestParams(postValues), responseHandler);
-    }*/
     public static void cambiarContrasena(String email, AsyncHttpResponseHandler responseHandler) {
         HashMap<String, String> postValues = new HashMap<>();
         String url = "http://www.spinws.com/Login_rest/recuperarPass";
@@ -159,6 +176,28 @@ public class NetConnection {
         String url = "http://www.spinws.com/Login_rest/country";
         client.post(url, new RequestParams(postValues), responseHandler);
     }
+
+
+    public static void registrarPiscina(Pool pool, AsyncHttpResponseHandler responseHandler) {
+        HashMap<String, String> postValues = new HashMap<>();
+        String url = ServiceRequest.getUrlAddPool();
+        postValues.put("id_user", String.valueOf(pool.getPool_user_id()));
+        postValues.put("name", pool.getPool_name());
+        postValues.put("user", "User");
+        postValues.put("location", "MX");
+        postValues.put("figure", String.valueOf(pool.getPool_form()));
+        postValues.put("category", pool.getPool_category());
+        postValues.put("typeOfUse", pool.getPool_use());
+        postValues.put("type", pool.getPool_type());
+        postValues.put("rotationTime", String.valueOf(pool.getPool_rotation()));
+        postValues.put("volume", String.valueOf(pool.getPool_volume()));
+        postValues.put("um", String.valueOf(pool.getPool_um()));
+        postValues.put("equipment", pool.getmEquipos());
+     /*   postValues.put("pool_modify", "MX");
+        postValues.put("pool_id", "MX");*/
+        client.post(url, new RequestParams(postValues), responseHandler);
+    }
+
 
 
     //region MAIN

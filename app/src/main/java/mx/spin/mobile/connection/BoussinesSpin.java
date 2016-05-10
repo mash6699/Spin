@@ -46,11 +46,18 @@ public class BoussinesSpin extends SpinFactory implements SpinImpl {
     public User getUser() {
         Log.d(TAG, "getUser");
         UserDao  userDao = daoSession.getUserDao();
-        return userDao.loadAll().get(0);
+        User user = new User();
+        try{
+            user = userDao.loadAll().get(0);
+        }catch (Exception ex){
+            Log.e(TAG, ex.getMessage());
+        }
+        return user;
     }
 
+
     @Override
-    public void deleteUser() {
+    public void deleteAllUser() {
         UserDao  userDao = daoSession.getUserDao();
         userDao.deleteAll();
     }
@@ -87,8 +94,15 @@ public class BoussinesSpin extends SpinFactory implements SpinImpl {
     public Pool getPool(int idPool) {
         Log.d(TAG, "getPool");
         PoolDao poolDao = daoSession.getPoolDao();
-        Pool pool =  poolDao.load((long) idPool);
+        Pool pool = (Pool) poolDao.queryBuilder().where(PoolDao.Properties.Pool_id.eq(idPool)).limit(1).list().get(0);
         return pool;
+    }
+
+    @Override
+    public void deleteAllPools() {
+        Log.d(TAG, "deleteAllPools");
+        PoolDao poolDao = daoSession.getPoolDao();
+        poolDao.deleteAll();
     }
 
     @Override
@@ -110,6 +124,13 @@ public class BoussinesSpin extends SpinFactory implements SpinImpl {
         Log.d(TAG, "insertAllEquipment");
         EquipmentDao equipmentDao = daoSession.getEquipmentDao();
         equipmentDao.insertInTx(equipment);
+    }
+
+    @Override
+    public void deleteAllEquipment() {
+        Log.d(TAG, "deleteAllEquipment");
+        EquipmentDao equipmentDao = daoSession.getEquipmentDao();
+        equipmentDao.deleteAll();
     }
 
     @Override
@@ -161,6 +182,9 @@ public class BoussinesSpin extends SpinFactory implements SpinImpl {
 
     @Override
     public void cleanDB() {
-        deleteUser();
+        Log.d(TAG, "::::cleanDB::::");
+        deleteAllUser();
+        deleteAllPools();
+        deleteAllEquipment();
     }
 }

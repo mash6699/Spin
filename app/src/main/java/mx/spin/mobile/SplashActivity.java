@@ -7,19 +7,25 @@ import android.util.Log;
 
 
 import mx.spin.mobile.common.SpinBusinnes;
+import mx.spin.mobile.connection.BoussinesSpin;
+import mx.spin.mobile.dao.User;
 import mx.spin.mobile.entitys.Usuario;
 
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import mx.spin.mobile.singleton.SpingApplication;
 import mx.spin.mobile.utils.constants.Constants;
 
 public class SplashActivity extends AppCompatActivity {
 
     private static final String TAG = SplashActivity.class.getCanonicalName();
-    private SpinBusinnes spinBusinnes;
-    private List<Usuario> usuario;
+    //private SpinBusinnes spinBusinnes;
+    private BoussinesSpin boussinesSpin;
+    private SpingApplication spingApplication = SpingApplication.getInstance();
+   // private List<User> usuario;
+   private User usuario;
 
     @Override
     public void onStart() {
@@ -31,10 +37,12 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        spinBusinnes = new SpinBusinnes().getInstance(this);
-        usuario = spinBusinnes.loadAllUsers();
-        if (!usuario.isEmpty()) {
-            Log.d(TAG, "SESSION INICIADA");
+        //spinBusinnes = new SpinBusinnes().getInstance(this);
+        boussinesSpin = new BoussinesSpin(this);
+        usuario = boussinesSpin.getUser();
+        if (usuario.getId_user() != null) {
+            Log.d(TAG, "SESSION INICIADA::> " + usuario.getId_user());
+            spingApplication.setIdUsuario(String.valueOf(usuario.getId_user()));
             startActivity(new Intent(this, DrawerActivity.class));
         } else {
             TimerTask task = new TimerTask() {

@@ -22,6 +22,8 @@ import mx.spin.mobile.LoginActivity;
 
 import mx.spin.mobile.SpinApp;
 import mx.spin.mobile.common.SpinBusinnes;
+import mx.spin.mobile.connection.BoussinesSpin;
+import mx.spin.mobile.dao.User;
 import mx.spin.mobile.entitys.Usuario;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -33,9 +35,11 @@ import mx.spin.mobile.R;
 public class ProfileFragment extends Fragment {
 
     private static String TAG = ProfileFragment.class.getName();
-    private SpinBusinnes spinBusinnes;
-    private Usuario usuario;
+   // private SpinBusinnes spinBusinnes;
+    private User usuario;
     private View rootView;
+
+    private BoussinesSpin boussinesSpin;
 
     @Nullable
     @Bind(R.id.toolbar)
@@ -69,8 +73,10 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        spinBusinnes = new SpinBusinnes();
-        usuario = spinBusinnes.loadUser();
+       // spinBusinnes = new SpinBusinnes();
+        boussinesSpin = new BoussinesSpin(getActivity());
+        //usuario = spinBusinnes.loadUser();
+        usuario = boussinesSpin.getUser();
     }
 
     @Override
@@ -118,25 +124,26 @@ public class ProfileFragment extends Fragment {
         try{
             if(usuario != null){
                 SpinApp.initCargarImagen(getActivity());
-                nombreUsuarioPerfil.setText(usuario.getNombre());
-                emailUsuarioPerfil.setText(usuario.getEmail());
+                nombreUsuarioPerfil.setText(usuario.getName());
+                emailUsuarioPerfil.setText(usuario.getMail());
 
-                if (usuario.getPais() !="-1"){
-                    pais.setText(usuario.getPais());
+              //  if (usuario.getPais() !="-1"){
+                if (!usuario.getCountry().isEmpty()){
+                    pais.setText(usuario.getCountry());
                 }
-                if (usuario.getCantPiscinas() > 0) {
-                    cantPisicnas.setText(getResources().getString(R.string.lbl_mis_piscinas) + usuario.getCantPiscinas());
+                if (usuario.getTotal_pools() > 0) {
+                    cantPisicnas.setText(getResources().getString(R.string.lbl_mis_piscinas) + usuario.getTotal_pools());
                 }
-                if (usuario.getTelefono() != null) {
-                    telefonoUsuarioPerfil.setText(usuario.getTelefono());
+                if (usuario.getPhone() != null) {
+                    telefonoUsuarioPerfil.setText(usuario.getPhone());
                 }
-                if (!usuario.getPhoto().equals("")) {
-                    imgProfileUser.setImageURI(Uri.parse(usuario.getPhoto()));
+                if (!usuario.getProfilePicture().equals("")) {
+                    imgProfileUser.setImageURI(Uri.parse(usuario.getProfilePicture()));
                 }
-                if (usuario.getOrigenLogin() != 0) {
+             /*   if (usuario.getOrigenLogin() != 0) {
                     ImageLoader loader = ImageLoader.getInstance();
                     loader.displayImage(usuario.getPhoto(), imgProfileUser);
-                }
+                }*/
             }
         }catch (Exception e){
             Log.e(TAG, e.getMessage());
@@ -145,7 +152,8 @@ public class ProfileFragment extends Fragment {
 
     void closeSession(){
         try {
-            spinBusinnes.cleanUser();
+          //  spinBusinnes.cleanUser();
+            boussinesSpin.cleanDB();
             Intent loginIntent = new Intent(getActivity() , LoginActivity.class);
             loginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(loginIntent);

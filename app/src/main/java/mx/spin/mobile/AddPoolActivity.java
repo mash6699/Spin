@@ -16,29 +16,46 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import mx.spin.mobile.entitys.Piscina;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
+import mx.spin.mobile.connection.BoussinesSpin;
+import mx.spin.mobile.dao.Pool;
 import mx.spin.mobile.entitys.Usuario;
 import mx.spin.mobile.model.Volume;
+import mx.spin.mobile.network.NetConnection;
+import mx.spin.mobile.singleton.SpingApplication;
 import mx.spin.mobile.singleton.VolumeSingleton;
 import mx.spin.mobile.utils.CalculateVolume;
+import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 import mx.spin.mobile.utils.constants.Constants;
 import mx.spin.mobile.utils.UtilViews;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Exchanger;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
+import mx.spin.mobile.utils.constants.JSKeys;
 
 public class AddPoolActivity extends AppCompatActivity  implements CompoundButton.OnCheckedChangeListener {
 
     private static String TAG = AddPoolActivity.class.getName();
 
     UtilViews utilViews;
-    private Piscina piscina;
+    private BoussinesSpin boussinesSpin;
+    private SpingApplication spingApplication = SpingApplication.getInstance();
+
+    //private Piscina piscina;
+
+    Pool piscina = new Pool();
+
     private Usuario usuario;
 
     private String namePool;
@@ -148,7 +165,13 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
     @Nullable
     @OnClick(R.id.btn_SavePool)
     public void saveMyPool(View view){
-        savePool();
+        //savePool();
+        if (NetConnection.isOnline(this, true)){
+            if(validPoolData()){
+                registerPool(piscina);
+            }
+        }
+
     }
 
     @Override
@@ -158,7 +181,7 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        boussinesSpin = new BoussinesSpin(this);
         utilViews = new UtilViews().getInstance(getApplicationContext());
 
         txt_titleToolbar.setText(R.string.title_activity_add_pool);
@@ -166,15 +189,10 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
         setValuesInView();
         setActions();
 
-       /* if (VolumeSingleton.SINGLETON.getVolume() != 0) {
-            ed_volumen.setText(VolumeSingleton.SINGLETON.getVolume() + "");
-        }*/
     }
 
     private void setActions(){
         Log.d(TAG, "setViews");
-
-
 
         ed_volumen.addTextChangedListener(new TextWatcher() {
             @Override
@@ -257,6 +275,8 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
             double lVolume = Double.parseDouble(vol);
             int um = sp_systemMetric.getSelectedItemPosition() + 1;
             txt_velociddadFlujo.setText(CalculateVolume.getVelocidadFlujo(lVolume, tiempoRotacion, um));// + " " + getResources().getString(R.string.lbl_lpm)
+
+            rotacionValue = CalculateVolume.getVelocidadFlujo(lVolume, tiempoRotacion, um);
         }
     }
 
@@ -303,59 +323,6 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
         sp_poolUse.setAdapter(UtilViews.getAdapterPHTitle(getApplicationContext(), poolUseList));
     }
 
-    protected void savePool(){
-        Log.d(TAG, "savePool" );
-        if(validPoolData()){
-            try {
-                Realm realm = Realm.getInstance(getApplicationContext());
-                realm.beginTransaction();
-
-                piscina = realm.createObject(Piscina.class);
-                int nextID = (int) (realm.where(Piscina.class).maximumInt("id") + 1);
-
-                piscina.setId(nextID);
-                piscina.setNombre(ed_namePool.getText().toString());
-                piscina.setIdTipoPiscina(idTipoPool);
-                piscina.setTipoPiscina(idTipoPool == 1 ? "Abierta" : "Techada");
-
-                piscina.setTipoInstalacion(tipoInstValue);
-                piscina.setIdTipoInstalacion(idTipoInst);
-
-                piscina.setTipoSpa(tipoSpaValue);
-                piscina.setIdTipoSpa(idTipoSpa+1);
-
-                //TODO VOLUMEN
-                piscina.setVolumen(Double.parseDouble(ed_volumen.getText().toString()));
-                piscina.setUm(idUm + 1);
-                //TODO figura seleccionada
-                piscina.setFigure(typePool);
-
-                piscina.setTiempoRotacion(tiempoRotacion);
-                piscina.setVelocidadFlujo(Double.parseDouble(velocidadFlujoValue));
-
-                //TODO EQUIPOS
-
-                if(!misEquipos.toString().isEmpty()){
-                    System.out.println("Agregando equipos");
-                    piscina.setEquipos(misEquipos.toString());
-                }else {
-                    System.out.println("no hay equipos");
-                }
-
-                usuario = realm.where(Usuario.class).findFirst();
-                int cantPiscinasActual = usuario.getCantPiscinas();
-                usuario.setCantPiscinas(cantPiscinasActual + 1);
-
-                realm.commitTransaction();
-
-                startActivity(new Intent(AddPoolActivity.this, DrawerActivity.class));
-                AddPoolActivity.this.finish();
-
-            }catch (Exception ex){
-                Log.e(TAG, "save pool: " + ex.getMessage());
-            }
-        }
-    }
 
     private boolean validPoolData(){
         Log.d(TAG, "validateInfo");
@@ -405,8 +372,8 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
             ed_volumen.requestFocus();
             estatus = false;
         }else{
-            rotacionValue   = txt_tiempoRotacion.getText().toString();
-            velocidadFlujoValue = txt_velociddadFlujo.getText().toString();
+           // rotacionValue   = txt_tiempoRotacion.getText().toString();
+        //    velocidadFlujoValue = txt_velociddadFlujo.getText().toString();
         }
 
         if(isDos){
@@ -440,7 +407,6 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
         }
 
         if(isMot){
-            //caballajeVal    =  ed_caballaje.getText().toString();
             caballajeVal    =  utilViews.replaceText(sp_caballaje.getSelectedItem().toString());
             cantidadVal     =  ed_cantidad.getText().toString();
             if(cantidadVal.isEmpty() || caballajeVal.isEmpty()){
@@ -448,10 +414,6 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
                     estatus = false;
                     ed_cantidad.setError(getString(R.string.lbl_empty_cantidad));
                 }
-                /*if(caballajeVal.isEmpty()){
-                    estatus = false;
-                    ed_caballaje.setError(getString(R.string.lbl_empty_caballaje));
-                }*/
             }else{
                 misEquipos.append(utilViews.setMotobomba(cantidadVal, caballajeVal));
             }
@@ -460,7 +422,80 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
         if(!message.toString().isEmpty()){
             utilViews.showToastInView(message.toString());
         }
+
+        setValuesPool();
+
         return estatus;
+    }
+
+
+    void setValuesPool(){
+        //TODO SET VALUES POOL
+        Log.d(TAG, "setValuesPool:::");
+
+        piscina.setPool_user_id(Integer.parseInt(spingApplication.getIdUsuario()));
+        piscina.setPool_name(ed_namePool.getText().toString());
+        piscina.setPool_category(String.valueOf(idTipoPool));
+       // piscina.setTipoPiscina(idTipoPool == 1 ? "Abierta" : "Techada");
+
+      //  piscina.setTipoInstalacion(tipoInstValue);
+        piscina.setPool_use(String.valueOf(idTipoInst));
+
+       // piscina.setTipoSpa(tipoSpaValue);
+        piscina.setPool_type(String.valueOf(idTipoSpa+1));
+
+        //TODO VOLUMEN
+        piscina.setPool_volume(String.valueOf(Double.parseDouble(ed_volumen.getText().toString())));
+        piscina.setPool_um(String.valueOf(idUm + 1));
+        //TODO figura seleccionada
+        piscina.setPool_form(String.valueOf(typePool));
+
+        piscina.setPool_rotation(rotacionValue);
+       // piscina.setVelocidadFlujo(Double.parseDouble(velocidadFlujoValue));
+
+        //TODO EQUIPOS
+
+        if(!misEquipos.toString().isEmpty()){
+            System.out.println("Agregando equipos");
+            //piscina.setEquipos(misEquipos.toString());
+            piscina.setmEquipos(misEquipos.toString());
+        }else {
+            System.out.println("no hay equipos");
+        }
+
+    }
+
+    void registerPool(Pool mPool){
+        NetConnection.registrarPiscina(mPool, new TextHttpResponseHandlerMessage() {
+            @Override
+            public void onStart() {
+                super.onStart();
+                showMessage(AddPoolActivity.this,getString(R.string.msg_load));
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                hideMessage();
+                utilViews.showToastInView(getString(R.string.msg_generic_error));
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                hideMessage();
+                try {
+                    JSONObject jsonObject = new JSONObject(responseString);
+                    if (jsonObject.optBoolean(JSKeys.SUCCESS)) {
+                        String id = jsonObject.get("pool_id").toString();
+                        piscina.setPool_id(Integer.parseInt(id));
+                        boussinesSpin.insertPool(piscina);
+                        startActivity(new Intent(AddPoolActivity.this, DrawerActivity.class));
+                        AddPoolActivity.this.finish();
+                    }
+                }catch (Exception ex){
+                    Log.e(TAG, ex.getMessage());
+                }
+            }
+        });
     }
 
     @Override
