@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.app.Fragment;
@@ -17,8 +18,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
+import butterknife.Bind;
 import mx.spin.mobile.fragments.AnalizeFragment;
 import mx.spin.mobile.fragments.ConceptsFragment;
 import mx.spin.mobile.fragments.PoolsFragment;
@@ -31,6 +34,8 @@ public class DrawerActivity extends AppCompatActivity implements OnNavigationIte
     public static DrawerLayout drawerLayout;
     private LinearLayout containerMyProfile;
     private Toolbar toolbar;
+
+    TextView txt_titleToolbar;
     private NavigationView navigationView;
 
     private final int HOME = 0;
@@ -40,23 +45,16 @@ public class DrawerActivity extends AppCompatActivity implements OnNavigationIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
-
+        txt_titleToolbar = (TextView) findViewById(R.id.txtToolbarTitle);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-/*        containerMyProfile = (LinearLayout) navigationView.findViewById(R.id.linearDrawerMyProfile);
 
-        containerMyProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawerLayout.closeDrawers();
-                changeFragment(new ProfileFragment(), getSupportFragmentManager());
-            }
-        });*/
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
 
         navigationView.inflateHeaderView(R.layout.drawer_header);
         navigationView.setNavigationItemSelectedListener(this);
-    //    navigationView.setItemTextColor(getColorStateList(R.color.white));
 
         if (getIntent().getExtras() != null && getIntent().getExtras().getInt("showFragment", 0) == 2) {
             changeFragment(new WhereBuyFragment(), getSupportFragmentManager());
@@ -114,11 +112,11 @@ public class DrawerActivity extends AppCompatActivity implements OnNavigationIte
         return position;
     }
 
-    protected void updateFragment(int postition){
-        Log.d(TAG, "updateFragment:  " + postition);
+    protected void updateFragment(int position){
+        Log.d(TAG, "updateFragment:  " + position);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         Fragment fragment = null;
-        switch (postition){
+        switch (position){
             case 0:
                 fragment = new PoolsFragment();
                 break;
@@ -136,10 +134,34 @@ public class DrawerActivity extends AppCompatActivity implements OnNavigationIte
                 break;
         }
 
+        setTitleToolbar(position);
+
         fragmentTransaction.replace(R.id.frame, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
 
+
+    private void setTitleToolbar(int position){
+        String title = null;
+        switch (position) {
+            case 0:
+                title = getResources().getString(R.string.title_piscinas);
+                break;
+            case 1:
+                title = getResources().getString(R.string.title_analisis);
+                break;
+            case 2:
+                title = "¿" + getResources().getString(R.string.title_buy) +"?";
+                break;
+            case 3:
+                title = getResources().getString(R.string.title_conceptos);
+                break;
+            case 4:
+                title = getResources().getString(R.string.title_profile);
+                break;
+        }
+        txt_titleToolbar.setText(title);
     }
 
     public static void changeFragment(Fragment fragment, FragmentManager fragmentManager) {

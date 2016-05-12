@@ -78,6 +78,13 @@ public class NetConnection {
         client.post(url, new RequestParams(postValues), responseHandler);
     }
 
+    public static void eliminarPiscina(String idUsuario, String idPiscina, AsyncHttpResponseHandler responseHandler) {
+        HashMap<String, String> postValues = new HashMap<>();
+        String url = ServiceRequest.getUrlDeletePool();
+        postValues.put("id_user", idUsuario);
+        postValues.put("id_pool", idPiscina);
+        client.post(url, new RequestParams(postValues), responseHandler);
+    }
 
     public static void registrarUsuario(String nombre, String email, String contrasena, String telefono, String tipoLogin,String pais,String estado, AsyncHttpResponseHandler responseHandler) {
         HashMap<String, String> postValues = new HashMap<>();

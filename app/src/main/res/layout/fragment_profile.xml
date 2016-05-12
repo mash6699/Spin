@@ -7,16 +7,20 @@
     style="@style/AppTheme"
     tools:context="mx.spin.mobile.fragments.ProfileFragment">
 
-    <include
+    <!--<include
         android:id="@+id/include_toolbar"
         layout="@layout/custom_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+
+        android:layout_below="@+id/include_toolbar"
+
+        -->
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/include_toolbar"
         android:padding="@dimen/activity_horizontal_margin">
 
         <de.hdodenhof.circleimageview.CircleImageView

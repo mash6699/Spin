@@ -124,7 +124,7 @@ public class PoolDetailActivity extends AppCompatActivity {
         Log.d(TAG, "setPoolInView");
 
         double volumen = Double.parseDouble(piscina.getPool_volume());
-        double rotacion = Double.parseDouble(piscina.getPool_rotation());
+    //    double rotacion = Double.parseDouble(piscina.getPool_rotation());
         int um = Integer.parseInt(piscina.getPool_um());
         spingApplication.resetAllValues();
         txt_titleToolbar.setText(R.string.title_activity_pool_detail);
@@ -134,8 +134,8 @@ public class PoolDetailActivity extends AppCompatActivity {
         txt_tipo_spa.setText(utilViews.getTipoSpa(Integer.parseInt(piscina.getPool_use()), Integer.parseInt(piscina.getPool_type())));
         txt_volumen.setText("" +piscina.getPool_volume());// + " " + utilViews.getUnidadMedida(piscina.getUm())
         txt_um.setText(utilViews.getUnidadMedida(um));
-        txt_tiempoRotacion.setText("" + piscina.getPool_rotation());
-        txt_velociddadFlujo.setText(CalculateVolume.getVelocidadFlujo(volumen, rotacion, um)); // TODO CALCULAR
+      //  txt_tiempoRotacion.setText("" + piscina.getPool_rotation());
+      //  txt_velociddadFlujo.setText(CalculateVolume.getVelocidadFlujo(volumen, rotacion, um)); // TODO CALCULAR
 
      /*   if(!piscina.getEquipos().isEmpty()){
             //txt_empty_equipos.setVisibility(View.GONE);

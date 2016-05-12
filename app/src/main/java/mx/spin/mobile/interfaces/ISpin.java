@@ -5,4 +5,5 @@ package mx.spin.mobile.interfaces;
  */
 public interface ISpin {
     public void selectItemSpin(Object object);
+    public void setAction(int tipo, int idPiscina);
 }

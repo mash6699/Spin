@@ -40,20 +40,31 @@ public class SplashActivity extends AppCompatActivity {
         //spinBusinnes = new SpinBusinnes().getInstance(this);
         boussinesSpin = new BoussinesSpin(this);
         usuario = boussinesSpin.getUser();
+      /*  if (usuario.getId_user() != null) {
+            Log.d(TAG, "SESSION INICIADA::> " + usuario.getId_user());
+            spingApplication.setIdUsuario(String.valueOf(usuario.getId_user()));
+            startActivity(new Intent(this, DrawerActivity.class));
+        } else {*/
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                  /*  Log.d(TAG, "REGISTRO");
+                    initLogin();*/
+                    changeActivity();
+                }
+            };
+            Timer timer = new Timer();
+            timer.schedule(task, Constants.SPLASH_SCREEN_DELAY);
+      //  }
+    }
+
+    void changeActivity(){
         if (usuario.getId_user() != null) {
             Log.d(TAG, "SESSION INICIADA::> " + usuario.getId_user());
             spingApplication.setIdUsuario(String.valueOf(usuario.getId_user()));
             startActivity(new Intent(this, DrawerActivity.class));
         } else {
-            TimerTask task = new TimerTask() {
-                @Override
-                public void run() {
-                    Log.d(TAG, "REGISTRO");
-                    initLogin();
-                }
-            };
-            Timer timer = new Timer();
-            timer.schedule(task, Constants.SPLASH_SCREEN_DELAY);
+            initLogin();
         }
     }
 

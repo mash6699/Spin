@@ -6,11 +6,11 @@
     style="@style/AppTheme"
     tools:context="mx.spin.mobile.fragments.AnalizeFragment">
 
-    <include
+    <!--<include
         android:id="@+id/include_toolbar"
         layout="@layout/custom_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" />-->
 
 
 </RelativeLayout>

@@ -38,19 +38,16 @@ import cz.msebera.android.httpclient.Header;
 
 public class ConceptsFragment extends android.support.v4.app.Fragment implements ConceptoSelector {
 
-
     private static String TAG = AnalizeFragment.class.getName();
-
-    @Nullable
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
-    @Nullable
-    @Bind(R.id.txtToolbarTitle)
-    TextView txt_titleToolbar;
-
     private AdapterConcept adapterConcept;
     private View rootView;
-    private RecyclerView recList;
+
+    @Nullable
+    @Bind(R.id.recyclerView)
+    RecyclerView recyclerView;
+    @Nullable
+    @Bind(R.id.empty)
+    View empty;
     private LinearLayoutManager llm;
 
 
@@ -65,41 +62,30 @@ public class ConceptsFragment extends android.support.v4.app.Fragment implements
                              Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_concepts, container, false);
-        ButterKnife.bind(this,rootView);
+        ButterKnife.bind(this, rootView);
 
-        initComponents();
+        recyclerView.setHasFixedSize(true);
+        llm = new LinearLayoutManager(getActivity());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(llm);
+        adapterConcept = new AdapterConcept(new ArrayList<ItemConcepts>(), getActivity(), this);
 
         if(NetConnection.isOnline(getActivity(),true)){
             listadoConceptos();
         }else{
-            //TODO EMPTY LAYOUT
+            empty.setVisibility(View.VISIBLE);
         }
-
-//        setConceptsInView();
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DrawerActivity.drawerLayout.openDrawer(Gravity.LEFT);
-            }
-        });
-
         return rootView;
     }
 
-     public void initComponents() {
 
-         txt_titleToolbar.setText(getString(R.string.title_conceptos));
-         toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
-         recList = (RecyclerView) rootView.findViewById(R.id.listado);
-         recList.setHasFixedSize(true);
-
-         llm = new LinearLayoutManager(getActivity());
-         llm.setOrientation(LinearLayoutManager.VERTICAL);
-         recList.setLayoutManager(llm);
-         adapterConcept = new AdapterConcept(new ArrayList<ItemConcepts>(),getActivity(),this);
-     }
     void setConceptsInView(){
-        recList.setAdapter(adapterConcept);
+        Log.d(TAG, "setConceptsInView");
+        if(adapterConcept != null){
+            recyclerView.setAdapter(adapterConcept);
+        }else{
+            empty.setVisibility(View.VISIBLE);
+        }
     }
 
     private void listadoConceptos(){
@@ -125,8 +111,8 @@ public class ConceptsFragment extends android.support.v4.app.Fragment implements
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 hideMessage();
-                Log.d("ConceptosJSon", responseString);
                 try {
+                    Log.d("ConceptosJSon", ""+ !responseString.isEmpty());
                     JSONObject jsonObject = new JSONObject(responseString);
                     Boolean success = jsonObject.getBoolean("success");
                     if (success){
@@ -137,15 +123,11 @@ public class ConceptsFragment extends android.support.v4.app.Fragment implements
                         }
                         setConceptsInView();
                     }
-
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                  Log.e(TAG, e.getMessage());
                 }
-
-
             }
         });
-
     }
 
     @Override
@@ -153,5 +135,11 @@ public class ConceptsFragment extends android.support.v4.app.Fragment implements
         Intent i = new Intent(getActivity(), DetalleConceptoActivity.class);
         i.putExtra(Constants.CONCEPTO, concepts);
         startActivity(i);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }

@@ -52,7 +52,6 @@ public class DetalleConceptoActivity extends AppCompatActivity {
         ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.simple_fragment, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_NONE);
-        // ft.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
         ft.commit();
 
     }

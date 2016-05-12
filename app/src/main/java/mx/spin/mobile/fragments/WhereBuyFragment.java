@@ -71,12 +71,12 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
 
     private static String TAG = WhereBuyFragment.class.getName();
 
-    @Nullable
+/*    @Nullable
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Nullable
     @Bind(R.id.txtToolbarTitle)
-    TextView txt_titleToolbar;
+    TextView txt_titleToolbar;*/
 
     private GoogleMap map;
     private GeoLocalization geoLocalization;
@@ -141,17 +141,17 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
         dealderPhone    = (TextView) rootView.findViewById(R.id.tv_dealderPhone);
         dealderEmail    = (TextView) rootView.findViewById(R.id.tv_dealderEmail);
 
-        txt_titleToolbar.setText("¿" + getResources().getString(R.string.title_buy) +"?");
-        toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
+     /*   txt_titleToolbar.setText("¿" + getResources().getString(R.string.title_buy) +"?");
+        toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);*/
 
         mLocManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+      /*  toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DrawerActivity.drawerLayout.openDrawer(Gravity.LEFT);
             }
-        });
+        });*/
 
         if (map != null) {
             mGoogleApiClient = new GoogleApiClient.Builder(getActivity())

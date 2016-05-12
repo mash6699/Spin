@@ -1,15 +1,22 @@
 <resources>
-    <style name="AppTheme.NoActionBar">
+<!--    <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
-        <!--<item name="android:tabWidgetStyle">@android:style/Widget.TabWidget</item>-->
+        &lt;!&ndash;<item name="android:tabWidgetStyle">@android:style/Widget.TabWidget</item>&ndash;&gt;
 
     </style>
 
     <style name="AppTheme.Widget.TextView" parent="android:Widget.Holo.Light.TextView">
         <item name="android:fontFamily">fonts/Roboto-Light.ttf</item>
+    </style>-->
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
     </style>
 
 </resources>

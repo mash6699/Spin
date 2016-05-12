@@ -37,16 +37,16 @@ public class AnalizeFragment extends android.support.v4.app.Fragment {
         rootView = inflater.inflate(R.layout.fragment_analize, container, false);
         ButterKnife.bind(this,rootView);
 
-        txt_titleToolbar.setText(R.string.title_analisis);
+       /* txt_titleToolbar.setText(R.string.title_analisis);
         toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
-        toolbar.invalidate();
+        toolbar.invalidate();*/
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+      /*  toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DrawerActivity.drawerLayout.openDrawer(Gravity.LEFT);
             }
-        });
+        });*/
 
 
         return rootView;

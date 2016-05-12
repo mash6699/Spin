@@ -33,6 +33,8 @@ public class DetalleConceptoFragment extends Fragment {
     private TextView fecha;
     private ImageView imagen;
     private View rootView;
+    String image_url = null;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -89,7 +91,10 @@ public class DetalleConceptoFragment extends Fragment {
                             descripcion.setText(listado.optJSONObject(i).optString("content_description"));
                             fecha.setText(listado.optJSONObject(i).optString("content_register"));
                             ImageLoader loader = ImageLoader.getInstance();
-                            loader.displayImage(listado.optJSONObject(i).optString("content_photo"),imagen);
+                            image_url = listado.optJSONObject(i).optString("content_photo");
+                            if(image_url != null){
+                                loader.displayImage(image_url,imagen);
+                            }
                         }
                     }
 

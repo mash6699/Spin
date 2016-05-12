@@ -41,12 +41,12 @@ public class ProfileFragment extends Fragment {
 
     private BoussinesSpin boussinesSpin;
 
-    @Nullable
+   /* @Nullable
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Nullable
     @Bind(R.id.txtToolbarTitle)
-    TextView txt_titleToolbar;
+    TextView txt_titleToolbar;*/
     @Nullable
     @Bind(R.id.imgProfileUser)
     CircleImageView imgProfileUser;
@@ -84,14 +84,14 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_profile, container, false);
         ButterKnife.bind(this,rootView);
-        txt_titleToolbar.setText(getResources().getString(R.string.title_profile));
+       /* txt_titleToolbar.setText(getResources().getString(R.string.title_profile));
         toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DrawerActivity.drawerLayout.openDrawer(Gravity.LEFT);
             }
-        });
+        });*/
         setUsuarioInView();
         return rootView;
     }

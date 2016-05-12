@@ -11,6 +11,8 @@ public class JSKeys {
 
     public static final String MY_POOL = "my_pool";
 
+    public static final String PISCINAS = "piscinas";
+
     //OBJECTS
     public static final String SESSION  = "session";
     public static final String CONTENT  = "content";
