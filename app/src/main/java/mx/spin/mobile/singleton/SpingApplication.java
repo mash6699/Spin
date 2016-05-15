@@ -65,6 +65,7 @@ public class SpingApplication extends Application{
         this.setFsp_13(0);
         this.setFsp_14(0);
         this.setFsp_15(0);
+        this.setFs_16(null);
 
         this.setSsp_21(0);
         this.setSsp_22(0);

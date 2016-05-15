@@ -11,21 +11,24 @@ import mx.spin.mobile.R;
 import mx.spin.mobile.entitys.ItemConcepts;
 import mx.spin.mobile.interfaces.ConceptoSelector;
 import mx.spin.mobile.utils.RecyclerViewHeaderFooterAdapter;
+import mx.spin.mobile.utils.UtilViews;
 
 import java.util.List;
 
 /**
- * Created by gorro on 12/01/16.
+ * Created by miguelangel on 12/01/16.
  */
 public class AdapterConcept extends RecyclerViewHeaderFooterAdapter<ItemConcepts> {
 
     private Context ctx;
     private ConceptoSelector selector;
+    private UtilViews utilViews;
 
     public AdapterConcept(List<ItemConcepts> info,Context context, ConceptoSelector selector) {
         super(null,null,info);
         this.ctx = context;
         this.selector = selector;
+        utilViews = new UtilViews().getInstance(context);
     }
 
 
@@ -57,6 +60,7 @@ public class AdapterConcept extends RecyclerViewHeaderFooterAdapter<ItemConcepts
         }
         public void bindConcepto(final ItemConcepts concepts){
             vNombre.setText(concepts.getTitulo());
+            vNombre.setTypeface(utilViews.setFontRegular());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

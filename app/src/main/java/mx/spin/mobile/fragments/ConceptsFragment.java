@@ -22,6 +22,7 @@ import mx.spin.mobile.adapters.AdapterConcept;
 import mx.spin.mobile.entitys.ItemConcepts;
 import mx.spin.mobile.interfaces.ConceptoSelector;
 import mx.spin.mobile.network.NetConnection;
+import mx.spin.mobile.utils.UtilViews;
 import mx.spin.mobile.utils.constants.Constants;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 
@@ -69,6 +70,8 @@ public class ConceptsFragment extends android.support.v4.app.Fragment implements
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
         adapterConcept = new AdapterConcept(new ArrayList<ItemConcepts>(), getActivity(), this);
+
+
 
         if(NetConnection.isOnline(getActivity(),true)){
             listadoConceptos();

@@ -1,83 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:stretchColumns="1">
 
         <TableRow
+            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dip"
-            android:gravity="center"
-            android:weightSum="3" >
+            android:gravity="center" >
 
             <TextView
                 android:text=""
-                android:textStyle="bold"
                 android:textColor="@color/white"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:layout_weight="1" />
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/lbl_conideal"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:gravity="center"
-                android:layout_weight="1" />
-
-            <TextView
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/lbl_conactual"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
-                android:layout_weight="1" />
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/lbl_conideal"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
 
         </TableRow>
 
 
         <TableRow
             android:id="@+id/tr_cloro_libre"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
             android:gravity="center"
             android:visibility="gone">
 
-            <TextView
-                android:text="@string/lbl_cloro_libre"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_weight="1" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp">
+
+                <TextView
+                    android:gravity="center"
+                    android:text="@string/lbl_cloro_libre"
+                    android:textSize="13dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textColor="@color/bluetextligth"
+                    android:gravity="center"
+                    android:id="@+id/txt_clorol_estatus"
+                    android:textSize="10sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lbl_bromo_debajo"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_cloro_libre"
                     android:text="0"
-                    android:textSize="16sp"
+                    android:textSize="13dp"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:gravity="center"
                     android:layout_weight="1" />
+
+                <View
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:layout_width="1dp" />
 
 
             </LinearLayout>
@@ -95,29 +118,49 @@
 
         <TableRow
             android:id="@+id/tr_cloro_total"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
             android:visibility="gone">
 
-            <TextView
-                android:text="@string/lbl_cloro_total"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_height="match_parent"
+            <LinearLayout
+                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_weight="1" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp">
+
+                <TextView
+                    android:gravity="center"
+                    android:text="@string/lbl_cloro_total"
+                    android:textSize="13dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent" />
+
+                <TextView
+                    android:textColor="@color/bluetextligth"
+                    android:gravity="center"
+                    android:id="@+id/txt_clorot_estatus"
+                    android:textSize="10sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lbl_bromo_debajo"/>
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_cloro_total"
                     android:text="0"
-                    android:textSize="16sp"
+                    android:textSize="13dp"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:layout_height="match_parent"
@@ -145,27 +188,49 @@
 
         <TableRow
             android:id="@+id/tr_cloramidas"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:gravity="center"
             android:visibility="gone">
 
-            <TextView
-                android:text="@string/lbl_cloraminas"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_weight="1" />
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp">
+
+                <TextView
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text="@string/lbl_cloraminas"
+                    android:textSize="13dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:textColor="@color/bluetextligth"
+                    android:gravity="center"
+                    android:id="@+id/txt_cloraminas_estatus"
+                    android:textSize="10sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lbl_bromo_debajo"/>
+
+            </LinearLayout>
 
             <LinearLayout
+                android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_cloramidas"
                     android:text="0"
-                    android:textSize="16sp"
+                    android:textSize="13dp"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:layout_height="match_parent"
@@ -192,28 +257,48 @@
 
         <TableRow
             android:id="@+id/tr_bromo"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
             android:gravity="center"
             android:visibility="gone">
 
-            <TextView
-                android:text="@string/lbl_bromo_sin"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_weight="1" />
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp">
 
+                <TextView
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lbl_bromo_sin"
+                    android:textSize="13dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:textColor="@color/bluetextligth"
+                    android:gravity="center"
+                    android:id="@+id/txt_bromo_estatus"
+                    android:textSize="10sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lbl_bromo_debajo"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1" >
+                android:orientation="horizontal" >
+
                 <TextView
                     android:id="@+id/tv_bromo"
                     android:text="0"
-                    android:textSize="16sp"
+                    android:textSize="13dp"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:layout_height="match_parent"
@@ -239,45 +324,48 @@
         </TableRow>
 
         <TableRow
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:layout_width="fill_parent"
+            android:gravity="center"
+            android:stretchColumns="1">
 
             <LinearLayout
+                android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_margin="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="1">
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp">
 
                 <TextView
+                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/lbl_turbidez"
-                    android:textSize="16sp"
+                    android:textSize="13dp"
                     android:textStyle="bold"
                     android:textColor="@color/white" />
 
-                <!--  <TextView
-                      android:textSize="10sp"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="@string/lbl_bromo_debajo"
-                      android:gravity="center"/>-->
+                <TextView
+                    android:textColor="@color/bluetextligth"
+                    android:gravity="center"
+                    android:id="@+id/txt_turbidez_estatus"
+                    android:textSize="10sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lbl_bromo_debajo"/>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_turbidez"
                     android:text="00000"
-                    android:textSize="16sp"
+                    android:textSize="13dp"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:layout_height="match_parent"
@@ -299,47 +387,52 @@
                 android:text="@string/lbl_conideal_turbidez"
                 android:textColor="@color/white"
                 android:layout_weight="1" />
+
         </TableRow>
 
         <TableRow
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
             android:gravity="center">
 
             <LinearLayout
+                android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_weight="1"
-                android:layout_margin="5dp">
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp">
 
                 <TextView
+                    android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="@string/lbl_metales_cloro"
-                    android:textSize="16sp"
+                    android:textSize="13dp"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:layout_weight="1" />
 
-                <!--   <TextView
-                       android:textSize="12sp"
-                       android:layout_width="wrap_content"
-                       android:layout_height="match_parent"
-                       android:text="@string/lbl_bromo_debajo"
-                       android:gravity="center"/>-->
+                <TextView
+                    android:id="@+id/txt_metales_estatus"
+                    android:textColor="@color/bluetextligth"
+                    android:gravity="center"
+                    android:textSize="10sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lbl_bromo_debajo"/>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1" >
+                android:orientation="horizontal" >
 
                 <TextView
                     android:id="@+id/tv_metales"
                     android:text="0"
-                    android:textSize="16sp"
+                    android:textSize="13dp"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:layout_height="match_parent"
@@ -364,44 +457,48 @@
         </TableRow>
 
         <TableRow
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
             android:gravity="center">
 
             <LinearLayout
+                android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_weight="1"
-                android:layout_margin="5dp">
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp">
 
                 <TextView
+                    android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="@string/lbl_cya"
-                    android:textSize="16sp"
+                    android:textSize="13dp"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:layout_weight="1"/>
 
-                <!-- <TextView
-                     android:textSize="12sp"
-                     android:layout_width="wrap_content"
-                     android:layout_height="match_parent"
-                     android:text="@string/lbl_bromo_debajo"
-                     android:gravity="center"/>-->
+                <TextView
+                    android:id="@+id/txt_cya_estatus"
+                    android:textColor="@color/bluetextligth"
+                    android:gravity="center"
+                    android:textSize="10sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lbl_estabilizador_dentro"/>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1" >
+                android:orientation="horizontal" >
 
                 <TextView
                     android:id="@+id/tv_cya"
                     android:text="0"
-                    android:textSize="16sp"
+                    android:textSize="13dp"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:layout_height="match_parent"

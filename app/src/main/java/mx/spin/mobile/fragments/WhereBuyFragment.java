@@ -39,6 +39,7 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -64,6 +65,7 @@ import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 import io.realm.Realm;
 import mx.spin.mobile.R;
+import mx.spin.mobile.utils.UtilViews;
 import mx.spin.mobile.utils.constants.Constants;
 import mx.spin.mobile.utils.constants.JSKeys;
 
@@ -71,12 +73,7 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
 
     private static String TAG = WhereBuyFragment.class.getName();
 
-/*    @Nullable
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
-    @Nullable
-    @Bind(R.id.txtToolbarTitle)
-    TextView txt_titleToolbar;*/
+    private UtilViews utilViews;
 
     private GoogleMap map;
     private GeoLocalization geoLocalization;
@@ -128,6 +125,8 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
         rootView = inflater.inflate(R.layout.fragment_where_buy, container, false);
         ButterKnife.bind(this,rootView);
 
+        utilViews = new UtilViews().getInstance(getContext());
+
         map = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map)).getMap();
 
         btnComollegar   = (Button) rootView.findViewById(R.id.btnComollegar);
@@ -141,17 +140,14 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
         dealderPhone    = (TextView) rootView.findViewById(R.id.tv_dealderPhone);
         dealderEmail    = (TextView) rootView.findViewById(R.id.tv_dealderEmail);
 
-     /*   txt_titleToolbar.setText("¿" + getResources().getString(R.string.title_buy) +"?");
-        toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);*/
+        dealderName.setTypeface(utilViews.setFontRegular());
+        dealderAddress.setTypeface(utilViews.setFontNormal());
+        dealderCity.setTypeface(utilViews.setFontNormal());
+        dealderPhone.setTypeface(utilViews.setFontNormal());
+        dealderEmail.setTypeface(utilViews.setFontNormal());
 
         mLocManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
-      /*  toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DrawerActivity.drawerLayout.openDrawer(Gravity.LEFT);
-            }
-        });*/
 
         if (map != null) {
             mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
@@ -173,8 +169,6 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
                 }
             }
         });
-
-
 
         btnSendEmail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -256,7 +250,7 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
         dealderContent.setVisibility(View.GONE);
     }
 
-    Tienda getInfoTienda(String name){
+   protected Tienda getInfoTienda(String name){
         Tienda mTienda = new Tienda();
         if(!tiendaList.isEmpty()) {
             Iterator<Tienda> iterator = tiendaList.iterator();
@@ -398,8 +392,9 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
 
                             map.addMarker(new MarkerOptions()
                                     .title(tienda.getNombre())
-                                    .snippet( tienda.getDireccion())
-                                    .position(latLng1));
+                                    .snippet(tienda.getDireccion())
+                                    .position(latLng1)
+                                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
                         }
                     }
 

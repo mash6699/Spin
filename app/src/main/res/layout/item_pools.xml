@@ -12,15 +12,15 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:gravity="center_vertical"
             android:layout_weight="1">
 
             <TextView
                 android:id="@+id/txtItemPoolName"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nombre"
                 android:textColor="@color/white"
@@ -29,7 +29,7 @@
 
             <TextView
                 android:id="@+id/txtItemPoolLastAnalize"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Sin análisis"
                 android:textColor="@color/bluetextligth"
@@ -40,20 +40,20 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
 
             <ImageView
                 android:id="@+id/iv_editPool"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/ic_mode_edit_black_24dp" />
 
 
             <ImageView
                 android:id="@+id/iv_deletePool"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/ic_delete_black_24dp"/>
 
         </LinearLayout>

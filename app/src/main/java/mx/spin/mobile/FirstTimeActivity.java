@@ -33,6 +33,7 @@ import mx.spin.mobile.entitys.Usuario;
 import mx.spin.mobile.interfaces.FBLoginCompleted;
 import mx.spin.mobile.network.NetConnection;
 import mx.spin.mobile.social.FacebookLoginDelegate;
+import mx.spin.mobile.utils.UtilViews;
 import mx.spin.mobile.utils.constants.Constants;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 import mx.spin.mobile.utils.UtilCommon;
@@ -49,12 +50,27 @@ import io.realm.Realm;
 public class FirstTimeActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private static String TAG = FirstTimeActivity.class.getName();
+
+    private UtilViews utilViews;
+
     @Nullable
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Nullable
     @Bind(R.id.txtToolbarTitle)
     TextView txt_titleToolbar;
+    @Nullable
+    @Bind(R.id.btnRegisFb)
+    Button btnRegisFb;
+    @Nullable
+    @Bind(R.id.btnRegisGl)
+    Button btnSignIn;
+    @Nullable
+    @Bind(R.id.txtRegisMail)
+    TextView txtRegisMail;
+    @Nullable
+    @Bind(R.id.tv_register)
+    TextView txt_register;
 
 
     private static final int RC_SIGN_IN = 0;
@@ -67,9 +83,6 @@ public class FirstTimeActivity extends AppCompatActivity implements GoogleApiCli
 
 
     private ConnectionResult mConnectionResult;
-    private Button btnRegisFb;
-    private Button btnSignIn;
-    private TextView txtRegisMail;
 
     private String personName ;
     private String personPhotoUrl ;
@@ -99,21 +112,18 @@ public class FirstTimeActivity extends AppCompatActivity implements GoogleApiCli
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        utilViews = new UtilViews().getInstance(getApplication());
 
-        initComponents();
+        txt_titleToolbar.setText(R.string.title_registro);
+
+        txt_titleToolbar.setTypeface(utilViews.setFontRegular());
+        txt_register.setTypeface(utilViews.setFontRegular());
+        btnSignIn.setTypeface(utilViews.setFontRegular());
+        btnRegisFb.setTypeface(utilViews.setFontRegular());
+        txtRegisMail.setTypeface(utilViews.setFontRegular());
+
         setActions();
     }
-
-    void initComponents(){
-        Log.d(TAG, "initComponents");
-
-        btnSignIn = (Button) findViewById(R.id.btnRegisGl);
-        btnRegisFb = (Button) findViewById(R.id.btnRegisFb);
-        txtRegisMail = (TextView) findViewById(R.id.txtRegisMail);
-
-       txt_titleToolbar.setText(R.string.title_registro);
-    }
-
 
     void setActions(){
         Log.d(TAG, "setActions");

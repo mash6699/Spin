@@ -9,8 +9,8 @@
 
     <string-array name="poolType">
         <item>@string/lbl_tipo_piscina</item>
-        <item>Abierta</item>
         <item>Techada</item>
+        <item>Abierta</item>
     </string-array>
 
 

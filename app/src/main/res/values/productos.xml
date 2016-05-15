@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <!-- <string name=""></string>-->
+    <string name="clorizide">Clorizide 91</string>
+    <string name="trizide">Trizide</string>
+    <string name="shock_correct">Shock Correctivo</string>
+    <string name="neutraclor">Neutraclor</string>
+    <string name="shock_prevent">Shock Preventivo</string>
+
+    <!--BROMO-->
+    <string name="clorizide_broma">Clorizide Bromado</string>
+    <string name="shock_a">Shock Bromado A</string>
+    <string name="shock_b">Shock Bromado B</string>
+    <!--BROMO-->
+
+    <string name="crista_green">Cristalin Green</string>
+    <string name="crista_platinum">Cristalin Platinum</string>
+    <string name="crista_perla">Cristalin Perla</string>
+    <string name="crarit_plus">Clarit Plus</string>
+    <string name="alcalos">Alcalos</string>
+    <string name="alkalin">Alkalin</string>
+    <string name="alka">Alka</string>
+    <string name="acidet">Acidet</string>
+
+<!-- FUNCION PRINCIPAL-->
+    <string name="fun_clorizide">Desinfectante de rutina</string>
+    <string name="fun_trizide">Multifuncional</string>
+    <string name="fun_shock_correct">Supercloración</string>
+    <string name="fun_neutraclor">Neutralizador de Cloro</string>
+    <string name="fun_shock_prevent">Desinfectante preventivo</string>
+    <string name="fun_clorizide_broma">Biocida para piscinas</string>
+    <string name="fun_shock_a">Súperbromación</string>
+    <string name="fun_shock_b">Súperbromación</string>
+    <string name="fun_crista_green">Coagulante - Algicida</string>
+    <string name="fun_crista_platinum">Coagulante - Algicida</string>
+    <string name="fun_crista_perla">Coagulante - Algicida</string>
+    <string name="fun_crarit_plus">Floculante</string>
+    <string name="fun_alcalos">Sube el pH</string>
+    <string name="fun_alkalin">Sube el pH y la alcalinidad</string>
+    <string name="fun_alka">Sube la alcalinidad</string>
+    <string name="fun_acidet">Baja el pH y la alcalididad</string>
+    <!-- FUNCION PRINCIPAL-->
+
+
+
+
+</resources>

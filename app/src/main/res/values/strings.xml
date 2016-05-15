@@ -180,7 +180,7 @@
     <string name="lbl_temp">Temp.</string>
     <string name="lbl_temperatura">Temperatura</string>
     <string name="lbl_std">STD</string>
-    <string name="lbl_cya">CYA</string>
+    <string name="lbl_cya">CYA (Estabilizador)</string>
     <string name="lbl_desinfeccion">Desinfección</string>
     <string name="lbl_">Balance</string>
     <string name="lbl_cloro_libre">Cloro libre</string>
@@ -222,26 +222,22 @@
 
     <!-- INTERPRETACION DE RESULTADOS -->
 
-
-    <string name="lbl_rango_arriba">POR ARRIBA DEL RANGO IDEAL PARA PISCINAS</string>
-    <string name="lbl_rango_debajo">POR DEBAJO DEL RANGO IDEAL PARA PISCINAS</string>
-    <string name="lbl_rango_dentro">DENTRO DEL RANGO IDEAL PARA UNA PISCINA</string>
-    <string name="lbl_rango_fuera">FUERA DEL RANGO IDEAL PARA PISCINAS</string>
-
-    <string name="lbl_bromo_debajo">ALERTA BROMO TOTAL DEBAJO DE NOM 245</string>
-    <string name="lbl_bromo_encima">VALOR POR ENCIMA DE LA NOM 245</string>
+    <string name="lbl_rango_arriba">POR ARRIBA DEL RANGO\n IDEAL PARA PISCINAS</string>
+    <string name="lbl_rango_debajo">POR DEBAJO DEL RANGO\n IDEAL PARA PISCINAS</string>
+    <string name="lbl_rango_dentro">DENTRO DEL RANGO IDEAL\n PARA UNA PISCINA</string>
+    <string name="lbl_rango_fuera" >FUERA DEL RANGO IDEAL\n PARA PISCINAS</string>
+    <string name="lbl_bromo_debajo">ALERTA BROMO TOTAL\n DEBAJO DE NOM 245</string>
+    <string name="lbl_bromo_encima">VALOR POR ENCIMA\n DE LA NOM 245</string>
     <string name="lbl_bromo_acorde">ACORDE A NOM 245</string>
-
-    <string name="lbl_cloro_debajo">ALERTA CLORO TOTAL DEBAJO DE NOM 245</string>
-    <string name="lbl_cloro_encima">VALOR POR ENCIMA DE LA NOM 245</string>
+    <string name="lbl_cloro_debajo">ALERTA CLORO LIBRE\n DEBAJO DE NOM 245</string>
+    <string name="lbl_cloro_encima">VALOR POR ENCIMA\n DE LA NOM 245</string>
     <string name="lbl_cloro_acorde">ACORDE A NOM 245</string>
 
-
-    <string name="lbl_cloramidas_ruptura">HACER UNA CLORACIÓN A PUNTO DE RUPTURA</string>
+    <string name="lbl_cloramidas_ruptura">HACER UNA CLORACIÓN\n A PUNTO DE RUPTURA</string>
     <string name="lbl_cloramidas_acorde">ACORDE A NOM 245</string>
 
-    <string name="lbl_metales_evaluar">EVALUAR ORIGEN DE LA PRESENCIA DE METALES Y ELIMINAR</string>
-    <string name="lbl_metales_ok">NO HAY PROBLEMA DE METALES</string>
+    <string name="lbl_metales_evaluar">EVALUAR ORIGEN DE LA \nPRESENCIA DE METALES Y ELIMINAR</string>
+    <string name="lbl_metales_ok">NO HAY PROBLEMA \nDE METALES</string>
 
     <string name="lbl_estabilizador_fuera">FUERA DE NORMA 245</string>
     <string name="lbl_estabilizador_dentro">DENTRO DE NORMA 245</string>
@@ -267,11 +263,11 @@
     <!--   DESINFECCION-->
     <string name="lbl_conideal_cloro_libre">1-5 ppm</string>
     <string name="lbl_conideal_cloro_total">N/A</string>
-    <string name="lbl_conideal_cloramidas">menor a 0.5ppm</string>
-    <string name="lbl_conideal_bromo">7.2-7.6</string>
+    <string name="lbl_conideal_cloramidas"> menor a 0.5ppm</string>
+    <string name="lbl_conideal_bromo">2-6 ppm</string>
     <string name="lbl_conideal_turbidez">menor a 0.5 NTU</string>
     <string name="lbl_conideal_metales">Negativos</string>
-    <string name="lbl_conideal_cya">Max 100 ppm</string>
+    <string name="lbl_conideal_cya">0 ppm</string>
     <!--   DESINFECCION-->
 
 

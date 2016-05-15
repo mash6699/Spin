@@ -36,7 +36,9 @@ import mx.spin.mobile.utils.UtilViews;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Exchanger;
+
+import android.os.Handler;
+
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -52,12 +54,13 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
     private BoussinesSpin boussinesSpin;
     private SpingApplication spingApplication = SpingApplication.getInstance();
 
-    //private Piscina piscina;
+    int idPiscina = 0;
 
     Pool piscina = new Pool();
 
     private Usuario usuario;
 
+    private final int DEFAULT = 0;
     private String namePool;
     private String tipoInstValue;
     private int idTipoInst;
@@ -75,6 +78,8 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
     private String cantidadVal;
     private String caballajeVal;
     private StringBuilder misEquipos = new StringBuilder();
+    private int typeInstall;
+    private int idTipoPool;
 
     boolean isDos = false;
     boolean isCal = false;
@@ -101,11 +106,11 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
     @Bind(R.id.ed_name_pool)
     EditText ed_namePool;
     @Nullable
+    @Bind(R.id.sp_pool_category)
+    Spinner sp_poolCategory;
+    @Nullable
     @Bind(R.id.sp_pool_type)
     Spinner sp_poolType;
-    @Nullable
-    @Bind(R.id.sp_pool_use)
-    Spinner sp_poolUse;
     @Nullable
     @Bind(R.id.sp_type_install)
     Spinner sp_typeInstall;
@@ -151,28 +156,7 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
     @Nullable
     @Bind(R.id.ed_cantidad)
     EditText ed_cantidad;
-    private int typeInstall;
-    private int idTipoPool;
 
-
-    @Nullable
-    @OnClick(R.id.btn_calculate)
-    public void calculateVolume(View view){
-        Intent intent = new Intent(AddPoolActivity.this, VolumeCalculateActivity.class);
-        startActivityForResult(intent,Constants.CODE_VOLUME);
-    }
-
-    @Nullable
-    @OnClick(R.id.btn_SavePool)
-    public void saveMyPool(View view){
-        //savePool();
-        if (NetConnection.isOnline(this, true)){
-            if(validPoolData()){
-                registerPool(piscina);
-            }
-        }
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,6 +172,61 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
 
         setValuesInView();
         setActions();
+
+        if(getIntent().getExtras() != null){
+            idPiscina = getIntent().getExtras().getInt(Constants.ID_PISCINA);
+            Log.d(TAG, "savedIntanceState:: " + idPiscina);
+            piscina = boussinesSpin.getPool(idPiscina);
+            setPoolInView();
+        }
+    }
+
+    @Nullable
+    @OnClick(R.id.btn_calculate)
+    public void calculateVolume(View view){
+        Intent intent = new Intent(AddPoolActivity.this, VolumeCalculateActivity.class);
+        startActivityForResult(intent,Constants.CODE_VOLUME);
+    }
+
+    @Nullable
+    @OnClick(R.id.btn_SavePool)
+    public void saveMyPool(View view){
+        //savePool();
+        if (NetConnection.isOnline(this, true)){
+            if(validPoolData()){
+                if(idPiscina != 0){
+                    updatePool(piscina);
+                }else{
+                    registerPool(piscina);
+                }
+            }
+        }
+    }
+
+    void setPoolInView(){
+        Log.d(TAG, "setPoolInView");
+        ed_namePool.setText(piscina.getPool_name());
+
+        int cat = piscina.getPool_category()!= null ? Integer.parseInt(piscina.getPool_category()) : DEFAULT;
+        int ins = piscina.getPool_use() != null ? Integer.parseInt(piscina.getPool_use()) : DEFAULT;
+        idTipoInst = piscina.getPool_type() != null ? Integer.parseInt(piscina.getPool_type()) : DEFAULT;
+        int um = piscina.getPool_um() != null ? Integer.parseInt(piscina.getPool_um()) -1 : DEFAULT;
+
+        sp_poolCategory.setSelection(cat);
+        sp_typeInstall.setSelection(ins);
+
+
+        //TODO VOLUME
+        ed_volumen.setText(piscina.getPool_volume());
+        sp_systemMetric.setSelection(um);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                sp_poolType.setSelection(idTipoInst);
+            }}, 500);
+
+        //TODO EQUIPOS
 
     }
 
@@ -215,7 +254,6 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
             }
         });
 
-
         sp_typeInstall.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -232,8 +270,7 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
             }
         });
 
-
-        sp_poolUse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        sp_poolType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i!=0){
@@ -291,7 +328,7 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
         dosificadorList     = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.dosificadorType)));
         caballajeList        = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.listCaballaje)));
 
-        sp_poolType.setAdapter(UtilViews.getAdapterPHTitle(getApplicationContext(), poolType));
+        sp_poolCategory.setAdapter(UtilViews.getAdapterPHTitle(getApplicationContext(), poolType));
         sp_typeInstall.setAdapter(UtilViews.getAdapterPHTitle(getApplicationContext(), typeInstallList));
         sp_systemMetric.setAdapter(UtilViews.getAdapterPH(getApplicationContext(), systemMetricList));
         sp_filtracion.setAdapter(UtilViews.getAdapterPHTitle(getApplicationContext(), filtracionList));
@@ -308,35 +345,34 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
         switch (type){
             case 1:
                 poolUseList        = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.poolTypePublic)));
-                sp_poolUse.setEnabled(true);
+                sp_poolType.setEnabled(true);
                 break;
             case 2:
                 poolUseList        = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.poolTypePrivate)));
-                sp_poolUse.setEnabled(true);
+                sp_poolType.setEnabled(true);
                 break;
             default:
                 poolUseList        = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.poolTypeDefault)));
-                sp_poolUse.setEnabled(false);
+                sp_poolType.setEnabled(false);
                 break;
         }
         txt_tiempoRotacion.setText("");
-        sp_poolUse.setAdapter(UtilViews.getAdapterPHTitle(getApplicationContext(), poolUseList));
+        sp_poolType.setAdapter(UtilViews.getAdapterPHTitle(getApplicationContext(), poolUseList));
     }
 
 
     private boolean validPoolData(){
-        Log.d(TAG, "validateInfo");
+        Log.d(TAG, "validPoolData");
         boolean estatus = true;
 
         StringBuilder message = new StringBuilder();
 
         namePool        = ed_namePool.getText().toString().trim();
         tipoInstValue   = sp_typeInstall.getSelectedItem().toString();
-        tipoSpaValue    = sp_poolUse.getSelectedItem().toString();
+        tipoSpaValue    = sp_poolType.getSelectedItem().toString();
         volumenValue    = ed_volumen.getText().toString().trim();
-
         idUm            = sp_systemMetric.getSelectedItemPosition();
-        idTipoSpa       = sp_poolUse.getSelectedItemPosition();
+        idTipoSpa       = sp_poolType.getSelectedItemPosition();
 
         if(namePool.isEmpty()){
             ed_namePool.setError(getResources().getString(R.string.lbl_empty_name));
@@ -344,11 +380,11 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
             estatus = false;
         }
 
-        if(sp_poolType.getSelectedItemPosition() == 0){
+        if(sp_poolCategory.getSelectedItemPosition() == 0){
             message.append(getString(R.string.lbl_empty_piscina));
             estatus = false;
         }else{
-            idTipoPool = sp_poolType.getSelectedItemPosition();
+            idTipoPool = sp_poolCategory.getSelectedItemPosition();
         }
 
         if(sp_typeInstall.getSelectedItemPosition() == 0){
@@ -358,22 +394,15 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
             idTipoInst = sp_typeInstall.getSelectedItemPosition();
         }
 
-        if(sp_poolUse.getSelectedItemPosition() == 0){
+        if(sp_poolType.getSelectedItemPosition() == 0){
             message.append(getString(R.string.lbl_empty_uso));
             estatus = false;
-        }else{
-          //  tipoSpaValue = sp_typeInstall.getSelectedItemPosition();
         }
-
-
 
         if(volumenValue.isEmpty()){
             ed_volumen.setError(getResources().getString(R.string.lbl_empty_volume));
             ed_volumen.requestFocus();
             estatus = false;
-        }else{
-           // rotacionValue   = txt_tiempoRotacion.getText().toString();
-        //    velocidadFlujoValue = txt_velociddadFlujo.getText().toString();
         }
 
         if(isDos){
@@ -413,8 +442,10 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
                 if(cantidadVal.isEmpty()){
                     estatus = false;
                     ed_cantidad.setError(getString(R.string.lbl_empty_cantidad));
+                    message.append(getString(R.string.lbl_empty_cantidad));
                 }
             }else{
+                isMot = false;
                 misEquipos.append(utilViews.setMotobomba(cantidadVal, caballajeVal));
             }
         }
@@ -422,9 +453,7 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
         if(!message.toString().isEmpty()){
             utilViews.showToastInView(message.toString());
         }
-
         setValuesPool();
-
         return estatus;
     }
 
@@ -435,34 +464,27 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
 
         piscina.setPool_user_id(Integer.parseInt(spingApplication.getIdUsuario()));
         piscina.setPool_name(ed_namePool.getText().toString());
+
         piscina.setPool_category(String.valueOf(idTipoPool));
-       // piscina.setTipoPiscina(idTipoPool == 1 ? "Abierta" : "Techada");
-
-      //  piscina.setTipoInstalacion(tipoInstValue);
+        piscina.setPool_type(String.valueOf(idTipoSpa));
         piscina.setPool_use(String.valueOf(idTipoInst));
-
-       // piscina.setTipoSpa(tipoSpaValue);
-        piscina.setPool_type(String.valueOf(idTipoSpa+1));
 
         //TODO VOLUMEN
         piscina.setPool_volume(String.valueOf(Double.parseDouble(ed_volumen.getText().toString())));
         piscina.setPool_um(String.valueOf(idUm + 1));
+
         //TODO figura seleccionada
         piscina.setPool_form(String.valueOf(typePool));
 
         piscina.setPool_rotation(rotacionValue);
-       // piscina.setVelocidadFlujo(Double.parseDouble(velocidadFlujoValue));
 
         //TODO EQUIPOS
-
         if(!misEquipos.toString().isEmpty()){
-            System.out.println("Agregando equipos");
-            //piscina.setEquipos(misEquipos.toString());
+            Log.d(TAG, "Agregando equipos");
             piscina.setmEquipos(misEquipos.toString());
         }else {
-            System.out.println("no hay equipos");
+            Log.d(TAG,"no hay equipos");
         }
-
     }
 
     void registerPool(Pool mPool){
@@ -493,6 +515,41 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
                     }
                 }catch (Exception ex){
                     Log.e(TAG, ex.getMessage());
+                    utilViews.showToastInView(getString(R.string.msg_generic_error));
+                }
+            }
+        });
+    }
+
+    void updatePool(Pool mPool){
+        NetConnection.actualizarPiscina(mPool, new TextHttpResponseHandlerMessage() {
+            @Override
+            public void onStart() {
+                super.onStart();
+                showMessage(AddPoolActivity.this,getString(R.string.msg_load));
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                hideMessage();
+                utilViews.showToastInView(getString(R.string.msg_generic_error));
+        }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                hideMessage();
+                try {
+                    JSONObject jsonObject = new JSONObject(responseString);
+                    if (jsonObject.optBoolean(JSKeys.SUCCESS)) {
+                        String id = jsonObject.get("pool_id").toString();
+                        piscina.setPool_id(Integer.parseInt(id));
+                        boussinesSpin.updatePool(piscina);
+                        startActivity(new Intent(AddPoolActivity.this, DrawerActivity.class));
+                        AddPoolActivity.this.finish();
+                    }
+                }catch (Exception ex){
+                    Log.e(TAG, ex.getMessage());
+                    utilViews.showToastInView(getString(R.string.msg_generic_error));
                 }
             }
         });
@@ -520,7 +577,6 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
     @Override
     protected void onResume() {
         super.onResume();
-        sp_systemMetric.setSelection(VolumeSingleton.SINGLETON.getTypeSystem());
     }
 
     @Override
@@ -556,8 +612,6 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
             if(isChecked){
                 isMot = isChecked;
             }else{
-               // ed_caballaje.setText("");
-                //ed_caballaje.setError(null);
                 ed_cantidad.setText("");
                 ed_cantidad.setError(null);
                 sp_caballaje.setSelection(0);

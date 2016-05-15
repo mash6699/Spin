@@ -22,21 +22,37 @@ import android.widget.TextView;
 
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import mx.spin.mobile.fragments.AnalizeFragment;
 import mx.spin.mobile.fragments.ConceptsFragment;
 import mx.spin.mobile.fragments.PoolsFragment;
 import mx.spin.mobile.fragments.ProfileFragment;
 import mx.spin.mobile.fragments.WhereBuyFragment;
+import mx.spin.mobile.utils.UtilViews;
+import mx.spin.mobile.utils.constants.Constants;
 
 public class DrawerActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
     private final static String TAG = DrawerActivity.class.getSimpleName();
-    public static DrawerLayout drawerLayout;
-    private LinearLayout containerMyProfile;
-    private Toolbar toolbar;
 
+
+    private UtilViews utilViews;
+
+    @Nullable
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+
+    @Nullable
+    @Bind(R.id.txtToolbarTitle)
     TextView txt_titleToolbar;
-    private NavigationView navigationView;
+
+    @Nullable
+    @Bind(R.id.navigation_view)
+    NavigationView navigationView;
+
+    @Nullable
+    @Bind(R.id.drawer)
+    DrawerLayout drawerLayout;
 
     private final int HOME = 0;
 
@@ -45,14 +61,11 @@ public class DrawerActivity extends AppCompatActivity implements OnNavigationIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
-        txt_titleToolbar = (TextView) findViewById(R.id.txtToolbarTitle);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-
+        ButterKnife.bind(this);
+        utilViews = new UtilViews().getInstance(getApplicationContext());
         setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
 
+        toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
         navigationView.inflateHeaderView(R.layout.drawer_header);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -162,6 +175,7 @@ public class DrawerActivity extends AppCompatActivity implements OnNavigationIte
                 break;
         }
         txt_titleToolbar.setText(title);
+        txt_titleToolbar.setTypeface(utilViews.setFontRegular());
     }
 
     public static void changeFragment(Fragment fragment, FragmentManager fragmentManager) {
@@ -173,6 +187,14 @@ public class DrawerActivity extends AppCompatActivity implements OnNavigationIte
 
     public void addNewPool(View v) {
         startActivity(new Intent(DrawerActivity.this, AddPoolActivity.class));
+    }
+
+    public void addNewPool(int idPiscina) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.ID_PISCINA, idPiscina);
+        Intent mIntent = new Intent(DrawerActivity.this, AddPoolActivity.class);
+        mIntent.putExtras(bundle);
+        startActivity(mIntent);
     }
 
     public void redirectHome(View v){

@@ -22,7 +22,6 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
@@ -30,11 +29,9 @@ import mx.spin.mobile.DrawerActivity;
 import mx.spin.mobile.PoolDetailActivity;
 
 import mx.spin.mobile.adapters.AdapterPools;
-import mx.spin.mobile.common.SpinBusinnes;
 import mx.spin.mobile.connection.BoussinesSpin;
 import mx.spin.mobile.dao.Equipment;
 import mx.spin.mobile.dao.Pool;
-import mx.spin.mobile.entitys.Piscina;
 import mx.spin.mobile.interfaces.ISpin;
 import mx.spin.mobile.network.NetConnection;
 import mx.spin.mobile.singleton.SpingApplication;
@@ -47,6 +44,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 import mx.spin.mobile.utils.UtilViews;
+import mx.spin.mobile.utils.constants.Constants;
 import mx.spin.mobile.utils.constants.JSKeys;
 
 
@@ -56,19 +54,17 @@ public class PoolsFragment extends Fragment implements ISpin {
     private View rootView;
     private AdapterPools adapterPools;
     private List<Pool> misPiscinas = new ArrayList<>();
-
     private BoussinesSpin boussinesSpin;
     private UtilViews utilViews;
     private SpingApplication spingApplication = SpingApplication.getInstance();
-
     private static String idUsuario;
+    private Pool piscina;
+
 
     @Nullable
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
-    @Nullable
-    @Bind(R.id.txtToolbarTitle)
-    TextView txt_titleToolbar;
+    @Bind(R.id.tv_header)
+    TextView txt_header;
+
     @Nullable
     @Bind(R.id.listPools)
     ListView listPools;
@@ -90,47 +86,49 @@ public class PoolsFragment extends Fragment implements ISpin {
 
         setActions();
         idUsuario = spingApplication.getIdUsuario();
+
+        txt_header.setTypeface(utilViews.setFontNormal());
+
         return rootView;
     }
 
     void loadPiscinasInAdapter(){
         Log.d(TAG, "loadPiscinasInAdapter");
-        //  if(misPiscinas != null){
-        //  adapterPools = new AdapterPools(getActivity(), R.layout.item_pools, misPiscinas, this);
         misPiscinas.clear();
         misPiscinas.addAll(boussinesSpin.getMyPools());
         adapterPools.notifyDataSetChanged();
-
     }
 
     void setActions() {
         Log.d(TAG, "setActions");
-
         listPools.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 gotoDetailPool(position);
             }
         });
-
     }
 
     void gotoDetailPool(int position) {
-        Log.d(TAG, "gotoDetailPool position::" + position);
-        Pool piscina = misPiscinas.get(position);
-        spingApplication.setIdPiscina(piscina.getPool_id());
-        spingApplication.setName(piscina.getPool_name());
-        spingApplication.setDate(utilViews.getDatePool());
-        spingApplication.setTipoPiscina(Integer.parseInt(piscina.getPool_type()));
+        try{
+            Log.d(TAG, "gotoDetailPool position::" + position);
+            piscina = misPiscinas.get(position);
 
-        Intent detailIntent = new Intent(getActivity(), PoolDetailActivity.class);
-        startActivity(detailIntent);
+            spingApplication.setIdPiscina(piscina.getPool_id());
+            spingApplication.setName(piscina.getPool_name());
+            spingApplication.setDate(utilViews.getDatePool());
+            spingApplication.setTipoPiscina(Integer.parseInt(piscina.getPool_category()));
+
+            Intent detailIntent = new Intent(getActivity(), PoolDetailActivity.class);
+            startActivity(detailIntent);
+        } catch (Exception ex){
+            Log.e(TAG, ex.getMessage());
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        //   adapterPools.notifyDataSetChanged();
     }
 
     @Override
@@ -141,14 +139,20 @@ public class PoolsFragment extends Fragment implements ISpin {
     @Override
     public void setAction(int tipo, int idPiscina) {
         switch (tipo) {
-            case 0:
-                Log.d(TAG, "Editar: " + idPiscina);
+            case Constants.ID_EDIT:
+                editPool(idPiscina);
                 break;
-            case 1:
+            case Constants.ID_DELETE:
                 deletePool(idPiscina);
                 break;
         }
     }
+
+    private void editPool(int idPiscina){
+        Log.d(TAG, "editPool : " + idPiscina);
+        ((DrawerActivity)getActivity()).addNewPool(idPiscina);
+    }
+
 
     private void deletePool(final int idPiscina) {
         Log.d(TAG, "Eliminar" + idPiscina);
@@ -169,8 +173,6 @@ public class PoolsFragment extends Fragment implements ISpin {
                     });
             AlertDialog alert = builder.create();
             alert.show();
-
-
         }
     }
 
@@ -200,7 +202,6 @@ public class PoolsFragment extends Fragment implements ISpin {
                 hideMessage();
                 try {
                     Log.d("ConceptosJSon", responseString);
-
                     JSONObject jsonObject = new JSONObject(responseString);
                     Boolean exito = jsonObject.getBoolean(JSKeys.EXITO);
                     if(exito){
@@ -230,13 +231,12 @@ public class PoolsFragment extends Fragment implements ISpin {
                         utilViews.showToastInView("Lo sentimos ocurrió un error");
                     }
 
-
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.e(TAG, e.getMessage());
+                    utilViews.showToastInView("Lo sentimos ocurrió un error");
                 }
             }
         });
-
     }
 }
 

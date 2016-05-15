@@ -2,6 +2,7 @@ package mx.spin.mobile.utils;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -388,46 +389,22 @@ public class UtilViews {
         System.out.println("getTipoSpa::: " + spa);
         return spa;
     }
-
-//TODO BALANCE
-    /*
-    PH
-=+SI(C15>7.6,"POR ARRIBA DEL RANGO IDEAL PARA PISCINAS",SI(C15<7.4,"POR DEBAJO DEL RANGO IDEAL PARA PISCINAS","DENTRO DEL RANGO IDEAL PARA UNA PISCINA"))
-
-Alcalinidad
-=+SI(C16>120,"FUERA DEL RANGO IDEAL PARA PISCINAS",SI(C16<80,"FUERA DEL RANGO IDEAL PARA PISCINAS","DENTRO DEL RANGO IDEAL PARA UNA PISCINA"))
-
-Dureza
-=+SI(C17>250,"FUERA DEL RANGO IDEAL PARA PISCINAS",SI(C17<150,"FUERA DEL RANGO IDEAL PARA PISCINAS","DENTRO DEL RANGO IDEAL PARA UNA PISCINA"))
-
-STD
-=+SI(C18>2500, "FUERA DEL RANGO IDEAL PARA PISCINAS","DENTRO DEL RANGO IDEAL PARA UNA PISCINA")
-
-     */
-
-    //TODO DESINFECCION
-
-    /*
-Cloro Libre
-=+SI(C10<1,"ALERTA CLORO LIBRE DEBAJO DE NOM 245",SI(C10>5,"VALOR POR ENCIMA DE LA NOM 245","ACORDE A NOM 245"))
-
-Bromo
-=+SI(C14<2,"ALERTA BROMO TOTAL DEBAJO DE NOM 245",SI(C14>6,"VALOR POR ENCIMA DE LA NOM 245","ACORDE A NOM 245"))
-
-Cloramidas
-=+SI(C13>0.3, "HACER UNA CLORACIÓN A PUNTO DE RUPTURA", "ACORDE A NOM 245")
-
-Turbidez
-=+SI(C22>0.5,"FUERA DEL RANGO IDEAL PARA PISCINAS","DENTRO DEL RANGO IDEAL PARA UNA PISCINA")
-
-Metales
-=+SI(C24="Positivo", "EVALUAR ORIGEN DE LA PRESENCIA DE METALES Y ELIMINAR", "NO HAY PROBLEMA DE METALES")
-
-Estabilizador
-=+SI(Y(C21>0,C5="TECHADA"),"FUERA DE NORMA 245",SI(Y(C21>100,C5="AL AIRE LIBRE"),"FUERA DE NORMA 245","DENTRO DE NORMA 245"))
+    public static int getColorView(int tipo){
+        //TODO 1:UP, OTHER :DOWN
+        int color = (tipo == 1) ? mContext.getResources().getColor(R.color.rojo) : mContext.getResources().getColor(R.color.naranjaClaro);
+        return color ;
+    }
 
 
-     */
+
+    public static Typeface setFontNormal() {
+        Typeface roboto = Typeface.createFromAsset(mContext.getAssets(), Constants.ROBOTO_LIGTH );
+        return  roboto;
+    }
+    public static Typeface setFontRegular() {
+        Typeface roboto = Typeface.createFromAsset(mContext.getAssets(), Constants.ROBOTO_REGULAR );
+        return  roboto;
+    }
 
 
 

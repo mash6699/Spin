@@ -15,6 +15,7 @@ import mx.spin.mobile.R;
 import mx.spin.mobile.SpinApp;
 import mx.spin.mobile.entitys.ItemConcepts;
 import mx.spin.mobile.network.NetConnection;
+import mx.spin.mobile.utils.UtilViews;
 import mx.spin.mobile.utils.constants.Constants;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -34,6 +35,7 @@ public class DetalleConceptoFragment extends Fragment {
     private ImageView imagen;
     private View rootView;
     String image_url = null;
+    private UtilViews utilViews;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +44,8 @@ public class DetalleConceptoFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_detalle_piscina, container, false);
 
         initComponents();
+
+        utilViews = new UtilViews().getInstance(getActivity());
 
         ItemConcepts concepts = getActivity().getIntent().getParcelableExtra(Constants.CONCEPTO);
 
@@ -59,6 +63,7 @@ public class DetalleConceptoFragment extends Fragment {
         descripcion = (TextView) rootView.findViewById(R.id.descripcionConcepto);
         fecha = (TextView) rootView.findViewById(R.id.fechaConcepto);
         imagen = (ImageView) rootView.findViewById(R.id.imgDetalleConcepto);
+        descripcion.setTypeface(utilViews.setFontNormal());
 
     }
 

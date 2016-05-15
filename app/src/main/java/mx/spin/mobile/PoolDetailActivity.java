@@ -27,7 +27,6 @@ public class PoolDetailActivity extends AppCompatActivity {
 
     private final static String TAG = PoolDetailActivity.class.getSimpleName();
     private SpingApplication spingApplication = SpingApplication.getInstance();
-    //private SpinBusinnes spinBusinnes;
     private UtilViews utilViews;
     private Pool piscina;
     private BoussinesSpin boussinesSpin;
@@ -97,11 +96,10 @@ public class PoolDetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-      //  spinBusinnes = new SpinBusinnes().getInstance(getApplicationContext());
+
         boussinesSpin = new BoussinesSpin(this);
         utilViews = new UtilViews().getInstance(getApplicationContext());
         int idPiscina = spingApplication.getIdPiscina();
-        //piscina = spinBusinnes.getMyPool(idPiscina);
         piscina = boussinesSpin.getPool(idPiscina);
         if(piscina != null){
             Log.d(TAG, "IdPiscina:: " + idPiscina + " Nombre:: " + piscina.getPool_name());
@@ -134,6 +132,18 @@ public class PoolDetailActivity extends AppCompatActivity {
         txt_tipo_spa.setText(utilViews.getTipoSpa(Integer.parseInt(piscina.getPool_use()), Integer.parseInt(piscina.getPool_type())));
         txt_volumen.setText("" +piscina.getPool_volume());// + " " + utilViews.getUnidadMedida(piscina.getUm())
         txt_um.setText(utilViews.getUnidadMedida(um));
+
+
+        txt_nombre.setTypeface(utilViews.setFontNormal());
+        txt_instalacion.setTypeface(utilViews.setFontNormal());
+        txt_tipoPiscina.setTypeface(utilViews.setFontNormal());
+        txt_tipo_spa.setTypeface(utilViews.setFontNormal());
+        txt_volumen.setTypeface(utilViews.setFontNormal());
+        txt_um.setTypeface(utilViews.setFontNormal());
+
+        txt_tiempoRotacion.setTypeface(utilViews.setFontNormal());
+        txt_velociddadFlujo.setTypeface(utilViews.setFontNormal());
+        
       //  txt_tiempoRotacion.setText("" + piscina.getPool_rotation());
       //  txt_velociddadFlujo.setText(CalculateVolume.getVelocidadFlujo(volumen, rotacion, um)); // TODO CALCULAR
 

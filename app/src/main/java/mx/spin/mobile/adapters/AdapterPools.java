@@ -15,6 +15,7 @@ import mx.spin.mobile.R;
 
 import mx.spin.mobile.dao.Pool;
 import mx.spin.mobile.interfaces.ISpin;
+import mx.spin.mobile.utils.UtilViews;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +29,14 @@ public class AdapterPools extends BaseAdapter {
     private int layoutResource;
     private List<Pool> data = new ArrayList<>();
     private ISpin iSpin;
+    private UtilViews utilViews;
 
     public AdapterPools(Context ctx, int layoutResource, List<Pool> misPiscinas, ISpin iSpin) {
         this.ctx = ctx;
         this.layoutResource = layoutResource;
         this.data = misPiscinas;
         this.iSpin = iSpin;
+        this.utilViews = new UtilViews().getInstance(ctx);
     }
 
     @Override
@@ -74,6 +77,9 @@ public class AdapterPools extends BaseAdapter {
             holder.deletePool   = (ImageView)   fila.findViewById(R.id.iv_deletePool);
             holder.editPool     = (ImageView)   fila.findViewById(R.id.iv_editPool);
             fila.setTag(holder);
+
+            holder.txtTitle.setTypeface(utilViews.setFontRegular());
+            holder.txtSubtitle.setTypeface(utilViews.setFontNormal());
         } else {
             holder = (HolderView) fila.getTag();
         }

@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -77,6 +78,17 @@ public class LoginActivity extends AppCompatActivity {
     @Bind(R.id.contrasenaUsuarioLogin)
     EditText password;
 
+    @Nullable
+    @Bind(R.id.btnLogin)
+    Button login;
+
+    @Nullable
+    @Bind(R.id.recuperarContrasena)
+    TextView txt_recuperar;
+
+    @Nullable
+    @Bind(R.id.txtQuieroRegistrarme)
+    TextView txt_registrarme;
 
     @Override
     protected void onStart() {
@@ -94,6 +106,16 @@ public class LoginActivity extends AppCompatActivity {
         spinUtility = SpinUtility.getInstance();
 
         boussinesSpin = new BoussinesSpin(this);
+
+        txt_titleToolbar.setTypeface(utilViews.setFontRegular());
+
+        email.setTypeface(utilViews.setFontNormal());
+        password.setTypeface(utilViews.setFontNormal());
+
+        login.setTypeface(utilViews.setFontRegular());
+
+        txt_recuperar.setTypeface(utilViews.setFontRegular());
+        txt_registrarme.setTypeface(utilViews.setFontRegular());
 
         if (checkPlayServices()) {
             Intent intent = new Intent(getApplicationContext(), RegistrationIntentService.class);
@@ -214,7 +236,6 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.txtQuieroRegistrarme)
     void registrarme(View view){
         startActivity(new Intent(LoginActivity.this, FirstTimeActivity.class));
-
     }
 
     void gotoDrawer(){

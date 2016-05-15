@@ -35,7 +35,6 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
     private List<String> metalesList;
     private int idTipoPiscina = 0;
 
-
     double cloroTotal = 0d;
     double cloroLibre = 0d;
     double cloramidas = 0d;
@@ -103,10 +102,10 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
     @Nullable
     @OnClick(R.id.btnAnalizeSecondGoResults)
     public void gotoResult(View view){
-        if(validateData()){
-            setValues();
-            startActivity(new Intent(AnalizeSecondStepActivity.this, AnalizeResult.class));
-        }
+        //  if(validateData()){
+        setValuesApp();
+        startActivity(new Intent(AnalizeSecondStepActivity.this, AnalizeResult.class));
+        //  }
     }
 
     @Override
@@ -118,31 +117,40 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
         txt_titleToolbar.setText(R.string.title_activity_analize_second_step);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         utilViews = new UtilViews().getInstance(getApplicationContext());
 
         pool_name.setText(spingApplication.getName());
         pool_date.setText(spingApplication.getDate());
+
         idTipoPiscina = spingApplication.getTipoPiscina();
 
-        setListeners();
         setAdaptersInView();
         setDataInApp();
-
     }
 
 
     void setAdaptersInView(){
         Log.d(TAG, "setAdaptersInView");
 
-        if(idTipoPiscina == 1){
+        if(idTipoPiscina == Constants.PISCINA_ABIERTA){
             liner_clorodpd.setVisibility(View.VISIBLE);
             liner_cloro_libre.setVisibility(View.VISIBLE);
+
+            sp_cloroTotal.setOnItemSelectedListener(this);
+            sp_clorolibre.setOnItemSelectedListener(this);
+
         }else{
             liner_bromo.setVisibility(View.VISIBLE);
             txt_cloramidas.setVisibility(View.GONE);
             lbl_cloramidas.setVisibility(View.GONE);
+
+            sp_bromo.setOnItemSelectedListener(this);
         }
 
+
+        sp_turbidez.setOnItemSelectedListener(this);
+        sp_cya.setOnItemSelectedListener(this);
 
         List<String> listCloroDpd = new ArrayList<String>();
         for(float d = 0f ; d <= 20 ; d = d + 0.05f){
@@ -185,29 +193,14 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
         arrayAdapterCYA.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_cya.setAdapter(arrayAdapterCYA);
 
-
         metalesList  = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.metalesType)));
         sp_metales.setAdapter(UtilViews.getAdapterPH(getApplicationContext(), metalesList));
 
-
     }
-
-    private void setListeners() {
-        if(idTipoPiscina == 1){
-            sp_cloroTotal.setOnItemSelectedListener(this);
-            sp_clorolibre.setOnItemSelectedListener(this);
-        }else {
-            sp_bromo.setOnItemSelectedListener(this);
-        }
-
-        sp_turbidez.setOnItemSelectedListener(this);
-        sp_cya.setOnItemSelectedListener(this);
-    }
-
-
 
 
     void setValueCloramidas(){
+        Log.d(TAG, "setValueCloramidas");
         String cloroTotal = sp_cloroTotal.getSelectedItem().toString();
         String cloroLibre = sp_clorolibre.getSelectedItem().toString();
 
@@ -219,11 +212,66 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
         }
     }
 
+    void setValuesApp(){
+        Log.d(TAG, "setValuesApp");
+        metales = sp_metales.getSelectedItemPosition();
+        spingApplication.setSsp_25((int) metales);
+        spingApplication.setSs_25(metales == 1 ?  "Negativo" : "Positivo");
+
+        spingApplication.setSs_21(String.valueOf(cloroTotal));
+        spingApplication.setSs_22(String.valueOf(cloroLibre));
+        spingApplication.setSs_24(String.valueOf(turbidez));
+        spingApplication.setSs_26(String.valueOf(cya));
+        spingApplication.setSs_27(String.valueOf(bromo));
+    }
+
+    void setDataInApp(){
+        try {
+            Log.d(TAG, "setDataInApp");
+
+            sp_metales.setSelection(spingApplication.getSsp_25());
+
+            if (spingApplication.getSs_24() != null) {
+                sp_turbidez.setSelection(spingApplication.getSsp_24());
+            } else {
+                sp_turbidez.setSelection(20);
+            }
+
+            if (spingApplication.getSsp_26() > 0) {
+                sp_cya.setSelection(spingApplication.getSsp_26());
+            } else {
+                sp_cya.setSelection(5);
+            }
+
+            if (idTipoPiscina == Constants.PISCINA_ABIERTA) {
+
+                if (spingApplication.getSsp_22() > 0) {
+                    sp_clorolibre.setSelection(spingApplication.getSsp_22());
+                } else {
+                    sp_clorolibre.setSelection(20);
+                }
+
+                if (spingApplication.getSsp_21() > 0) {
+                    sp_cloroTotal.setSelection(spingApplication.getSsp_21());
+                } else {
+                    sp_cloroTotal.setSelection(60);
+
+                }
+            } else {
+                if (spingApplication.getSsp_27() > 0) {
+                    sp_bromo.setSelection(spingApplication.getSsp_27());
+                } else {
+                    sp_bromo.setSelection(60);
+                }
+            }
+        }catch (Exception ex){
+            Log.e(TAG, ex.getMessage());
+        }
+    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         try{
-
             String text = ((AppCompatTextView) view).getText().toString();
             Log.d(TAG, "onItemSelected  text[" + text + "] [" +position + "]");
             if(!text.isEmpty()){
@@ -252,63 +300,10 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
                         spingApplication.setSsp_27(position);
                         break;
                 }
-
             }
         }catch (Exception ex){
             Log.e(TAG, ex.getMessage());
         }
-    }
-
-    void setValues(){
-        Log.d(TAG, "setValues");
-        metales = sp_metales.getSelectedItemPosition();
-        spingApplication.setSsp_25((int) metales);
-        spingApplication.setSs_25(metales == 1 ?   "Negativo" : "Positivo");
-
-        spingApplication.setSs_21(String.valueOf(cloroTotal));
-        spingApplication.setSs_22(String.valueOf(cloroLibre));
-        spingApplication.setSs_24(String.valueOf(turbidez));
-        spingApplication.setSs_26(String.valueOf(cya));
-        spingApplication.setSs_27(String.valueOf(bromo));
-    }
-
-    void setDataInApp(){
-        Log.d(TAG, "setDataInApp");
-       // if(spingApplication.getSsp_26() ){
-            sp_cloroTotal.setSelection(spingApplication.getSsp_21());
-            sp_clorolibre.setSelection(spingApplication.getSsp_22());
-
-
-            txt_cloramidas.setText(spingApplication.getSs_23());
-          //  sp_turbidez.setSelection(spingApplication.getSsp_24());
-            sp_metales.setSelection(spingApplication.getSsp_25());
-
-
-       //     sp_cya.setSelection(spingApplication.getSsp_26());
-      //      sp_bromo.setSelection(spingApplication.getSsp_27());
-      //  }else {
-
-        if(spingApplication.getSs_24() != null){
-            sp_turbidez.setSelection(spingApplication.getSsp_24());
-        }else{
-            sp_turbidez.setSelection(20);
-        }
-
-        if(spingApplication.getSsp_26() > 0){
-            sp_cya.setSelection(spingApplication.getSsp_26());
-        }else{
-            sp_cya.setSelection(5);
-        }
-
-
-        if(spingApplication.getSsp_27() > 0){
-            sp_bromo.setSelection(spingApplication.getSsp_27());
-        }else{
-            sp_bromo.setSelection(60);
-        }
-
-      //  }
-
     }
 
     @Override
@@ -329,11 +324,11 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
         //spingApplication.setSs_27(String.valueOf();
 
         //TODO VALIDAR CLORO
-        if(idTipoPiscina == 1){
+        if(idTipoPiscina == Constants.PISCINA_ABIERTA){
             if(cloroTotal == comparator){
                 validate = false;
                 message.append("Tienes que seleccionar cloro total\n");
-             }
+            }
             if(cloroLibre == comparator){
                 validate = false;
                 message.append("Tienes que seleccionar cloro libre\n");
@@ -354,8 +349,6 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
             validate = false;
             message.append("Tienes que seleccionar cya\n");
         }
-
-
 
         if(!message.toString().isEmpty()){
             utilViews.showToastInView(message.toString());

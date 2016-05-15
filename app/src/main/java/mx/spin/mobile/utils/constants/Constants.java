@@ -19,6 +19,14 @@ public class Constants {
     public final static String PISCINA = "PSCINA";
     public final static String ID_PISCINA = "ID_PSCINA";
 
+
+    /*
+    1= Techada
+    2= Abierta
+     */
+    public final static int PISCINA_TECHADA = 1;
+    public final static int PISCINA_ABIERTA = 2;
+
     public final static String ANDROID_OS = "android";
 
     public final static String PPM = " ppm";
@@ -43,5 +51,12 @@ public class Constants {
     public final static String MAPS_URL = "http://maps.google.com/maps?daddr=";
 
     public final static String MY_POSITION = "Aqui estoy";
+
+    public final static int ID_EDIT = 0;
+    public final static int ID_DELETE = 1;
+
+
+    public static final String ROBOTO_LIGTH = "font/Roboto-Light.ttf";
+    public static final String ROBOTO_REGULAR = "font/Roboto-Regular.ttf";
 
 }

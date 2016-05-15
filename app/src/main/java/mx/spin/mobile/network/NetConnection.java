@@ -205,6 +205,24 @@ public class NetConnection {
         client.post(url, new RequestParams(postValues), responseHandler);
     }
 
+    public static void actualizarPiscina(Pool pool, AsyncHttpResponseHandler responseHandler){
+        HashMap<String, String> postValues = new HashMap<>();
+        String url = ServiceRequest.getUrlAddPool();
+        postValues.put("id_user", String.valueOf(pool.getPool_user_id()));
+        postValues.put("name", pool.getPool_name());
+        postValues.put("user", "User");
+        postValues.put("location", "MX");
+        postValues.put("figure", String.valueOf(pool.getPool_form()));
+        postValues.put("category", pool.getPool_category());
+        postValues.put("typeOfUse", pool.getPool_use());
+        postValues.put("type", pool.getPool_type());
+        postValues.put("rotationTime", String.valueOf(pool.getPool_rotation()));
+        postValues.put("volume", String.valueOf(pool.getPool_volume()));
+        postValues.put("um", String.valueOf(pool.getPool_um()));
+        postValues.put("equipment", pool.getmEquipos());
+        postValues.put("pool_id", String.valueOf(pool.getPool_id()));
+        client.post(url, new RequestParams(postValues), responseHandler);
+    }
 
 
     //region MAIN
