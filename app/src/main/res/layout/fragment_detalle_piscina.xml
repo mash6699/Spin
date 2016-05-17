@@ -14,7 +14,7 @@
             android:layout_height="50dp"
             android:id="@+id/imgDetalleConcepto"
             android:src="@mipmap/ic_launcher"
-            android:visibility="visible"/>
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="match_parent"

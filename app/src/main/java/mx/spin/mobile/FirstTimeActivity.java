@@ -3,6 +3,7 @@ package mx.spin.mobile;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -27,31 +28,44 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
+import com.google.gson.Gson;
 
 
+import mx.spin.mobile.connection.BoussinesSpin;
+import mx.spin.mobile.dao.Equipment;
+import mx.spin.mobile.dao.Pool;
+import mx.spin.mobile.dao.User;
 import mx.spin.mobile.entitys.Usuario;
 import mx.spin.mobile.interfaces.FBLoginCompleted;
 import mx.spin.mobile.network.NetConnection;
+import mx.spin.mobile.singleton.SpingApplication;
 import mx.spin.mobile.social.FacebookLoginDelegate;
+import mx.spin.mobile.utils.SpinUtility;
 import mx.spin.mobile.utils.UtilViews;
 import mx.spin.mobile.utils.constants.Constants;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 import mx.spin.mobile.utils.UtilCommon;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 import io.realm.Realm;
+import mx.spin.mobile.utils.constants.JSKeys;
 
 public class FirstTimeActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private static String TAG = FirstTimeActivity.class.getName();
-
     private UtilViews utilViews;
+    private SpinUtility spinUtility;
+    private BoussinesSpin boussinesSpin;
+    private SpingApplication spingApplication = SpingApplication.getInstance();
 
     @Nullable
     @Bind(R.id.toolbar)
@@ -109,6 +123,10 @@ public class FirstTimeActivity extends AppCompatActivity implements GoogleApiCli
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_first_time);
         ButterKnife.bind(this);
+
+        spinUtility = SpinUtility.getInstance();
+
+        boussinesSpin = new BoussinesSpin(this);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -381,6 +399,78 @@ public class FirstTimeActivity extends AppCompatActivity implements GoogleApiCli
         });
     }
 
+
+    private void loginSocial(String email, String password){
+
+        String token =  spinUtility.getValueDataStorage(getApplicationContext(), SpinUtility.ANDROID_TOKEN);
+        String deviceId =  Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+
+        NetConnection.login(email, password, token, deviceId, new TextHttpResponseHandlerMessage() {
+            public void onStart() {
+                super.onStart();
+                showMessage(FirstTimeActivity.this, getString(R.string.msg_progress_dialog));
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                hideMessage();
+                utilViews.showToastInView(getString(R.string.msg_generic_error));
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                hideMessage();
+                try {
+                    JSONObject jsonObject = new JSONObject(responseString);
+
+                    if (jsonObject.optBoolean(JSKeys.EXITO)) {
+
+                        //ONE LEVEL
+                        if(jsonObject.has(JSKeys.SESSION)){
+
+                            JSONObject sesion = jsonObject.optJSONObject(JSKeys.SESSION);
+                            Log.d("LoginOK", responseString);
+                            JSONArray piscinas = (JSONArray) jsonObject.get("piscinas");
+
+                            User mUser = new Gson().fromJson(sesion.toString(), User.class);
+                            boussinesSpin.insertUser(mUser);
+
+
+                            if(!piscinas.toString().trim().equals("[]")){
+                                Pool[] mPiscinas =  new Gson().fromJson(piscinas.toString(), Pool[].class);
+
+                                if(mPiscinas.length > 0 ){
+                                    for(int i = 0; i < mPiscinas.length; i++){
+                                        boussinesSpin.insertPool(mPiscinas[i]);
+                                        List<Equipment> equipo = mPiscinas[i].equipos;
+                                        if(equipo != null){
+                                            Log.d(TAG, "INSERTA MUCHOS EQUIPOS");
+                                            boussinesSpin.insertAllEquipment(equipo);
+                                        }
+                                    }
+                                    Log.d("LoginOKK", responseString);
+
+                                }
+                            }
+
+                            spingApplication.setIdUsuario(sesion.optString(JSKeys.ID_USER));
+                            gotoDrawer();
+                        }
+
+                    } else {
+                        utilViews.showToastInView(getString(R.string.msg_incorrect_data));
+                        Log.d("RegisterFail", responseString);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e(TAG, "RegisterFail" + e.getMessage());
+                }
+            }
+        });
+
+    }
+
+
     private void registrarUsuarioFb(String nombre, String email, String contrasena, String telefono, String tipoLogin, final String token,  final JSONObject objFacebook) {
         NetConnection.registrarUsuario(nombre, email, contrasena, telefono, tipoLogin,"-1","-1", new TextHttpResponseHandlerMessage() {
             @Override
@@ -433,7 +523,7 @@ public class FirstTimeActivity extends AppCompatActivity implements GoogleApiCli
                      /*   startActivity(new Intent(FirstTimeActivity.this, DrawerActivity.class));
                         finish();*/
                     }
-                    loadDrawer();
+                    gotoDrawer();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -441,11 +531,12 @@ public class FirstTimeActivity extends AppCompatActivity implements GoogleApiCli
         });
     }
 
-    void loadDrawer(){
-        Intent mIntent = new Intent(FirstTimeActivity.this, DrawerActivity.class);
-        mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(mIntent);
-        finish();
+    void gotoDrawer(){
+        Log.d(TAG, "gotoDrawer");
+        Intent intent = new Intent(FirstTimeActivity.this, DrawerActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        this.finish();
     }
 
 }

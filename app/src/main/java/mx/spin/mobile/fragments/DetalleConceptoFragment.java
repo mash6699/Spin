@@ -97,9 +97,9 @@ public class DetalleConceptoFragment extends Fragment {
                             fecha.setText(listado.optJSONObject(i).optString("content_register"));
                             ImageLoader loader = ImageLoader.getInstance();
                             image_url = listado.optJSONObject(i).optString("content_photo");
-                            if(image_url != null){
+                          /*  if(image_url != null){
                                 loader.displayImage(image_url,imagen);
-                            }
+                            }*/
                         }
                     }
 
