@@ -1,46 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-   <!-- <string name=""></string>-->
-    <string name="clorizide">Clorizide 91</string>
-    <string name="trizide">Trizide</string>
-    <string name="shock_correct">Shock Correctivo</string>
-    <string name="neutraclor">Neutraclor</string>
-    <string name="shock_prevent">Shock Preventivo</string>
+ <!-- <string name=""></string>-->
+ <string name="clorizide">Clorizide 91</string>
+ <string name="trizide">Trizide</string>
+ <string name="shock_correct">Shock Correctivo</string>
+ <string name="neutraclor">Neutraclor</string>
+ <string name="shock_prevent">Shock Preventivo</string>
 
-    <!--BROMO-->
-    <string name="clorizide_broma">Clorizide Bromado</string>
-    <string name="shock_a">Shock Bromado A</string>
-    <string name="shock_b">Shock Bromado B</string>
-    <!--BROMO-->
+ <!--BROMO-->
+ <string name="clorizide_broma">Clorizide Bromado</string>
+ <string name="shock_a">Shock Bromado A</string>
+ <string name="shock_b">Shock Bromado B</string>
+ <!--BROMO-->
 
-    <string name="crista_green">Cristalin Green</string>
-    <string name="crista_platinum">Cristalin Platinum</string>
-    <string name="crista_perla">Cristalin Perla</string>
-    <string name="crarit_plus">Clarit Plus</string>
-    <string name="alcalos">Alcalos</string>
-    <string name="alkalin">Alkalin</string>
-    <string name="alka">Alka</string>
-    <string name="acidet">Acidet</string>
+ <string name="crista_green">Cristalin Green</string>
+ <string name="crista_platinum">Cristalin Platinum</string>
+ <string name="crista_perla">Cristalin Perla</string>
+ <string name="crarit_plus">Clarit Plus</string>
+ <string name="alcalos">Alcalos</string>
+ <string name="alkalin">Alkalin</string>
+ <string name="alka">Alka</string>
+ <string name="acidet">Acidet</string>
 
-<!-- FUNCION PRINCIPAL-->
-    <string name="fun_clorizide">Desinfectante de rutina</string>
-    <string name="fun_trizide">Multifuncional</string>
-    <string name="fun_shock_correct">Supercloración</string>
-    <string name="fun_neutraclor">Neutralizador de Cloro</string>
-    <string name="fun_shock_prevent">Desinfectante preventivo</string>
-    <string name="fun_clorizide_broma">Biocida para piscinas</string>
-    <string name="fun_shock_a">Súperbromación</string>
-    <string name="fun_shock_b">Súperbromación</string>
-    <string name="fun_crista_green">Coagulante - Algicida</string>
-    <string name="fun_crista_platinum">Coagulante - Algicida</string>
-    <string name="fun_crista_perla">Coagulante - Algicida</string>
-    <string name="fun_crarit_plus">Floculante</string>
-    <string name="fun_alcalos">Sube el pH</string>
-    <string name="fun_alkalin">Sube el pH y la alcalinidad</string>
-    <string name="fun_alka">Sube la alcalinidad</string>
-    <string name="fun_acidet">Baja el pH y la alcalididad</string>
-    <!-- FUNCION PRINCIPAL-->
+ <!-- FUNCION PRINCIPAL-->
+ <string name="fun_clorizide">Desinfectante de rutina</string>
+ <string name="fun_trizide">Multifuncional</string>
+ <string name="fun_shock_correct">Supercloración</string>
+ <string name="fun_neutraclor">Neutralizador de Cloro</string>
+ <string name="fun_shock_prevent">Desinfectante preventivo</string>
+ <string name="fun_clorizide_broma">Biocida para piscinas</string>
+ <string name="fun_shock_a">Súperbromación</string>
+ <string name="fun_shock_b">Súperbromación</string>
+ <string name="fun_crista_green">Coagulante - Algicida</string>
+ <string name="fun_crista_platinum">Coagulante - Algicida</string>
+ <string name="fun_crista_perla">Coagulante - Algicida</string>
+ <string name="fun_crarit_plus">Floculante</string>
+ <string name="fun_alcalos">Sube el pH</string>
+ <string name="fun_alkalin">Sube el pH y la alcalinidad</string>
+ <string name="fun_alka">Sube la alcalinidad</string>
+ <string name="fun_acidet">Baja el pH y la alcalididad</string>
+ <!-- FUNCION PRINCIPAL-->
 
+
+ <!-- PRIMER AJUSTE-->
+      <!-- Ph y Alcalinidad-->
+      <string name="recomendacion_1">Debes ajustar correctamente tu pH para garantizar la desinfección y comodidad de los usuarios.</string>
+      <string name="recomendacion_2">Revisa constantemente tu pH y eventualmente la Alcalinidad para mantener tu piscina correctamente.</string>
+      <string name="recomendcion_3">Debes ajustar correctamente tu pH para garantizar la desinfección y comodidad de los usuarios.</string>
+      <!-- Ph y Alcalinidad-->
+ <!-- PRIMER AJUSTE-->
+
+ <!-- SEGUNDO AJUSTE-->
+     <!--Turbidez y Metales-->
+     <string name="recomendacion_4">Excelente, tu piscina esta en buena forma.</string>
+     <string name="recomendacion_5">Para solucionar el problema de Turbidez y Coloración debes agregar xxx litros de CRISTALIN GREEN en el agua y poner a filtrar por 24 horas.</string>
+     <string name="recomendacion_6">Para solucionar el problema de Coloración debes agregar xxx litros de CRISTALIN GREEN en el agua y poner a filtrar por 24 horas.
+    NOTA: Si el color es Verde militar muy probablemente sea problema de algas, si esto es así se debe hacer una súper cloración antes de agregar CRISTALIN GREEN.
+    Al finalizar, se debera limpiar sus filtos.</string>
+     <!--Turbidez y Metales-->
+ <!-- SEGUNDO AJUSTE-->
+
+ <!-- TERCERO AJUSTE-->
+
+   <!--Desinfectante-->
+   <string name="recomendacion_7">Debes agregar XXX gramos de "TRIZIDE" a tu piscina, estó la llevara a 3 ppm.</string>
+   <string name="recomendacion_8">Revisa constantemente tus niveles de desinfectante para mantener sana el agua de tu piscina.</string>
+   <string name="recomendacion_9">Si se requiere podrias bajar el nivel de Cloro rapidamente con "NEUTRACLOR" o bien esperar a que baje por el uso normal.</string>
+
+   <string name="recomendacion_10">Excelente tu piscina esta en buen estado.</string>
+   <string name="recomendacion_11">Debes agregar XXX gramos de "SHOCK CORRECTIVO" a tu piscina y dejar el equipo de su piscina funcionando, estó eliminará las Cloraminas.</string>
+   <string name="recomendacion_12">Utilice Clorizide Bromado, mediante un bromador, aumentando el flujo hasta lograr la concentracion deseada.</string>
+   <string name="recomendacion_13">Revisa constantemente tus niveles de desinfectante para mantener sana el agua de tu piscina.</string>
+   <string name="recomendacion_14">Utilice Clorizide Bromado, mediante un bromador, disminuyendo el flujo hasta lograr la concentracion deseada.</string>
+   <!--Desinfectante-->
+
+   <!--Estabilizador-->
+   <string name="recomendacion_15">Debes agregar XXX gramos de "TRIZIDE" a tu piscina, estó la llevara a 3 ppm.</string>
+   <string name="recomendacion_16">Revisa constantemente tus niveles de desinfectante para mantener sana el agua de tu piscina.</string>
+   <string name="recomendacion_17">Si se requiere podrias bajar el nivel de Cloro rapidamente con "NEUTRACLOR" o bien esperar a que baje por el uso normal.</string>
+   <string name="recomendacion_18">Debes agregar XXX gramos de "TRIZIDE" a tu piscina, estó la llevara a 3 ppm.</string>
+   <string name="recomendacion_19">Si se requiere podrias bajar el nivel de Cloro rapidamente con "NEUTRACLOR" o bien esperar a que baje por el uso normal.</string>
+   <!--Estabilizador-->
+
+   <!-- Shock Preventivo-->
+   <string name="recomendacion_20">Debes agregar XXX gramos de "SHOCK PREVENTIVO" a tu piscina, estó la llevara a 10 ppm.</string>
+   <string name="recomendacion_21">Excelente: tu piscina estra protegida</string>
+   <string name="recomendacion_22">Tienes más que suficiente protección, cuida los excesos.</string>
+   <!-- Shock Preventivo-->
+
+ <!-- TERCERO AJUSTE-->
+
+ <!-- CUARTO AJUSTE-->
+
+   <!-- Dureza-->
+   <string name="recomendacion_23">Es recomendable  agregar XXX gramos de "DURAL" a tu piscina.</string>
+   <string name="recomendacion_24">Excelente: tu piscina extra protegida</string>
+   <string name="recomendacion_25">CUIDADO: Debes eliminar la Dureza excesiva en tu agua para evitar manchas en el mosaico, incrustaciones en tuberías y equipos dañados. Puedes hacerlo incrementando el tiempo de retro lavando, reponiendo agua sin excelso de dureza o mediante un proceso de suavización.</string>
+   <!-- Dureza-->
+
+   <!--STD-->
+   <string name="recomendacion_26"> CUIDADO: Debes eliminar el exceso de SDT (Solidos Disueltos Totales) , puedes hacerlo incrementando el tiempo de retro lavando o reponiendo agua.</string>
+   <string name="recomendacion_27">La dureza esta dentro de control, monitoreala con frecuencia.</string>
+   <!--STD-->
+
+ <string name="recomendacion_"></string>
+
+ <!-- CUARTO AJUSTE-->
 
 
 
