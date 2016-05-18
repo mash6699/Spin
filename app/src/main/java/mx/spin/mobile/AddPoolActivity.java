@@ -22,6 +22,7 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 import mx.spin.mobile.connection.BoussinesSpin;
+import mx.spin.mobile.dao.Equipment;
 import mx.spin.mobile.dao.Pool;
 import mx.spin.mobile.entitys.Usuario;
 import mx.spin.mobile.model.Volume;
@@ -35,6 +36,7 @@ import mx.spin.mobile.utils.UtilViews;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import android.os.Handler;
@@ -56,7 +58,8 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
 
     int idPiscina = 0;
 
-    Pool piscina = new Pool();
+    private Pool piscina = new Pool();
+    private List<Equipment> equipmentList;
 
     private Usuario usuario;
 
@@ -177,6 +180,7 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
             idPiscina = getIntent().getExtras().getInt(Constants.ID_PISCINA);
             Log.d(TAG, "savedIntanceState:: " + idPiscina);
             piscina = boussinesSpin.getPool(idPiscina);
+            equipmentList = boussinesSpin.getMyEquipment(piscina.getPool_id());
             setPoolInView();
         }
     }
@@ -228,6 +232,44 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
 
         //TODO EQUIPOS
 
+        if(equipmentList != null){
+            Iterator<Equipment> iterator = equipmentList.iterator();
+            while(iterator.hasNext()){
+                Equipment equipment = iterator.next();
+                setValueEquipment(equipment);
+            }
+        }
+    }
+
+
+    void setValueEquipment(Equipment equipment){
+
+        if(equipment.getPooleq_equipment_id() == 8){
+            cb_dosificador.setChecked(true);
+            sp_dosificador.setSelection(getIndex(sp_dosificador, equipment.getEquipment()));
+
+        }else if(equipment.getPooleq_equipment_id() == 13){
+            cb_calefaccion.setChecked(true);
+            sp_calefaccion.setSelection(getIndex(sp_calefaccion, equipment.getEquipment()));
+        }else if(equipment.getPooleq_equipment_id() == 18){
+            cb_filtracion.setChecked(true);
+            sp_filtracion.setSelection(getIndex(sp_filtracion, equipment.getEquipment()));
+        }else if(equipment.getPooleq_equipment_id() == 4){
+            cb_motobomba.setChecked(true);
+            sp_caballaje.setSelection(getIndex(sp_caballaje, equipment.getPooleq_hp() + " HP"));
+            ed_cantidad.setText(equipment.getPooleq_qty());
+        }
+    }
+
+    private int getIndex(Spinner spinner, String myString) {
+        int index = 0;
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 
     private void setActions(){
@@ -374,6 +416,8 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
         idUm            = sp_systemMetric.getSelectedItemPosition();
         idTipoSpa       = sp_poolType.getSelectedItemPosition();
 
+        misEquipos = new StringBuilder();
+
         if(namePool.isEmpty()){
             ed_namePool.setError(getResources().getString(R.string.lbl_empty_name));
             ed_namePool.requestFocus();
@@ -481,7 +525,9 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
         //TODO EQUIPOS
         if(!misEquipos.toString().isEmpty()){
             Log.d(TAG, "Agregando equipos");
-            piscina.setmEquipos(misEquipos.toString());
+            int lenghEquipos = misEquipos.length();
+            String mEquipos = misEquipos.toString().substring(0, lenghEquipos -1);
+            piscina.setmEquipos(mEquipos);
         }else {
             Log.d(TAG,"no hay equipos");
         }

@@ -4,9 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
@@ -28,13 +26,10 @@ import mx.spin.mobile.connection.BoussinesSpin;
 import mx.spin.mobile.dao.Equipment;
 import mx.spin.mobile.dao.Pool;
 import mx.spin.mobile.dao.User;
-import mx.spin.mobile.entitys.Usuario;
-import mx.spin.mobile.entitys.pojo.ListaPiscinas;
 import mx.spin.mobile.network.NetConnection;
 import mx.spin.mobile.services.RegistrationIntentService;
 import mx.spin.mobile.singleton.SpingApplication;
 import mx.spin.mobile.utils.SpinUtility;
-import mx.spin.mobile.utils.constants.Constants;
 import mx.spin.mobile.utils.constants.JSKeys;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 import mx.spin.mobile.utils.UtilViews;
@@ -50,7 +45,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cz.msebera.android.httpclient.Header;
-import io.realm.Realm;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -177,16 +171,22 @@ public class LoginActivity extends AppCompatActivity {
                                 Pool[] mPiscinas =  new Gson().fromJson(piscinas.toString(), Pool[].class);
 
                                 if(mPiscinas.length > 0 ){
-                                    for(int i = 0; i < mPiscinas.length; i++){
+                                    for(int i = 0 ; i < mPiscinas.length; i++){
+                                        int idPool = mPiscinas[i].getPool_id();
                                         boussinesSpin.insertPool(mPiscinas[i]);
+
                                         List<Equipment> equipo = mPiscinas[i].equipos;
+
                                         if(equipo != null){
+                                            for(int e = 0; e< equipo.size(); e++){
+                                                System.out.println("set idPool " + e);
+                                                equipo.get(e).setPool_id(idPool);
+                                            }
+
                                             Log.d(TAG, "INSERTA MUCHOS EQUIPOS");
                                             boussinesSpin.insertAllEquipment(equipo);
                                         }
                                     }
-                                    Log.d("LoginOKK", responseString);
-
                                 }
                             }
 

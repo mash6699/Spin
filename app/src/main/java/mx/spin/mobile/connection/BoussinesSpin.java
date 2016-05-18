@@ -127,6 +127,13 @@ public class BoussinesSpin extends SpinFactory implements SpinImpl {
     }
 
     @Override
+    public List<Equipment> getMyEquipment(int idPool) {
+        Log.d(TAG, "getMyEquipment");
+        EquipmentDao equipmentDao = daoSession.getEquipmentDao();
+        return  equipmentDao.queryBuilder().where(EquipmentDao.Properties.Pool_id.eq(idPool)).list();
+    }
+
+    @Override
     public void deleteAllEquipment() {
         Log.d(TAG, "deleteAllEquipment");
         EquipmentDao equipmentDao = daoSession.getEquipmentDao();

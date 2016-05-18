@@ -10,9 +10,12 @@ import android.view.View;
 import android.widget.TextView;
 
 
+import java.util.Iterator;
+import java.util.List;
 
 import mx.spin.mobile.common.SpinBusinnes;
 import mx.spin.mobile.connection.BoussinesSpin;
+import mx.spin.mobile.dao.Equipment;
 import mx.spin.mobile.dao.Pool;
 import mx.spin.mobile.entitys.Piscina;
 import mx.spin.mobile.singleton.SpingApplication;
@@ -29,6 +32,7 @@ public class PoolDetailActivity extends AppCompatActivity {
     private SpingApplication spingApplication = SpingApplication.getInstance();
     private UtilViews utilViews;
     private Pool piscina;
+    private List<Equipment> equipmentList;
     private BoussinesSpin boussinesSpin;
 
     @Nullable
@@ -121,8 +125,10 @@ public class PoolDetailActivity extends AppCompatActivity {
     void setPoolInView(){
         Log.d(TAG, "setPoolInView");
 
+        equipmentList = boussinesSpin.getMyEquipment(piscina.getPool_id());
+
         double volumen = Double.parseDouble(piscina.getPool_volume());
-    //    double rotacion = Double.parseDouble(piscina.getPool_rotation());
+        //    double rotacion = Double.parseDouble(piscina.getPool_rotation());
         int um = Integer.parseInt(piscina.getPool_um());
         spingApplication.resetAllValues();
         txt_titleToolbar.setText(R.string.title_activity_pool_detail);
@@ -143,20 +149,48 @@ public class PoolDetailActivity extends AppCompatActivity {
 
         txt_tiempoRotacion.setTypeface(utilViews.setFontNormal());
         txt_velociddadFlujo.setTypeface(utilViews.setFontNormal());
-        
-      //  txt_tiempoRotacion.setText("" + piscina.getPool_rotation());
-      //  txt_velociddadFlujo.setText(CalculateVolume.getVelocidadFlujo(volumen, rotacion, um)); // TODO CALCULAR
 
-     /*   if(!piscina.getEquipos().isEmpty()){
-            //txt_empty_equipos.setVisibility(View.GONE);
+        txt_dosi.setTypeface(utilViews.setFontNormal());
+        txt_dosi_val.setTypeface(utilViews.setFontNormal());
+        txt_cale.setTypeface(utilViews.setFontNormal());
+        txt_cale_val.setTypeface(utilViews.setFontNormal());
+        txt_filt.setTypeface(utilViews.setFontNormal());
+        txt_filt_val.setTypeface(utilViews.setFontNormal());
+        txt_moto.setTypeface(utilViews.setFontNormal());
+        txt_moto_val.setTypeface(utilViews.setFontNormal());
+
+        if(equipmentList.size() > 0){
             txt_empty_equipos.setText("Equipos");
-            String [] equipos = piscina.getEquipos().toString().replace(",''","").split("\\|");
-            for(String equipo: equipos){
-                parseEquipo(equipo);
+            Iterator<Equipment> iterator = equipmentList.iterator();
+            while(iterator.hasNext()){
+                Equipment equipment = iterator.next();
+                parseEquipo(equipment);
             }
-        }else{
-            txt_empty_equipos.setVisibility(View.VISIBLE);
-        }*/
+        }
+
+    }
+
+    private void parseEquipo(Equipment equipment) {
+        Log.d(TAG,"parseEquipo::: " + equipment.toString());
+        int idEquipo = equipment.getPooleq_equipment_id();
+        if(idEquipo > 4 && idEquipo < 9){
+            txt_dosi.setVisibility(View.VISIBLE);
+            txt_dosi_val.setVisibility(View.VISIBLE);
+            txt_dosi_val.setText(utilViews.getDosificador(idEquipo));
+        }else  if(idEquipo > 8 && idEquipo < 14){
+            txt_cale.setVisibility(View.VISIBLE);
+            txt_cale_val.setVisibility(View.VISIBLE);
+            txt_cale_val.setText(utilViews.getCalefacion(idEquipo));
+        }else  if(idEquipo > 13 && idEquipo < 20){
+            txt_filt.setVisibility(View.VISIBLE);
+            txt_filt_val.setVisibility(View.VISIBLE);
+            txt_filt_val.setText(utilViews.getFiltracion(idEquipo));
+        }else if(idEquipo == 4){
+            txt_moto.setVisibility(View.VISIBLE);
+            txt_moto_val.setVisibility(View.VISIBLE);
+            txt_moto_val.setText( getResources().getString(R.string.lbl_cantidad) + " : " + equipment.getPooleq_qty()+
+                    " " +  getResources().getString(R.string.lbl_caballaje) + ": " + equipment.getPooleq_hp());
+        }
     }
 
     void parseEquipo(String mEquipo){
@@ -166,13 +200,12 @@ public class PoolDetailActivity extends AppCompatActivity {
             txt_moto.setVisibility(View.VISIBLE);
             txt_moto_val.setVisibility(View.VISIBLE);
             txt_moto_val.setText( getResources().getString(R.string.lbl_cantidad) + " : " + item[1] +
-              " " +  getResources().getString(R.string.lbl_caballaje) + ": " + item[2]);
+                    " " +  getResources().getString(R.string.lbl_caballaje) + ": " + item[2]);
         }else{
             for(String element: item){
                 parseItemEquipo(element);
             }
         }
-
     }
     void parseItemEquipo(String mEquipo){
         Log.d(TAG,"parseItemEquipo::: " + mEquipo);

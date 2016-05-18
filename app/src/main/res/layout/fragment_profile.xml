@@ -7,146 +7,139 @@
     style="@style/AppTheme"
     tools:context="mx.spin.mobile.fragments.ProfileFragment">
 
-    <!--<include
-        android:id="@+id/include_toolbar"
-        layout="@layout/custom_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-
-        android:layout_below="@+id/include_toolbar"
-
-        -->
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/activity_horizontal_margin">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:layout_centerVertical="true">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgProfileUser"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="35dp"
             android:src="@drawable/user_placeholder" />
 
         <LinearLayout
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="32dp"
-            android:layout_alignEnd="@+id/cv_analizar"
-            android:layout_alignRight="@+id/cv_analizar"
+            android:layout_marginTop="29dp"
             android:id="@+id/iv_option_menu"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
             android:layout_alignTop="@+id/imgProfileUser"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content">
+            android:layout_toRightOf="@+id/imgProfileUser"
+            android:layout_toEndOf="@+id/imgProfileUser">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/more" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:gravity="center"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/txtProfilePoolsRegistered"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Piscinas Registradas: 0"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:layout_below="@+id/paisProfile"
-            android:layout_centerVertical="true"
+            android:src="@drawable/more"
             android:gravity="center" />
 
+        </LinearLayout>
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/cv_analizar"
-            android:layout_below="@+id/txtProfilePoolsRegistered"
-            android:layout_gravity="center_vertical"
-            android:layout_width="180dp"
+
+
+        <LinearLayout
+            android:layout_below="@+id/imgProfileUser"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            card_view:cardBackgroundColor="@android:color/white"
-            card_view:cardCornerRadius="21dp"
-            card_view:cardElevation="6dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentRight="false"
-            android:layout_centerHorizontal="true">
+            android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/btn_analizar"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/lbl_analizar"
-                android:onClick="redirectHome"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:text="Melanie Fedor"
                 android:gravity="center"
-                android:background="@android:color/transparent"
-                android:padding="12dp"
-                android:textColor="@android:color/holo_blue_dark"/>/>
+                android:id="@+id/nombreUsuarioPerfil"
+                android:textSize="18sp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/white"/>
 
-        </android.support.v7.widget.CardView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Melanie Fedor"
-            android:id="@+id/nombreUsuarioPerfil"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_below="@+id/iv_option_menu"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="43dp"
-            android:textColor="@color/white"
-            style="@style/AppTheme.Widget.TextView" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/emailUsuarioPerfil"
+                android:gravity="center"
+                android:text="melanie@mail.com"
+                android:textSize="16sp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/emailUsuarioPerfil"
-            android:text="melanie@mail.com"
-            android:textSize="16sp"
-            android:layout_below="@+id/imgProfileUser"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/white"/>
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/telefonoUsuarioPerfil"
+                android:text="044 55 1234123443"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/telefonoUsuarioPerfil"
-            android:text="044 55 1234123443"
-            android:textSize="16sp"
-            android:layout_below="@+id/emailUsuarioPerfil"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/white"/>
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mexico DF"
+                android:textSize="16sp"
+                android:layout_below="@+id/telefonoUsuarioPerfil"
+                android:layout_marginTop="8dp"
+                android:id="@+id/paisProfile"
+                android:textColor="@color/white"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mexico DF"
-            android:textSize="16sp"
-            android:layout_below="@+id/telefonoUsuarioPerfil"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/paisProfile"
-            android:textColor="@color/white"/>
+
+
+            <TextView
+                android:id="@+id/txtProfilePoolsRegistered"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Piscinas Registradas: 0"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:gravity="center" />
+
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_analizar"
+                android:layout_gravity="center"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardCornerRadius="21dp"
+                card_view:cardElevation="6dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentRight="false"
+                android:layout_centerHorizontal="true">
+
+                <Button
+                    android:id="@+id/btn_analizar"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/lbl_analizar"
+                    android:onClick="redirectHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:background="@android:color/transparent"
+                    android:padding="12dp"
+                    android:textColor="@android:color/holo_blue_dark"/>/>
+
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+
 
     </RelativeLayout>
 

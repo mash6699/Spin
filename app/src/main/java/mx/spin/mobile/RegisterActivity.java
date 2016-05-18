@@ -21,7 +21,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.google.gson.Gson;
 
 import mx.spin.mobile.common.SpinBusinnes;
@@ -47,7 +46,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 import de.hdodenhof.circleimageview.CircleImageView;
-import io.realm.Realm;
 import mx.spin.mobile.utils.constants.JSKeys;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -319,7 +317,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 hideMessage();
-             //   Toast.makeText(RegisterActivity.this,getResources().getString(R.string.msg_generic_error),Toast.LENGTH_SHORT).show();
                 utilViews.showToastInView(getResources().getString(R.string.msg_generic_error));
             }
 
@@ -356,7 +353,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 hideMessage();
-               // Toast.makeText(RegisterActivity.this,getResources().getString(R.string.msg_generic_error),Toast.LENGTH_SHORT).show();
                 utilViews.showToastInView(getResources().getString(R.string.msg_generic_error));
             }
 
@@ -395,7 +391,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 hideMessage();
-               // Toast.makeText(RegisterActivity.this,getResources().getString(R.string.msg_generic_error),Toast.LENGTH_SHORT).show();
                 utilViews.showToastInView(getResources().getString(R.string.msg_generic_error));
             }
 
@@ -416,7 +411,6 @@ public class RegisterActivity extends AppCompatActivity {
                     }else{
                         String msj = jsonObject.get("msj").toString();
                         Log.d("RegisterFail",responseString);
-                      //  Toast.makeText(RegisterActivity.this, msj, Toast.LENGTH_SHORT).show();
                         utilViews.showToastInView(msj);
                     }
                 } catch (JSONException e) {

@@ -22,12 +22,12 @@ public class UsuarioReg implements Serializable {
     private String os;
     private String token;
     private String diviceId;
-
+    private String photo;
+    private String tipoLogin;
 
     public UsuarioReg(){
 
     }
-
 
     public String getNombre() {
         return nombre;
@@ -123,5 +123,21 @@ public class UsuarioReg implements Serializable {
 
     public void setDiviceId(String diviceId) {
         this.diviceId = diviceId;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getTipoLogin() {
+        return tipoLogin;
+    }
+
+    public void setTipoLogin(String tipoLogin) {
+        this.tipoLogin = tipoLogin;
     }
 }

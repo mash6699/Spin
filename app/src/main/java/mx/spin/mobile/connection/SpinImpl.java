@@ -28,8 +28,11 @@ public interface SpinImpl {
     Pool getPool(int idPool);
     void deleteAllPools();
     List<Pool> getMyPools();
+
+    //TODO EQUIPMENT
     void insertEquipment(Equipment equipment);
     void insertAllEquipment(List<Equipment> equipment);
+    List<Equipment> getMyEquipment(int idPool);
     void deleteAllEquipment();
 
     //TODO DEALERS

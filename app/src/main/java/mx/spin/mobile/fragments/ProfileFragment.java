@@ -5,66 +5,63 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import butterknife.OnClick;
-import mx.spin.mobile.DrawerActivity;
 import mx.spin.mobile.EditProfileActivity;
 import mx.spin.mobile.LoginActivity;
 
 import mx.spin.mobile.SpinApp;
-import mx.spin.mobile.common.SpinBusinnes;
 import mx.spin.mobile.connection.BoussinesSpin;
 import mx.spin.mobile.dao.User;
-import mx.spin.mobile.entitys.Usuario;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import mx.spin.mobile.R;
+import mx.spin.mobile.utils.UtilViews;
 
 public class ProfileFragment extends Fragment {
 
     private static String TAG = ProfileFragment.class.getName();
-   // private SpinBusinnes spinBusinnes;
+
     private User usuario;
     private View rootView;
 
     private BoussinesSpin boussinesSpin;
+    private UtilViews utilViews;
 
-   /* @Nullable
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
-    @Nullable
-    @Bind(R.id.txtToolbarTitle)
-    TextView txt_titleToolbar;*/
     @Nullable
     @Bind(R.id.imgProfileUser)
-    CircleImageView imgProfileUser;
+    CircleImageView txt_image;
     @Nullable
     @Bind(R.id.nombreUsuarioPerfil)
-    TextView nombreUsuarioPerfil;
+    TextView txt_nombre;
     @Nullable
     @Bind(R.id.emailUsuarioPerfil)
-    TextView emailUsuarioPerfil;
+    TextView txt_email;
     @Nullable
     @Bind(R.id.telefonoUsuarioPerfil)
-    TextView telefonoUsuarioPerfil;
+    TextView txt_phone;
     @Nullable
     @Bind(R.id.txtProfilePoolsRegistered)
-    TextView cantPisicnas;
+    TextView txt_totalPools;
     @Nullable
     @Bind(R.id.paisProfile)
-    TextView pais;
+    TextView txt_pais;
+
+
+    @Nullable
+    @Bind(R.id.btn_analizar)
+    Button btn_analizar;
+
 
     @Nullable
     @Bind(R.id.iv_option_menu)
@@ -73,9 +70,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // spinBusinnes = new SpinBusinnes();
         boussinesSpin = new BoussinesSpin(getActivity());
-        //usuario = spinBusinnes.loadUser();
         usuario = boussinesSpin.getUser();
     }
 
@@ -84,15 +79,16 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_profile, container, false);
         ButterKnife.bind(this,rootView);
-       /* txt_titleToolbar.setText(getResources().getString(R.string.title_profile));
-        toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DrawerActivity.drawerLayout.openDrawer(Gravity.LEFT);
-            }
-        });*/
         setUsuarioInView();
+        utilViews = new UtilViews().getInstance(getActivity());
+
+        txt_nombre.setTypeface(utilViews.setFontRegular());
+        txt_email.setTypeface(utilViews.setFontNormal());
+        txt_phone.setTypeface(utilViews.setFontNormal());
+        txt_pais.setTypeface(utilViews.setFontNormal());
+        txt_totalPools.setTypeface(utilViews.setFontNormal());
+        btn_analizar.setTypeface(utilViews.setFontRegular());
+
         return rootView;
     }
 
@@ -122,28 +118,28 @@ public class ProfileFragment extends Fragment {
     void setUsuarioInView(){
         Log.d(TAG, "setUsuarioInView");
         try{
+
             if(usuario != null){
                 SpinApp.initCargarImagen(getActivity());
-                nombreUsuarioPerfil.setText(usuario.getName());
-                emailUsuarioPerfil.setText(usuario.getMail());
+                txt_nombre.setText(usuario.getName());
+                txt_email.setText(usuario.getMail());
 
-              //  if (usuario.getPais() !="-1"){
-                if (!usuario.getCountry().isEmpty()){
-                    pais.setText(usuario.getCountry());
+                if (usuario.getCountry()!= null){
+                    txt_pais.setText(usuario.getCountry());
+                }else{
+                    txt_pais.setVisibility(View.GONE);
                 }
                 if (usuario.getTotal_pools() > 0) {
-                    cantPisicnas.setText(getResources().getString(R.string.lbl_mis_piscinas) + usuario.getTotal_pools());
+                    txt_totalPools.setText(getResources().getString(R.string.lbl_mis_piscinas) + usuario.getTotal_pools());
                 }
-                if (usuario.getPhone() != null) {
-                    telefonoUsuarioPerfil.setText(usuario.getPhone());
+                if (usuario.getPhone() != null && !usuario.getPhone().equals("Sin número")) {
+                    txt_phone.setText(usuario.getPhone());
+                }else{
+                    txt_phone.setVisibility(View.GONE);
                 }
                 if (!usuario.getProfilePicture().equals("")) {
-                    imgProfileUser.setImageURI(Uri.parse(usuario.getProfilePicture()));
+                    txt_image.setImageURI(Uri.parse(usuario.getProfilePicture()));
                 }
-             /*   if (usuario.getOrigenLogin() != 0) {
-                    ImageLoader loader = ImageLoader.getInstance();
-                    loader.displayImage(usuario.getPhoto(), imgProfileUser);
-                }*/
             }
         }catch (Exception e){
             Log.e(TAG, e.getMessage());
@@ -152,7 +148,6 @@ public class ProfileFragment extends Fragment {
 
     void closeSession(){
         try {
-          //  spinBusinnes.cleanUser();
             boussinesSpin.cleanDB();
             Intent loginIntent = new Intent(getActivity() , LoginActivity.class);
             loginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

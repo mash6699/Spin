@@ -116,6 +116,7 @@ public class NetConnection {
         postValues.put("Id_country", user.getIdPais());
         postValues.put("Id_state", user.getIdEstado());
         postValues.put("phone", user.getTelefono());
+        postValues.put("photo", user.getPhoto());
         postValues.put("userMail", user.getEmail());
         postValues.put("userCred", user.getPassword());
         postValues.put("RedLogin", user.getRegLogin());
@@ -186,6 +187,8 @@ public class NetConnection {
 
 
     public static void registrarPiscina(Pool pool, AsyncHttpResponseHandler responseHandler) {
+
+
         HashMap<String, String> postValues = new HashMap<>();
         String url = ServiceRequest.getUrlAddPool();
         postValues.put("id_user", String.valueOf(pool.getPool_user_id()));
@@ -199,7 +202,7 @@ public class NetConnection {
         postValues.put("rotationTime", String.valueOf(pool.getPool_rotation()));
         postValues.put("volume", String.valueOf(pool.getPool_volume()));
         postValues.put("um", String.valueOf(pool.getPool_um()));
-        postValues.put("equipment", pool.getmEquipos());
+        postValues.put("equipment", pool.getmEquipos().toString().replace("'",""));
      /*   postValues.put("pool_modify", "MX");
         postValues.put("pool_id", "MX");*/
         client.post(url, new RequestParams(postValues), responseHandler);

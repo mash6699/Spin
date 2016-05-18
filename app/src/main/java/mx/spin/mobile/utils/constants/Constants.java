@@ -19,6 +19,7 @@ public class Constants {
     public final static String PISCINA = "PSCINA";
     public final static String ID_PISCINA = "ID_PSCINA";
 
+    public final static String DEFAULT_SOCIAL_PASSWORD = "redSocialSpin";
 
     /*
     1= Techada
