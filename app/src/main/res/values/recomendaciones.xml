@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!--Turbidez y Metales-->
+    <string name="turb_rec_20">Excelente, tu piscina esta en buena forma.</string>
+    <string name="turb_rec_21">Para solucionar el problema de Turbidez y Coloración debes agregar %1$s litros de CRISTALIN GREEN en el agua y poner a filtrar por 24 horas.</string>
+    <string name="turb_rec_22">Para solucionar el problema de Coloración debes agregar %1$s litros de CRISTALIN GREEN en el agua y poner a filtrar por 24 horas.
+    NOTA: Si el color es Verde militar muy probablemente sea problema de algas, si esto es así se debe hacer una súper cloración antes de agregar CRISTALIN GREEN.
+    Al finalizar, se debera limpiar sus filtos.</string>
+    <!--Turbidez y Metales-->
+
+
+
+    <!-- Dureza-->
+    <string name="dureza_rec_40">Es recomendable  agregar %1$s gramos de <b>DURAL</b> a tu piscina.</string>
+    <string name="dureza_rec_41">Excelente: tu piscina extra protegida</string>
+    <string name="dureza_rec_42">CUIDADO: Debes eliminar la Dureza excesiva en tu agua para evitar manchas en el mosaico, incrustaciones en tuberías y equipos dañados. Puedes hacerlo incrementando el tiempo de retro lavando, reponiendo agua sin excelso de dureza o mediante un proceso de suavización.</string>
+    <!-- Dureza-->
+
+
+    <!--STD-->
+    <string name="std_rec_43"> CUIDADO: Debes eliminar el exceso de SDT (Solidos Disueltos Totales) , puedes hacerlo incrementando el tiempo de retro lavando o reponiendo agua.</string>
+    <string name="std_rec_44">La dureza esta dentro de control, monitoreala con frecuencia.</string>
+    <!--STD-->
+
+
+</resources>

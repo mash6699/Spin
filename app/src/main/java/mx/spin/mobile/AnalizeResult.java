@@ -371,7 +371,8 @@ public class AnalizeResult extends AppCompatActivity {
     @Nullable
     @OnClick(R.id.btn_mantenimiento)
     public void gotoMantenimiento(View view){
-        startActivity(new Intent(AnalizeResult.this, MantenimientoActivity.class));
+      //  startActivity(new Intent(AnalizeResult.this, MantenimientoActivity.class));
+        startActivity(new Intent(AnalizeResult.this, Mantenimiento.class));
     }
 
     @Override

@@ -3,7 +3,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/black</item>
+        <item name="colorAccent">@color/card_shadow_1</item>
         <item name="colorControlNormal">@color/white</item>
     </style>
 

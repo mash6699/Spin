@@ -44,64 +44,51 @@
 
  <!-- PRIMER AJUSTE-->
       <!-- Ph y Alcalinidad-->
-      <string name="recomendacion_1">Debes ajustar correctamente tu pH para garantizar la desinfección y comodidad de los usuarios.</string>
-      <string name="recomendacion_2">Revisa constantemente tu pH y eventualmente la Alcalinidad para mantener tu piscina correctamente.</string>
-      <string name="recomendcion_3">Debes ajustar correctamente tu pH para garantizar la desinfección y comodidad de los usuarios.</string>
+      <string name="recomendacion_10">Debes ajustar correctamente tu pH para garantizar la desinfección y comodidad de los usuarios.</string>
+      <string name="recomendacion_11">Revisa constantemente tu pH y eventualmente la Alcalinidad para mantener tu piscina correctamente.</string>
+      <string name="recomendcion_12">Debes ajustar correctamente tu pH para garantizar la desinfección y comodidad de los usuarios.</string>
       <!-- Ph y Alcalinidad-->
  <!-- PRIMER AJUSTE-->
 
  <!-- SEGUNDO AJUSTE-->
-     <!--Turbidez y Metales-->
-     <string name="recomendacion_4">Excelente, tu piscina esta en buena forma.</string>
-     <string name="recomendacion_5">Para solucionar el problema de Turbidez y Coloración debes agregar xxx litros de CRISTALIN GREEN en el agua y poner a filtrar por 24 horas.</string>
-     <string name="recomendacion_6">Para solucionar el problema de Coloración debes agregar xxx litros de CRISTALIN GREEN en el agua y poner a filtrar por 24 horas.
-    NOTA: Si el color es Verde militar muy probablemente sea problema de algas, si esto es así se debe hacer una súper cloración antes de agregar CRISTALIN GREEN.
-    Al finalizar, se debera limpiar sus filtos.</string>
-     <!--Turbidez y Metales-->
+
  <!-- SEGUNDO AJUSTE-->
 
  <!-- TERCERO AJUSTE-->
 
    <!--Desinfectante-->
-   <string name="recomendacion_7">Debes agregar XXX gramos de "TRIZIDE" a tu piscina, estó la llevara a 3 ppm.</string>
-   <string name="recomendacion_8">Revisa constantemente tus niveles de desinfectante para mantener sana el agua de tu piscina.</string>
-   <string name="recomendacion_9">Si se requiere podrias bajar el nivel de Cloro rapidamente con "NEUTRACLOR" o bien esperar a que baje por el uso normal.</string>
+   <string name="recomendacion_30">Debes agregar XXX gramos de "TRIZIDE" a tu piscina, estó la llevara a 3 ppm.</string>
+   <string name="recomendacion_31">Revisa constantemente tus niveles de desinfectante para mantener sana el agua de tu piscina.</string>
+   <string name="recomendacion_32">Si se requiere podrias bajar el nivel de Cloro rapidamente con "NEUTRACLOR" o bien esperar a que baje por el uso normal.</string>
 
-   <string name="recomendacion_10">Excelente tu piscina esta en buen estado.</string>
-   <string name="recomendacion_11">Debes agregar XXX gramos de "SHOCK CORRECTIVO" a tu piscina y dejar el equipo de su piscina funcionando, estó eliminará las Cloraminas.</string>
-   <string name="recomendacion_12">Utilice Clorizide Bromado, mediante un bromador, aumentando el flujo hasta lograr la concentracion deseada.</string>
-   <string name="recomendacion_13">Revisa constantemente tus niveles de desinfectante para mantener sana el agua de tu piscina.</string>
-   <string name="recomendacion_14">Utilice Clorizide Bromado, mediante un bromador, disminuyendo el flujo hasta lograr la concentracion deseada.</string>
+   <string name="recomendacion_33">Excelente tu piscina esta en buen estado.</string>
+   <string name="recomendacion_34">Debes agregar XXX gramos de "SHOCK CORRECTIVO" a tu piscina y dejar el equipo de su piscina funcionando, estó eliminará las Cloraminas.</string>
+   <string name="recomendacion_35">Utilice Clorizide Bromado, mediante un bromador, aumentando el flujo hasta lograr la concentracion deseada.</string>
+   <string name="recomendacion_36">Revisa constantemente tus niveles de desinfectante para mantener sana el agua de tu piscina.</string>
+   <string name="recomendacion_37">Utilice Clorizide Bromado, mediante un bromador, disminuyendo el flujo hasta lograr la concentracion deseada.</string>
    <!--Desinfectante-->
 
    <!--Estabilizador-->
-   <string name="recomendacion_15">Debes agregar XXX gramos de "TRIZIDE" a tu piscina, estó la llevara a 3 ppm.</string>
-   <string name="recomendacion_16">Revisa constantemente tus niveles de desinfectante para mantener sana el agua de tu piscina.</string>
-   <string name="recomendacion_17">Si se requiere podrias bajar el nivel de Cloro rapidamente con "NEUTRACLOR" o bien esperar a que baje por el uso normal.</string>
-   <string name="recomendacion_18">Debes agregar XXX gramos de "TRIZIDE" a tu piscina, estó la llevara a 3 ppm.</string>
-   <string name="recomendacion_19">Si se requiere podrias bajar el nivel de Cloro rapidamente con "NEUTRACLOR" o bien esperar a que baje por el uso normal.</string>
+   <string name="recomendacion_310">Debes agregar XXX gramos de "TRIZIDE" a tu piscina, estó la llevara a 3 ppm.</string>
+   <string name="recomendacion_311">Revisa constantemente tus niveles de desinfectante para mantener sana el agua de tu piscina.</string>
+   <string name="recomendacion_312">Si se requiere podrias bajar el nivel de Cloro rapidamente con "NEUTRACLOR" o bien esperar a que baje por el uso normal.</string>
+   <string name="recomendacion_313">Debes agregar XXX gramos de "TRIZIDE" a tu piscina, estó la llevara a 3 ppm.</string>
+   <string name="recomendacion_314">Si se requiere podrias bajar el nivel de Cloro rapidamente con "NEUTRACLOR" o bien esperar a que baje por el uso normal.</string>
    <!--Estabilizador-->
 
    <!-- Shock Preventivo-->
-   <string name="recomendacion_20">Debes agregar XXX gramos de "SHOCK PREVENTIVO" a tu piscina, estó la llevara a 10 ppm.</string>
-   <string name="recomendacion_21">Excelente: tu piscina estra protegida</string>
-   <string name="recomendacion_22">Tienes más que suficiente protección, cuida los excesos.</string>
+   <string name="recomendacion_315">Debes agregar XXX gramos de "SHOCK PREVENTIVO" a tu piscina, estó la llevara a 10 ppm.</string>
+   <string name="recomendacion_316">Excelente: tu piscina estra protegida</string>
+   <string name="recomendacion_317">Tienes más que suficiente protección, cuida los excesos.</string>
    <!-- Shock Preventivo-->
 
  <!-- TERCERO AJUSTE-->
 
  <!-- CUARTO AJUSTE-->
 
-   <!-- Dureza-->
-   <string name="recomendacion_23">Es recomendable  agregar XXX gramos de "DURAL" a tu piscina.</string>
-   <string name="recomendacion_24">Excelente: tu piscina extra protegida</string>
-   <string name="recomendacion_25">CUIDADO: Debes eliminar la Dureza excesiva en tu agua para evitar manchas en el mosaico, incrustaciones en tuberías y equipos dañados. Puedes hacerlo incrementando el tiempo de retro lavando, reponiendo agua sin excelso de dureza o mediante un proceso de suavización.</string>
-   <!-- Dureza-->
 
-   <!--STD-->
-   <string name="recomendacion_26"> CUIDADO: Debes eliminar el exceso de SDT (Solidos Disueltos Totales) , puedes hacerlo incrementando el tiempo de retro lavando o reponiendo agua.</string>
-   <string name="recomendacion_27">La dureza esta dentro de control, monitoreala con frecuencia.</string>
-   <!--STD-->
+
+
 
  <string name="recomendacion_"></string>
 

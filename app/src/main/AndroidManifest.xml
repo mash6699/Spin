@@ -159,6 +159,16 @@
                 android:value="mx.spin.mobile.AnalizeSecondStepActivity" />
         </activity>
         <activity
+            android:name="mx.spin.mobile.Mantenimiento"
+            android:label="@string/title_activity_mantenimiento"
+            android:parentActivityName="mx.spin.mobile.AnalizeResultActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mx.spin.mobile.AnalizeResultActivity" />
+        </activity>
+        <activity
             android:name="mx.spin.mobile.MantenimientoActivity"
             android:label="@string/title_activity_mantenimiento"
             android:parentActivityName="mx.spin.mobile.AnalizeResultActivity"

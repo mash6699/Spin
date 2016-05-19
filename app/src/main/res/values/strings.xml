@@ -270,6 +270,12 @@
     <string name="lbl_conideal_cya">0 ppm</string>
     <!--   DESINFECCION-->
 
+    <string name="lbl_ajuste_uno">PRIMER AJUSTE</string>
+    <string name="lbl_ajuste_segundo">SEGUNDO AJUSTE</string>
+    <string name="lbl_ajuste_tercero">TERCER AJUSTE</string>
+    <string name="lbl_ajuste_cuarto">CUARTO AJUSTE</string>
+
+
 
     <string name="facebook_app_id">1689859307920046</string>
     <string name="maps_apy_key">AIzaSyBmZ7ue7T23S6luSX4H1qE04OirWdR9I3Q</string>

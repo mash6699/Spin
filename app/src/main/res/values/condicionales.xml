@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="dureza_cond_40">Cuidado: La <b>DUREZA</b> esta por debajo del ideal</string>
+    <string name="dureza_cond_41">Excelente: tu <b>DUREZA</b> esta balanceada</string>
+    <string name="dureza_cond_42">ALERTA: Debes disminuir la <b>DUREZA</b>.</string>
+
+
+    <string name="std_cond_43">Cuidado: El STD esta por debajo del ideal.</string>
+    <string name="std_cond_44">La dureza esta dentro del control.</string>
+
+
+</resources>
