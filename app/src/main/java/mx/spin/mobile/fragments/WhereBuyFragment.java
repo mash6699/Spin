@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -16,9 +15,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,28 +25,18 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResult;
-import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import butterknife.OnClick;
-import mx.spin.mobile.DrawerActivity;
 
 import mx.spin.mobile.entitys.Tienda;
 import mx.spin.mobile.network.NetConnection;
-import mx.spin.mobile.utils.GeoLocalization;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 
 import org.json.JSONArray;
@@ -60,7 +47,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -77,21 +63,19 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
     private UtilViews utilViews;
 
     private GoogleMap map;
-    private GeoLocalization geoLocalization;
     private LocationManager mLocManager;
     private Location mLastLocation;
+    private GoogleApiClient mGoogleApiClient;
 
     private ArrayList<LatLng> listadoTiendas = new ArrayList<>();
 
     private Boolean locationEnabled = false;
-
     private LatLng latLngSeleccionado = null;
-    // The minimum distance to change Updates in meters
+
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 100; // 5 meters
     // The minimum time between updates in milliseconds
     private static final long MIN_TIME_BW_UPDATES = 1000 * 5; // 5 Segundos
 
-    private GoogleApiClient mGoogleApiClient;
 
     @Nullable
     @Bind(R.id.dealderContent)
@@ -132,11 +116,12 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
                              Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_where_buy, container, false);
-        ButterKnife.bind(this,rootView);
+        ButterKnife.bind(this, rootView);
 
         utilViews = new UtilViews().getInstance(getContext());
 
         map = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map)).getMap();
+
 
         //TODO SET FONTS
         dealderName.setTypeface(utilViews.setFontRegular());
@@ -390,7 +375,8 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
                             map.addMarker(new MarkerOptions()
                                     .title(tienda.getNombre())
                                     .snippet(tienda.getDireccion())
-                                    .position(latLng1));
+                                    .position(latLng1)
+                                    .draggable(true));
                                    // .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
                         }
                     }

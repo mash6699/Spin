@@ -515,7 +515,7 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
         //TODO figura seleccionada
         piscina.setPool_form(String.valueOf(typePool));
 
-        piscina.setPool_rotation(rotacionValue);
+        piscina.setPool_rotation(String.valueOf(tiempoRotacion));//rotationValue
 
         //TODO EQUIPOS
         if(!misEquipos.toString().isEmpty()){
