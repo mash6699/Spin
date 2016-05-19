@@ -1,11 +1,9 @@
 package mx.spin.mobile.entitys;
 
-import io.realm.RealmObject;
-
 /**
  * Created by robe on 23/02/16.
  */
-public class InfoAnalisisPDF extends RealmObject{
+public class InfoAnalisisPDF {
     private String nombre;
 
     public InfoAnalisisPDF() {

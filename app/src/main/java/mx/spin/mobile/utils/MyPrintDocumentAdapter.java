@@ -1,3 +1,4 @@
+/*
 package mx.spin.mobile.utils;
 
 import android.content.Context;
@@ -25,12 +26,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
-import io.realm.Realm;
-import io.realm.RealmResults;
 
+
+*/
 /**
  * Created by robe on 20/02/16.
- */
+ *//*
+
 public class MyPrintDocumentAdapter extends PrintDocumentAdapter
 {
     Context context;
@@ -197,4 +199,4 @@ public class MyPrintDocumentAdapter extends PrintDocumentAdapter
     public void setListadoMantenimiento(ArrayList<ItemMantenimiento> listadoMantenimiento) {
         this.listadoMantenimiento = listadoMantenimiento;
     }
-}
+}*/

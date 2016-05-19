@@ -2,7 +2,6 @@ package mx.spin.mobile.entitys.pojo;
 
 import java.io.Serializable;
 
-import mx.spin.mobile.entitys.Usuario;
 import mx.spin.mobile.utils.constants.Constants;
 
 /**

@@ -11,15 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import butterknife.OnClick;
-import mx.spin.mobile.common.SpinBusinnes;
-import mx.spin.mobile.entitys.Usuario;
 import mx.spin.mobile.network.NetConnection;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 
@@ -30,13 +27,13 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 import de.hdodenhof.circleimageview.CircleImageView;
-import io.realm.Realm;
+
 
 public class EditProfileActivity extends AppCompatActivity {
 
     private static String TAG = EditProfileActivity.class.getName();
-    private SpinBusinnes spinBusinnes;
-    private Usuario usuario;
+    /*private SpinBusinnes spinBusinnes;
+    private Usuario usuario;*/
 
     @Nullable
     @Bind(R.id.toolbar)
@@ -68,8 +65,8 @@ public class EditProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
         ButterKnife.bind(this);
 
-        spinBusinnes = new SpinBusinnes();
-        usuario = spinBusinnes.loadUser();
+      /*  spinBusinnes = new SpinBusinnes();
+        usuario = spinBusinnes.loadUser();*/
 
         txt_titleToolbar.setText(R.string.title_edit_profile);
 
@@ -91,13 +88,13 @@ public class EditProfileActivity extends AppCompatActivity {
     void setUsuarioInView(){
        try {
            Log.d(TAG, "setUsuarioInView" );
-           if (usuario != null) {
+         /*  if (usuario != null) {
                nombre.setText(usuario.getNombre());
                telefono.setText(usuario.getTelefono());
                if (!usuario.getPhoto().equals("")){
                    imgProfileUser.setImageURI(Uri.parse(usuario.getPhoto()));
                }
-           }
+           }*/
        }catch (Exception e){
            Log.e(TAG, e.getMessage());
        }
@@ -108,7 +105,7 @@ public class EditProfileActivity extends AppCompatActivity {
     @OnClick(R.id.btn_guardar)
     public void actualizarUsuario(View view){
         Log.d(TAG, "actualizarUsuario");
-        Realm realm = Realm.getInstance(EditProfileActivity.this);
+     /*   Realm realm = Realm.getInstance(EditProfileActivity.this);
         realm.beginTransaction();
         Usuario usuario = realm.where(Usuario.class).findFirst();
         usuario.setNombre(nombre.getText().toString());
@@ -117,7 +114,7 @@ public class EditProfileActivity extends AppCompatActivity {
         }
         usuario.setTelefono(telefono.getText().toString());
         realm.commitTransaction();
-        editarUsuario(usuario.getId(),nombre.getText().toString(), telefono.getText().toString());
+        editarUsuario(usuario.getId(),nombre.getText().toString(), telefono.getText().toString());*/
     }
 
 
@@ -176,8 +173,8 @@ public class EditProfileActivity extends AppCompatActivity {
                     if (jsonObject.optBoolean("success")) {
                         JSONObject sesion = jsonObject.optJSONObject("session");
                         Log.d("RegisterOK", responseString);
-                        Realm realm = Realm.getInstance(EditProfileActivity.this);
-                        realm.beginTransaction();
+                       /* Realm realm = Realm.getInstance(EditProfileActivity.this);
+                        realm.beginTransaction();*/
 //                        ListaPiscinas user = realm.createObject(ListaPiscinas.class);
 //                        user.setToken(sesion.optString("user_id"));
 //                        user.setNombre(sesion.optString("name"));
@@ -186,7 +183,7 @@ public class EditProfileActivity extends AppCompatActivity {
 //                        user.setContrasena(contrasena);
 //                        user.setPhoto(selectedImagePath);
 //                        user.setFotoFile(Utils.convertBitmapToBytes(imageFile));
-                        realm.commitTransaction();
+                     //   realm.commitTransaction();
                         startActivity(new Intent(EditProfileActivity.this, DrawerActivity.class));
                         finish();
                     } else {

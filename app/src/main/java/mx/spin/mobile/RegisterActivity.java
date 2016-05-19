@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import mx.spin.mobile.common.SpinBusinnes;
 import mx.spin.mobile.connection.BoussinesSpin;
 import mx.spin.mobile.dao.User;
 import mx.spin.mobile.entitys.Estado;
@@ -188,8 +187,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                SpinBusinnes spinBusinnes = new SpinBusinnes().getInstance(getApplicationContext());
-                spinBusinnes.cleanUser();
+
 
                 //cleanUser();
 //                if (imageFile != null){

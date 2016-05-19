@@ -2,9 +2,9 @@ package mx.spin.mobile.entitys;
 
 import org.json.JSONObject;
 
-import io.realm.RealmObject;
 
-public class Pais extends RealmObject {
+
+public class Pais {
     private int pk;
     private String nombre;
     private String codigo;

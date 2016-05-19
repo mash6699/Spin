@@ -6,12 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 
-import mx.spin.mobile.common.SpinBusinnes;
 import mx.spin.mobile.connection.BoussinesSpin;
 import mx.spin.mobile.dao.User;
-import mx.spin.mobile.entitys.Usuario;
 
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 

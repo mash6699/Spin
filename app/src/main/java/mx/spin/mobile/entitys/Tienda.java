@@ -1,10 +1,9 @@
 package mx.spin.mobile.entitys;
 
-import org.json.JSONObject;
 
-import io.realm.RealmObject;
+import java.io.Serializable;
 
-public class Tienda extends RealmObject {
+public class Tienda implements Serializable {
 
     private int pk;
     private String nombre;
@@ -20,16 +19,7 @@ public class Tienda extends RealmObject {
     private String venta;
     private double distancia;
 
-/*    public Tienda(JSONObject jsonObject) {
-        this.pk = jsonObject.optInt("dealer_id");
-        this.nombre = jsonObject.optString("dealer");
-        this.direccion = jsonObject.optString("dealer_address");
-        this.email = jsonObject.optString("dealer_email");
-        this.telefono = jsonObject.optString("dealer_phone");
-    }*/
-
-/*    public Tienda() {
-    }*/
+    public Tienda(){}
 
 
     public int getPk() {

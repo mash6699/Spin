@@ -43,6 +43,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import butterknife.OnClick;
 import mx.spin.mobile.DrawerActivity;
 
 import mx.spin.mobile.entitys.Tienda;
@@ -63,7 +65,6 @@ import java.util.concurrent.ExecutionException;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
-import io.realm.Realm;
 import mx.spin.mobile.R;
 import mx.spin.mobile.utils.UtilViews;
 import mx.spin.mobile.utils.constants.Constants;
@@ -82,8 +83,6 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
 
     private ArrayList<LatLng> listadoTiendas = new ArrayList<>();
 
-    private Button btnComollegar;
-
     private Boolean locationEnabled = false;
 
     private LatLng latLngSeleccionado = null;
@@ -93,28 +92,38 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
     private static final long MIN_TIME_BW_UPDATES = 1000 * 5; // 5 Segundos
 
     private GoogleApiClient mGoogleApiClient;
-    /* @Nullable
-     @Bind(R.id.infoMarcador)*/
-    TextView infoTienda;
 
+    @Nullable
+    @Bind(R.id.dealderContent)
+    View dealderContent;
+
+    @Nullable
+    @Bind(R.id.tv_dealderName)
     TextView dealderName;
+    @Nullable
+    @Bind(R.id.tv_dealderAddress)
     TextView dealderAddress;
+    @Nullable
+    @Bind(R.id.tv_dealderCity)
     TextView dealderCity;
+    @Nullable
+    @Bind(R.id.tv_dealderPhone)
     TextView dealderPhone;
+    @Nullable
+    @Bind(R.id.tv_dealderEmail)
     TextView dealderEmail;
-    /* @Nullable
-     @Bind(R.id.btnComollegar)*/
-    Button getBtnComollegar;
-    /* @Nullable
-     @Bind(R.id.btnSendEmail)*/
+
+    @Nullable
+    @Bind(R.id.btnComollegar)
+    Button btnComollegar;
+    @Nullable
+    @Bind(R.id.btnSendEmail)
     Button btnSendEmail;
 
     String email;
     List<Tienda> tiendaList = new ArrayList<>();
 
     private Integer REQUEST_CHECK_SETTINGS = 0;
-
-    View dealderContent;
 
     private View rootView;
 
@@ -129,17 +138,7 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
 
         map = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map)).getMap();
 
-        btnComollegar   = (Button) rootView.findViewById(R.id.btnComollegar);
-        btnSendEmail    = (Button) rootView.findViewById(R.id.btnSendEmail);
-        infoTienda      = (TextView) rootView.findViewById(R.id.infoMarcador);
-
-        dealderContent  = rootView.findViewById(R.id.dealderContent);
-        dealderName     = (TextView) rootView.findViewById(R.id.tv_dealderName);
-        dealderAddress  = (TextView) rootView.findViewById(R.id.tv_dealderAddress);
-        dealderCity     = (TextView) rootView.findViewById(R.id.tv_dealderCity);
-        dealderPhone    = (TextView) rootView.findViewById(R.id.tv_dealderPhone);
-        dealderEmail    = (TextView) rootView.findViewById(R.id.tv_dealderEmail);
-
+        //TODO SET FONTS
         dealderName.setTypeface(utilViews.setFontRegular());
         dealderAddress.setTypeface(utilViews.setFontNormal());
         dealderCity.setTypeface(utilViews.setFontNormal());
@@ -157,25 +156,6 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
                     .build();
         }
 
-        btnComollegar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (latLngSeleccionado == null) {
-                    Toast.makeText(getActivity(), "Debe seleccionar una tienda en el mapa antes de comenzar el recorrido", Toast.LENGTH_SHORT).show();
-                } else {
-                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                            Uri.parse(Constants.MAPS_URL + latLngSeleccionado.latitude + "," + latLngSeleccionado.longitude + ""));
-                    startActivity(intent);
-                }
-            }
-        });
-
-        btnSendEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-              sendEmail();
-            }
-        });
 
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -195,6 +175,22 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
         return rootView;
     }
 
+    @OnClick(R.id.btnSendEmail)
+    public void sendMail(View view){
+        sendEmail();
+    }
+
+    @OnClick(R.id.btnComollegar)
+    public void getInfo(View view){
+        if (latLngSeleccionado == null) {
+            Toast.makeText(getActivity(), "Debe seleccionar una tienda en el mapa antes de comenzar el recorrido", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                    Uri.parse(Constants.MAPS_URL + latLngSeleccionado.latitude + "," + latLngSeleccionado.longitude + ""));
+            startActivity(intent);
+        }
+    }
+
 
     void sendEmail(){
         try {
@@ -212,7 +208,7 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
 
                 startActivity(Intent.createChooser(email, "Enviar email"));
                 //Log.i(TAG, "finish");
-              //  inish();
+                //  inish();
             }
         }
         catch (android.content.ActivityNotFoundException ex) {
@@ -223,24 +219,24 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
 
     void setDealderInfo(String name){
         Tienda datosTienda = getInfoTienda(name);
-      try{
-          if(datosTienda != null ){
-              dealderContent.setVisibility(View.VISIBLE);
-              dealderName.setText(" " + datosTienda.getNombre());
-              dealderAddress.setText(" " + datosTienda.getDireccion());
-              dealderCity.setText(" " + datosTienda.getCiudad());
-              dealderPhone.setText(" " + datosTienda.getTelefono());
-              dealderEmail.setText(" " + datosTienda.getEmail());
-              email = datosTienda.getEmail();
-          }else{
-              email = null;
-              ocultaDatos();
-          }
-      }catch (Exception ex){
-          Log.e(TAG,ex.getMessage());
-          email = null;
-          ocultaDatos();
-      }
+        try{
+            if(datosTienda != null ){
+                dealderContent.setVisibility(View.VISIBLE);
+                dealderName.setText(" " + datosTienda.getNombre());
+                dealderAddress.setText(" " + datosTienda.getDireccion());
+                dealderCity.setText(" " + datosTienda.getCiudad());
+                dealderPhone.setText(" " + datosTienda.getTelefono());
+                dealderEmail.setText(" " + datosTienda.getEmail());
+                email = datosTienda.getEmail();
+            }else{
+                email = null;
+                ocultaDatos();
+            }
+        }catch (Exception ex){
+            Log.e(TAG,ex.getMessage());
+            email = null;
+            ocultaDatos();
+        }
 
 
     }
@@ -250,7 +246,7 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
         dealderContent.setVisibility(View.GONE);
     }
 
-   protected Tienda getInfoTienda(String name){
+    protected Tienda getInfoTienda(String name){
         Tienda mTienda = new Tienda();
         if(!tiendaList.isEmpty()) {
             Iterator<Tienda> iterator = tiendaList.iterator();
@@ -369,10 +365,11 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
                             LatLng latLng1 = new LatLng(latitude, longitude);
                             listadoTiendas.add(latLng1);
 
-                            Realm realm = Realm.getInstance(getActivity());
+                           /* Realm realm = Realm.getInstance(getActivity());
                             realm.beginTransaction();
+                            Tienda tienda = realm.createObject(Tienda.class);*/
 
-                            Tienda tienda = realm.createObject(Tienda.class);
+                            Tienda tienda = new Tienda();
 
                             tienda.setPk(tiendaJson.optInt(JSKeys.DEALDER_ID));
                             tienda.setNombre(tiendaJson.optString(JSKeys.DEALDER));
@@ -386,15 +383,15 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
                             tienda.setCiudad(tiendaJson.optString(JSKeys.DEALDER_CITY));
                             tienda.setDireccion(tiendaJson.optString(JSKeys.DEALDER_ADDRESS));
 
-                            realm.commitTransaction();
+                           // realm.commitTransaction();
 
                             tiendaList.add(tienda);
 
                             map.addMarker(new MarkerOptions()
                                     .title(tienda.getNombre())
                                     .snippet(tienda.getDireccion())
-                                    .position(latLng1)
-                                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
+                                    .position(latLng1));
+                                   // .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
                         }
                     }
 
@@ -470,7 +467,7 @@ public class WhereBuyFragment extends Fragment implements GoogleApiClient.Connec
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-      //  outState.putSerializable("lista", (Serializable) tiendaList);
+        //  outState.putSerializable("lista", (Serializable) tiendaList);
         super.onSaveInstanceState(outState);
     }
 }

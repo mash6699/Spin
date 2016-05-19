@@ -24,14 +24,13 @@ import mx.spin.mobile.adapters.AdapterMantenimiento;
 import mx.spin.mobile.entitys.InfoAnalisisPDF;
 import mx.spin.mobile.entitys.ItemMantenimiento;
 import mx.spin.mobile.singleton.SpingApplication;
-import mx.spin.mobile.utils.MyPrintDocumentAdapter;
+/*import mx.spin.mobile.utils.MyPrintDocumentAdapter;*/
 
 import java.io.File;
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import io.realm.Realm;
 
 public class MantenimientoActivity extends AppCompatActivity {
 
@@ -94,7 +93,7 @@ public class MantenimientoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //startActivity(new Intent(MantenimientoActivity.this, SendAnalizeActivity.class));
-                Realm realm = Realm.getInstance(MantenimientoActivity.this);
+            /*    Realm realm = Realm.getInstance(MantenimientoActivity.this);
                 realm.beginTransaction();
                 InfoAnalisisPDF doc = realm.where(InfoAnalisisPDF.class).findFirst();
                 realm.commitTransaction();
@@ -105,7 +104,7 @@ public class MantenimientoActivity extends AppCompatActivity {
                 Log.d("EmailAttach", filelocation);
                 emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+filelocation));
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Analisis de piscina");
-                startActivity(Intent.createChooser(emailIntent , "Enviar análisis..."));
+                startActivity(Intent.createChooser(emailIntent , "Enviar análisis..."));*/
             }
         });
 
@@ -122,10 +121,10 @@ public class MantenimientoActivity extends AppCompatActivity {
                 PrintManager printManager = (PrintManager) MantenimientoActivity.this.getSystemService(Context.PRINT_SERVICE);
 
                 String jobName = " Document";
-                MyPrintDocumentAdapter printAdapter = new MyPrintDocumentAdapter(MantenimientoActivity.this);
+            /*    MyPrintDocumentAdapter printAdapter = new MyPrintDocumentAdapter(MantenimientoActivity.this);
                 printAdapter.setTitulo("Nombre de la piscina");
                 printAdapter.setTextoMantenimientoRutinario("Encontramos 1 problema en tu piscina y está \n causando Agua Corrosiva.\nEs necesario aplicar el siguiente \nquímico para que el agua de \ntu piscina esté en balance.");
-                printManager.print(jobName,printAdapter ,null);
+                printManager.print(jobName,printAdapter ,null);*/
 
             }
         });

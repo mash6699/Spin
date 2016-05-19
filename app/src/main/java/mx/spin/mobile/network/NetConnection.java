@@ -8,8 +8,6 @@ import android.net.NetworkInfo;
 
 import mx.spin.mobile.R;
 import mx.spin.mobile.dao.Pool;
-import mx.spin.mobile.dao.User;
-import mx.spin.mobile.entitys.Usuario;
 import mx.spin.mobile.entitys.pojo.UsuarioReg;
 import mx.spin.mobile.utils.constants.Constants;
 

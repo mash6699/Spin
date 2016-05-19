@@ -35,7 +35,6 @@ import mx.spin.mobile.connection.BoussinesSpin;
 import mx.spin.mobile.dao.Equipment;
 import mx.spin.mobile.dao.Pool;
 import mx.spin.mobile.dao.User;
-import mx.spin.mobile.entitys.Usuario;
 import mx.spin.mobile.entitys.pojo.UsuarioReg;
 import mx.spin.mobile.interfaces.FBLoginCompleted;
 import mx.spin.mobile.network.NetConnection;

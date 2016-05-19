@@ -2,9 +2,8 @@ package mx.spin.mobile.entitys;
 
 import org.json.JSONObject;
 
-import io.realm.RealmObject;
 
-public class Estado extends RealmObject {
+public class Estado {
     private int pk;
     private String nombre;
     private String codigo;

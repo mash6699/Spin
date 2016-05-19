@@ -24,11 +24,9 @@ import cz.msebera.android.httpclient.Header;
 import mx.spin.mobile.connection.BoussinesSpin;
 import mx.spin.mobile.dao.Equipment;
 import mx.spin.mobile.dao.Pool;
-import mx.spin.mobile.entitys.Usuario;
 import mx.spin.mobile.model.Volume;
 import mx.spin.mobile.network.NetConnection;
 import mx.spin.mobile.singleton.SpingApplication;
-import mx.spin.mobile.singleton.VolumeSingleton;
 import mx.spin.mobile.utils.CalculateVolume;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 import mx.spin.mobile.utils.constants.Constants;
@@ -41,11 +39,9 @@ import java.util.List;
 
 import android.os.Handler;
 
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.realm.Realm;
 import mx.spin.mobile.utils.constants.JSKeys;
 
 public class AddPoolActivity extends AppCompatActivity  implements CompoundButton.OnCheckedChangeListener {
@@ -61,7 +57,6 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
     private Pool piscina = new Pool();
     private List<Equipment> equipmentList;
 
-    private Usuario usuario;
 
     private final int DEFAULT = 0;
     private String namePool;

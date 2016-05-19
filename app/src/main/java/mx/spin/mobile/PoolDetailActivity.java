@@ -13,13 +13,10 @@ import android.widget.TextView;
 import java.util.Iterator;
 import java.util.List;
 
-import mx.spin.mobile.common.SpinBusinnes;
 import mx.spin.mobile.connection.BoussinesSpin;
 import mx.spin.mobile.dao.Equipment;
 import mx.spin.mobile.dao.Pool;
-import mx.spin.mobile.entitys.Piscina;
 import mx.spin.mobile.singleton.SpingApplication;
-import mx.spin.mobile.utils.CalculateVolume;
 import mx.spin.mobile.utils.UtilViews;
 
 import butterknife.Bind;
