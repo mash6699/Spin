@@ -34,16 +34,14 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="15dp">
 
-
-       <!--     style="@android:style/ThemeOverlay.Material.Dark"-->
-
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Correo electrónico"
                 android:id="@+id/emailUsuarioLogin"
                 android:textColor="@color/white"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:singleLine="true"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -59,17 +57,12 @@
                 android:hint="Contraseña"
                 android:id="@+id/contrasenaUsuarioLogin"
                 android:textColor="@color/white"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:onClick="login"/>
 
         </android.support.design.widget.TextInputLayout>
 
-<!--        <Button
-            style="@style/btn_rounded_white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:id="@+id/btnLogin"
-            android:text="Ingresar" />-->
 
         <android.support.v7.widget.CardView
             android:layout_width="180dp"

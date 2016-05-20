@@ -28,8 +28,9 @@ android {
         applicationId "mx.spin.mobile"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 25
+        versionCode 26
         versionName "1.4"
+        multiDexEnabled true
         signingConfig signingConfigs.release
     }
 
@@ -94,16 +95,16 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:4.+'
     compile "com.google.android.gms:play-services:8.4.0"
     compile "com.google.android.gms:play-services-gcm:8.4.0"
-    compile 'com.google.android.gms:play-services-plus:8.4.0'
+   // compile 'com.google.android.gms:play-services-plus:8.4.0'
     compile 'com.google.android.gms:play-services-auth:8.4.0'
     compile 'com.google.android.gms:play-services-maps:8.4.0'
     compile 'com.google.android.gms:play-services-location:8.4.0'
-    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
+   // compile 'com.google.android.gms:play-services-appindexing:8.4.0'
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.google.android.gms:play-services-ads:8.4.0'
+ //   compile 'com.google.android.gms:play-services-ads:8.4.0'
     compile 'org.greenrobot:greendao:2.2.0'
     compile 'com.google.code.gson:gson:2.6.2'
-    compile 'com.itextpdf:itextg:5.5.9'
+   // compile 'com.itextpdf:itextg:5.5.9'
   /*  compile 'io.realm:realm-android:0.80.3'*/
 }
 

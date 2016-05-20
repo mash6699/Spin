@@ -1,5 +1,6 @@
 package mx.spin.mobile;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -157,6 +159,11 @@ public class VolumeCalculateActivity extends AppCompatActivity implements View.O
         tv_titleToolbar.setText(getResources().getString(R.string.title_volumen));
         systemMetricList = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.systemMetric)));
         sp_systemMetric.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, systemMetricList));
+    }
+
+    void hiddenkb(){
+        InputMethodManager inputMethodManager = (InputMethodManager)  getApplication().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
     }
 
     private void setActions(){
@@ -310,6 +317,7 @@ public class VolumeCalculateActivity extends AppCompatActivity implements View.O
     public void calculateVolume(View view){
         Log.d(TAG,"calculateVolume");
         String message = null;
+        hiddenkb();
         if (poolSelected != 0) {
             if (validateVolumenData()) {
                 calculateVolume();

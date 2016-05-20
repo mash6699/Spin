@@ -1,5 +1,6 @@
 package mx.spin.mobile;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -16,7 +18,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.json.JSONObject;
 
@@ -190,9 +191,12 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
     @Nullable
     @OnClick(R.id.btn_SavePool)
     public void saveMyPool(View view){
-        //savePool();
+        hidenkb();
         if (NetConnection.isOnline(this, true)){
             if(validPoolData()){
+
+                setValuesPool();
+
                 if(idPiscina != 0){
                     updatePool(piscina);
                 }else{
@@ -295,6 +299,7 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                hidenkb();
                 if(position != 0){
                     typeInstall = position;
                     setPoolUseByInstall(position);
@@ -310,6 +315,7 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
         sp_poolType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                hidenkb();
                 if(i!=0){
                     tiempoRotacion = UtilViews.getTiempoRotacion(i, typeInstall);
                     txt_tiempoRotacion.setText("  "+ tiempoRotacion);
@@ -326,7 +332,19 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
         sp_systemMetric.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                hidenkb();
                 setVelocidadFlujo();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        sp_poolCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                hidenkb();
             }
 
             @Override
@@ -492,7 +510,7 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
         if(!message.toString().isEmpty()){
             utilViews.showToastInView(message.toString());
         }
-        setValuesPool();
+
         return estatus;
     }
 
@@ -500,33 +518,44 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
     void setValuesPool(){
         //TODO SET VALUES POOL
         Log.d(TAG, "setValuesPool:::");
+        try{
 
-        piscina.setPool_user_id(Integer.parseInt(spingApplication.getIdUsuario()));
-        piscina.setPool_name(ed_namePool.getText().toString());
+            piscina.setPool_user_id(Integer.parseInt(spingApplication.getIdUsuario()));
+            piscina.setPool_name(ed_namePool.getText().toString());
 
-        piscina.setPool_category(String.valueOf(idTipoPool));
-        piscina.setPool_type(String.valueOf(idTipoSpa));
-        piscina.setPool_use(String.valueOf(idTipoInst));
+            piscina.setPool_category(String.valueOf(idTipoPool));
+            piscina.setPool_type(String.valueOf(idTipoSpa));
+            piscina.setPool_use(String.valueOf(idTipoInst));
 
-        //TODO VOLUMEN
-        piscina.setPool_volume(String.valueOf(Double.parseDouble(ed_volumen.getText().toString())));
-        piscina.setPool_um(String.valueOf(idUm + 1));
+            //TODO VOLUMEN
+            piscina.setPool_volume(String.valueOf(Double.parseDouble(ed_volumen.getText().toString())));
+            piscina.setPool_um(String.valueOf(idUm + 1));
 
-        //TODO figura seleccionada
-        piscina.setPool_form(String.valueOf(typePool));
+            //TODO figura seleccionada
+            piscina.setPool_form(String.valueOf(typePool));
 
-        piscina.setPool_rotation(String.valueOf(tiempoRotacion));//rotationValue
+            piscina.setPool_rotation(String.valueOf(tiempoRotacion));//rotationValue
 
-        //TODO EQUIPOS
-        if(!misEquipos.toString().isEmpty()){
-            Log.d(TAG, "Agregando equipos");
-            int lenghEquipos = misEquipos.length();
-            String mEquipos = misEquipos.toString().substring(0, lenghEquipos -1);
-            piscina.setmEquipos(mEquipos);
-        }else {
-            Log.d(TAG,"no hay equipos");
+            //TODO EQUIPOS
+            if(!misEquipos.toString().isEmpty()){
+                Log.d(TAG, "Agregando equipos");
+                int lenghEquipos = misEquipos.length();
+                String mEquipos = misEquipos.toString().substring(0, lenghEquipos -1);
+                piscina.setmEquipos(mEquipos);
+            }else {
+                Log.d(TAG,"no hay equipos");
+            }
+
+        }catch(Exception ex){
+            Log.e(TAG, ex.getMessage());
         }
     }
+
+    void hidenkb(){
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(ed_namePool.getWindowToken(), 0);
+    }
+
 
     void registerPool(Pool mPool){
         NetConnection.registrarPiscina(mPool, new TextHttpResponseHandlerMessage() {
@@ -574,7 +603,7 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 hideMessage();
                 utilViews.showToastInView(getString(R.string.msg_generic_error));
-        }
+            }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
@@ -623,7 +652,7 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         Log.d(TAG , "onCheckedChanged " + buttonView  + " isChecked:: " + isChecked);
-
+        hidenkb();
         if(buttonView == cb_dosificador){
             if(isChecked){
                 isDos = isChecked;

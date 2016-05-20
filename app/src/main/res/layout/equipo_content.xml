@@ -25,23 +25,21 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/ed_cantidad"
                 android:hint="@string/lbl_cantidad"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number|numberDecimal"
                 android:textColor="@color/white"
-                android:layout_weight="1"/>
+                android:singleLine="true" />
 
             <Spinner
                 android:id="@+id/sp_caballaje"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

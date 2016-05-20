@@ -34,7 +34,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/lbl_nombre_piscina"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white"
+                    android:singleLine="true"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -85,7 +86,9 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/lbl_volumen"
                         android:inputType="number|numberDecimal"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white"
+                        android:singleLine="true"
+                        android:onClick="saveMyPool"/>
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -116,7 +119,7 @@
                         android:id="@+id/btn_calculate"
                         android:layout_gravity="center_horizontal"
                         android:text="@string/lbl_btn_calcular"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:gravity="center"

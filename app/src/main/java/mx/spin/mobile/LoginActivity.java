@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -98,16 +99,12 @@ public class LoginActivity extends AppCompatActivity {
         txt_titleToolbar.setText(R.string.title_login);
         utilViews = new UtilViews().getInstance(getApplication());
         spinUtility = SpinUtility.getInstance();
-
         boussinesSpin = new BoussinesSpin(this);
 
         txt_titleToolbar.setTypeface(utilViews.setFontRegular());
-
         email.setTypeface(utilViews.setFontNormal());
         password.setTypeface(utilViews.setFontNormal());
-
         login.setTypeface(utilViews.setFontRegular());
-
         txt_recuperar.setTypeface(utilViews.setFontRegular());
         txt_registrarme.setTypeface(utilViews.setFontRegular());
 
@@ -182,7 +179,6 @@ public class LoginActivity extends AppCompatActivity {
                                                 System.out.println("set idPool " + e);
                                                 equipo.get(e).setPool_id(idPool);
                                             }
-
                                             Log.d(TAG, "INSERTA MUCHOS EQUIPOS");
                                             boussinesSpin.insertAllEquipment(equipo);
                                         }
@@ -209,9 +205,10 @@ public class LoginActivity extends AppCompatActivity {
 
     @Nullable
     @OnClick(R.id.btnLogin)
-    void login(View view ){
+    public void login(View view ){
         String mail = email.getText().toString().trim();
         String pass = password.getText().toString().trim();
+        hidenkb();
         if (connection()){
             if(TextUtils.isEmpty(mail) || TextUtils.isEmpty(pass)){
                 utilViews.showToastInView(getString(R.string.msg_incomplete_data));
@@ -236,6 +233,11 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.txtQuieroRegistrarme)
     void registrarme(View view){
         startActivity(new Intent(LoginActivity.this, FirstTimeActivity.class));
+    }
+
+    void hidenkb(){
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(password.getWindowToken(), 0);
     }
 
     void gotoDrawer(){
