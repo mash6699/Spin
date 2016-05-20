@@ -78,6 +78,7 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
     private String caballajeVal;
     private StringBuilder misEquipos = new StringBuilder();
     private int typeInstall;
+    private int typeSpa;
     private int idTipoPool;
 
     boolean isDos = false;
@@ -317,6 +318,14 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 hidenkb();
                 if(i!=0){
+                    typeSpa = 0;
+
+                    if(typeInstall == 2){
+                        typeSpa = i;
+                    }else{
+                        typeSpa = i + 2;
+                    }
+
                     tiempoRotacion = UtilViews.getTiempoRotacion(i, typeInstall);
                     txt_tiempoRotacion.setText("  "+ tiempoRotacion);
                     setVelocidadFlujo();
@@ -423,7 +432,6 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
         StringBuilder message = new StringBuilder();
 
         namePool        = ed_namePool.getText().toString().trim();
-        tipoInstValue   = sp_typeInstall.getSelectedItem().toString();
         tipoSpaValue    = sp_poolType.getSelectedItem().toString();
         volumenValue    = ed_volumen.getText().toString().trim();
         idUm            = sp_systemMetric.getSelectedItemPosition();
@@ -534,7 +542,7 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
             //TODO figura seleccionada
             piscina.setPool_form(String.valueOf(typePool));
 
-            piscina.setPool_rotation(String.valueOf(tiempoRotacion));//rotationValue
+            piscina.setPool_rotation(String.valueOf(typeSpa));//rotationValue
 
             //TODO EQUIPOS
             if(!misEquipos.toString().isEmpty()){
