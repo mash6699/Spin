@@ -117,6 +117,8 @@ public class PoolsFragment extends Fragment implements ISpin {
             spingApplication.setIdPiscina(piscina.getPool_id());
             spingApplication.setName(piscina.getPool_name());
             spingApplication.setDate(utilViews.getDatePool());
+            spingApplication.setUm(piscina.getPool_um());
+            spingApplication.setVolumen(piscina.getPool_volume());
             spingApplication.setTipoPiscina(Integer.parseInt(piscina.getPool_category()));
 
             Intent detailIntent = new Intent(getActivity(), PoolDetailActivity.class);

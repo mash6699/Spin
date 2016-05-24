@@ -1,6 +1,7 @@
 package mx.spin.mobile;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -45,6 +46,10 @@ public class AnalizeFirstStepActivity extends AppCompatActivity implements  Adap
     TextView txt_titleToolbar;
 
     @Nullable
+    @Bind(R.id.txt_name)
+    TextView label_name;
+
+    @Nullable
     @Bind(R.id.tv_pool_name)
     TextView pool_name;
     @Nullable
@@ -81,7 +86,6 @@ public class AnalizeFirstStepActivity extends AppCompatActivity implements  Adap
     @Bind(R.id.sp_std)
     Spinner sp_std;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,9 +98,21 @@ public class AnalizeFirstStepActivity extends AppCompatActivity implements  Adap
         pool_name.setText(spingApplication.getName());
         pool_date.setText(spingApplication.getDate());
 
+        setFonts();
         loadSpinners();
         setListeners();
         setAppValues();
+    }
+
+    void setFonts(){
+        label_name.setTypeface(utilViews.setFontRegular());
+        pool_name.setTypeface(utilViews.setFontNormal());
+        pool_date.setTypeface(utilViews.setFontNormal());
+
+
+
+        indice_saturacion.setTypeface(utilViews.setFontNormal());
+        calidad_agua.setTypeface(utilViews.setFontNormal());
     }
 
     void loadSpinners() {
@@ -157,7 +173,9 @@ public class AnalizeFirstStepActivity extends AppCompatActivity implements  Adap
                 sp_temp.setSelection(spingApplication.getFsp_14());
                 sp_std.setSelection(spingApplication.getFsp_15());
                 indice_saturacion.setText(spingApplication.getFs_16());
-                calidad_agua.setText(spingApplication.getFs_17());
+                String texts = spingApplication.getFs_17();
+                calidad_agua.setText(texts);
+                changeColorCalidad(texts);
             }else{
                 defaultValues();
             }
@@ -268,12 +286,23 @@ public class AnalizeFirstStepActivity extends AppCompatActivity implements  Adap
         if(ph!= 0d && alcalinidad != 0d && dureza !=0d && std != 0d ){
             double indice = utilViews.calculateIS(ph, std, temp, alcalinidad, dureza);
             is = String.format(Constants.THREE_DECIMAL, indice);
-            calidad = utilViews.getCalidadAgua(indice);
             indice_saturacion.setText(" " + is);
+
+            calidad = utilViews.getCalidadAgua(indice);
             calidad_agua.setText(calidad);
+            changeColorCalidad(calidad);
             spingApplication.setFs_16(is);
             setDataInApp();
         }
+    }
+
+    void changeColorCalidad(String texts){
+        if(texts.equals(getString(R.string.lbl_riesgo_agua_incrustante)) || texts.equals(getString(R.string.lbl_riesgo_Agua_corrosiva))){
+            calidad_agua.setTextColor(Color.RED);
+        }else {
+            calidad_agua.setTextColor(Color.GREEN);
+        }
+
     }
 
     void setDataInApp(){

@@ -294,8 +294,10 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:text="Agua en Balance"
-                android:textColor="@color/bluetextligth"
                 android:textSize="18sp" />
+
+
+          <!--  android:textColor="@color/bluetextligth"-->
 
             <android.support.v7.widget.CardView
                 android:layout_gravity="center_horizontal"

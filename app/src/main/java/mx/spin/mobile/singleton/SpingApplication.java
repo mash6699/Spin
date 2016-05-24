@@ -14,6 +14,9 @@ public class SpingApplication extends Application{
     private String name;
     private String date;
     private int tipoPiscina;
+    private String instalacion;
+    private String volumen;
+    private String um;
 
     private String fs_11;
     private int fsp_11;
@@ -74,6 +77,10 @@ public class SpingApplication extends Application{
         this.setSsp_25(0);
         this.setSsp_26(0);
         this.setSsp_27(0);
+
+        this.setUm(null);
+        this.setVolumen(null);
+        this.setInstalacion(null);
     }
 
 
@@ -323,5 +330,29 @@ public class SpingApplication extends Application{
 
     public void setSsp_27(int ssp_27) {
         this.ssp_27 = ssp_27;
+    }
+
+    public String getInstalacion() {
+        return instalacion;
+    }
+
+    public void setInstalacion(String instalacion) {
+        this.instalacion = instalacion;
+    }
+
+    public String getVolumen() {
+        return volumen;
+    }
+
+    public void setVolumen(String volumen) {
+        this.volumen = volumen;
+    }
+
+    public String getUm() {
+        return um;
+    }
+
+    public void setUm(String um) {
+        this.um = um;
     }
 }

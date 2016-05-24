@@ -17,6 +17,7 @@ import mx.spin.mobile.connection.BoussinesSpin;
 import mx.spin.mobile.dao.Equipment;
 import mx.spin.mobile.dao.Pool;
 import mx.spin.mobile.singleton.SpingApplication;
+import mx.spin.mobile.utils.CalculateVolume;
 import mx.spin.mobile.utils.UtilViews;
 
 import butterknife.Bind;
@@ -125,9 +126,16 @@ public class PoolDetailActivity extends AppCompatActivity {
         equipmentList = boussinesSpin.getMyEquipment(piscina.getPool_id());
 
         double volumen = Double.parseDouble(piscina.getPool_volume());
-        //    double rotacion = Double.parseDouble(piscina.getPool_rotation());
+        double tiempoRotacion = utilViews.getTiempoRotacion(Integer.parseInt(piscina.getPool_rotation()));
         int um = Integer.parseInt(piscina.getPool_um());
+        String velFlujo = CalculateVolume.getVelocidadFlujo(volumen, tiempoRotacion, um);
+
         spingApplication.resetAllValues();
+
+        spingApplication.setInstalacion(piscina.getPool_category());
+        spingApplication.setVolumen(piscina.getPool_volume());
+        spingApplication.setUm(piscina.getPool_um());
+
         txt_titleToolbar.setText(R.string.title_activity_pool_detail);
         txt_nombre.setText(piscina.getPool_name());
         txt_instalacion.setText(piscina.getPool_category().equals("1")? "Abierta" : "Techada");
@@ -135,7 +143,8 @@ public class PoolDetailActivity extends AppCompatActivity {
         txt_tipo_spa.setText(utilViews.getTipoSpa(Integer.parseInt(piscina.getPool_use()), Integer.parseInt(piscina.getPool_type())));
         txt_volumen.setText("" +piscina.getPool_volume());// + " " + utilViews.getUnidadMedida(piscina.getUm())
         txt_um.setText(utilViews.getUnidadMedida(um));
-
+        txt_tiempoRotacion.setText(""+tiempoRotacion);
+        txt_velociddadFlujo.setText(velFlujo);
 
         txt_nombre.setTypeface(utilViews.setFontNormal());
         txt_instalacion.setTypeface(utilViews.setFontNormal());
@@ -143,10 +152,8 @@ public class PoolDetailActivity extends AppCompatActivity {
         txt_tipo_spa.setTypeface(utilViews.setFontNormal());
         txt_volumen.setTypeface(utilViews.setFontNormal());
         txt_um.setTypeface(utilViews.setFontNormal());
-
         txt_tiempoRotacion.setTypeface(utilViews.setFontNormal());
         txt_velociddadFlujo.setTypeface(utilViews.setFontNormal());
-
         txt_dosi.setTypeface(utilViews.setFontNormal());
         txt_dosi_val.setTypeface(utilViews.setFontNormal());
         txt_cale.setTypeface(utilViews.setFontNormal());
@@ -164,7 +171,6 @@ public class PoolDetailActivity extends AppCompatActivity {
                 parseEquipo(equipment);
             }
         }
-
     }
 
     private void parseEquipo(Equipment equipment) {

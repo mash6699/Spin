@@ -6,11 +6,15 @@
     style="@style/AppTheme"
     tools:context="mx.spin.mobile.fragments.AnalizeFragment">
 
-    <!--<include
-        android:id="@+id/include_toolbar"
-        layout="@layout/custom_toolbar"
+    <ListView
+        android:id="@+id/listPools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />-->
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header"
+        android:layout_marginTop="5dp"
+        tools:listitem="@layout/analysis_pools">
+
+    </ListView>
 
 
 </RelativeLayout>

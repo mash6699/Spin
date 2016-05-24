@@ -26,7 +26,7 @@ public class UtilViews {
     private static final String TAG = UtilViews.class.getName();
     private static Context mContext;
     private static UtilViews INSTANCE = new UtilViews();
-    private static float LIMITE_AGUA = 0.3f;
+    public static float LIMITE_AGUA = 0.3f;
 
     public UtilViews(){
     }
@@ -252,6 +252,32 @@ public class UtilViews {
         System.out.println("getTiempoRotacion itemPos [ " + position+" ] type: " + type);
         double value = 0d;
         switch (nPosition){
+            case 1:
+                value = 0.5d;
+                break;
+            case 2:
+                value = 3d;
+                break;
+            case 5:
+                value = 0.5d;
+                break;
+            case 6:
+                value = 2d;
+                break;
+            case 7:
+                value = 4d;
+                break;
+            default:
+                value = 6d;
+                break;
+        }
+        System.out.println("Horas: " + value);
+        return value;
+    }
+
+    public static double getTiempoRotacion (int position){
+           double value = 0d;
+        switch (position){
             case 1:
                 value = 0.5d;
                 break;

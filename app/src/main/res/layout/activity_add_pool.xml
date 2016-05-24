@@ -87,8 +87,7 @@
                         android:hint="@string/lbl_volumen"
                         android:inputType="number|numberDecimal"
                         android:textColor="@color/white"
-                        android:singleLine="true"
-                        android:onClick="saveMyPool"/>
+                        android:singleLine="true"/>
 
                 </android.support.design.widget.TextInputLayout>
 

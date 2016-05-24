@@ -32,7 +32,7 @@ public class Mantenimiento extends AppCompatActivity {
     private static String TAG = Mantenimiento.class.getName();
     private static SpingApplication spingApplication = SpingApplication.getInstance();
     private BoussinesSpin boussinesSpin;
-    private Pool piscina;
+    //  private Pool piscina;
 
     private ViewPager mViewPager;
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -82,7 +82,7 @@ public class Mantenimiento extends AppCompatActivity {
         pool_date.setText(" " +spingApplication.getDate());
 
         int idPiscina = spingApplication.getIdPiscina();
-        piscina = boussinesSpin.getPool(idPiscina);
+        //   piscina = boussinesSpin.getPool(idPiscina);
 
         setValues();
 
@@ -96,31 +96,32 @@ public class Mantenimiento extends AppCompatActivity {
 
     void setValues(){
         try{
-            if(piscina != null){
-                Log.d(TAG, "setValues");
+            Log.d(TAG, "setValues");
 
-                volumen     = Double.parseDouble(piscina.getPool_volume());
-                um          = Integer.parseInt(piscina.getPool_um());
+            volumen     = Double.parseDouble(spingApplication.getVolumen());
+            um          = Integer.parseInt(spingApplication.getUm());
 
-                ph           = Double.parseDouble(spingApplication.getFs_11());
-                alcalinidad  = Double.parseDouble(spingApplication.getFs_12());
+            ph           = Double.parseDouble(spingApplication.getFs_11());
+            alcalinidad  = Double.parseDouble(spingApplication.getFs_12());
 
-                dureza      = Double.parseDouble(spingApplication.getFs_13());
-                std         = Double.parseDouble(spingApplication.getFs_15());
+            dureza      = Double.parseDouble(spingApplication.getFs_13());
+            std         = Double.parseDouble(spingApplication.getFs_15());
+            cya         = Double.parseDouble(spingApplication.getSs_26());
 
-                cya         = Double.parseDouble(spingApplication.getSs_26());
+            turbidez    = Double.parseDouble(spingApplication.getSs_24());
+            metales     = spingApplication.getSs_25();
 
+            instalacion = Integer.parseInt(spingApplication.getInstalacion());
+
+            //TECHADA = 1
+            if(instalacion == Constants.PISCINA_TECHADA){
+                bromo         = Double.parseDouble(spingApplication.getSs_27());
+            }else{
                 cloroLibre    = Double.parseDouble(spingApplication.getSs_22());
                 cloraminas    = Double.parseDouble(spingApplication.getSs_23());
-                bromo         = Double.parseDouble(spingApplication.getSs_27());
-
-                turbidez    = Double.parseDouble(spingApplication.getSs_24());
-                metales     = spingApplication.getSs_25();
-
-                //ABIERTA = 1
-                instalacion = Integer.parseInt(piscina.getPool_category());
-
             }
+
+            //     }
         }catch (Exception ex){
             Log.e(TAG, ex.getMessage());
         }
@@ -154,13 +155,13 @@ public class Mantenimiento extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "PRIMER AJUSTE";
+                    return getResources().getString(R.string.lbl_ajuste_primero);
                 case 1:
-                    return "SEGUNDO AJUSTE";
+                    return getResources().getString(R.string.lbl_ajuste_segundo);
                 case 2:
-                    return "TERCER AJUSTE";
+                    return getResources().getString(R.string.lbl_ajuste_tercero);
                 case 3:
-                    return  "CUARTO AJUSTE";
+                    return getResources().getString(R.string.lbl_ajuste_cuarto);
             }
             return null;
         }
@@ -203,7 +204,6 @@ public class Mantenimiento extends AppCompatActivity {
         @Nullable
         @Bind(R.id.txt_std_rec)
         TextView std_rec;
-
 
 
         public PlaceholderFragment() {
@@ -261,7 +261,7 @@ public class Mantenimiento extends AppCompatActivity {
 
 
         //TODO CUARTO AJUSTE
-       protected void durezaCondicional(){
+        protected void durezaCondicional(){
             try{
                 Log.d(TAG ,"durezaFA val [" + dureza + " ]" );
                 if(dureza < 150d){
@@ -282,13 +282,13 @@ public class Mantenimiento extends AppCompatActivity {
         }
 
         protected void stdCondicional(){
-          if(std >= 2500d){
-              std_con.setText(getString(R.string.std_cond_43));
-              std_rec.setText(getString(R.string.std_rec_43));
-          }else if( std < 2500d){
-              std_con.setText(getString(R.string.std_cond_44));
-              std_rec.setText(getString(R.string.std_rec_44));
-          }
+            if(std >= 2500d){
+                std_con.setText(getString(R.string.std_cond_43));
+                std_rec.setText(getString(R.string.std_rec_43));
+            }else if( std < 2500d){
+                std_con.setText(getString(R.string.std_cond_44));
+                std_rec.setText(getString(R.string.std_rec_44));
+            }
         }
 
 
@@ -300,9 +300,9 @@ public class Mantenimiento extends AppCompatActivity {
             double calDure = ((150 - dureza) / 10);
 
             if(um == 1){
-                 dosificacion = calcM3 * calDure;
+                dosificacion = calcM3 * calDure;
             }else{
-                 dosificacion = (calcM3 * calDure) / 28.35;
+                dosificacion = (calcM3 * calDure) / 28.35;
             }
 
             Log.d(TAG, "UM [ "+ um +" ] calcDosificacion = " + dosificacion);
@@ -317,7 +317,7 @@ public class Mantenimiento extends AppCompatActivity {
                 turb = (((240 * volumen) / 10) / 1000);
             }else {
                 turb = (((50 * volumen)/ 10) / 1000);
-               // '= ((50 * "Volumen en metros cubicos"  ) /  10  )    /      1000 )
+                // '= ((50 * "Volumen en metros cubicos"  ) /  10  )    /      1000 )
             }
 
             if(um == 2){

@@ -270,7 +270,7 @@
     <string name="lbl_conideal_cya">0 ppm</string>
     <!--   DESINFECCION-->
 
-    <string name="lbl_ajuste_uno">PRIMER AJUSTE</string>
+    <string name="lbl_ajuste_primero">PRIMER AJUSTE</string>
     <string name="lbl_ajuste_segundo">SEGUNDO AJUSTE</string>
     <string name="lbl_ajuste_tercero">TERCER AJUSTE</string>
     <string name="lbl_ajuste_cuarto">CUARTO AJUSTE</string>

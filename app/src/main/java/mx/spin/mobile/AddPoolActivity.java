@@ -350,6 +350,7 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
 
             }
         });
+
         sp_poolCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
