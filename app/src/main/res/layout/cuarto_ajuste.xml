@@ -2,7 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:id="@+id/iv_dureza"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/cristalingreencincokg" />
 
     <TextView
         android:id="@+id/txt_dureza"
@@ -35,6 +44,16 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:text="valor recomendacion"/>
+
+
+
+    <ImageView
+        android:id="@+id/iv_std"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/alcalosdiezkg" />
 
     <TextView
         android:id="@+id/txt_std"

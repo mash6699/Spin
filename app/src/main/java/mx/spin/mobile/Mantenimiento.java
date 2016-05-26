@@ -1,16 +1,24 @@
 package mx.spin.mobile;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.PermissionChecker;
+import android.support.v4.os.EnvironmentCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -36,32 +44,28 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Section;
+import com.itextpdf.text.pdf.PdfImportedPage;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
 
-
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
-
-import android.os.Environment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import mx.spin.mobile.connection.BoussinesSpin;
-import mx.spin.mobile.dao.Pool;
 import mx.spin.mobile.singleton.SpingApplication;
 import mx.spin.mobile.utils.constants.Constants;
 
@@ -73,6 +77,7 @@ public class Mantenimiento extends AppCompatActivity {
     private static String TAG = Mantenimiento.class.getName();
     private static SpingApplication spingApplication = SpingApplication.getInstance();
     private BoussinesSpin boussinesSpin;
+    private static final int MY_PERMISSIONS_REQUEST_STORAGE = 123456;
     //  private Pool piscina;
 
     private ViewPager mViewPager;
@@ -108,11 +113,10 @@ public class Mantenimiento extends AppCompatActivity {
     TextView pool_date;
 
 
-
-    private static final String FILE_FOLDER = "Skholingua";
+    private static final String FILE_FOLDER = "SpinPDF";
     private static File file;
-    private static final String filepath = Environment.getExternalStorageDirectory().getPath();
-  //  private EditText _pdfBodyEDT;
+    private static final String FILE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath();
+    //  private EditText _pdfBodyEDT;
     private boolean isPDFFromHTML = false;
 
 
@@ -131,6 +135,47 @@ public class Mantenimiento extends AppCompatActivity {
 
         int idPiscina = spingApplication.getIdPiscina();
         //   piscina = boussinesSpin.getPool(idPiscina);
+
+
+        FloatingActionButton fabSave = (FloatingActionButton) findViewById(R.id.guardar);
+        fabSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Generar y visualizar el PDF", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+             //   if (Build.VERSION.SDK_INT >= 23) {
+                if (ContextCompat.checkSelfPermission(Mantenimiento.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(Mantenimiento.this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_STORAGE);
+                }
+
+          /*  }else{
+                    createPdf();
+                }*/
+
+
+        createPdf();
+            }
+        });
+
+        FloatingActionButton fabSend = (FloatingActionButton) findViewById(R.id.enviar);
+        fabSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Se enviara el pdf en un email", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+            }
+        });
+
+        FloatingActionButton fabFind = (FloatingActionButton) findViewById(R.id.buscar);
+        fabFind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Mantenimiento.this, DrawerActivity.class).putExtra("showFragment", 2));
+
+            }
+        });
+
 
         setValues();
 
@@ -216,8 +261,8 @@ public class Mantenimiento extends AppCompatActivity {
     }
 
     public static class PlaceholderFragment extends Fragment {
-        private static final String ARG_SECTION_NUMBER = "section_number";
 
+        private static final String ARG_SECTION_NUMBER = "section_number";
         private View rootView;
 
         @Nullable
@@ -238,7 +283,6 @@ public class Mantenimiento extends AppCompatActivity {
         @Nullable
         @Bind(R.id.txt_metales_rec)
         TextView turbidez_rec;
-
 
         @Nullable
         @Bind(R.id.txt_dureza_con)
@@ -379,29 +423,27 @@ public class Mantenimiento extends AppCompatActivity {
             return String.format(Constants.TWO_DECIMAL, turbCal);
         }
 
-
     }
 
+
+
     private void getFile() {
-        file = new File(filepath, FILE_FOLDER);
+        file = new File(FILE_PATH, FILE_FOLDER);
         if (!file.exists()) {
             file.mkdirs();
         }
 
     }
 
-@OnClick(R.id.button)
-    public void onClickPdf(View view){
-        createPdf();
-    }
 
     private void createPdf()  {
         try {
             getFile();
             //Create time stamp
             Date date = new Date ();
-            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(date);
-            File myFile = new File(file.getAbsolutePath()+ File.separator + timeStamp + ".pdf");
+            String timeStamp = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(date);
+            String fileName = FILE_PATH + "/"+ FILE_FOLDER  +  "/"+ timeStamp + ".pdf";
+            File myFile = new File(fileName);
             myFile.createNewFile();
             OutputStream output = new FileOutputStream(myFile);
 
@@ -409,6 +451,7 @@ public class Mantenimiento extends AppCompatActivity {
             PdfWriter writer = PdfWriter.getInstance(document, output);
             writer.setLinearPageMode();
             writer.setFullCompression();
+
             // document header attributes
             document.addAuthor("Skholingua");
             document.addCreationDate();
@@ -423,55 +466,58 @@ public class Mantenimiento extends AppCompatActivity {
             document.open();
 
             //Add content
-       /*     if(isPDFFromHTML) {
-                //A helper class for parsing XHTML/CSS or XML flow to PDF.
-                XMLWorkerHelper.getInstance().parseXHtml(writer, document,
-                        new ByteArrayInputStream(readFromFile("index.html").getBytes("UTF-8")),
-                        new ByteArrayInputStream(readFromFile("style.css").getBytes("UTF-8")));
-            }
-            else {*/
-                /* Create Paragraph and Set Font */
-                Paragraph p1 = new Paragraph("Skholingua Tutorial\nLearn how to create a PDF in android with image and dynamic text form User.");
+            Paragraph p1 = new Paragraph("Skholingua Tutorial\nLearn how to create a PDF in android with image and dynamic text form User.");
 
                 /* Create Set Font and its Size */
-                Font paraFont= new Font(Font.FontFamily.HELVETICA);
-                paraFont.setSize(16);
-                p1.setAlignment(Paragraph.ALIGN_CENTER);
-                p1.setFont(paraFont);
+            Font paraFont= new Font(Font.FontFamily.HELVETICA);
+            paraFont.setSize(16);
+            p1.setAlignment(Paragraph.ALIGN_CENTER);
+            p1.setFont(paraFont);
+            //add paragraph to document
+            document.add(p1);
 
-                //add paragraph to document
-                document.add(p1);
-
-                Paragraph p2 = new Paragraph("hola");//_pdfBodyEDT.getText().toString().trim()
+            Paragraph p2 = new Paragraph("hola");
 
                 /* You can also SET FONT and SIZE like this */
-                Font paraFont2= new Font(Font.FontFamily.COURIER,14.0f, Color.GREEN);
-                p2.setAlignment(Paragraph.ALIGN_CENTER);
-                p2.setFont(paraFont2);
+            Font paraFont2= new Font(Font.FontFamily.COURIER,14.0f, Color.GREEN);
+            p2.setAlignment(Paragraph.ALIGN_CENTER);
+            p2.setFont(paraFont2);
 
-                document.add(p2);
+            document.add(p2);
 
                 /* Inserting Image in PDF */
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                Bitmap bitmap = BitmapFactory.decodeResource(getBaseContext().getResources(), R.mipmap.ic_launcher);
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100 , stream);
-                Image myImg = Image.getInstance(stream.toByteArray());
-                myImg.setAlignment(Image.MIDDLE);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100 , stream);
+            Image myImg = Image.getInstance(stream.toByteArray());
+            myImg.setAlignment(Image.MIDDLE);
 
-                //add image to document
-                document.add(myImg);
+            //add image to document
+            document.add(myImg);
+            addContent(document);
 
-                addContent(document);
-
-                //set footer
-               /* Phrase footerText = new Phrase("This is an example of a footer");
+            //set footer
+          /*       Phrase footerText = new Phrase("This is an example of a footer");
                 HeaderFooter pdfFooter = new HeaderFooter(footerText, false);
-                document.(pdfFooter);*/
-//            }
+                document.(pdfFooter);
+          }*/
 //
+ /*           PdfReader reader = new PdfReader(fileName);
+
+            int n = reader.getNumberOfPages();
+            PdfImportedPage page;
+            // Traversing through all the pages
+            for (int i = 1; i <= n; i++) {
+                page = writer.getImportedPage(reader, i);
+                Image instance = Image.getInstance(page);
+                //Save a specific page threshold for displaying in a scroll view inside your App
+            }
+*/
             //Close the document
             document.close();
-            Toast.makeText(this, "Pdf created successfully.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Pdf created successfully.", Toast.LENGTH_LONG).show();
+
+
 
         } catch (IOException | DocumentException e) {
             e.printStackTrace();
@@ -586,6 +632,7 @@ public class Mantenimiento extends AppCompatActivity {
         InputStreamReader isr = null;
         BufferedReader input = null;
         try {
+            // File myFile = new File(Environment.getExternalStorageDirectory()+ File.separator + fileName);
             fIn = getResources().getAssets()
                     .open(fileName, Context.MODE_PRIVATE);
             isr = new InputStreamReader(fIn);
@@ -610,7 +657,6 @@ public class Mantenimiento extends AppCompatActivity {
         }
         return returnString.toString();
     }
-
 }
 
 

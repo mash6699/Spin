@@ -63,14 +63,17 @@ public class DrawerActivity extends AppCompatActivity implements OnNavigationIte
         setContentView(R.layout.activity_drawer);
         ButterKnife.bind(this);
         utilViews = new UtilViews().getInstance(getApplicationContext());
-        setSupportActionBar(toolbar);
+
 
         toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
         navigationView.inflateHeaderView(R.layout.drawer_header);
         navigationView.setNavigationItemSelectedListener(this);
 
+        setSupportActionBar(toolbar);
+
         if (getIntent().getExtras() != null && getIntent().getExtras().getInt("showFragment", 0) == 2) {
-            changeFragment(new WhereBuyFragment(), getSupportFragmentManager());
+            //changeFragment(new WhereBuyFragment(), getSupportFragmentManager());
+            updateFragment(2);
         } else {
             updateFragment(HOME);
         }

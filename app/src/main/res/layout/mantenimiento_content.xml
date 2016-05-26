@@ -10,12 +10,18 @@
     tools:context=".Mantenimiento$PlaceholderFragment"
     android:background="@color/colorPrimary">
 
-    <LinearLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView">
 
+
+    <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true">
+
 
         <include
             android:id="@+id/primero"
@@ -46,6 +52,9 @@
             android:visibility="gone"/>
 
 
+
+
     </LinearLayout>
 
+    </ScrollView>
 </RelativeLayout>

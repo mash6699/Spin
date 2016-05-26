@@ -76,7 +76,7 @@ public class MantenimientoActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         txt_titleToolbar.setText(R.string.title_activity_mantenimiento);
         pool_name.setText(spingApplication.getName());
-        pool_date.setText(spingApplication.getDate());
+               pool_date.setText(spingApplication.getDate());
 
         adapterMantenimiento = new AdapterMantenimiento(MantenimientoActivity.this, R.layout.item_list_mantenimiento, getQuimicos());
         listQuimicos.setAdapter(adapterMantenimiento);

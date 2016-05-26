@@ -4,6 +4,14 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+    android:scaleType="fitXY"
+        android:id="@+id/iv_primer"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/acidetdiezkg" />
+
     <TextView
         android:id="@+id/txt_ph_exacto"
         android:layout_width="match_parent"
@@ -34,6 +42,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/white"/>
+
+
+    <ImageView
+        android:id="@+id/iv_primerSegenda"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/cristalingreencincokg" />
 
     <TextView
         android:id="@+id/txt_ph_estimado"
@@ -69,7 +86,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PDF"
-        android:id="@+id/button" />
+        android:id="@+id/buttonPDF"
+        android:visibility="gone"/>
 
 
 </LinearLayout>
