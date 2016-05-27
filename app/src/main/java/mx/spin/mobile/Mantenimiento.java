@@ -41,8 +41,11 @@ import com.itextpdf.text.ListItem;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.Section;
+import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPCellEvent;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
@@ -640,18 +643,23 @@ public class Mantenimiento extends AppCompatActivity implements ActivityCompat.O
 
         PdfPTable table = new PdfPTable(3);
         table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.getDefaultCell().setVerticalAlignment(Element.ALIGN_CENTER);
+        table.getDefaultCell().setBorder(PdfPCell.NO_BORDER);
 
         PdfPCell c1 = new PdfPCell(new Phrase(""));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setBorder(PdfPCell.NO_BORDER);
         table.addCell(c1);
 
         c1 = new PdfPCell(new Phrase(getResources().getString(R.string.lbl_conactual)));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setBorder(PdfPCell.NO_BORDER);
+        c1.setCellEvent(new DottedCell(PdfPCell.RIGHT | PdfPCell.BOTTOM));
         table.addCell(c1);
 
         c1 = new PdfPCell(new Phrase(getResources().getString(R.string.lbl_conideal)));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setBorder(PdfPCell.NO_BORDER);
+        c1.setCellEvent(new DottedCell(PdfPCell.BOTTOM));
         table.addCell(c1);
         table.setHeaderRows(1);
 
@@ -694,6 +702,36 @@ public class Mantenimiento extends AppCompatActivity implements ActivityCompat.O
         document.add(mantenimiento);
     }
 
+    class DottedCell implements PdfPCellEvent {
+        private int border = 0;
+        public DottedCell(int border) {
+            this.border = border;
+        }
+        public void cellLayout(PdfPCell cell, Rectangle position,
+                               PdfContentByte[] canvases) {
+            PdfContentByte canvas = canvases[PdfPTable.LINECANVAS];
+            canvas.saveState();
+        //    canvas.setLineDash(0, 1);
+            if ((border & PdfPCell.TOP) == PdfPCell.TOP) {
+                canvas.moveTo(position.getRight(), position.getTop());
+                canvas.lineTo(position.getLeft(), position.getTop());
+            }
+            if ((border & PdfPCell.BOTTOM) == PdfPCell.BOTTOM) {
+                canvas.moveTo(position.getRight(), position.getBottom());
+                canvas.lineTo(position.getLeft(), position.getBottom());
+            }
+            if ((border & PdfPCell.RIGHT) == PdfPCell.RIGHT) {
+                canvas.moveTo(position.getRight(), position.getTop());
+                canvas.lineTo(position.getRight(), position.getBottom());
+            }
+            if ((border & PdfPCell.LEFT) == PdfPCell.LEFT) {
+                canvas.moveTo(position.getLeft(), position.getTop());
+                canvas.lineTo(position.getLeft(), position.getBottom());
+            }
+            canvas.stroke();
+            canvas.restoreState();
+        }
+    }
 
     private static void addEmptyLine(Paragraph paragraph, int number) {
         for (int i = 0; i < number; i++) {
