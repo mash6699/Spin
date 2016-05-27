@@ -1,13 +1,14 @@
 package mx.spin.mobile;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,10 +17,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.PermissionChecker;
-import android.support.v4.os.EnvironmentCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -37,21 +36,17 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.Image;
 import com.itextpdf.text.List;
 import com.itextpdf.text.ListItem;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Section;
-import com.itextpdf.text.pdf.PdfImportedPage;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -59,25 +54,26 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import mx.spin.mobile.connection.BoussinesSpin;
 import mx.spin.mobile.singleton.SpingApplication;
+import mx.spin.mobile.utils.PermissionUtil;
 import mx.spin.mobile.utils.constants.Constants;
 
 /**
- * Created by miguelangel on 18/05/2016.
+ * Created by miguel_angel on 18/05/2016.
  */
-public class Mantenimiento extends AppCompatActivity {
+public class Mantenimiento extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback{
 
     private static String TAG = Mantenimiento.class.getName();
     private static SpingApplication spingApplication = SpingApplication.getInstance();
     private BoussinesSpin boussinesSpin;
-    private static final int MY_PERMISSIONS_REQUEST_STORAGE = 123456;
+    private static final int REQUEST_PERMISSIONS = 16;
     //  private Pool piscina;
 
     private ViewPager mViewPager;
@@ -112,6 +108,8 @@ public class Mantenimiento extends AppCompatActivity {
     @Bind(R.id.tv_pool_date)
     TextView pool_date;
 
+    View mView;
+
 
     private static final String FILE_FOLDER = "SpinPDF";
     private static File file;
@@ -137,23 +135,13 @@ public class Mantenimiento extends AppCompatActivity {
         //   piscina = boussinesSpin.getPool(idPiscina);
 
 
+
         FloatingActionButton fabSave = (FloatingActionButton) findViewById(R.id.guardar);
         fabSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Generar y visualizar el PDF", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-             //   if (Build.VERSION.SDK_INT >= 23) {
-                if (ContextCompat.checkSelfPermission(Mantenimiento.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(Mantenimiento.this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_STORAGE);
-                }
-
-          /*  }else{
-                    createPdf();
-                }*/
-
-
-        createPdf();
+                mView =  view;
+                requestMMPermissions();
             }
         });
 
@@ -163,6 +151,7 @@ public class Mantenimiento extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Se enviara el pdf en un email", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                mView =  view;
 
             }
         });
@@ -185,6 +174,56 @@ public class Mantenimiento extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+    }
+
+    private void requestMMPermissions() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            String storeWritePermission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+            java.util.List<String> permissions = new ArrayList<String>();
+            int hasStorePermission = checkSelfPermission(storeWritePermission);
+
+            if (hasStorePermission != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(storeWritePermission);
+            }
+
+            if (!permissions.isEmpty()) {
+                final String[] params = permissions.toArray(new String[permissions.size()]);
+                //
+            new AlertDialog.Builder(this).setMessage(Html.fromHtml("Para crear el PDF tienes que activar el almacenamiento de tu dispositivo.")).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                @TargetApi(Build.VERSION_CODES.M)
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    requestPermissions(params, REQUEST_PERMISSIONS);
+                }
+            }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            }).setTitle(getString(R.string.app_name)).setCancelable(false).create().show();
+
+            }else {
+                createPdf();
+            }
+
+
+        } else {
+            createPdf();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_PERMISSIONS:
+                boolean isGranted = PermissionUtil.verifyPermissions(grantResults);
+                if (!isGranted) {
+                  createPdf();
+                }
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 
     void setValues(){
@@ -437,12 +476,14 @@ public class Mantenimiento extends AppCompatActivity {
 
 
     private void createPdf()  {
+        Log.d(TAG, "createPdf" );
         try {
             getFile();
             //Create time stamp
             Date date = new Date ();
             String timeStamp = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(date);
             String fileName = FILE_PATH + "/"+ FILE_FOLDER  +  "/"+ timeStamp + ".pdf";
+
             File myFile = new File(fileName);
             myFile.createNewFile();
             OutputStream output = new FileOutputStream(myFile);
@@ -452,70 +493,57 @@ public class Mantenimiento extends AppCompatActivity {
             writer.setLinearPageMode();
             writer.setFullCompression();
 
-            // document header attributes
-            document.addAuthor("Skholingua");
+              /* Create Set Font and its Size */
+            Font titleFont= new Font(Font.FontFamily.HELVETICA, Font.BOLD);
+            titleFont.setSize(16);
+
+            Font fontContent= new Font(Font.FontFamily.HELVETICA);
+            fontContent.setSize(12);
+
+            //TODO document header attributes
+            document.addAuthor("Spin mobile");
             document.addCreationDate();
             document.addProducer();
-            document.addCreator("www.skholingua.com");
-            document.addTitle("Skholingua");
+            document.addCreator("www.spingrupo.com");
+
+            document.addTitle("Sping Reporte");
             document.setPageSize(PageSize.A4);
-            // left,right,top,bottom
             document.setMargins(36, 36, 36, 36);
             document.setMarginMirroring(true);
-            // open document
+
+            //TODO open document
             document.open();
 
-            //Add content
-            Paragraph p1 = new Paragraph("Skholingua Tutorial\nLearn how to create a PDF in android with image and dynamic text form User.");
 
-                /* Create Set Font and its Size */
-            Font paraFont= new Font(Font.FontFamily.HELVETICA);
-            paraFont.setSize(16);
-            p1.setAlignment(Paragraph.ALIGN_CENTER);
-            p1.setFont(paraFont);
-            //add paragraph to document
-            document.add(p1);
+            headerDocument(document, titleFont);
+            addInfoPool(document,fontContent);
+            addTableBalance(document, titleFont);
+            addTableDesinfeccion(document, titleFont);
+            addMantenimiento(document, titleFont);
 
-            Paragraph p2 = new Paragraph("hola");
 
-                /* You can also SET FONT and SIZE like this */
-            Font paraFont2= new Font(Font.FontFamily.COURIER,14.0f, Color.GREEN);
-            p2.setAlignment(Paragraph.ALIGN_CENTER);
-            p2.setFont(paraFont2);
 
-            document.add(p2);
+            //Close the document
+            document.close();
 
-                /* Inserting Image in PDF */
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+          //  Toast.makeText(getApplicationContext(),  , Toast.LENGTH_LONG).show();
+
+            Snackbar.make( mView.getRootView(),"El PDF se creo correctamente se encuentra en la carpeta " + FILE_FOLDER, Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+
+
+
+                           /* Inserting Image in PDF */
+         /*   ByteArrayOutputStream stream = new ByteArrayOutputStream();
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100 , stream);
             Image myImg = Image.getInstance(stream.toByteArray());
             myImg.setAlignment(Image.MIDDLE);
-
             //add image to document
-            document.add(myImg);
-            addContent(document);
+            document.add(myImg);*/
 
-            //set footer
-          /*       Phrase footerText = new Phrase("This is an example of a footer");
-                HeaderFooter pdfFooter = new HeaderFooter(footerText, false);
-                document.(pdfFooter);
-          }*/
-//
- /*           PdfReader reader = new PdfReader(fileName);
 
-            int n = reader.getNumberOfPages();
-            PdfImportedPage page;
-            // Traversing through all the pages
-            for (int i = 1; i <= n; i++) {
-                page = writer.getImportedPage(reader, i);
-                Image instance = Image.getInstance(page);
-                //Save a specific page threshold for displaying in a scroll view inside your App
-            }
-*/
-            //Close the document
-            document.close();
-            Toast.makeText(getApplicationContext(), "Pdf created successfully.", Toast.LENGTH_LONG).show();
+            //      addContent(document);
 
 
 
@@ -526,100 +554,151 @@ public class Mantenimiento extends AppCompatActivity {
     }
 
 
-    private static void addContent(Document document) throws DocumentException {
-        Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
-                Font.BOLD);
-        Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16,
-                Font.BOLD);
-        Anchor anchor = new Anchor("First Chapter", catFont);
-        anchor.setName("First Chapter");
-
-        // Second parameter is the number of the chapter
-        Chapter catPart = new Chapter(new Paragraph(anchor), 1);
-
-        Paragraph subPara = new Paragraph("Subcategory 1", subFont);
-        Section subCatPart = catPart.addSection(subPara);
-        subCatPart.add(new Paragraph("Hello"));
-
-        subPara = new Paragraph("Subcategory 2", subFont);
-        subCatPart = catPart.addSection(subPara);
-        subCatPart.add(new Paragraph("Paragraph 1"));
-        subCatPart.add(new Paragraph("Paragraph 2"));
-        subCatPart.add(new Paragraph("Paragraph 3"));
-
-        // add a list
-        createList(subCatPart);
-        Paragraph paragraph = new Paragraph();
-        addEmptyLine(paragraph, 5);
-        subCatPart.add(paragraph);
-
-        // add a table
-        createTable(subCatPart);
-
-        // now add all this to the document
-        document.add(catPart);
-
-        // Next section
-        anchor = new Anchor("Second Chapter", catFont);
-        anchor.setName("Second Chapter");
-
-        // Second parameter is the number of the chapter
-        catPart = new Chapter(new Paragraph(anchor), 2);
-
-        subPara = new Paragraph("Subcategory", subFont);
-        subCatPart = catPart.addSection(subPara);
-        subCatPart.add(new Paragraph("This is a very important message"));
-
-        // now add all this to the document
-        document.add(catPart);
+    public void headerDocument(Document document, Font titleFont) throws DocumentException{
+        Log.d(TAG, "headerDocument");
+        Paragraph header = new Paragraph("Resultado del Análisis de la Piscina\n\n");
+        header.setAlignment(Paragraph.ALIGN_CENTER);
+        header.setFont(titleFont);
+        document.add(header);
 
     }
 
-    private static void createTable(Section subCatPart)
-            throws BadElementException {
+    public void addInfoPool(Document document, Font fontContent) throws DocumentException{
+        Log.d(TAG, "addInfoPool");
+        Paragraph iPiscina = new Paragraph(getResources().getString(R.string.lbl_nombre_piscina) +" : " + "Nueva" +"\n");
+        iPiscina.add(getResources().getString(R.string.lbl_fecha_analisis)      + " : " + new Date().getTime() +"\n");
+        iPiscina.add(getResources().getString(R.string.lbl_volumen)             + " : "  +"7000" +"\n");
+        iPiscina.add(getResources().getString(R.string.lbl_unidad_volumen)      + " : " +"m3" +"\n");
+        iPiscina.add(getResources().getString(R.string.lbl_piscina)             + " : " + "Piscina: \n");
+        iPiscina.add(getResources().getString(R.string.lbl_tipo_instalacion)    + " : " +"" +"\n");
+        iPiscina.add(getResources().getString(R.string.lbl_tiempo_rotacion)     + " : " +"" +"\n");
+        iPiscina.add(getResources().getString(R.string.lbl_velocidad_flujo)     + " : " +"" +"\n");
+        iPiscina.add(getResources().getString(R.string.lbl_uso_piscina)         + " : " +"" +"\n");
+        iPiscina.add(getResources().getString(R.string.lbl_equipo)              + " : " + "" +"\n");
+        iPiscina.add("" +"" +"\n");
+        iPiscina.add("" +"" +"\n");
+
+        iPiscina.setAlignment(Paragraph.ALIGN_LEFT);
+        iPiscina.setFont(fontContent);
+
+        document.add(iPiscina);
+    }
+
+
+    private void addTableBalance(Document document, Font titleFont) throws DocumentException {
+        Log.d(TAG, "addTableBalance");
+        Paragraph iBalance = new Paragraph("Resultados Balance\n\n");
+        iBalance.setAlignment(Paragraph.ALIGN_CENTER);
+        iBalance.setFont(titleFont);
+        document.add(iBalance);
+
         PdfPTable table = new PdfPTable(3);
+        table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
 
-        // t.setBorderColor(BaseColor.GRAY);
-        // t.setPadding(4);
-        // t.setSpacing(4);
-        // t.setBorderWidth(1);
-
-        PdfPCell c1 = new PdfPCell(new Phrase("Table Header 1"));
+        PdfPCell c1 = new PdfPCell(new Phrase(""));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c1);
 
-        c1 = new PdfPCell(new Phrase("Table Header 2"));
+        c1 = new PdfPCell(new Phrase(getResources().getString(R.string.lbl_conactual)));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c1);
 
-        c1 = new PdfPCell(new Phrase("Table Header 3"));
+        c1 = new PdfPCell(new Phrase(getResources().getString(R.string.lbl_conideal)));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c1);
         table.setHeaderRows(1);
 
-        table.addCell("1.0");
+        table.addCell(getResources().getString(R.string.lbl_ph) + "\n" + "Estatus");
         table.addCell("1.1");
-        table.addCell("1.2");
-        table.addCell("2.1");
+        table.addCell(getResources().getString(R.string.lbl_conideal_ph));
+
+        table.addCell(getResources().getString(R.string.lbl_alcalinidad) + "\n" + "Estatus");
         table.addCell("2.2");
-        table.addCell("2.3");
+        table.addCell(getResources().getString(R.string.lbl_conideal_alcalinidad));
 
-        subCatPart.add(table);
+        table.addCell(getResources().getString(R.string.lbl_std) + "\n" + "Estatus");
+        table.addCell("1.1");
+        table.addCell(getResources().getString(R.string.lbl_conideal_std));
 
+        table.addCell(getResources().getString(R.string.lbl_dureza) + "\n" + "Estatus");
+        table.addCell("1.1");
+        table.addCell(getResources().getString(R.string.lbl_conideal_dureza));
+
+        table.addCell(getResources().getString(R.string.lbl_temperatura) + "\n" + "Estatus");
+        table.addCell("1.1");
+        table.addCell(getResources().getString(R.string.lbl_conideal_temperatura));
+
+        document.add(table);
     }
+
+    private void addTableDesinfeccion(Document document, Font titleFont) throws DocumentException {
+        Log.d(TAG, "addTableDesinfeccion");
+        Paragraph iDesinfeccion = new Paragraph("Resultados Desinfección\n\n");
+        iDesinfeccion.setAlignment(Paragraph.ALIGN_CENTER);
+        iDesinfeccion.setFont(titleFont);
+        document.add(iDesinfeccion);
+
+        PdfPTable table = new PdfPTable(3);
+        table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.getDefaultCell().setVerticalAlignment(Element.ALIGN_CENTER);
+
+        PdfPCell c1 = new PdfPCell(new Phrase(""));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase(getResources().getString(R.string.lbl_conactual)));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase(getResources().getString(R.string.lbl_conideal)));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+        table.setHeaderRows(1);
+
+        //TODO CLORO LIBRE
+        //TODO CLORMINAS
+        table.addCell(getResources().getString(R.string.lbl_cloro_total) + "\n" + "Estatus" );
+        table.addCell("1.1");
+        table.addCell(getResources().getString(R.string.lbl_conideal_cloro_total));
+
+        table.addCell(getResources().getString(R.string.lbl_cloraminas) + "\n" + "Estatus");
+        table.addCell("1.1");
+        table.addCell(getResources().getString(R.string.lbl_conideal_cloramidas));
+
+        //TODO BROMO
+        table.addCell(getResources().getString(R.string.lbl_bromo) + "\n" + "Estatus");
+        table.addCell("1.1");
+        table.addCell(getResources().getString(R.string.lbl_conideal_bromo));
+
+
+        table.addCell(getResources().getString(R.string.lbl_turbidez) + "\n" + "Estatus");
+        table.addCell("1.1");
+        table.addCell(getResources().getString(R.string.lbl_conideal_turbidez));
+
+        table.addCell(getResources().getString(R.string.lbl_metales)+ "\n" + "Estatus");
+        table.addCell("1.1");
+        table.addCell(getResources().getString(R.string.lbl_conideal_metales) );
+
+        table.addCell(getResources().getString(R.string.lbl_cya) + "\n" + "Estatus");
+        table.addCell("1.1");
+        table.addCell(getResources().getString(R.string.lbl_conideal_cya));
+
+        document.add(table);
+    }
+
+
+    private void addMantenimiento(Document document, Font titleFont) throws DocumentException {
+        Paragraph mantenimiento = new Paragraph("Mantenimiento\n\n");
+        mantenimiento.setAlignment(Paragraph.ALIGN_CENTER);
+        mantenimiento.setFont(titleFont);
+        document.add(mantenimiento);
+    }
+
 
     private static void addEmptyLine(Paragraph paragraph, int number) {
         for (int i = 0; i < number; i++) {
             paragraph.add(new Paragraph(" "));
         }
-    }
-
-    private static void createList(Section subCatPart) {
-        List list = new List(true, false, 10);
-        list.add(new ListItem("First point"));
-        list.add(new ListItem("Second point"));
-        list.add(new ListItem("Third point"));
-        subCatPart.add(list);
     }
 
     /**

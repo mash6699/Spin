@@ -68,7 +68,8 @@
     <string name="lbl_ya_tengo_cuenta">Ya tengo cuenta, quiero usarla</string>
 
     <string name="lbl_nombre_piscina">Nombre de la Piscina</string>
-    <string name="lbl_equipo">Equipo</string>
+    <string name="lbl_fecha_analisis">Fecha del Análisis</string>
+    <string name="lbl_equipo">Equipos</string>
 
     <string name="lbl_empty_name">Debes ingresar el nombre de la piscina.</string>
     <string name="lbl_empty_volume">Debes ingresar el volumen de la piscina.</string>
@@ -186,7 +187,7 @@
     <string name="lbl_cloro_libre">Cloro libre</string>
     <string name="lbl_cloro_dpd">Cloro (DPD1)</string>
     <string name="lbl_cloro_total">Cloro total</string>
-    <string name="lbl_metales_cloro">Metales</string>
+    <string name="lbl_metales">Metales</string>
     <string name="lbl_cloraminas">Cloraminas</string>
     <string name="lbl_bromo">Bromo total(DPD1)</string>
     <string name="lbl_bromo_sin">Bromo</string>
