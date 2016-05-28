@@ -31,17 +31,17 @@
                 layout="@layout/header_pool" />
 
             <TextView
+                android:id="@+id/tv_desinfeccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:text="@string/lbl_desinfeccion"
                 android:textColor="@color/bluetextligth"
-                android:textSize="16sp"
+                android:textSize="@dimen/title_size"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/liner_cloro_libre"
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="2"
@@ -55,7 +55,8 @@
                     android:text="@string/lbl_cloro_libre"
                     android:textColor="@color/white"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textSize="@dimen/content_size"/>
 
                 <Spinner
                     android:layout_width="match_parent"
@@ -64,13 +65,13 @@
                     android:prompt="@string/lbl_select_clorolibre"
                     android:layout_centerVertical="true"
                     android:spinnerMode="dialog"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textSize="@dimen/content_size"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/liner_clorodpd"
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="2"
@@ -84,7 +85,8 @@
                     android:text="@string/lbl_cloro_total"
                     android:textColor="@color/white"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textSize="@dimen/content_size"/>
 
                 <Spinner
                     android:layout_width="match_parent"
@@ -99,7 +101,6 @@
 
 
             <LinearLayout
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="2">
@@ -113,7 +114,8 @@
                     android:text="@string/lbl_cloraminas"
                     android:textColor="@color/white"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textSize="@dimen/content_size"/>
 
 
                 <TextView
@@ -124,13 +126,13 @@
                     android:layout_marginRight="5dp"
                     android:textColor="@color/white"
                     android:gravity="right"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textSize="@dimen/content_size"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/liner_bromo"
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="2"
@@ -144,7 +146,8 @@
                     android:text="@string/lbl_bromo"
                     android:textColor="@color/white"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textSize="@dimen/content_size"/>
 
                 <Spinner
                     android:layout_width="match_parent"
@@ -153,21 +156,22 @@
                     android:prompt="@string/lbl_select_bromo"
                     android:layout_centerVertical="true"
                     android:spinnerMode="dialog"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textSize="@dimen/content_size"/>
 
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="@string/lbl_mas_parametos"
                 android:textColor="@color/bluetextligth"
-                android:textSize="16sp"
+                android:textSize="@dimen/title_size"
                 android:textStyle="bold" />
 
             <LinearLayout
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="2">
@@ -180,7 +184,8 @@
                     android:text="@string/lbl_turbidez"
                     android:textColor="@color/white"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textSize="@dimen/content_size"/>
 
                 <Spinner
                     android:layout_width="match_parent"
@@ -194,7 +199,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="2">
@@ -220,7 +224,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="2">
@@ -233,7 +236,8 @@
                     android:text="@string/lbl_cya"
                     android:textColor="@color/white"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textSize="@dimen/content_size"/>
 
                 <Spinner
                     android:layout_width="match_parent"
@@ -242,7 +246,8 @@
                     android:prompt="@string/lbl_select_cya"
                     android:layout_centerVertical="true"
                     android:spinnerMode="dialog"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textSize="@dimen/content_size" />
 
             </LinearLayout>
 

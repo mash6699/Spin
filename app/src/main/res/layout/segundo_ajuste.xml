@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
 
     <ImageView
         android:id="@+id/iv_segundo"
@@ -13,24 +14,26 @@
         android:src="@drawable/cristalingreencincokg" />
 
     <TextView
+        android:textSize="@dimen/title_size"
         android:id="@+id/txt_metales"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/bluetextligth"
         android:text="Turbidez y Metales"
         android:textStyle="bold"
         android:gravity="center"/>
 
 
     <TextView
+        android:textSize="@dimen/content_size"
         android:id="@+id/lbl_recomendation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:text="Recomendación"
-        android:textStyle="bold"/>
+        android:text="Recomendación" />
 
     <TextView
+        android:textSize="@dimen/content_size"
         android:id="@+id/txt_metales_rec"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

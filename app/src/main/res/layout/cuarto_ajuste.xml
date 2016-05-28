@@ -14,15 +14,16 @@
         android:src="@drawable/cristalingreencincokg" />
 
     <TextView
+        android:textSize="@dimen/title_size"
         android:id="@+id/txt_dureza"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
         android:text="@string/lbl_dureza"
-        android:textStyle="bold"
+        android:textColor="@color/bluetextligth"
         android:gravity="center"/>
 
     <TextView
+        android:textSize="@dimen/content_size"
         android:id="@+id/txt_dureza_con"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,14 +32,15 @@
 
 
     <TextView
+        android:textSize="@dimen/content_size"
         android:id="@+id/lbl_recomendation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:text="Recomendación"
-        android:textStyle="bold"/>
+        android:text="Recomendación"/>
 
     <TextView
+        android:textSize="@dimen/content_size"
         android:id="@+id/txt_dureza_rec"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,15 +58,17 @@
         android:src="@drawable/alcalosdiezkg" />
 
     <TextView
+        android:textSize="@dimen/title_size"
         android:id="@+id/txt_std"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/bluetextligth"
         android:text="@string/lbl_std"
         android:textStyle="bold"
         android:gravity="center"/>
 
     <TextView
+        android:textSize="@dimen/content_size"
         android:id="@+id/txt_std_con"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,14 +76,15 @@
         android:text="condiciones"/>
 
     <TextView
+        android:textSize="@dimen/content_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:text="Recomendación"
-        android:textStyle="bold"/>
+        android:text="Recomendación"/>
 
 
     <TextView
+        android:textSize="@dimen/content_size"
         android:id="@+id/txt_std_rec"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -5,17 +5,6 @@
     android:orientation="vertical"
     android:paddingBottom="10dp" >
 
- <!-- <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/lbl_volumen"
-      android:textColor="@color/white"
-      android:paddingBottom="10dp"
-      android:paddingTop="10dp"
-      android:textStyle="bold"
-      android:visibility="gone" />-->
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,7 +18,7 @@
             android:layout_height="wrap_content"
             android:text="Volumen"
             android:textColor="@color/bluetextligth"
-            android:textSize="13sp"
+            android:textSize="@dimen/title_size"
             android:layout_weight="1"/>
 
 
@@ -38,7 +27,7 @@
             android:layout_height="wrap_content"
             android:text="@string/lbl_unidad_volumen"
             android:textColor="@color/bluetextligth"
-            android:textSize="13sp"
+            android:textSize="@dimen/title_size"
             android:layout_weight="1"/>
 
     </LinearLayout>
@@ -54,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="27 ft"
-            android:textSize="16sp"
+            android:textSize="@dimen/content_size"
             android:textColor="@color/white"
             android:layout_weight="1" />
 
@@ -62,7 +51,7 @@
             android:id="@+id/txt_um"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="@dimen/content_size"
             android:textColor="@color/white"
             android:layout_weight="1"/>
 
@@ -82,7 +71,7 @@
             android:layout_height="wrap_content"
             android:text="@string/lbl_piscina"
             android:textColor="@color/bluetextligth"
-            android:textSize="13sp"
+            android:textSize="@dimen/title_size"
             android:layout_weight="1"/>
 
         <TextView
@@ -90,7 +79,7 @@
             android:layout_height="wrap_content"
             android:text="@string/lbl_tipo_instalacion"
             android:textColor="@color/bluetextligth"
-            android:textSize="13sp"
+            android:textSize="@dimen/title_size"
             android:layout_weight="1"/>
 
     </LinearLayout>
@@ -109,8 +98,8 @@
             android:id="@+id/txt_tipo_piscina"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pública"
-            android:textSize="16sp"
+            android:text=""
+            android:textSize="@dimen/content_size"
             android:textColor="@color/white"
             android:layout_weight="1"/>
 
@@ -118,11 +107,10 @@
             android:id="@+id/txt_instalacion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pública"
-            android:textSize="16sp"
+            android:text=""
+            android:textSize="@dimen/content_size"
             android:textColor="@color/white"
             android:layout_weight="1"/>
-
 
     </LinearLayout>
 
@@ -139,14 +127,16 @@
             android:layout_height="wrap_content"
             android:text="@string/lbl_tiempo_rotacion"
             android:textColor="@color/bluetextligth"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textSize="@dimen/title_size"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/lbl_velocidad_flujo"
             android:textColor="@color/bluetextligth"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textSize="@dimen/title_size"/>
 
     </LinearLayout>
 
@@ -163,7 +153,7 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_weight="1"
-            android:text="12" />
+            android:textSize="@dimen/content_size" />
 
         <TextView
             android:id="@+id/txt_velocidad_flujo"
@@ -172,8 +162,33 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_weight="1"
-            android:text="14" />
+            android:textSize="@dimen/content_size"/>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/lbl_uso_piscina"
+            android:textColor="@color/bluetextligth"
+            android:textSize="@dimen/title_size" />
+
+        <TextView
+            android:id="@+id/txt_tipo_spa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_na"
+            android:textSize="15sp"
+            android:textColor="@color/white"/>
+
+        </LinearLayout>
 
 </LinearLayout>

@@ -20,10 +20,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:padding="@dimen/activity_horizontal_margin"
             android:orientation="vertical">
-
 
             <include
                 android:layout_width="match_parent"
@@ -32,237 +31,154 @@
 
 
             <TextView
+                android:id="@+id/tv_balance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/lbl_balance"
                 android:textColor="@color/bluetextligth"
-                android:textSize="16sp"
+                android:textSize="@dimen/title_size"
                 android:textStyle="bold" />
 
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal">
+                android:weightSum="2">
 
                 <TextView
                     android:id="@+id/txtAnalizePH"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="@string/lbl_ph"
                     android:textColor="@color/white"
-                    android:visibility="visible" />
-
+                    android:visibility="visible"
+                    android:textSize="@dimen/content_size"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"/>
 
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/sp_ph"
                     android:prompt="@string/lbl_select_ph"
-                    android:layout_toEndOf="@+id/txtAnalizePH"
-                    android:layout_toLeftOf="@+id/txt_ph"
-                    android:layout_toRightOf="@+id/txt_ph"
-                    android:layout_toStartOf="@+id/txt_ph"
                     android:layout_centerVertical="true"
-                    android:spinnerMode="dialog" />
+                    android:spinnerMode="dialog"
+                    android:layout_weight="1"/>
 
 
-                <TextView
-                    android:id="@+id/txt_ph"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginStart="5dp"
-                    android:text="0"
-                    android:visibility="gone"
-                    android:textColor="@color/white"
-                    />
+            </LinearLayout>
 
-            </RelativeLayout>
-
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="match_parent"
+                android:weightSum="2">
 
                 <TextView
                     android:id="@+id/txtAnalizeAlcanilidad"
-                    android:layout_width="150dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
+                    android:gravity="center_vertical"
                     android:text="@string/lbl_alcalinidad"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/content_size"
+                    android:layout_weight="1"/>
 
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/sp_alcali"
                     android:prompt="@string/lbl_select_alcali"
-                    android:layout_toEndOf="@+id/txtAnalizeAlcanilidad"
-                    android:layout_toLeftOf="@+id/txt_alcalinidad"
-                    android:layout_toRightOf="@+id/txt_alcalinidad"
-                    android:layout_toStartOf="@+id/txt_alcalinidad"
                     android:layout_centerVertical="true"
-                    android:spinnerMode="dialog" />
+                    android:spinnerMode="dialog"
+                    android:layout_weight="1"/>
 
-                <TextView
-                    android:id="@+id/txt_alcalinidad"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginStart="5dp"
-                    android:text="0 ppm"
-                    android:textColor="@color/white"
-                    android:visibility="gone"/>
+            </LinearLayout>
 
-            </RelativeLayout>
-
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:weightSum="2">
 
                 <TextView
                     android:id="@+id/txtAnalizeDureza"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:text="@string/lbl_dureza"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/content_size"
+                    android:layout_weight="1"/>
 
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/sp_dureza"
                     android:prompt="@string/lbl_select_dureza"
-                    android:layout_toEndOf="@+id/txtAnalizeDureza"
-                    android:layout_toLeftOf="@+id/txt_dureza"
-                    android:layout_toRightOf="@+id/txt_dureza"
-                    android:layout_toStartOf="@+id/txt_dureza"
                     android:layout_centerVertical="true"
-                    android:spinnerMode="dialog" />
+                    android:spinnerMode="dialog"
+                    android:layout_weight="1"/>
 
+            </LinearLayout>
 
-                <TextView
-                    android:id="@+id/txt_dureza"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginStart="5dp"
-                    android:text="0 ppm"
-                    android:textColor="@color/white"
-                    android:visibility="gone"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:weightSum="2">
 
                 <TextView
                     android:id="@+id/txtAnalizeTemp"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
+                    android:gravity="center_vertical"
                     android:text="@string/lbl_temp"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/content_size"
+                    android:layout_weight="1"/>
 
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/sp_temp"
                     android:prompt="@string/lbl_select_temp"
-                    android:layout_toEndOf="@+id/txtAnalizeTemp"
-                    android:layout_toLeftOf="@+id/txt_temp"
-                    android:layout_toRightOf="@+id/txt_temp"
-                    android:layout_toStartOf="@+id/txt_temp"
                     android:layout_centerVertical="true"
-                    android:spinnerMode="dialog" />
+                    android:spinnerMode="dialog"
+                    android:layout_weight="1"/>
 
-                <TextView
-                    android:id="@+id/txt_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginStart="5dp"
-                    android:text="0 ºC"
-                    android:textColor="@color/white"
-                    android:visibility="gone"/>
+            </LinearLayout>
 
-            </RelativeLayout>
-
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:weightSum="2">
 
                 <TextView
                     android:id="@+id/txtAnalizeSTD"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:text="@string/lbl_std"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/content_size"
+                    android:layout_weight="1"/>
 
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/sp_std"
                     android:prompt="@string/lbl_select_std"
-                    android:layout_toEndOf="@+id/txtAnalizeSTD"
-                    android:layout_toLeftOf="@+id/txt_std"
-                    android:layout_toRightOf="@+id/txt_std"
-                    android:layout_toStartOf="@+id/txt_std"
                     android:layout_centerVertical="true"
-                    android:spinnerMode="dialog" />
+                    android:spinnerMode="dialog"
+                    android:layout_weight="1"/>
 
-
-                <TextView
-                    android:id="@+id/txt_std"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginStart="5dp"
-                    android:text="0 ppm"
-                    android:textColor="@color/white"
-                    android:visibility="gone"/>
-
-            </RelativeLayout>
+            </LinearLayout>
 
 
 
             <LinearLayout
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -273,7 +189,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/lbl_indice_saturacion"
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/content_size"/>
 
                 <TextView
                     android:id="@+id/tv_indice_saturacion"
@@ -282,7 +198,7 @@
                     android:layout_gravity="center_horizontal"
                     android:text="0"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/content_size"
                     android:textStyle="bold"/>
 
             </LinearLayout>
@@ -294,10 +210,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:text="Agua en Balance"
-                android:textSize="18sp" />
+                android:textSize="@dimen/content_size" />
 
-
-          <!--  android:textColor="@color/bluetextligth"-->
 
             <android.support.v7.widget.CardView
                 android:layout_gravity="center_horizontal"
@@ -309,7 +223,7 @@
                 card_view:cardBackgroundColor="@android:color/white"
                 card_view:cardCornerRadius="21dp"
                 card_view:cardElevation="6dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp">
 
                 <Button
@@ -325,15 +239,6 @@
 
             </android.support.v7.widget.CardView>
 
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-
-
-            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>

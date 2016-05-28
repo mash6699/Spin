@@ -33,12 +33,17 @@ public class PoolDetailActivity extends AppCompatActivity {
     private List<Equipment> equipmentList;
     private BoussinesSpin boussinesSpin;
 
+    private final String DEFAULT_VALUE = "1";
+
     @Nullable
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Nullable
     @Bind(R.id.txtToolbarTitle)
     TextView txt_titleToolbar;
+    @Nullable
+    @Bind(R.id.tv_nombre)
+    TextView tv_nombre;
     @Nullable
     @Bind(R.id.txt_nombre)
     TextView txt_nombre;
@@ -138,14 +143,22 @@ public class PoolDetailActivity extends AppCompatActivity {
 
         txt_titleToolbar.setText(R.string.title_activity_pool_detail);
         txt_nombre.setText(piscina.getPool_name());
-        txt_instalacion.setText(piscina.getPool_category().equals("1")? "Abierta" : "Techada");
-        txt_tipoPiscina.setText(piscina.getPool_type().equals("1") ? "Pública" : "Privada");
+        txt_instalacion.setText(piscina.getPool_category().equals(DEFAULT_VALUE) ? getResources().getString(R.string.lbl_techada) : getResources().getString(R.string.lbl_abierta) );
+        spingApplication.setInstalacionVal(txt_instalacion.getText().toString());
+        txt_tipoPiscina.setText(piscina.getPool_type().equals(DEFAULT_VALUE) ? getResources().getString(R.string.lbl_publica) : getResources().getString(R.string.lbl_privada));
+        spingApplication.settPiscina(txt_tipoPiscina.getText().toString());
         txt_tipo_spa.setText(utilViews.getTipoSpa(Integer.parseInt(piscina.getPool_use()), Integer.parseInt(piscina.getPool_type())));
+        spingApplication.setUsoPiscina(txt_tipo_spa.getText().toString());
         txt_volumen.setText("" +piscina.getPool_volume());// + " " + utilViews.getUnidadMedida(piscina.getUm())
         txt_um.setText(utilViews.getUnidadMedida(um));
+        spingApplication.setUmVal(txt_um.getText().toString());
         txt_tiempoRotacion.setText(""+tiempoRotacion);
+        spingApplication.settRotacion(txt_tiempoRotacion.getText().toString());
         txt_velociddadFlujo.setText(velFlujo);
+        spingApplication.setvFlujo(txt_velociddadFlujo.getText().toString());
 
+        txt_titleToolbar.setTypeface(utilViews.setFontRegular());
+        tv_nombre.setTypeface(utilViews.setFontRegular());
         txt_nombre.setTypeface(utilViews.setFontNormal());
         txt_instalacion.setTypeface(utilViews.setFontNormal());
         txt_tipoPiscina.setTypeface(utilViews.setFontNormal());

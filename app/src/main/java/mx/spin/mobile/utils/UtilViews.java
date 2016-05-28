@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,6 +72,33 @@ public class UtilViews {
 
     public static ArrayAdapter<String> getAdapterPHTitle(Context context, List<String> infoArray) {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, infoArray) {
+            @Override
+            public boolean isEnabled(int position) {
+                if (position == 0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                View v = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) v;
+                if (position == 0) {
+                    tv.setTextColor(Color.GRAY);
+                } else {
+                    tv.setTextColor(Color.BLACK);
+                }
+                return v;
+            }
+        };
+
+        return adapter;
+    }
+
+    public static ArrayAdapter<String> getAdapterPH(Context context, ArrayAdapter<String> infoArray) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, (List<String>) infoArray) {
             @Override
             public boolean isEnabled(int position) {
                 if (position == 0) {
@@ -431,8 +459,5 @@ public class UtilViews {
         Typeface roboto = Typeface.createFromAsset(mContext.getAssets(), Constants.ROBOTO_REGULAR );
         return  roboto;
     }
-
-
-
 
 }

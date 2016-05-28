@@ -134,7 +134,7 @@
             <include
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                layout="@layout/detaller_piscina"
+                layout="@layout/detalle_piscina"
                 android:visibility="gone"/>
 
 

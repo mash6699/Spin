@@ -533,8 +533,8 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
             piscina.setPool_name(ed_namePool.getText().toString());
 
             piscina.setPool_category(String.valueOf(idTipoPool));
-            piscina.setPool_type(String.valueOf(idTipoSpa));
-            piscina.setPool_use(String.valueOf(idTipoInst));
+            piscina.setPool_type(String.valueOf(idTipoInst));//idTipoSpa
+            piscina.setPool_use(String.valueOf(idTipoSpa));//idTipoInst
 
             //TODO VOLUMEN
             piscina.setPool_volume(String.valueOf(Double.parseDouble(ed_volumen.getText().toString())));

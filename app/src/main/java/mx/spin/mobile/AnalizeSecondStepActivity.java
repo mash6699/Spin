@@ -2,7 +2,6 @@ package mx.spin.mobile;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.Sampler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
@@ -10,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -49,6 +47,18 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
     @Nullable
     @Bind(R.id.txtToolbarTitle)
     TextView txt_titleToolbar;
+
+    @Nullable
+    @Bind(R.id.txt_name)
+    TextView label_name;
+
+    @Nullable
+    @Bind(R.id.tv_desinfeccion)
+    TextView tv_desinfeccion;
+
+    @Nullable
+    @Bind(R.id.tv_more)
+    TextView tv_more;
 
     @Nullable
     @Bind(R.id.tv_pool_name)
@@ -104,7 +114,7 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
     public void gotoResult(View view){
         //  if(validateData()){
         setValuesApp();
-        startActivity(new Intent(AnalizeSecondStepActivity.this, AnalizeResult.class));
+        startActivity(new Intent(AnalizeSecondStepActivity.this, AnalizeResultActivity.class));
         //  }
     }
 
@@ -125,10 +135,21 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
 
         idTipoPiscina = spingApplication.getTipoPiscina();
 
+        setFonts();
         setAdaptersInView();
         setDataInApp();
     }
 
+
+    void setFonts(){
+        txt_titleToolbar.setTypeface(utilViews.setFontRegular());
+        label_name.setTypeface(utilViews.setFontRegular());
+        pool_name.setTypeface(utilViews.setFontNormal());
+        pool_date.setTypeface(utilViews.setFontNormal());
+
+        tv_desinfeccion.setTypeface(utilViews.setFontRegular());
+        tv_more.setTypeface(utilViews.setFontRegular());
+    }
 
     void setAdaptersInView(){
         Log.d(TAG, "setAdaptersInView");
@@ -152,46 +173,51 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
         sp_turbidez.setOnItemSelectedListener(this);
         sp_cya.setOnItemSelectedListener(this);
 
-        List<String> listCloroDpd = new ArrayList<String>();
+        List<String> listCloroTotal= new ArrayList<String>();
         for(float d = 0f ; d <= 20 ; d = d + 0.05f){
-            listCloroDpd.add("" + String.format(Constants.TWO_DECIMAL, d) + " ppm");
+            listCloroTotal.add("" + String.format(Constants.TWO_DECIMAL, d) + " ppm");
         }
-        ArrayAdapter<String> arrayAdapterCloroDpd = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listCloroDpd);
+      /*  ArrayAdapter<String> arrayAdapterCloroDpd = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listCloroDpd);
         arrayAdapterCloroDpd.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_cloroTotal.setAdapter(arrayAdapterCloroDpd);
+        sp_cloroTotal.setAdapter(arrayAdapterCloroDpd);*/
+        sp_cloroTotal.setAdapter(utilViews.getAdapterPH(getApplicationContext(), listCloroTotal));
 
         List<String> listCloroLibre = new ArrayList<String>();
         for(float l = 0f ; l <= 20 ; l = l + 0.05f){
             listCloroLibre.add(""+String.format(Constants.TWO_DECIMAL, l) + " ppm");
         }
-        ArrayAdapter<String> arrayAdapterCloroLibre = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listCloroLibre);
+      /*  ArrayAdapter<String> arrayAdapterCloroLibre = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listCloroLibre);
         arrayAdapterCloroLibre.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_clorolibre.setAdapter(arrayAdapterCloroLibre);
+        sp_clorolibre.setAdapter(arrayAdapterCloroLibre);*/
+        sp_clorolibre.setAdapter(utilViews.getAdapterPH(getApplicationContext(), listCloroLibre));
 
         List<String> listBromo = new ArrayList<String>();
         for(float d = 0f ; d <= 40 ; d = d + 0.05f){
             listBromo.add("" + String.format(Constants.TWO_DECIMAL, d) + " ppm");
         }
-        ArrayAdapter<String> arrayAdapterBromo = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listBromo);
+       /* ArrayAdapter<String> arrayAdapterBromo = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listBromo);
         arrayAdapterBromo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_bromo.setAdapter(arrayAdapterBromo);
+        sp_bromo.setAdapter(arrayAdapterBromo);*/
+        sp_bromo.setAdapter(utilViews.getAdapterPH(getApplicationContext(), listBromo));
 
         List<String> listTurbidez = new ArrayList<String>();
         for(float t = 0f ; t <= 5 ; t = t + 0.05f){
             listTurbidez.add(""+ String.format(Constants.TWO_DECIMAL, t) + " NTU");
         }
-        ArrayAdapter<String> arrayAdapterTurbidez = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listTurbidez);
+    /*    ArrayAdapter<String> arrayAdapterTurbidez = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listTurbidez);
         arrayAdapterTurbidez.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_turbidez.setAdapter(arrayAdapterTurbidez);
+        sp_turbidez.setAdapter(arrayAdapterTurbidez);*/
+        sp_turbidez.setAdapter(utilViews.getAdapterPH(getApplicationContext(), listTurbidez));
 
 
         List<String> listCYA = new ArrayList<String>();
         for(int c = 0 ; c <= 160 ; c = c+10){
             listCYA.add(""+ c + " ppm");
         }
-        ArrayAdapter<String> arrayAdapterCYA = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listCYA);
+       /* ArrayAdapter<String> arrayAdapterCYA = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listCYA);
         arrayAdapterCYA.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_cya.setAdapter(arrayAdapterCYA);
+        sp_cya.setAdapter(arrayAdapterCYA);*/
+        sp_cya.setAdapter(utilViews.getAdapterPH(getApplicationContext(), listCYA));
 
         metalesList  = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.metalesType)));
         sp_metales.setAdapter(UtilViews.getAdapterPH(getApplicationContext(), metalesList));

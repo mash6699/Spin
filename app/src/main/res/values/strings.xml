@@ -55,6 +55,11 @@
     <string name="lbl_recovery_5">Por favor inténtalo más tarde.</string>
 
 
+    <string name="lbl_publica">Pública</string>
+    <string name="lbl_privada">Privada</string>
+    <string name="lbl_techada">Techada</string>
+    <string name="lbl_abierta">Abierta</string>
+
     <string name="lbl_dealder_"></string>
     <string name="lbl_dealder_address">Dirección:</string>
     <string name="lbl_dealder_city">Cuidad: </string>

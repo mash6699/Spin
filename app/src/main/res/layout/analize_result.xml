@@ -6,7 +6,7 @@
     android:background="@color/colorPrimary"
     android:fitsSystemWindows="true"
     style="@style/AppTheme"
-    tools:context="mx.spin.mobile.AnalizeResult">
+    tools:context=".AnalizeResultActivity">
 
     <include
         android:id="@+id/include_toolbar"

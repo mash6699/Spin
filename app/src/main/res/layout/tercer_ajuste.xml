@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
 
     <ImageView
         android:id="@+id/iv_desinfeccion"
@@ -13,15 +14,16 @@
         android:src="@drawable/acidetunkg" />
 
     <TextView
+        android:textSize="@dimen/title_size"
         android:id="@+id/txt_desinfectante"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/bluetextligth"
         android:text="Desinfectante"
-        android:textStyle="bold"
         android:gravity="center"/>
 
     <TextView
+        android:textSize="@dimen/content_size"
         android:id="@+id/txt_desinfectante_con"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,14 +31,15 @@
         android:text="condiciones"/>
 
     <TextView
+        android:textSize="@dimen/content_size"
         android:id="@+id/lbl_recomendation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:text="Recomendación"
-        android:textStyle="bold"/>
+        android:text="Recomendación"/>
 
     <TextView
+        android:textSize="@dimen/content_size"
         android:id="@+id/txt_desinfectante_rec"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,15 +55,16 @@
         android:src="@drawable/cristalingreencincokg" />
 
     <TextView
+        android:textSize="@dimen/title_size"
         android:id="@+id/txt_estab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/bluetextligth"
         android:text="Estabilizador"
-        android:textStyle="bold"
         android:gravity="center"/>
 
     <TextView
+        android:textSize="@dimen/content_size"
         android:id="@+id/txt_estab_con"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,13 +72,14 @@
         android:text="condiciones"/>
 
     <TextView
+        android:textSize="@dimen/content_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:text="Recomendación"
-        android:textStyle="bold"/>
+        android:text="Recomendación"/>
 
     <TextView
+        android:textSize="@dimen/content_size"
         android:id="@+id/txt_estab_rec"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -89,15 +94,16 @@
         android:src="@drawable/shockcincokg" />
 
     <TextView
+        android:textSize="@dimen/title_size"
         android:id="@+id/txt_shock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/bluetextligth"
         android:text="Shock Preventivo"
-        android:textStyle="bold"
         android:gravity="center"/>
 
     <TextView
+        android:textSize="@dimen/content_size"
         android:id="@+id/txt_shock_con"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -105,13 +111,14 @@
         android:text="condiciones"/>
 
     <TextView
+        android:textSize="@dimen/content_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:text="Recomendación"
-        android:textStyle="bold"/>
+        android:text="Recomendación"/>
 
     <TextView
+        android:textSize="@dimen/content_size"
         android:id="@+id/txt_shock_rec"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

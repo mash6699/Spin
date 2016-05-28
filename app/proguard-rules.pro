@@ -85,3 +85,5 @@
 -keepnames class * { @butterknife.InjectView *;}
 
 -dontwarn butterknife.Views$InjectViewProcessor
+-keep class org.spongycastle.** { *; }
+-dontwarn org.spongycastle.**
