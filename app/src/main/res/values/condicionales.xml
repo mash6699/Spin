@@ -1,14 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+<!-- PH Y ALCALINIDAD-->
+    <string name="ph_cond_10">ALERTA: El pH de tu agua esta por debajo del ideal.</string>
+    <string name="ph_cond_11">Excelente: esta detro del ideal para tu piscina.</string>
+    <string name="ph_cond_12">ALERTA: El pH de tu agua esta por arriba del ideal.</string>
+    <!-- PH Y ALCALINIDAD-->
 
-    <string name="dureza_cond_40">Cuidado: La <b>DUREZA</b> esta por debajo del ideal</string>
-    <string name="dureza_cond_41">Excelente: tu <b>DUREZA</b> esta balanceada</string>
+    <!--Turbidez y Metales-->
+    <string name="turb_cond_20"></string>
+    <string name="turb_cond_21"></string>
+    <string name="turb_cond_22"></string>
+    <!--Turbidez y Metales-->
+
+
+    <!--CLORO-->
+    <string name="cloro_cond_30">ALERTA: El Cloro libre esta por debajo del ideal.</string>
+    <string name="cloro_cond_31">Excelente: esta detro del ideal para tu piscina.</string>
+    <string name="cloro_cond_32">Cuidado: El Cloro libre esta por encima del ideal.</string>
+    <string name="cloraminas_cond_33">BIEN: Tus Cloraminas estan controladas por lo pronto.</string>
+    <string name="cloraminas_cond_34">Cuidado: Te recomendamos hacer una Súper Cloración a punto de ruptura para recuperar tu agua.</string>
+    <!--CLORO-->
+
+    <!--BROMO -->
+    <string name="bromo_cond_30">ALERTA: El Bromo Total esta por debajo del ideal</string>
+    <string name="bromo_cond_31">Excelente: esta detro del ideal para tu piscina</string>
+    <string name="bromo_cond_32">Cuidado: El Bromo Total esta por encima del ideal</string>
+    <!--BROMO -->
+
+
+
+    <string name="shock_cond_37">ALERTA: El Shock Preventivo esta por debajo del ideal.</string>
+    <string name="shock_cond_38">Excelente: tu piscina está protegida.</string>
+    <string name="shock_cond_39">Tienes más que suficiente protección, cuida los excesos.</string>
+
+    <string name="dureza_cond_40">Cuidado: La <b>DUREZA</b> esta por debajo del ideal.</string>
+    <string name="dureza_cond_41">Excelente: tu <b>DUREZA</b> esta balanceada.</string>
     <string name="dureza_cond_42">ALERTA: Debes disminuir la <b>DUREZA</b>.</string>
 
 
     <string name="std_cond_43">Cuidado: El STD esta por debajo del ideal.</string>
     <string name="std_cond_44">La dureza esta dentro del control.</string>
+
+
 
 
 </resources>

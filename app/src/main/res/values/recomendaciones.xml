@@ -2,6 +2,14 @@
 <resources>
 
 
+
+    <!-- Ph y Alcalinidad-->
+    <string name="ph_rec_10">Debes ajustar correctamente tu pH para garantizar la desinfección y comodidad de los usuarios.</string>
+    <string name="ph_rec_11">Revisa constantemente tu pH y eventualmente la Alcalinidad para mantener tu piscina correctamente.</string>
+    <string name="ph_rec_12">Debes ajustar correctamente tu pH para garantizar la desinfección y comodidad de los usuarios.</string>
+    <!-- Ph y Alcalinidad-->
+
+
     <!--Turbidez y Metales-->
     <string name="turb_rec_20">Excelente, tu piscina esta en buena forma.</string>
     <string name="turb_rec_21">Para solucionar el problema de Turbidez y Coloración debes agregar %1$s litros de CRISTALIN GREEN en el agua y poner a filtrar por 24 horas.</string>
@@ -10,6 +18,27 @@
     Al finalizar, se debera limpiar sus filtos.</string>
     <!--Turbidez y Metales-->
 
+
+    <!--CLORO-->
+    <string name="cloro_rec_30">Debes agregar %1$s gramos de "TRIZIDE" a tu piscina, estó la llevara a 3 ppm.</string>
+    <string name="cloro_rec_31">Revisa constantemente tus niveles de desinfectante para mantener sana el agua de tu piscina.</string>
+    <string name="cloro_rec_32">Si se requiere podrias bajar el nivel de Cloro rapidamente con "NEUTRACLOR" o bien esperar a que baje por el uso normal.</string>
+    <string name="cloraminas_rec_33">Excelente tu piscina esta en buen estado.</string>
+    <string name="cloraminas_rec_34">Debes agregar %1$s gramos de "SHOCK CORRECTIVO" a tu piscina y dejar el equipo de su piscina funcionando, estó eliminará las Cloraminas.</string>
+    <!--CLORO-->
+
+    <!--BROMO -->
+    <string name="bromo_rec_30">Utilice Clorizide Bromado, mediante un bromador, aumentando el flujo hasta lograr la concentracion deseada.</string>
+    <string name="bromo_rec_31">Revisa constantemente tus niveles de desinfectante para mantener sana el agua de tu piscina.</string>
+    <string name="bromo_rec_32">Utilice Clorizide Bromado, mediante un bromador, disminuyendo el flujo hasta lograr la concentracion deseada.</string>
+    <!--BROMO -->
+
+
+    <!-- Shock Preventivo-->
+    <string name="shock_rec_37">Debes agregar %1$s gramos de "SHOCK PREVENTIVO" a tu piscina, estó la llevara a 10 ppm.</string>
+    <string name="shock_rec_38">Excelente: tu piscina estra protegida.</string>
+    <string name="shock_rec_39">Tienes más que suficiente protección, cuida los excesos.</string>
+    <!-- Shock Preventivo-->
 
 
     <!-- Dureza-->

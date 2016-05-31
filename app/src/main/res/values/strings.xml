@@ -187,6 +187,12 @@
     <string name="lbl_temperatura">Temperatura</string>
     <string name="lbl_std">STD</string>
     <string name="lbl_cya">CYA (Estabilizador)</string>
+    <string name="lbl_estabilizador">Estabilizador</string>
+    <string name="lbl_shock_preventivo">Shock Preventivo</string>
+    <string name="lbl_desinfectante">Desinfectante</string>
+    <string name="lbl_estatus">Estatus: </string>
+    <string name="lbl_recomendacion">Recomendación: </string>
+    <string name="lbl_paso_intermedio">PASO INTERMEDIO  </string>
     <string name="lbl_desinfeccion">Desinfección</string>
     <string name="lbl_">Balance</string>
     <string name="lbl_cloro_libre">Cloro libre</string>

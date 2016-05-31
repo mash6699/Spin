@@ -350,18 +350,18 @@ public class FirstTimeActivity extends AppCompatActivity implements GoogleApiCli
         NetConnection.login(usuarioReg.getEmail(), usuarioReg.getPassword(), usuarioReg.getToken(), usuarioReg.getDiviceId(), new TextHttpResponseHandlerMessage() {
             public void onStart() {
                 super.onStart();
-                showMessage(FirstTimeActivity.this, getString(R.string.msg_progress_dialog));
+          //      showMessage(FirstTimeActivity.this, getString(R.string.msg_progress_dialog));
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                hideMessage();
+     //           hideMessage();
                 utilViews.showToastInView(getString(R.string.msg_generic_error));
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                hideMessage();
+     //           hideMessage();
                 try {
                     JSONObject jsonObject = new JSONObject(responseString);
 

@@ -1,129 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorPrimary">
 
-    <ImageView
-        android:id="@+id/iv_desinfeccion"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="fitXY"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/acidetunkg" />
-
-    <TextView
-        android:textSize="@dimen/title_size"
-        android:id="@+id/txt_desinfectante"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/bluetextligth"
-        android:text="Desinfectante"
-        android:gravity="center"/>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:textSize="@dimen/content_size"
-        android:id="@+id/txt_desinfectante_con"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="condiciones"/>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="5dp"
+            card_view:cardUseCompatPadding="true" >
 
-    <TextView
-        android:textSize="@dimen/content_size"
-        android:id="@+id/lbl_recomendation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="Recomendación"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:padding="8dp">
 
-    <TextView
-        android:textSize="@dimen/content_size"
-        android:id="@+id/txt_desinfectante_rec"
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/iv_desinfectante"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="5dp" />
+
+                <TextView
+                    android:id="@+id/title_desinfectante"
+                    android:textSize="@dimen/title_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/iv_desinfectante"
+                    android:paddingBottom="5dp"
+                    android:text="Desinfectante"/>
+
+                <TextView
+                    android:id="@+id/lbl_description_desinfectante"
+                    android:textSize="@dimen/content_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title_desinfectante"
+                    android:layout_toRightOf="@+id/iv_desinfectante"
+                    android:text="Descripción"
+                    android:textColor="#8b8b8b" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:visibility="gone"
+            android:id="@+id/cv_cloramidas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="5dp"
+            card_view:cardUseCompatPadding="true" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:padding="8dp">
+
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/iv_desinfectante_cloramidas"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="5dp" />
+
+                <TextView
+                    android:id="@+id/title_desinfectante_cloramidas"
+                    android:textSize="@dimen/title_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/iv_desinfectante_cloramidas"
+                    android:paddingBottom="5dp"
+                    android:text="Desinfectante"/>
+
+                <TextView
+                    android:id="@+id/lbl_description_desinfectante_cloramidas"
+                    android:textSize="@dimen/content_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title_desinfectante_cloramidas"
+                    android:layout_toRightOf="@+id/iv_desinfectante_cloramidas"
+                    android:text="Descripción"
+                    android:textColor="#8b8b8b" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"/>
+        android:layout_height="wrap_content">
 
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="5dp"
+            card_view:cardUseCompatPadding="true" >
 
-    <ImageView
-        android:id="@+id/iv_estabilizador"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="fitXY"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/cristalingreencincokg" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:padding="8dp">
 
-    <TextView
-        android:textSize="@dimen/title_size"
-        android:id="@+id/txt_estab"
+                <ImageView
+                    android:id="@+id/iv_estabilizador"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/cristalingreencincokg" />
+
+                <TextView
+                    android:id="@+id/title_estabilizador"
+                    android:textSize="@dimen/title_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/iv_estabilizador"
+                    android:paddingBottom="5dp"
+                    android:text="Estabilizador" />
+
+                <TextView
+                    android:id="@+id/lbl_description_estabilizador"
+                    android:textSize="@dimen/content_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title_estabilizador"
+                    android:layout_toRightOf="@+id/iv_estabilizador"
+                    android:text="Descripción"
+                    android:textColor="#8b8b8b" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/bluetextligth"
-        android:text="Estabilizador"
-        android:gravity="center"/>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:textSize="@dimen/content_size"
-        android:id="@+id/txt_estab_con"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="condiciones"/>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="5dp"
+            card_view:cardUseCompatPadding="true" >
 
-    <TextView
-        android:textSize="@dimen/content_size"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="Recomendación"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:padding="8dp">
 
-    <TextView
-        android:textSize="@dimen/content_size"
-        android:id="@+id/txt_estab_rec"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"/>
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/iv_shock"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/shockcincokg" />
 
+                <TextView
+                    android:id="@+id/title_shockpreventivo"
+                    android:textSize="@dimen/title_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/iv_shock"
+                    android:paddingBottom="5dp"
+                    android:text="Shock Preventivo" />
 
-    <ImageView
-        android:id="@+id/iv_shock"       android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="fitXY"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/shockcincokg" />
+                <TextView
+                    android:id="@+id/lbl_description_shockpreventivo"
+                    android:textSize="@dimen/content_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title_shockpreventivo"
+                    android:layout_toRightOf="@+id/iv_shock"
+                    android:text="Descripción"
+                    android:textColor="#8b8b8b" />
 
-    <TextView
-        android:textSize="@dimen/title_size"
-        android:id="@+id/txt_shock"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/bluetextligth"
-        android:text="Shock Preventivo"
-        android:gravity="center"/>
+            </RelativeLayout>
 
-    <TextView
-        android:textSize="@dimen/content_size"
-        android:id="@+id/txt_shock_con"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="condiciones"/>
+        </android.support.v7.widget.CardView>
 
-    <TextView
-        android:textSize="@dimen/content_size"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="Recomendación"/>
-
-    <TextView
-        android:textSize="@dimen/content_size"
-        android:id="@+id/txt_shock_rec"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"/>
-
+    </LinearLayout>
 
 
 </LinearLayout>

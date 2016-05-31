@@ -43,11 +43,7 @@
 
 
  <!-- PRIMER AJUSTE-->
-      <!-- Ph y Alcalinidad-->
-      <string name="recomendacion_10">Debes ajustar correctamente tu pH para garantizar la desinfección y comodidad de los usuarios.</string>
-      <string name="recomendacion_11">Revisa constantemente tu pH y eventualmente la Alcalinidad para mantener tu piscina correctamente.</string>
-      <string name="recomendcion_12">Debes ajustar correctamente tu pH para garantizar la desinfección y comodidad de los usuarios.</string>
-      <!-- Ph y Alcalinidad-->
+
  <!-- PRIMER AJUSTE-->
 
  <!-- SEGUNDO AJUSTE-->
@@ -68,19 +64,8 @@
    <string name="recomendacion_37">Utilice Clorizide Bromado, mediante un bromador, disminuyendo el flujo hasta lograr la concentracion deseada.</string>
    <!--Desinfectante-->
 
-   <!--Estabilizador-->
-   <string name="recomendacion_310">Debes agregar XXX gramos de "TRIZIDE" a tu piscina, estó la llevara a 3 ppm.</string>
-   <string name="recomendacion_311">Revisa constantemente tus niveles de desinfectante para mantener sana el agua de tu piscina.</string>
-   <string name="recomendacion_312">Si se requiere podrias bajar el nivel de Cloro rapidamente con "NEUTRACLOR" o bien esperar a que baje por el uso normal.</string>
-   <string name="recomendacion_313">Debes agregar XXX gramos de "TRIZIDE" a tu piscina, estó la llevara a 3 ppm.</string>
-   <string name="recomendacion_314">Si se requiere podrias bajar el nivel de Cloro rapidamente con "NEUTRACLOR" o bien esperar a que baje por el uso normal.</string>
-   <!--Estabilizador-->
 
-   <!-- Shock Preventivo-->
-   <string name="recomendacion_315">Debes agregar XXX gramos de "SHOCK PREVENTIVO" a tu piscina, estó la llevara a 10 ppm.</string>
-   <string name="recomendacion_316">Excelente: tu piscina estra protegida</string>
-   <string name="recomendacion_317">Tienes más que suficiente protección, cuida los excesos.</string>
-   <!-- Shock Preventivo-->
+
 
  <!-- TERCERO AJUSTE-->
 

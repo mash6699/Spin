@@ -26,6 +26,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.itextpdf.text.Document;
@@ -86,6 +87,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
     static double cya;
     static String metales;
     static int instalacion;
+    static double cloroTotal;
     static double cloroLibre;
     static double cloraminas;
     static double bromo;
@@ -167,7 +169,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
             }
         });
 
-setFonts();
+        setFonts();
         setValues();
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -198,18 +200,18 @@ setFonts();
             if (!permissions.isEmpty()) {
                 final String[] params = permissions.toArray(new String[permissions.size()]);
                 //
-            new AlertDialog.Builder(this).setMessage(Html.fromHtml("Para crear el PDF tienes que activar el almacenamiento de tu dispositivo.")).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                @TargetApi(Build.VERSION_CODES.M)
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    requestPermissions(params, REQUEST_PERMISSIONS);
-                }
-            }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+                new AlertDialog.Builder(this).setMessage(Html.fromHtml("Para crear el PDF tienes que activar el almacenamiento de tu dispositivo.")).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @TargetApi(Build.VERSION_CODES.M)
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        requestPermissions(params, REQUEST_PERMISSIONS);
+                    }
+                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                }
-            }).setTitle(getString(R.string.app_name)).setCancelable(false).create().show();
+                    }
+                }).setTitle(getString(R.string.app_name)).setCancelable(false).create().show();
 
             }else {
                 createPdf();
@@ -228,7 +230,7 @@ setFonts();
             case REQUEST_PERMISSIONS:
                 boolean isGranted = PermissionUtil.verifyPermissions(grantResults);
                 if (!isGranted) {
-                  createPdf();
+                    createPdf();
                 }
             default:
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -258,6 +260,7 @@ setFonts();
             if(instalacion == Constants.PISCINA_TECHADA){
                 bromo         = Double.parseDouble(spingApplication.getSs_27());
             }else{
+                cloroTotal    = Double.parseDouble(spingApplication.getSs_21());
                 cloroLibre    = Double.parseDouble(spingApplication.getSs_22());
                 cloraminas    = Double.parseDouble(spingApplication.getSs_23());
             }
@@ -312,6 +315,7 @@ setFonts();
 
         private static final String ARG_SECTION_NUMBER = "section_number";
         private View rootView;
+        private UtilViews utilViews ;
 
         @Nullable
         @Bind(R.id.primero)
@@ -328,22 +332,88 @@ setFonts();
         @Bind(R.id.cuarto)
         View viewCuaro;
 
-        @Nullable
-        @Bind(R.id.txt_metales_rec)
-        TextView turbidez_rec;
 
         @Nullable
-        @Bind(R.id.txt_dureza_con)
-        TextView dure_con;
+        @Bind(R.id.iv_ph)
+        ImageView iv_ph;
         @Nullable
-        @Bind(R.id.txt_dureza_rec)
-        TextView dure_rec;
+        @Bind(R.id.title_ph)
+        TextView title_ph;
         @Nullable
-        @Bind(R.id.txt_std_con)
-        TextView std_con;
+        @Bind(R.id.lbl_description_ph)
+        TextView lbl_ph;
+
+
         @Nullable
-        @Bind(R.id.txt_std_rec)
-        TextView std_rec;
+        @Bind(R.id.iv_desinfectante)
+        ImageView iv_desinfectante;
+        @Nullable
+        @Bind(R.id.title_desinfectante)
+        TextView title_desinfectante;
+        @Nullable
+        @Bind(R.id.lbl_description_desinfectante)
+        TextView lbl_desinfectante;
+        @Nullable
+        @Bind(R.id.cv_cloramidas)
+        View cv_cloramidad;
+        @Nullable
+        @Bind(R.id.iv_desinfectante_cloramidas)
+        ImageView iv_desinfectante_cloramidas;
+        @Nullable
+        @Bind(R.id.title_desinfectante_cloramidas)
+        TextView title_desinfectante_cloramidas;
+        @Nullable
+        @Bind(R.id.lbl_description_desinfectante_cloramidas)
+        TextView lbl_desinfectante_cloramidas;
+
+
+        @Nullable
+        @Bind(R.id.iv_estabilizador)
+        ImageView iv_estabilizador;
+        @Nullable
+        @Bind(R.id.title_estabilizador)
+        TextView title_estabilizador;
+        @Nullable
+        @Bind(R.id.lbl_description_estabilizador)
+        TextView lbl_estabilizador;
+
+        @Nullable
+        @Bind(R.id.iv_shock)
+        ImageView iv_shock;
+        @Nullable
+        @Bind(R.id. title_shockpreventivo)
+        TextView title_shock;
+        @Nullable
+        @Bind(R.id.lbl_description_shockpreventivo)
+        TextView lbl_shock;
+
+
+        @Nullable
+        @Bind(R.id.iv_turbidez)
+        ImageView iv_turbidez;
+        @Nullable
+        @Bind(R.id.title_turbidez)
+        TextView title_turbidez;
+        @Nullable
+        @Bind(R.id.lbl_description_turbidez)
+        TextView lbl_turbidez;
+
+        @Nullable
+        @Bind(R.id.iv_dureza)
+        ImageView iv_dureza;
+        @Nullable
+        @Bind(R.id.title_dureza)
+        TextView title_dureza;
+        @Nullable
+        @Bind(R.id.lbl_description_dureza)
+        TextView lbl_dureza;
+
+        @Nullable
+        @Bind(R.id.title_std)
+        TextView title_std;
+        @Nullable
+        @Bind(R.id.lbl_description_std)
+        TextView lbl_std;
 
 
         public PlaceholderFragment() {
@@ -362,12 +432,13 @@ setFonts();
                                  Bundle savedInstanceState) {
             rootView = inflater.inflate(R.layout.mantenimiento_content, container, false);
             ButterKnife.bind(this,rootView);
-
+            utilViews = new UtilViews().getInstance(getActivity());
             int position = getArguments().getInt(ARG_SECTION_NUMBER);
-
-            switch (position){
+            setFontsResults();
+            switch (position) {
                 case 1:
                     viewPrimero.setVisibility(View.VISIBLE);
+                    phRec();
                     break;
                 case 2:
                     viewSegundo.setVisibility(View.VISIBLE);
@@ -375,6 +446,9 @@ setFonts();
                     break;
                 case 3:
                     viewTercero.setVisibility(View.VISIBLE);
+                    desinfectanteRec();
+                    estabilizadorRec();
+                    shockPreventivoRec();
                     break;
                 case 4:
                     viewCuaro.setVisibility(View.VISIBLE);
@@ -386,51 +460,224 @@ setFonts();
             return rootView;
         }
 
-        protected void turbidezRec(){
-            //Positivo
-            if(turbidez < 0.5 && metales.equals("Negativo")){
-                turbidez_rec.setText(getString(R.string.turb_rec_20));
-            }else if(turbidez > 0.5d && metales.equals("Negativo")){
-                turbidez_rec.setText(getString(R.string.turb_rec_21,turbidezCal(1)));
-            }else if(turbidez > 0.5d && metales.equals("Positivo")){
-                turbidez_rec.setText(getString(R.string.turb_rec_21,turbidezCal(1)));
-            }else if(turbidez < 0.5 && metales.equals("Positivo")){
-                turbidez_rec.setText(getString(R.string.turb_rec_22,turbidezCal(2)));
-            }
+        void setFontsResults(){
+            Log.d(TAG, "setFontsResults");
+
+            title_ph.setTypeface(utilViews.setFontRegular());
+            lbl_ph.setTypeface(utilViews.setFontNormal());
+
+            title_desinfectante.setTypeface(utilViews.setFontRegular());
+            lbl_desinfectante.setTypeface(utilViews.setFontNormal());
+            title_desinfectante_cloramidas.setTypeface(utilViews.setFontRegular());
+            lbl_desinfectante_cloramidas.setTypeface(utilViews.setFontNormal());
+
+            title_estabilizador.setTypeface(utilViews.setFontRegular());
+            lbl_estabilizador.setTypeface(utilViews.setFontNormal());
+
+            title_shock.setTypeface(utilViews.setFontRegular());
+            lbl_shock.setTypeface(utilViews.setFontNormal());
+
+            title_turbidez.setTypeface(utilViews.setFontRegular());
+            lbl_turbidez.setTypeface(utilViews.setFontNormal());
+
+            title_dureza.setTypeface(utilViews.setFontRegular());
+            lbl_dureza.setTypeface(utilViews.setFontNormal());
+
+            title_std.setTypeface(utilViews.setFontRegular());
+            lbl_std.setTypeface(utilViews.setFontNormal());
         }
 
+        //TODO PRIMER AJUSTE
+          protected  void phRec(){
+              Log.d(TAG, "phRec");
+              StringBuilder phTxt = new StringBuilder();
+
+              if(ph < 7.4d){
+                  phTxt.append("<b>Estatus: </b>" + getString(R.string.ph_cond_10));
+                  phTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.ph_rec_10));
+
+                  if(alcalinidad > 120d){
+                      phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
+
+                  }else if (alcalinidad >= 80d || alcalinidad <= 120d){
+                      phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
+
+                  }else if (alcalinidad < 80d){
+                      phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
+
+                  }
+
+              }else if (ph >= 7.4d || ph <= 7.6d){
+                  phTxt.append("<b>Estatus: </b>" + getString(R.string.ph_cond_11));
+                  phTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.ph_rec_11));
+
+                  if (alcalinidad > 120d){
+                      phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
+
+                  }
+              }else if(ph > 7.6d){
+                  phTxt.append("<b>Estatus: </b>" + getString(R.string.ph_cond_12));
+                  phTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.ph_rec_12));
+
+                  if (alcalinidad >= 80d || alcalinidad <= 120d){
+                      phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
+
+                  }else if (alcalinidad > 120d){
+                      phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
+
+                  }else if(alcalinidad < 80d){
+                      phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
+
+                  }
+
+              }
+
+              lbl_ph.setText(Html.fromHtml(phTxt.toString()));
+
+          }
+
+        //TODO SEGUNDO AJUSTE
+        protected void turbidezRec(){
+            Log.d(TAG, "turbidezRec");
+            StringBuilder turbidezTxt = new StringBuilder();
+            if(turbidez < 0.5 && metales.equals(getString(R.string.lbl_negativo))){
+                turbidezTxt.append(("<b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.turb_rec_20)));
+            }else if(turbidez > 0.5d && metales.equals(getString(R.string.lbl_negativo))){
+                turbidezTxt.append("<b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.turb_rec_21,turbidezCal(1)));
+                iv_turbidez.setVisibility(View.VISIBLE);
+            }else if(turbidez > 0.5d && metales.equals(getString(R.string.lbl_positivo))){
+                turbidezTxt.append("<b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.turb_rec_21,turbidezCal(1)));
+                iv_turbidez.setVisibility(View.VISIBLE);
+            }else if(turbidez < 0.5 && metales.equals(getString(R.string.lbl_positivo))){
+                turbidezTxt.append("<b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.turb_rec_22,turbidezCal(2)));
+                iv_turbidez.setVisibility(View.VISIBLE);
+            }
+            lbl_turbidez.setText(Html.fromHtml(turbidezTxt.toString()));
+        }
+
+        //TODO TERCER AJUSTE
+        protected void desinfectanteRec(){
+            StringBuilder desinfTxt = new StringBuilder();
+            StringBuilder desinfCloramidasTxt = new StringBuilder();
+
+            if(instalacion == Constants.PISCINA_ABIERTA){
+                if(cloroLibre < 1d){
+                    desinfTxt.append("<b>Estatus: </b>" + getString(R.string.cloro_cond_30));
+                    desinfTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.cloro_rec_30, desinfectanteCloro()));
+                    iv_desinfectante.setVisibility(View.VISIBLE);
+                    iv_desinfectante.setBackgroundResource(R.drawable.trizidecuatrokg);
+                } else if(cloroLibre >= 1d || cloroLibre <= 5d){
+                    desinfTxt.append("<b>Estatus: </b>" + getString(R.string.cloro_cond_31));
+                    desinfTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.cloro_rec_31));
+
+                } else if(cloroLibre > 5d){
+                    desinfTxt.append("<b>Estatus: </b>" + getString(R.string.cloro_cond_32));
+                    desinfTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.cloro_rec_32));
+                    iv_desinfectante.setVisibility(View.VISIBLE);
+                    iv_desinfectante.setBackgroundResource(R.drawable.neutraclorcincokg);
+                }
+                cv_cloramidad.setVisibility(View.VISIBLE);
+
+                if(cloraminas < 2d){
+                    desinfCloramidasTxt.append("<b>Estatus: </b>" + getString(R.string.cloraminas_cond_33));
+                    desinfCloramidasTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.cloraminas_rec_33));
+
+                }else if(cloraminas >= 0.3d){
+                    desinfCloramidasTxt.append("<b>Estatus: </b>" + getString(R.string.cloraminas_cond_34));
+                    desinfCloramidasTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.cloraminas_rec_34, desinfectanteCloraminas()));
+
+                    iv_desinfectante_cloramidas.setVisibility(View.VISIBLE);
+                    iv_desinfectante_cloramidas.setBackgroundResource(R.drawable.shockcorrectivounkg);
+                }
+
+                lbl_desinfectante_cloramidas.setText(Html.fromHtml(desinfCloramidasTxt.toString()));
+
+            } else {
+
+                if(bromo < 2d){
+                    desinfTxt.append("<b>Estatus: </b>" + getString(R.string.bromo_cond_30));
+                    desinfTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.bromo_rec_30));
+                    iv_desinfectante.setVisibility(View.VISIBLE);
+                    iv_desinfectante.setBackgroundResource(R.drawable.clorizidebromadounkg);
+                } else if( bromo >= 2 || bromo <= 6){
+                    desinfTxt.append("<b>Estatus: </b>" + getString(R.string.bromo_cond_31));
+                    desinfTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.bromo_rec_31));
+
+                } else if (bromo > 6d){
+                    desinfTxt.append("<b>Estatus: </b>" + getString(R.string.bromo_cond_32));
+                    desinfTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.bromo_rec_32));
+                    iv_desinfectante.setVisibility(View.VISIBLE);
+                    iv_desinfectante.setBackgroundResource(R.drawable.clorizidebromadounkg);
+                }
+
+            }
+
+
+            lbl_desinfectante.setText(Html.fromHtml(desinfTxt.toString()));
+        }
+
+        protected void estabilizadorRec(){
+            StringBuilder estabTxt = new StringBuilder();
+ //if(cya )  TRIZIDE Y NEUTRACLOR
+
+            lbl_estabilizador.setText(Html.fromHtml(estabTxt.toString()));
+        }
+        protected void shockPreventivoRec(){
+            StringBuilder shockTxt = new StringBuilder();
+             double shockVal = calcularShock();
+
+            if(shockVal <= 2d){
+                shockTxt.append("<b>Estatus: </b>" + getString(R.string.shock_cond_37));
+                shockTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.shock_rec_37, shockVal));
+                iv_shock.setVisibility(View.VISIBLE);
+            }else if(shockVal >= 3d || shockVal <= 10){
+                shockTxt.append("<b>Estatus: </b>" + getString(R.string.shock_cond_38));
+                shockTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.shock_rec_38));
+            }else if(shockVal > 10){
+                shockTxt.append("<b>Estatus: </b>" + getString(R.string.shock_cond_39));
+                shockTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.shock_rec_39));
+            }
+
+            lbl_shock.setText(Html.fromHtml(shockTxt.toString()));
+        }
+
+        //TODO FIN TERCER AJUSTE
 
         //TODO CUARTO AJUSTE
         protected void durezaCondicional(){
             try{
+                StringBuilder durezaTxt = new StringBuilder();
                 Log.d(TAG ,"durezaFA val [" + dureza + " ]" );
                 if(dureza < 150d){
-                    dure_con.setText(Html.fromHtml(getString(R.string.dureza_cond_40)));
-                    dure_rec.setText(Html.fromHtml(getString(R.string.dureza_rec_40, dosificacionDur())));
+                    durezaTxt.append("<b>Estatus: </b>" + getString(R.string.dureza_cond_40));
+                    durezaTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>" + getString(R.string.dureza_rec_40, dosificacionDur()) );
+                    iv_dureza.setVisibility(View.VISIBLE);
                 }else if(dureza >= 150d || dureza <= 250d){
-                    dure_con.setText(Html.fromHtml(getString(R.string.dureza_cond_41)));
-                    dure_rec.setText(Html.fromHtml(getString(R.string.dureza_rec_41)));
+                    durezaTxt.append("<b>Estatus: </b>" + getString(R.string.dureza_cond_41));
+                    durezaTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>" + getString(R.string.dureza_rec_41) );
                 }else if (dureza > 250d){
-                    dure_con.setText(Html.fromHtml(getString(R.string.dureza_cond_42)));
-                    dure_rec.setText(Html.fromHtml(getString(R.string.dureza_rec_42)));
+                    durezaTxt.append("<b>Estatus: </b>" + getString(R.string.dureza_cond_42));
+                    durezaTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>" +getString(R.string.dureza_rec_42) );
                 }
+
+                lbl_dureza.setText(Html.fromHtml(durezaTxt.toString()));
             }catch (Exception ex){
                 Log.e(TAG, ex.getMessage());
-                dure_con.setText("ups");
-                dure_rec.setText("ups");
             }
         }
 
         protected void stdCondicional(){
+            StringBuilder stdTxt = new StringBuilder();
             if(std >= 2500d){
-                std_con.setText(getString(R.string.std_cond_43));
-                std_rec.setText(getString(R.string.std_rec_43));
+                stdTxt.append("<b>Estatus: </b>" + getString(R.string.std_cond_43));
+                stdTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>" + getString(R.string.std_rec_43));
             }else if( std < 2500d){
-                std_con.setText(getString(R.string.std_cond_44));
-                std_rec.setText(getString(R.string.std_rec_44));
+                stdTxt.append("<b>Estatus: </b>" + getString(R.string.std_cond_44));
+                stdTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.std_rec_44));
             }
+            lbl_std.setText(Html.fromHtml(stdTxt.toString()));
         }
-
+        //TODO FIN CUARTO AJUSTE
 
         //TODO CALCULO DOSIFICACION
         public String dosificacionDur(){
@@ -470,6 +717,43 @@ setFonts();
             Log.d(TAG, "UM [ "+ um +" ] turbidezCal = " + turbCal);
             return String.format(Constants.TWO_DECIMAL, turbCal);
         }
+
+        public Double calcularShock(){
+            double result = 0;
+            //TODO SI
+            if(um == 2){
+                result = (((15 * volumen) / 10 ) * ((150 - dureza)/10) );
+            }else {
+                result = (300 * volumen) / 10;
+            }
+            Log.d(TAG, "calcularShock: "  + result );
+            return  result;
+        }
+
+
+        public Double desinfectanteCloro(){
+            double result = 0;
+            //TODO SI '=((16 * "VOLUMEN EN METROS CUBICOS") / 10) * (3 - "Cloro Libre")
+            if(um == 2){
+                result = (((16 * volumen) / 10 ) * (3 - cloroLibre) );
+            }else {
+                // '=((16 * "VOLUMEN EN METROS CUBICOS") / 10) * (3 - "Cloro Libre")
+                result = (((16 * volumen) / 10) * (3 - cloroLibre) );
+            }
+            Log.d(TAG, "desinfectanteCloro: "  + result );
+            return  result;
+        }
+
+
+
+        public Double desinfectanteCloraminas(){
+            double result =   result = (((cloroTotal -cloroLibre) * 10 ) - cloroLibre);
+
+            Log.d(TAG, "desinfectanteCloraminas: "  + result );
+            return  result;
+        }
+
+
 
     }
 
@@ -718,7 +1002,7 @@ setFonts();
                                PdfContentByte[] canvases) {
             PdfContentByte canvas = canvases[PdfPTable.LINECANVAS];
             canvas.saveState();
-        //    canvas.setLineDash(0, 1);
+            //    canvas.setLineDash(0, 1);
             if ((border & PdfPCell.TOP) == PdfPCell.TOP) {
                 canvas.moveTo(position.getRight(), position.getTop());
                 canvas.lineTo(position.getLeft(), position.getTop());

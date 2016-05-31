@@ -1,95 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorPrimary">
 
-    <ImageView
-        android:id="@+id/iv_dureza"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="fitXY"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/cristalingreencincokg" />
-
-    <TextView
-        android:textSize="@dimen/title_size"
-        android:id="@+id/txt_dureza"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/lbl_dureza"
-        android:textColor="@color/bluetextligth"
-        android:gravity="center"/>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:textSize="@dimen/content_size"
-        android:id="@+id/txt_dureza_con"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="condiciones"/>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="5dp"
+            card_view:cardUseCompatPadding="true" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:padding="8dp">
+
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/iv_dureza"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/dural" />
+
+                <TextView
+                    android:id="@+id/title_dureza"
+                    android:textSize="@dimen/title_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/iv_dureza"
+                    android:paddingBottom="5dp"
+                    android:text="@string/lbl_dureza"/>
+
+                <TextView
+                    android:id="@+id/lbl_description_dureza"
+                    android:textSize="@dimen/content_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title_dureza"
+                    android:layout_toRightOf="@+id/iv_dureza"
+                    android:text="Descripción"
+                    android:textColor="#8b8b8b" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
 
 
-    <TextView
-        android:textSize="@dimen/content_size"
-        android:id="@+id/lbl_recomendation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="Recomendación"/>
-
-    <TextView
-        android:textSize="@dimen/content_size"
-        android:id="@+id/txt_dureza_rec"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="valor recomendacion"/>
+        android:layout_height="wrap_content">
 
+        <android.support.v7.widget.CardView
+            android:id="@+id/android_card_view_example"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="5dp"
+            card_view:cardUseCompatPadding="true" >
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:padding="8dp">
 
-    <ImageView
-        android:id="@+id/iv_std"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="fitXY"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/alcalosdiezkg" />
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/iv_std"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/acidetunkg" />
 
-    <TextView
-        android:textSize="@dimen/title_size"
-        android:id="@+id/txt_std"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/bluetextligth"
-        android:text="@string/lbl_std"
-        android:textStyle="bold"
-        android:gravity="center"/>
+                <TextView
+                    android:id="@+id/title_std"
+                    android:textSize="@dimen/title_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/iv_std"
+                    android:paddingBottom="5dp"
+                    android:text="@string/lbl_std"/>
 
-    <TextView
-        android:textSize="@dimen/content_size"
-        android:id="@+id/txt_std_con"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="condiciones"/>
+                <TextView
+                    android:id="@+id/lbl_description_std"
+                    android:textSize="@dimen/content_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title_std"
+                    android:layout_toRightOf="@+id/iv_std"
+                    android:text="Estatus: Recomendacion"
+                    android:textColor="#8b8b8b" />
 
-    <TextView
-        android:textSize="@dimen/content_size"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="Recomendación"/>
+            </RelativeLayout>
 
+        </android.support.v7.widget.CardView>
 
-    <TextView
-        android:textSize="@dimen/content_size"
-        android:id="@+id/txt_std_rec"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"/>
-
-
+    </LinearLayout>
 
 </LinearLayout>
