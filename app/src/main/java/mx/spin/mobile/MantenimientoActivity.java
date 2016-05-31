@@ -1,10 +1,12 @@
 package mx.spin.mobile;
 
 import android.annotation.TargetApi;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -28,6 +30,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -772,8 +775,8 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
             getFile();
             //Create time stamp
             Date date = new Date ();
-            String timeStamp = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(date);
-            String fileName = FILE_PATH + "/"+ FILE_FOLDER  +  "/"+ timeStamp + ".pdf";
+            String timeStamp = new SimpleDateFormat("dd-M-yyyy hh:mm:ss", Locale.getDefault()).format(date);
+            String fileName = FILE_PATH + "/"+ FILE_FOLDER  +  "/"+ spingApplication.getName() +"_" + timeStamp + ".pdf";
 
             File myFile = new File(fileName);
             myFile.createNewFile();
@@ -816,8 +819,10 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
             //Close the document
             document.close();
 
-            Snackbar.make( mView.getRootView(),"El PDF se creo correctamente se encuentra en la carpeta " + FILE_FOLDER, Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+          /*  Snackbar.make( mView.getRootView(),"El PDF se creo correctamente se encuentra en la carpeta " + FILE_FOLDER, Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();*/
+
+            openPDF(fileName);
 
 
 
@@ -838,6 +843,22 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
         } catch (IOException | DocumentException e) {
             e.printStackTrace();
             Log.e("PDF--->",  "exception", e);
+        }
+    }
+
+    public void openPDF(String name)
+    {
+       // File pdfFile = new File(Environment.getExternalStorageDirectory() + "/t/" + name);  // -> filename = maven.pdf
+        File pdfFile = new File(name);
+        Uri path = Uri.fromFile(pdfFile);
+        Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
+        pdfIntent.setDataAndType(path, "application/pdf");
+        pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        try{
+            startActivity(pdfIntent);
+        }catch(ActivityNotFoundException e){
+            Toast.makeText(MantenimientoActivity.this, "No Application available to view PDF", Toast.LENGTH_SHORT).show();
         }
     }
 

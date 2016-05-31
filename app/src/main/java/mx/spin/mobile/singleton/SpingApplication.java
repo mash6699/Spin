@@ -1,6 +1,10 @@
 package mx.spin.mobile.singleton;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import mx.spin.mobile.R;
 
 
 /**
@@ -111,6 +115,29 @@ public class SpingApplication extends Application{
             }
         }
         return INSTANCE;
+    }
+
+//TODO GUARDAR DATOS
+    public void saveSharedPreference(Context context) {
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                context.getString(R.string.spin_pool), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+
+    //TODO SETEADOR
+// if (name != null)
+       editor.putString("profile_name", name);
+
+        editor.commit();
+
+    }
+    public static SpingApplication loadSharedPreference(Context context) {
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                context.getString(R.string.spin_pool), Context.MODE_PRIVATE);
+        //READ DATA
+        // String profile_user_id = sharedPref.getString("profile_user_id", "");
+        return  new SpingApplication();
+
     }
 
     public void resetAllValues(){

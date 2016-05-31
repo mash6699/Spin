@@ -307,4 +307,5 @@
     <string name="gcm_defaultSenderId">76976375361</string>
 
     <string name="app_diskfile_name">spin_pref</string>
+    <string name="spin_pool">spin_pool</string>
 </resources>

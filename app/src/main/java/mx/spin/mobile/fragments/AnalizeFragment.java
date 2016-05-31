@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import mx.spin.mobile.AnalizeFirstStepActivity;
 import mx.spin.mobile.DrawerActivity;
 import mx.spin.mobile.PoolDetailActivity;
 import mx.spin.mobile.R;
@@ -113,8 +114,7 @@ public class AnalizeFragment extends android.support.v4.app.Fragment {
             spingApplication.setVolumen(piscina.getPool_volume());
             spingApplication.setTipoPiscina(Integer.parseInt(piscina.getPool_category()));
 
-            Intent detailIntent = new Intent(getActivity(), PoolDetailActivity.class);
-            startActivity(detailIntent);
+            startActivity(new Intent(getActivity(), AnalizeFirstStepActivity.class));
         } catch (Exception ex){
             Log.e(TAG, ex.getMessage());
         }
