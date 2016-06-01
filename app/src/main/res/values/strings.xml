@@ -217,6 +217,7 @@
 
     <string name="lbl_default_ppm">0 ppm</string>
 
+    <string name="lbl_calculo_ph">¿Cuentas con los indicadores para hace la prueba de "Demanda de Alcali" o "Demanda de Acido"?</string>
 
     <string name="lbl_select_ph">Selecciona el pH</string>
     <string name="lbl_select_alcali">Selecciona la Alcalinidad</string>

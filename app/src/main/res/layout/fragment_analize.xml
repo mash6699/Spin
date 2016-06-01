@@ -6,6 +6,26 @@
     style="@style/AppTheme"
     tools:context="mx.spin.mobile.fragments.AnalizeFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/header"
+        android:gravity="center_vertical"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Elige una piscina para analizarla"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_weight="2.5" />
+
+    </LinearLayout>
+
     <ListView
         android:id="@+id/listPools"
         android:layout_width="match_parent"

@@ -496,7 +496,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
               StringBuilder phTxt = new StringBuilder();
 
               if(ph < 7.4d){
-                  phTxt.append("<b>Estatus: </b>" + getString(R.string.ph_cond_10));
+                //  phTxt.append("<b>Estatus: </b>" + getString(R.string.ph_cond_10));
                   phTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.ph_rec_10));
 
                   if(alcalinidad > 120d){
@@ -511,7 +511,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
                   }
 
               }else if (ph >= 7.4d || ph <= 7.6d){
-                  phTxt.append("<b>Estatus: </b>" + getString(R.string.ph_cond_11));
+                 // phTxt.append("<b>Estatus: </b>" + getString(R.string.ph_cond_11));
                   phTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.ph_rec_11));
 
                   if (alcalinidad > 120d){
@@ -519,7 +519,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
 
                   }
               }else if(ph > 7.6d){
-                  phTxt.append("<b>Estatus: </b>" + getString(R.string.ph_cond_12));
+                  //phTxt.append("<b>Estatus: </b>" + getString(R.string.ph_cond_12));
                   phTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.ph_rec_12));
 
                   if (alcalinidad >= 80d || alcalinidad <= 120d){
@@ -532,7 +532,6 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
                       phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
 
                   }
-
               }
 
               lbl_ph.setText(Html.fromHtml(phTxt.toString()));
@@ -565,16 +564,16 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
 
             if(instalacion == Constants.PISCINA_ABIERTA){
                 if(cloroLibre < 1d){
-                    desinfTxt.append("<b>Estatus: </b>" + getString(R.string.cloro_cond_30));
+                    //desinfTxt.append("<b>Estatus: </b>" + getString(R.string.cloro_cond_30));
                     desinfTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.cloro_rec_30, desinfectanteCloro()));
                     iv_desinfectante.setVisibility(View.VISIBLE);
                     iv_desinfectante.setBackgroundResource(R.drawable.trizidecuatrokg);
                 } else if(cloroLibre >= 1d || cloroLibre <= 5d){
-                    desinfTxt.append("<b>Estatus: </b>" + getString(R.string.cloro_cond_31));
+                    //desinfTxt.append("<b>Estatus: </b>" + getString(R.string.cloro_cond_31));
                     desinfTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.cloro_rec_31));
 
                 } else if(cloroLibre > 5d){
-                    desinfTxt.append("<b>Estatus: </b>" + getString(R.string.cloro_cond_32));
+                   // desinfTxt.append("<b>Estatus: </b>" + getString(R.string.cloro_cond_32));
                     desinfTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.cloro_rec_32));
                     iv_desinfectante.setVisibility(View.VISIBLE);
                     iv_desinfectante.setBackgroundResource(R.drawable.neutraclorcincokg);
@@ -582,11 +581,11 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
                 cv_cloramidad.setVisibility(View.VISIBLE);
 
                 if(cloraminas < 2d){
-                    desinfCloramidasTxt.append("<b>Estatus: </b>" + getString(R.string.cloraminas_cond_33));
+                    //desinfCloramidasTxt.append("<b>Estatus: </b>" + getString(R.string.cloraminas_cond_33));
                     desinfCloramidasTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.cloraminas_rec_33));
 
                 }else if(cloraminas >= 0.3d){
-                    desinfCloramidasTxt.append("<b>Estatus: </b>" + getString(R.string.cloraminas_cond_34));
+                    //desinfCloramidasTxt.append("<b>Estatus: </b>" + getString(R.string.cloraminas_cond_34));
                     desinfCloramidasTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.cloraminas_rec_34, desinfectanteCloraminas()));
 
                     iv_desinfectante_cloramidas.setVisibility(View.VISIBLE);
@@ -598,16 +597,16 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
             } else {
 
                 if(bromo < 2d){
-                    desinfTxt.append("<b>Estatus: </b>" + getString(R.string.bromo_cond_30));
+                    //desinfTxt.append("<b>Estatus: </b>" + getString(R.string.bromo_cond_30));
                     desinfTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.bromo_rec_30));
                     iv_desinfectante.setVisibility(View.VISIBLE);
                     iv_desinfectante.setBackgroundResource(R.drawable.clorizidebromadounkg);
                 } else if( bromo >= 2 || bromo <= 6){
-                    desinfTxt.append("<b>Estatus: </b>" + getString(R.string.bromo_cond_31));
+                    //desinfTxt.append("<b>Estatus: </b>" + getString(R.string.bromo_cond_31));
                     desinfTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.bromo_rec_31));
 
                 } else if (bromo > 6d){
-                    desinfTxt.append("<b>Estatus: </b>" + getString(R.string.bromo_cond_32));
+                   // desinfTxt.append("<b>Estatus: </b>" + getString(R.string.bromo_cond_32));
                     desinfTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.bromo_rec_32));
                     iv_desinfectante.setVisibility(View.VISIBLE);
                     iv_desinfectante.setBackgroundResource(R.drawable.clorizidebromadounkg);
@@ -630,14 +629,14 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
              double shockVal = calcularShock();
 
             if(shockVal <= 2d){
-                shockTxt.append("<b>Estatus: </b>" + getString(R.string.shock_cond_37));
+               // shockTxt.append("<b>Estatus: </b>" + getString(R.string.shock_cond_37));
                 shockTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.shock_rec_37, shockVal));
                 iv_shock.setVisibility(View.VISIBLE);
             }else if(shockVal >= 3d || shockVal <= 10){
-                shockTxt.append("<b>Estatus: </b>" + getString(R.string.shock_cond_38));
+               // shockTxt.append("<b>Estatus: </b>" + getString(R.string.shock_cond_38));
                 shockTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.shock_rec_38));
             }else if(shockVal > 10){
-                shockTxt.append("<b>Estatus: </b>" + getString(R.string.shock_cond_39));
+               // shockTxt.append("<b>Estatus: </b>" + getString(R.string.shock_cond_39));
                 shockTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.shock_rec_39));
             }
 
@@ -652,14 +651,14 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
                 StringBuilder durezaTxt = new StringBuilder();
                 Log.d(TAG ,"durezaFA val [" + dureza + " ]" );
                 if(dureza < 150d){
-                    durezaTxt.append("<b>Estatus: </b>" + getString(R.string.dureza_cond_40));
+                   // durezaTxt.append("<b>Estatus: </b>" + getString(R.string.dureza_cond_40));
                     durezaTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>" + getString(R.string.dureza_rec_40, dosificacionDur()) );
                     iv_dureza.setVisibility(View.VISIBLE);
                 }else if(dureza >= 150d || dureza <= 250d){
-                    durezaTxt.append("<b>Estatus: </b>" + getString(R.string.dureza_cond_41));
+                  //  durezaTxt.append("<b>Estatus: </b>" + getString(R.string.dureza_cond_41));
                     durezaTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>" + getString(R.string.dureza_rec_41) );
                 }else if (dureza > 250d){
-                    durezaTxt.append("<b>Estatus: </b>" + getString(R.string.dureza_cond_42));
+                   // durezaTxt.append("<b>Estatus: </b>" + getString(R.string.dureza_cond_42));
                     durezaTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>" +getString(R.string.dureza_rec_42) );
                 }
 
@@ -672,10 +671,10 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
         protected void stdCondicional(){
             StringBuilder stdTxt = new StringBuilder();
             if(std >= 2500d){
-                stdTxt.append("<b>Estatus: </b>" + getString(R.string.std_cond_43));
+                //stdTxt.append("<b>Estatus: </b>" + getString(R.string.std_cond_43));
                 stdTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>" + getString(R.string.std_rec_43));
             }else if( std < 2500d){
-                stdTxt.append("<b>Estatus: </b>" + getString(R.string.std_cond_44));
+                //stdTxt.append("<b>Estatus: </b>" + getString(R.string.std_cond_44));
                 stdTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.std_rec_44));
             }
             lbl_std.setText(Html.fromHtml(stdTxt.toString()));
@@ -747,15 +746,12 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
             return  result;
         }
 
-
-
         public Double desinfectanteCloraminas(){
             double result =   result = (((cloroTotal -cloroLibre) * 10 ) - cloroLibre);
 
             Log.d(TAG, "desinfectanteCloraminas: "  + result );
             return  result;
         }
-
 
 
     }
@@ -809,12 +805,12 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
             document.open();
 
 
-            headerDocument(document, titleFont);
-            addInfoPool(document,fontContent);
+            //headerDocument(document, titleFont);
+            //addInfoPool(document,fontContent);
+            addTablePiscina(document, titleFont);
             addTableBalance(document, titleFont);
             addTableDesinfeccion(document, titleFont);
-
-            //addMantenimiento(document, titleFont);
+            addMantenimiento(document, titleFont);
 
             //Close the document
             document.close();
@@ -892,16 +888,62 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
         document.add(iPiscina);
     }
 
+    private void addTablePiscina(Document document, Font titleFont) throws DocumentException {
+        Log.d(TAG, "addTablePiscina");
+        Paragraph header = new Paragraph("Resultado del Análisis de la Piscina\n\n");
+        header.setAlignment(Paragraph.ALIGN_CENTER);
+        header.setFont(titleFont);
+        document.add(header);
+
+        PdfPTable table = new PdfPTable(2);
+     //   table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+        table.addCell(getResources().getString(R.string.lbl_nombre_piscina) + ": ");
+        table.addCell(spingApplication.getName());
+
+        table.addCell(getResources().getString(R.string.lbl_fecha_analisis)+ ": ");
+        table.addCell(spingApplication.getDate());
+
+        table.addCell(getResources().getString(R.string.lbl_volumen) + ": ");
+        table.addCell(spingApplication.getVolumen());
+
+        table.addCell(getResources().getString(R.string.lbl_unidad_volumen)+ ": ");
+        table.addCell(spingApplication.getUmVal());
+
+        table.addCell(getResources().getString(R.string.lbl_piscina)  + ": ");
+        table.addCell(spingApplication.gettPiscina());
+
+        table.addCell(getResources().getString(R.string.lbl_tipo_instalacion)+ ": ");
+        table.addCell(spingApplication.getInstalacionVal());
+
+        table.addCell(getResources().getString(R.string.lbl_tiempo_rotacion)+ ": ");
+        table.addCell(spingApplication.gettRotacion());
+
+        table.addCell(getResources().getString(R.string.lbl_velocidad_flujo) + ": ");
+        table.addCell(spingApplication.getvFlujo().trim());
+
+        table.addCell(getResources().getString(R.string.lbl_uso_piscina)+ ": ");
+        table.addCell(spingApplication.getUsoPiscina());
+
+        table.addCell(getResources().getString(R.string.lbl_equipo)+ ": " );
+        table.addCell("");
+
+        document.add(table);
+
+    }
+
 
     private void addTableBalance(Document document, Font titleFont) throws DocumentException {
         Log.d(TAG, "addTableBalance");
-        Paragraph iBalance = new Paragraph("Resultados Balance\n\n");
+        Paragraph iBalance = new Paragraph("\nResultados Balance\n\n");
         iBalance.setAlignment(Paragraph.ALIGN_CENTER);
         iBalance.setFont(titleFont);
         document.add(iBalance);
 
         PdfPTable table = new PdfPTable(3);
         table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.getDefaultCell().setVerticalAlignment(Element.ALIGN_CENTER);
         table.getDefaultCell().setBorder(PdfPCell.NO_BORDER);
 
         PdfPCell c1 = new PdfPCell(new Phrase(""));
@@ -922,24 +964,48 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
         table.addCell(c1);
         table.setHeaderRows(1);
 
-        table.addCell(getResources().getString(R.string.lbl_ph) + "\n" + spingApplication.getFres_11());
-        table.addCell(spingApplication.getFs_11());
+        table.addCell(getResources().getString(R.string.lbl_ph) + "\n" + spingApplication.getFres_11().toLowerCase());
+        c1 = new PdfPCell(new Phrase(spingApplication.getFs_11()));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setBorder(PdfPCell.NO_BORDER);
+        c1.setCellEvent(new DottedCell(PdfPCell.RIGHT));
+        table.addCell(c1);
         table.addCell(getResources().getString(R.string.lbl_conideal_ph));
 
-        table.addCell(getResources().getString(R.string.lbl_alcalinidad) + "\n" + spingApplication.getFres_12());
-        table.addCell(spingApplication.getFs_12());
+        table.addCell(getResources().getString(R.string.lbl_alcalinidad) + "\n" + spingApplication.getFres_12().toLowerCase());
+        c1 = new PdfPCell(new Phrase(spingApplication.getFs_12()));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setBorder(PdfPCell.NO_BORDER);
+        c1.setCellEvent(new DottedCell(PdfPCell.RIGHT ));
+        table.addCell(c1);
+        //table.addCell(spingApplication.getFs_12());
         table.addCell(getResources().getString(R.string.lbl_conideal_alcalinidad));
 
-        table.addCell(getResources().getString(R.string.lbl_std) + "\n" + spingApplication.getFres_15());
-        table.addCell(spingApplication.getFs_15());
+        table.addCell(getResources().getString(R.string.lbl_std) + "\n" + spingApplication.getFres_15().toLowerCase());
+        c1 = new PdfPCell(new Phrase(spingApplication.getFs_15()));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setBorder(PdfPCell.NO_BORDER);
+        c1.setCellEvent(new DottedCell(PdfPCell.RIGHT ));
+        table.addCell(c1);
+        //table.addCell(spingApplication.getFs_15());
         table.addCell(getResources().getString(R.string.lbl_conideal_std));
 
-        table.addCell(getResources().getString(R.string.lbl_dureza) + "\n" + spingApplication.getFres_13());
-        table.addCell(spingApplication.getFs_13());
+        table.addCell(getResources().getString(R.string.lbl_dureza) + "\n" + spingApplication.getFres_13().toLowerCase());
+        c1 = new PdfPCell(new Phrase(spingApplication.getFs_13()));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setBorder(PdfPCell.NO_BORDER);
+        c1.setCellEvent(new DottedCell(PdfPCell.RIGHT ));
+        table.addCell(c1);
+        //table.addCell(spingApplication.getFs_13());
         table.addCell(getResources().getString(R.string.lbl_conideal_dureza));
 
         table.addCell(getResources().getString(R.string.lbl_temperatura));
-        table.addCell(spingApplication.getFs_14());
+        c1 = new PdfPCell(new Phrase(spingApplication.getFs_14()));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setBorder(PdfPCell.NO_BORDER);
+        c1.setCellEvent(new DottedCell(PdfPCell.RIGHT ));
+        table.addCell(c1);
+        //table.addCell(spingApplication.getFs_14());
         table.addCell(getResources().getString(R.string.lbl_conideal_temperatura));
 
         document.add(table);
@@ -947,7 +1013,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
 
     private void addTableDesinfeccion(Document document, Font titleFont) throws DocumentException {
         Log.d(TAG, "addTableDesinfeccion");
-        Paragraph iDesinfeccion = new Paragraph("Resultados Desinfección\n\n");
+        Paragraph iDesinfeccion = new Paragraph("\nResultados Desinfección\n\n");
         iDesinfeccion.setAlignment(Paragraph.ALIGN_CENTER);
         iDesinfeccion.setFont(titleFont);
         document.add(iDesinfeccion);
@@ -977,30 +1043,60 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
         if (spingApplication.getTipoPiscina() ==  Constants.PISCINA_ABIERTA ){
             //TODO CLORO TOTAL
             //TODO CLORMINAS
-            table.addCell(getResources().getString(R.string.lbl_cloro_total) + "\n" + spingApplication.getSres_22());
-            table.addCell(spingApplication.getSs_22());
+            table.addCell(getResources().getString(R.string.lbl_cloro_total) + "\n" + spingApplication.getSres_22().toLowerCase());
+            c1 = new PdfPCell(new Phrase(spingApplication.getSs_22()));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            c1.setBorder(PdfPCell.NO_BORDER);
+            c1.setCellEvent(new DottedCell(PdfPCell.RIGHT ));
+            table.addCell(c1);
+           // table.addCell(spingApplication.getSs_22());
             table.addCell(getResources().getString(R.string.lbl_conideal_cloro_total));
 
-            table.addCell(getResources().getString(R.string.lbl_cloraminas) + "\n" + spingApplication.getSres_23());
-            table.addCell(spingApplication.getSs_23());
+            table.addCell(getResources().getString(R.string.lbl_cloraminas) + "\n" + spingApplication.getSres_23().toLowerCase());
+            c1 = new PdfPCell(new Phrase(spingApplication.getSs_23()));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            c1.setBorder(PdfPCell.NO_BORDER);
+            c1.setCellEvent(new DottedCell(PdfPCell.RIGHT ));
+            table.addCell(c1);
+           // table.addCell(spingApplication.getSs_23());
             table.addCell(getResources().getString(R.string.lbl_conideal_cloramidas));
         }else {
             //TODO BROMO
-            table.addCell(getResources().getString(R.string.lbl_bromo) + "\n" + spingApplication.getSres_27());
-            table.addCell(spingApplication.getSs_27());
+            table.addCell(getResources().getString(R.string.lbl_bromo) + "\n" + spingApplication.getSres_27().toLowerCase());
+            c1 = new PdfPCell(new Phrase(spingApplication.getSs_27()));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            c1.setBorder(PdfPCell.NO_BORDER);
+            c1.setCellEvent(new DottedCell(PdfPCell.RIGHT ));
+            table.addCell(c1);
+           // table.addCell(spingApplication.getSs_27());
             table.addCell(getResources().getString(R.string.lbl_conideal_bromo));
         }
 
-        table.addCell(getResources().getString(R.string.lbl_turbidez) + "\n" + spingApplication.getSres_24());
-        table.addCell(spingApplication.getSs_24());
+        table.addCell(getResources().getString(R.string.lbl_turbidez) + "\n" + spingApplication.getSres_24().toLowerCase());
+        c1 = new PdfPCell(new Phrase(spingApplication.getSs_24()));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setBorder(PdfPCell.NO_BORDER);
+        c1.setCellEvent(new DottedCell(PdfPCell.RIGHT ));
+        table.addCell(c1);
+        //table.addCell(spingApplication.getSs_24());
         table.addCell(getResources().getString(R.string.lbl_conideal_turbidez));
 
-        table.addCell(getResources().getString(R.string.lbl_metales)+ "\n" + spingApplication.getSres_25());
-        table.addCell(spingApplication.getSs_25());
+        table.addCell(getResources().getString(R.string.lbl_metales)+ "\n" + spingApplication.getSres_25().toLowerCase());
+        c1 = new PdfPCell(new Phrase(spingApplication.getSs_25()));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setBorder(PdfPCell.NO_BORDER);
+        c1.setCellEvent(new DottedCell(PdfPCell.RIGHT ));
+        table.addCell(c1);
+       // table.addCell(spingApplication.getSs_25());
         table.addCell(getResources().getString(R.string.lbl_conideal_metales) );
 
-        table.addCell(getResources().getString(R.string.lbl_cya) + "\n" + spingApplication.getSres_26());
-        table.addCell(spingApplication.getSs_26());
+        table.addCell(getResources().getString(R.string.lbl_cya) + "\n" + spingApplication.getSres_26().toLowerCase());
+        c1 = new PdfPCell(new Phrase(spingApplication.getSs_26()));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setBorder(PdfPCell.NO_BORDER);
+        c1.setCellEvent(new DottedCell(PdfPCell.RIGHT ));
+        table.addCell(c1);
+      //  table.addCell(spingApplication.getSs_26());
         table.addCell(getResources().getString(R.string.lbl_conideal_cya));
 
         document.add(table);
@@ -1008,7 +1104,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
 
 
     private void addMantenimiento(Document document, Font titleFont) throws DocumentException {
-        Paragraph mantenimiento = new Paragraph("MantenimientoActivity\n\n");
+        Paragraph mantenimiento = new Paragraph("\nMantenimientoActivity\n\n");
         mantenimiento.setAlignment(Paragraph.ALIGN_CENTER);
         mantenimiento.setFont(titleFont);
         document.add(mantenimiento);
@@ -1045,47 +1141,6 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
         }
     }
 
-    private static void addEmptyLine(Paragraph paragraph, int number) {
-        for (int i = 0; i < number; i++) {
-            paragraph.add(new Paragraph(" "));
-        }
-    }
-
-    /**
-     * To read a file from assets folder
-     * @param fileName
-     */
-    public String readFromFile(String fileName) {
-        StringBuilder returnString = new StringBuilder();
-        InputStream fIn = null;
-        InputStreamReader isr = null;
-        BufferedReader input = null;
-        try {
-            // File myFile = new File(Environment.getExternalStorageDirectory()+ File.separator + fileName);
-            fIn = getResources().getAssets()
-                    .open(fileName, Context.MODE_PRIVATE);
-            isr = new InputStreamReader(fIn);
-            input = new BufferedReader(isr);
-            String line = "";
-            while ((line = input.readLine()) != null) {
-                returnString.append(line);
-            }
-        } catch (Exception e) {
-            e.getMessage();
-        } finally {
-            try {
-                if (isr != null)
-                    isr.close();
-                if (fIn != null)
-                    fIn.close();
-                if (input != null)
-                    input.close();
-            } catch (Exception e2) {
-                e2.getMessage();
-            }
-        }
-        return returnString.toString();
-    }
 }
 
 
