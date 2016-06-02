@@ -16,6 +16,7 @@ import java.util.List;
 import mx.spin.mobile.connection.BoussinesSpin;
 import mx.spin.mobile.dao.Equipment;
 import mx.spin.mobile.dao.Pool;
+import mx.spin.mobile.singleton.Spin;
 import mx.spin.mobile.singleton.SpingApplication;
 import mx.spin.mobile.utils.CalculateVolume;
 import mx.spin.mobile.utils.UtilViews;
@@ -103,6 +104,8 @@ public class PoolDetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        SpingApplication local =  new Spin().getPool(getApplicationContext());
 
         boussinesSpin = new BoussinesSpin(this);
         utilViews = new UtilViews().getInstance(getApplicationContext());

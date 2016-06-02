@@ -102,7 +102,7 @@ public class SpingApplication extends Application{
     private String scon_27;
     private String srec_27;
 
-    private SpingApplication(){
+    public SpingApplication(){
 
     }
 
@@ -137,8 +137,8 @@ public class SpingApplication extends Application{
         //READ DATA
         // String profile_user_id = sharedPref.getString("profile_user_id", "");
         return  new SpingApplication();
-
     }
+
 
     public void resetAllValues(){
         System.out.println("resetsAllValues:...");

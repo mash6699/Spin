@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.fitness.data.Value;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -34,6 +35,7 @@ import mx.spin.mobile.dao.Equipment;
 import mx.spin.mobile.dao.Pool;
 import mx.spin.mobile.interfaces.ISpin;
 import mx.spin.mobile.network.NetConnection;
+import mx.spin.mobile.singleton.Spin;
 import mx.spin.mobile.singleton.SpingApplication;
 
 import java.util.ArrayList;
@@ -42,6 +44,7 @@ import java.util.List;
 import mx.spin.mobile.R;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import mx.spin.mobile.utils.CalculateVolume;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
 import mx.spin.mobile.utils.UtilViews;
 import mx.spin.mobile.utils.constants.Constants;
@@ -111,15 +114,37 @@ public class PoolsFragment extends Fragment implements ISpin {
 
     void gotoDetailPool(int position) {
         try{
-            Log.d(TAG, "gotoDetailPool position::" + position);
+
             piscina = misPiscinas.get(position);
 
+            int um = Integer.parseInt(piscina.getPool_um());
+            String usuPiscina = utilViews.getTipoSpa(Integer.parseInt(piscina.getPool_use()), Integer.parseInt(piscina.getPool_type()));
+            double tiempoRotacion = utilViews.getTiempoRotacion(Integer.parseInt(piscina.getPool_rotation()));
+            double volumen = Double.parseDouble(piscina.getPool_volume());
+            String velFlujo = CalculateVolume.getVelocidadFlujo(volumen, tiempoRotacion, um);
+            String instVal = piscina.getPool_category().equals(1) ? getResources().getString(R.string.lbl_techada) : getResources().getString(R.string.lbl_abierta);
+            String tipoVal = piscina.getPool_type().equals(1) ? getResources().getString(R.string.lbl_publica) : getResources().getString(R.string.lbl_privada);
+            Log.d(TAG, "gotoDetailPool position::" + position);
+
+
             spingApplication.setIdPiscina(piscina.getPool_id());
+            spingApplication.setIdUsuario(String.valueOf(piscina.getPool_user_id()));
             spingApplication.setName(piscina.getPool_name());
             spingApplication.setDate(utilViews.getDatePool());
-            spingApplication.setUm(piscina.getPool_um());
+            spingApplication.setTipoPiscina(Integer.parseInt(piscina.getPool_type()));
+            spingApplication.settPiscina(tipoVal);
+            spingApplication.setInstalacion(piscina.getPool_category());
+            spingApplication.setInstalacionVal(instVal);
+            spingApplication.setUsoPiscina(usuPiscina);
             spingApplication.setVolumen(piscina.getPool_volume());
-            spingApplication.setTipoPiscina(Integer.parseInt(piscina.getPool_category()));
+            spingApplication.setUm(piscina.getPool_um());
+            spingApplication.setUmVal(utilViews.getUnidadMedida(um));
+            //EQUIPOS
+            spingApplication.setvFlujo(velFlujo);
+            spingApplication.settRotacion(String.valueOf(tiempoRotacion));
+
+
+            new Spin().savePool(spingApplication, getContext());
 
             Intent detailIntent = new Intent(getActivity(), PoolDetailActivity.class);
             startActivity(detailIntent);

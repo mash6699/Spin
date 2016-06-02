@@ -804,7 +804,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
             Font titleFont= new Font(Font.FontFamily.HELVETICA, Font.BOLD);
             titleFont.setSize(16);
 
-            Font fontContent= new Font(Font.FontFamily.HELVETICA);
+            Font fontContent= new Font(Font.FontFamily.HELVETICA, Font.NORMAL);
             fontContent.setSize(12);
 
             //TODO document header attributes
@@ -1001,7 +1001,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
 
     private void addTableBalance(Document document, Font titleFont) throws DocumentException {
         Log.d(TAG, "addTableBalance");
-        Paragraph iBalance = new Paragraph("\nResultados Balance\n\n");
+        Paragraph iBalance = new Paragraph("\nBalance\n\n");
         iBalance.setAlignment(Paragraph.ALIGN_CENTER);
         iBalance.setFont(titleFont);
         document.add(iBalance);
@@ -1078,7 +1078,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
 
     private void addTableDesinfeccion(Document document, Font titleFont) throws DocumentException {
         Log.d(TAG, "addTableDesinfeccion");
-        Paragraph iDesinfeccion = new Paragraph("\nResultados Desinfección\n\n");
+        Paragraph iDesinfeccion = new Paragraph("\nDesinfección\n\n");
         iDesinfeccion.setAlignment(Paragraph.ALIGN_CENTER);
         iDesinfeccion.setFont(titleFont);
         document.add(iDesinfeccion);
@@ -1169,7 +1169,8 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
 
 
     private void addMantenimiento(Document document, Font titleFont) throws DocumentException {
-        Paragraph mantenimiento = new Paragraph("\nMantenimientoActivity\n\n");
+        Log.d(TAG,"addMantenimiento");
+        Paragraph mantenimiento = new Paragraph("\nMantenimiento\n\n");
         mantenimiento.setAlignment(Paragraph.ALIGN_CENTER);
         mantenimiento.setFont(titleFont);
         document.add(mantenimiento);
