@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,21 +35,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.ColumnText;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPCellEvent;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -491,52 +500,52 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
         }
 
         //TODO PRIMER AJUSTE
-          protected  void phRec(){
-              Log.d(TAG, "phRec");
-              StringBuilder phTxt = new StringBuilder();
+        protected  void phRec(){
+            Log.d(TAG, "phRec");
+            StringBuilder phTxt = new StringBuilder();
 
-              if(ph < 7.4d){
+            if(ph < 7.4d){
                 //  phTxt.append("<b>Estatus: </b>" + getString(R.string.ph_cond_10));
-                  phTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.ph_rec_10));
+                phTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.ph_rec_10));
 
-                  if(alcalinidad > 120d){
-                      phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
+                if(alcalinidad > 120d){
+                    phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
 
-                  }else if (alcalinidad >= 80d || alcalinidad <= 120d){
-                      phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
+                }else if (alcalinidad >= 80d || alcalinidad <= 120d){
+                    phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
 
-                  }else if (alcalinidad < 80d){
-                      phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
+                }else if (alcalinidad < 80d){
+                    phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
 
-                  }
+                }
 
-              }else if (ph >= 7.4d || ph <= 7.6d){
-                 // phTxt.append("<b>Estatus: </b>" + getString(R.string.ph_cond_11));
-                  phTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.ph_rec_11));
+            }else if (ph >= 7.4d || ph <= 7.6d){
+                // phTxt.append("<b>Estatus: </b>" + getString(R.string.ph_cond_11));
+                phTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.ph_rec_11));
 
-                  if (alcalinidad > 120d){
-                      phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
+                if (alcalinidad > 120d){
+                    phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
 
-                  }
-              }else if(ph > 7.6d){
-                  //phTxt.append("<b>Estatus: </b>" + getString(R.string.ph_cond_12));
-                  phTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.ph_rec_12));
+                }
+            }else if(ph > 7.6d){
+                //phTxt.append("<b>Estatus: </b>" + getString(R.string.ph_cond_12));
+                phTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.ph_rec_12));
 
-                  if (alcalinidad >= 80d || alcalinidad <= 120d){
-                      phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
+                if (alcalinidad >= 80d || alcalinidad <= 120d){
+                    phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
 
-                  }else if (alcalinidad > 120d){
-                      phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
+                }else if (alcalinidad > 120d){
+                    phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
 
-                  }else if(alcalinidad < 80d){
-                      phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
+                }else if(alcalinidad < 80d){
+                    phTxt.append("<br /><b> " + getString(R.string.lbl_paso_intermedio) +" </b><br />"  );
 
-                  }
-              }
+                }
+            }
 
-              lbl_ph.setText(Html.fromHtml(phTxt.toString()));
+            lbl_ph.setText(Html.fromHtml(phTxt.toString()));
 
-          }
+        }
 
         //TODO SEGUNDO AJUSTE
         protected void turbidezRec(){
@@ -573,7 +582,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
                     desinfTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.cloro_rec_31));
 
                 } else if(cloroLibre > 5d){
-                   // desinfTxt.append("<b>Estatus: </b>" + getString(R.string.cloro_cond_32));
+                    // desinfTxt.append("<b>Estatus: </b>" + getString(R.string.cloro_cond_32));
                     desinfTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.cloro_rec_32));
                     iv_desinfectante.setVisibility(View.VISIBLE);
                     iv_desinfectante.setBackgroundResource(R.drawable.neutraclorcincokg);
@@ -606,7 +615,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
                     desinfTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.bromo_rec_31));
 
                 } else if (bromo > 6d){
-                   // desinfTxt.append("<b>Estatus: </b>" + getString(R.string.bromo_cond_32));
+                    // desinfTxt.append("<b>Estatus: </b>" + getString(R.string.bromo_cond_32));
                     desinfTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.bromo_rec_32));
                     iv_desinfectante.setVisibility(View.VISIBLE);
                     iv_desinfectante.setBackgroundResource(R.drawable.clorizidebromadounkg);
@@ -620,23 +629,23 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
 
         protected void estabilizadorRec(){
             StringBuilder estabTxt = new StringBuilder();
- //if(cya )  TRIZIDE Y NEUTRACLOR
+            //if(cya )  TRIZIDE Y NEUTRACLOR
 
             lbl_estabilizador.setText(Html.fromHtml(estabTxt.toString()));
         }
         protected void shockPreventivoRec(){
             StringBuilder shockTxt = new StringBuilder();
-             double shockVal = calcularShock();
+            double shockVal = calcularShock();
 
             if(shockVal <= 2d){
-               // shockTxt.append("<b>Estatus: </b>" + getString(R.string.shock_cond_37));
+                // shockTxt.append("<b>Estatus: </b>" + getString(R.string.shock_cond_37));
                 shockTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.shock_rec_37, shockVal));
                 iv_shock.setVisibility(View.VISIBLE);
             }else if(shockVal >= 3d || shockVal <= 10){
-               // shockTxt.append("<b>Estatus: </b>" + getString(R.string.shock_cond_38));
+                // shockTxt.append("<b>Estatus: </b>" + getString(R.string.shock_cond_38));
                 shockTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.shock_rec_38));
             }else if(shockVal > 10){
-               // shockTxt.append("<b>Estatus: </b>" + getString(R.string.shock_cond_39));
+                // shockTxt.append("<b>Estatus: </b>" + getString(R.string.shock_cond_39));
                 shockTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>"  + getString(R.string.shock_rec_39));
             }
 
@@ -651,14 +660,14 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
                 StringBuilder durezaTxt = new StringBuilder();
                 Log.d(TAG ,"durezaFA val [" + dureza + " ]" );
                 if(dureza < 150d){
-                   // durezaTxt.append("<b>Estatus: </b>" + getString(R.string.dureza_cond_40));
+                    // durezaTxt.append("<b>Estatus: </b>" + getString(R.string.dureza_cond_40));
                     durezaTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>" + getString(R.string.dureza_rec_40, dosificacionDur()) );
                     iv_dureza.setVisibility(View.VISIBLE);
                 }else if(dureza >= 150d || dureza <= 250d){
-                  //  durezaTxt.append("<b>Estatus: </b>" + getString(R.string.dureza_cond_41));
+                    //  durezaTxt.append("<b>Estatus: </b>" + getString(R.string.dureza_cond_41));
                     durezaTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>" + getString(R.string.dureza_rec_41) );
                 }else if (dureza > 250d){
-                   // durezaTxt.append("<b>Estatus: </b>" + getString(R.string.dureza_cond_42));
+                    // durezaTxt.append("<b>Estatus: </b>" + getString(R.string.dureza_cond_42));
                     durezaTxt.append("<br /><b> " + getString(R.string.lbl_recomendacion) +" </b>" +getString(R.string.dureza_rec_42) );
                 }
 
@@ -778,10 +787,18 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
             myFile.createNewFile();
             OutputStream output = new FileOutputStream(myFile);
 
-            Document document = new Document();
+            // Document document = new Document();
+            HeaderTable event = new HeaderTable();
+
+            Document document = new Document(PageSize.A4, 36, 36, 20 + event.getTableHeight(), 36);
+
             PdfWriter writer = PdfWriter.getInstance(document, output);
-            writer.setLinearPageMode();
-            writer.setFullCompression();
+            // writer.setLinearPageMode();
+            // writer.setFullCompression();
+
+            writer.setPageEvent(event);
+            // HeaderTable event = new HeaderTable();
+
 
               /* Create Set Font and its Size */
             Font titleFont= new Font(Font.FontFamily.HELVETICA, Font.BOLD);
@@ -797,16 +814,15 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
             document.addCreator("www.spingrupo.com");
 
             document.addTitle("Sping Reporte");
-            document.setPageSize(PageSize.A4);
+            /*document.setPageSize(PageSize.A4);
             document.setMargins(36, 36, 36, 36);
-            document.setMarginMirroring(true);
+            document.setMarginMirroring(true);*/
 
             //TODO open document
             document.open();
 
 
-            //headerDocument(document, titleFont);
-            //addInfoPool(document,fontContent);
+
             addTablePiscina(document, titleFont);
             addTableBalance(document, titleFont);
             addTableDesinfeccion(document, titleFont);
@@ -844,7 +860,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
 
     public void openPDF(String name)
     {
-       // File pdfFile = new File(Environment.getExternalStorageDirectory() + "/t/" + name);  // -> filename = maven.pdf
+        // File pdfFile = new File(Environment.getExternalStorageDirectory() + "/t/" + name);  // -> filename = maven.pdf
         File pdfFile = new File(name);
         Uri path = Uri.fromFile(pdfFile);
         Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
@@ -859,13 +875,61 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
     }
 
 
-    public void headerDocument(Document document, Font titleFont) throws DocumentException{
-        Log.d(TAG, "headerDocument");
-        Paragraph header = new Paragraph("Resultado del Análisis de la Piscina\n\n");
-        header.setAlignment(Paragraph.ALIGN_CENTER);
-        header.setFont(titleFont);
-        document.add(header);
+
+    public class HeaderTable extends PdfPageEventHelper {
+        protected PdfPTable table;
+        protected float tableHeight;
+        protected PdfPCell cell;
+        protected Image img;
+        public HeaderTable() {
+            try{
+
+                Drawable drawable = getResources().getDrawable(R.drawable.logo_ajustado);
+                BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+                Bitmap bitmap = bitmapDrawable.getBitmap();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+
+                cell = new PdfPCell(new Phrase("Resultado del Análisis"));
+                img = Image.getInstance(stream.toByteArray());
+
+                img.scaleToFit(30, 30);
+                img.setAlignment(Chunk.ALIGN_MIDDLE);
+
+                table = new PdfPTable(2);
+                table.getDefaultCell().setBorder(PdfPCell.NO_BORDER);
+
+
+                table.setTotalWidth(523);
+
+                table.setWidths(new int[]{ 1, 9 });
+
+                table.setLockedWidth(true);
+
+                table.addCell(new PdfPCell(img, true));
+                table.addCell(cell);
+
+
+                tableHeight = table.getTotalHeight();
+
+            }catch (Exception ex){
+
+            }
+        }
+
+        public float getTableHeight() {
+            return tableHeight;
+        }
+
+        public void onEndPage(PdfWriter writer, Document document) {
+            table.writeSelectedRows(0, -1,
+                    document.left(),
+                    document.top() + ((document.topMargin() + tableHeight) / 2),
+                    writer.getDirectContent());
+        }
     }
+
 
     public void addInfoPool(Document document, Font fontContent) throws DocumentException{
         Log.d(TAG, "addInfoPool");
@@ -890,13 +954,14 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
 
     private void addTablePiscina(Document document, Font titleFont) throws DocumentException {
         Log.d(TAG, "addTablePiscina");
-        Paragraph header = new Paragraph("Resultado del Análisis de la Piscina\n\n");
+//        Paragraph header = new Paragraph("Resultado del Análisis de la Piscina\n\n");
+        Paragraph header = new Paragraph("Información de la Piscina\n\n");
         header.setAlignment(Paragraph.ALIGN_CENTER);
         header.setFont(titleFont);
         document.add(header);
 
         PdfPTable table = new PdfPTable(2);
-     //   table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
+        //   table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
         table.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
 
         table.addCell(getResources().getString(R.string.lbl_nombre_piscina) + ": ");
@@ -1049,7 +1114,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
             c1.setBorder(PdfPCell.NO_BORDER);
             c1.setCellEvent(new DottedCell(PdfPCell.RIGHT ));
             table.addCell(c1);
-           // table.addCell(spingApplication.getSs_22());
+            // table.addCell(spingApplication.getSs_22());
             table.addCell(getResources().getString(R.string.lbl_conideal_cloro_total));
 
             table.addCell(getResources().getString(R.string.lbl_cloraminas) + "\n" + spingApplication.getSres_23().toLowerCase());
@@ -1058,7 +1123,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
             c1.setBorder(PdfPCell.NO_BORDER);
             c1.setCellEvent(new DottedCell(PdfPCell.RIGHT ));
             table.addCell(c1);
-           // table.addCell(spingApplication.getSs_23());
+            // table.addCell(spingApplication.getSs_23());
             table.addCell(getResources().getString(R.string.lbl_conideal_cloramidas));
         }else {
             //TODO BROMO
@@ -1068,7 +1133,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
             c1.setBorder(PdfPCell.NO_BORDER);
             c1.setCellEvent(new DottedCell(PdfPCell.RIGHT ));
             table.addCell(c1);
-           // table.addCell(spingApplication.getSs_27());
+            // table.addCell(spingApplication.getSs_27());
             table.addCell(getResources().getString(R.string.lbl_conideal_bromo));
         }
 
@@ -1087,7 +1152,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
         c1.setBorder(PdfPCell.NO_BORDER);
         c1.setCellEvent(new DottedCell(PdfPCell.RIGHT ));
         table.addCell(c1);
-       // table.addCell(spingApplication.getSs_25());
+        // table.addCell(spingApplication.getSs_25());
         table.addCell(getResources().getString(R.string.lbl_conideal_metales) );
 
         table.addCell(getResources().getString(R.string.lbl_cya) + "\n" + spingApplication.getSres_26().toLowerCase());
@@ -1096,7 +1161,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
         c1.setBorder(PdfPCell.NO_BORDER);
         c1.setCellEvent(new DottedCell(PdfPCell.RIGHT ));
         table.addCell(c1);
-      //  table.addCell(spingApplication.getSs_26());
+        //  table.addCell(spingApplication.getSs_26());
         table.addCell(getResources().getString(R.string.lbl_conideal_cya));
 
         document.add(table);
