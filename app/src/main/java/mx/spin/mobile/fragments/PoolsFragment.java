@@ -149,6 +149,7 @@ public class PoolsFragment extends Fragment implements ISpin {
             Intent detailIntent = new Intent(getActivity(), PoolDetailActivity.class);
             startActivity(detailIntent);
         } catch (Exception ex){
+            utilViews.showToastInView("Por el momento no esta disponible el detalle de esta piscina. :(");
             Log.e(TAG, ex.getMessage());
         }
     }

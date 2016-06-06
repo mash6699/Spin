@@ -108,23 +108,23 @@ public class Spin {
                     context.getString(R.string.spin_pool), Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
 
-            editor.putInt("Ssp_25", spin.getSsp_25());
-            editor.putString("Ss_25()", spin.getSs_25());
+          //  editor.putInt("Ssp_25", spin.getSsp_25());
+            editor.putString("setSs_25", spin.getSs_25());
 
-            editor.putInt("Ssp_21", spin.getSsp_21());
-            editor.putString("Ss_21" ,spin.getSs_21());
+            //  editor.putInt("Ssp_21", spin.getSsp_21());
+            editor.putString("setSs_21" ,spin.getSs_21());
 
-            editor.putInt("Ssp_22", spin.getSsp_22());
-            editor.putString("Ss_22",spin.getSs_22());
+            // editor.putInt("Ssp_22", spin.getSsp_22());
+            editor.putString("setSs_22",spin.getSs_22());
 
-            editor.putInt("Ssp_24", spin.getSsp_24());
-            editor.putString("Ss_24",spin.getSs_24());
+            // editor.putInt("Ssp_24", spin.getSsp_24());
+            editor.putString("setSs_24",spin.getSs_24());
 
-            editor.putInt("Ssp_26" , spin.getSsp_26());
-            editor.putString("Ss_26", spin.getSs_26());
+            // editor.putInt("Ssp_26" , spin.getSsp_26());
+            editor.putString("setSs_26", spin.getSs_26());
 
-            editor.putInt("Ssp_27" ,spin.getSsp_27());
-            editor.putString("Ss_27" , spin.getSs_27());
+            // editor.putInt("Ssp_27" ,spin.getSsp_27());
+            editor.putString("setSs_27" , spin.getSs_27());
 
 
             editor.commit();
@@ -198,13 +198,13 @@ public class Spin {
             SharedPreferences sharedPref = context.getSharedPreferences(
                     context.getString(R.string.spin_pool), Context.MODE_PRIVATE);
 
-            application.setFs_11(sharedPref.getString("setFs_11",""));
-            application.setFs_12(sharedPref.getString("setFs_12",""));
-            application.setFs_13(sharedPref.getString("setFs_13",""));
-            application.setFs_14(sharedPref.getString("setFs_14",""));
-            application.setFs_15(sharedPref.getString("setFs_15",""));
-            application.setFs_16(sharedPref.getString("setFs_16",""));
-            application.setFs_17(sharedPref.getString("setFs_17",""));
+            application.setFs_11(sharedPref.getString("setFs_11",null));
+            application.setFs_12(sharedPref.getString("setFs_12",null));
+            application.setFs_13(sharedPref.getString("setFs_13",null));
+            application.setFs_14(sharedPref.getString("setFs_14",null));
+            application.setFs_15(sharedPref.getString("setFs_15",null));
+            application.setFs_16(sharedPref.getString("setFs_16",null));
+            application.setFs_17(sharedPref.getString("setFs_17",null));
 
         } catch (Exception ex) {
             Log.e(TAG,ex.getMessage());
@@ -219,23 +219,23 @@ public class Spin {
             SharedPreferences sharedPref = context.getSharedPreferences(
                     context.getString(R.string.spin_pool), Context.MODE_PRIVATE);
 
-            application.setSsp_25(sharedPref.getInt("Ssp_25",0 ));
-            application.setSs_25(sharedPref.getString("Ss_25()", "0"));
+            //application.setSsp_25(sharedPref.getInt("Ssp_25",0 ));
+            application.setSs_25(sharedPref.getString("setSs_25", null));
 
-            application.setSsp_21(sharedPref.getInt("Ssp_21", 0));
-            application.setSs_21( sharedPref.getString("Ss_21" ,"0"));
+            // application.setSsp_21(sharedPref.getInt("Ssp_21", 0));
+            application.setSs_21( sharedPref.getString("setSs_21" , null));
 
-            application.setSsp_22(sharedPref.getInt("Ssp_22", 0));
-            application.setSs_22(sharedPref.getString("Ss_22","0"));
+            //  application.setSsp_22(sharedPref.getInt("Ssp_22", 0));
+            application.setSs_22(sharedPref.getString("setSs_22", null));
 
-            application.setSsp_24(sharedPref.getInt("Ssp_24", 0));
-            application.setSs_24(sharedPref.getString("Ss_24","0"));
+            // application.setSsp_24(sharedPref.getInt("Ssp_24", 0));
+            application.setSs_24(sharedPref.getString("setSs_24", null));
 
-            application.setSsp_26(sharedPref.getInt("Ssp_26" , 0));
-            application.setSs_26(sharedPref.getString("Ss_26","0"));
+            // application.setSsp_26(sharedPref.getInt("Ssp_26" , 0));
+            application.setSs_26(sharedPref.getString("setSs_26",null));
 
-            application.setSsp_27(sharedPref.getInt("Ssp_27" ,0));
-            application.setSs_27(sharedPref.getString("Ss_27" ,"0"));
+            //  application.setSsp_27(sharedPref.getInt("Ssp_27" ,0));
+            application.setSs_27(sharedPref.getString("setSs_27" , null));
 
         } catch (Exception ex) {
             Log.e(TAG,ex.getMessage());

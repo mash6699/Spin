@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CheckedTextView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -250,7 +251,7 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
 
             sp_metales.setSelection(spingApplication.getSsp_25());
 
-            if (spingApplication.getSs_24() != null) {
+            if (!spingApplication.getSs_24().isEmpty()) {
                 sp_turbidez.setSelection(spingApplication.getSsp_24());
             } else {
                 sp_turbidez.setSelection(20);
@@ -291,7 +292,7 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         try{
-            String text = ((AppCompatTextView) view).getText().toString();
+            String text = ((CheckedTextView) view).getText().toString();
             Log.d(TAG, "onItemSelected  text[" + text + "] [" +position + "]");
             if(!text.isEmpty()){
                 Double valueItem = utilViews.replaceStringsToDouble(text);
@@ -300,23 +301,28 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
                         setValueCloramidas();
                         cloroTotal = valueItem;
                         spingApplication.setSsp_21(position);
+//                        spingApplication.setSs_21(String.valueOf(cloroTotal));
                         break;
                     case R.id.sp_clorolibre:
                         setValueCloramidas();
                         cloroLibre = valueItem;
                         spingApplication.setSsp_22(position);
+//                        spingApplication.setSs_22(String.valueOf(cloroLibre));
                         break;
                     case R.id.sp_turbidez:
                         turbidez = valueItem;
                         spingApplication.setSsp_24(position);
+//                        spingApplication.setSs_24(String.valueOf(turbidez));
                         break;
                     case R.id.sp_cya:
                         cya = valueItem;
                         spingApplication.setSsp_26(position);
+//                        spingApplication.setSs_26(String.valueOf(cya));
                         break;
                     case R.id.sp_bromo:
                         bromo = valueItem;
                         spingApplication.setSsp_27(position);
+//                        spingApplication.setSs_27(String.valueOf(bromo));
                         break;
                 }
             }

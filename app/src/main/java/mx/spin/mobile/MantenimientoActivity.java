@@ -70,6 +70,7 @@ import java.util.Locale;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import mx.spin.mobile.connection.BoussinesSpin;
+import mx.spin.mobile.singleton.Spin;
 import mx.spin.mobile.singleton.SpingApplication;
 import mx.spin.mobile.utils.PermissionUtil;
 import mx.spin.mobile.utils.UtilViews;
@@ -81,7 +82,8 @@ import mx.spin.mobile.utils.constants.Constants;
 public class MantenimientoActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback{
 
     private static String TAG = MantenimientoActivity.class.getName();
-    private static SpingApplication spingApplication = SpingApplication.getInstance();
+    //private static SpingApplication spingApplication = SpingApplication.getInstance();
+    private static SpingApplication spingApplication;
     private BoussinesSpin boussinesSpin;
     private static final int REQUEST_PERMISSIONS = 16;
     private UtilViews utilViews;
@@ -144,8 +146,13 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
         utilViews = new UtilViews().getInstance(this);
 
         txt_titleToolbar.setText(R.string.title_activity_mantenimiento);
+
+
+        spingApplication = new Spin().getMANResult(spingApplication,getApplicationContext());
+
         pool_name.setText(" " + spingApplication.getName());
         pool_date.setText(" " +spingApplication.getDate());
+
 
         int idPiscina = spingApplication.getIdPiscina();
         //   piscina = boussinesSpin.getPool(idPiscina);

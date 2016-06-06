@@ -165,7 +165,7 @@ public class AnalizeFirstStepActivity extends AppCompatActivity implements  Adap
 
             spingApplication =  new Spin().getPoolFS(spingApplication, getApplicationContext());
 
-            if(spingApplication.getFs_16()!= null ){
+            if(!spingApplication.getFs_16().isEmpty()){
                 Log.d(TAG, "setAppValues FS");
                 sp_ph.setSelection(spingApplication.getFsp_11());
                 sp_alcani.setSelection(spingApplication.getFsp_12());

@@ -139,7 +139,7 @@
     <string name="title_activity_send_analize">Enviar Análisis</string>
     <string name="title_activity_detalle_concepto">Detalle Concepto</string>
 
-    <string name="msg_generic_error">Lo sentimos ocurrió un error</string>
+    <string name="msg_generic_error">Lo sentimos ocurrió un error :(</string>
     <string name="msg_send">Enviando</string>
     <string name="msg_intenet_connection">No tiene conexión a internet.</string>
     <string name="msg_incomplete_data">Por favor verifica tus datos.</string>
