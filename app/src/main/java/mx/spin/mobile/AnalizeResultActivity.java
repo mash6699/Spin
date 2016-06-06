@@ -14,6 +14,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import mx.spin.mobile.singleton.Spin;
 import mx.spin.mobile.singleton.SpingApplication;
 import mx.spin.mobile.utils.UtilViews;
 import mx.spin.mobile.utils.constants.Constants;
@@ -24,7 +25,8 @@ import mx.spin.mobile.utils.constants.Constants;
 public class AnalizeResultActivity extends AppCompatActivity {
 
     private final static String TAG = AnalizeResultActivity.class.getName();
-    private SpingApplication spingApplication = SpingApplication.getInstance();
+  //  private SpingApplication spingApplication = SpingApplication.getInstance();
+    private SpingApplication spingApplication;
     private UtilViews utilViews;
 
     private int tipoPiscina;
@@ -164,6 +166,9 @@ public class AnalizeResultActivity extends AppCompatActivity {
 
         utilViews = new UtilViews().getInstance(this);
 
+        spingApplication = new Spin().getMANResult(spingApplication, getApplication());
+
+
         pool_name.setText(spingApplication.getName());
         pool_date.setText(spingApplication.getDate());
 
@@ -192,6 +197,9 @@ public class AnalizeResultActivity extends AppCompatActivity {
             Log.d(TAG, ":::setAnalisiInView:::");
 
             tipoPiscina = spingApplication.getTipoPiscina();
+
+         /*   spingApplication = new Spin().getPoolFS(getApplication());
+            spingApplication = new Spin().getPoolSS(getApplication());*/
 
             txt_ph.setText(spingApplication.getFs_11());
             txt_alcalinidad.setText(spingApplication.getFs_12());

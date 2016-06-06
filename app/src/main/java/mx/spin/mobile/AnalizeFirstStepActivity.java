@@ -21,6 +21,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import mx.spin.mobile.singleton.Spin;
 import mx.spin.mobile.singleton.SpingApplication;
 import mx.spin.mobile.utils.constants.Constants;
 import mx.spin.mobile.utils.UtilViews;
@@ -29,7 +30,8 @@ public class AnalizeFirstStepActivity extends AppCompatActivity implements  Adap
 
     private final static String TAG = AnalizeFirstStepActivity.class.getName();
     private UtilViews utilViews;
-    private SpingApplication spingApplication = SpingApplication.getInstance();
+    ///private SpingApplication spingApplication = SpingApplication.getInstance();
+    private SpingApplication spingApplication;
 
     double ph = 0d;
     double alcalinidad = 0d;
@@ -56,7 +58,6 @@ public class AnalizeFirstStepActivity extends AppCompatActivity implements  Adap
     @Nullable
     @Bind(R.id.tv_pool_date)
     TextView pool_date;
-
 
     @Nullable
     @Bind(R.id.tv_balance)
@@ -98,6 +99,9 @@ public class AnalizeFirstStepActivity extends AppCompatActivity implements  Adap
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         utilViews = new UtilViews().getInstance(getApplicationContext());
         txt_titleToolbar.setText(R.string.title_activity_analize_first_step);
+
+        spingApplication =  new Spin().getPool(getApplicationContext());
+
         pool_name.setText(spingApplication.getName());
         pool_date.setText(spingApplication.getDate());
 
@@ -126,45 +130,30 @@ public class AnalizeFirstStepActivity extends AppCompatActivity implements  Adap
             for(float p = 0f ; p <= 14.1f ; p  = p + 0.1f){
                 listPh.add( String.format(Constants.TWO_DECIMAL,p));
             }
-         /*   ArrayAdapter<String> arrayAdapterPh = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listPh);
-            arrayAdapterPh.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-      */    //  sp_ph.setAdapter(arrayAdapterPh);
             sp_ph.setAdapter(utilViews.getAdapterPH(getApplicationContext(), listPh));
 
             List<String> listAlcali = new ArrayList<String>();
             for(int x = 0 ; x <= 500 ; x = x+10){
                 listAlcali.add(""+x + " ppm");
             }
-/*            ArrayAdapter<String> arrayAdapterAlcali = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listAlcali);
-            arrayAdapterAlcali.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            sp_alcani.setAdapter(arrayAdapterAlcali);*/
             sp_alcani.setAdapter(utilViews.getAdapterPH(getApplicationContext(),listAlcali));
 
             List<String> listDureza = new ArrayList<String>();
             for(int d = 0 ; d <= 1000 ; d = d+10){
                 listDureza.add(""+d + " ppm");
             }
-          /*  ArrayAdapter<String> arrayAdapterDureza = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listDureza);
-            arrayAdapterDureza.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            sp_dureza.setAdapter(arrayAdapterDureza);*/
             sp_dureza.setAdapter(utilViews.getAdapterPH(getApplicationContext(),listDureza));
 
             List<String> listTemp = new ArrayList<String>();
             for(float t = 15f ; t <= 40f ; t = t + 0.5f){
                 listTemp.add(""+t + " °C");
             }
-            /*ArrayAdapter<String> arrayAdapterTemp = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listTemp);
-            arrayAdapterTemp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            sp_temp.setAdapter(arrayAdapterTemp);*/
             sp_temp.setAdapter(utilViews.getAdapterPH(getApplicationContext(),listTemp));
 
             List<String> listSTS = new ArrayList<String>();
             for(int s = 0 ; s <= 5000 ; s = s+50){
                 listSTS.add(""+s + " ppm");
             }
-          /*  ArrayAdapter<String> arrayAdapterSTD = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listSTS);
-            arrayAdapterSTD.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            sp_std.setAdapter(arrayAdapterSTD);*/
             sp_std.setAdapter(utilViews.getAdapterPH(getApplicationContext(),listSTS));
         }catch (Exception e){
             Log.e(TAG, e.getMessage());
@@ -173,6 +162,9 @@ public class AnalizeFirstStepActivity extends AppCompatActivity implements  Adap
 
     private void setAppValues(){
         try{
+
+            spingApplication =  new Spin().getPoolFS(spingApplication, getApplicationContext());
+
             if(spingApplication.getFs_16()!= null ){
                 Log.d(TAG, "setAppValues FS");
                 sp_ph.setSelection(spingApplication.getFsp_11());
@@ -301,7 +293,13 @@ public class AnalizeFirstStepActivity extends AppCompatActivity implements  Adap
             changeColorCalidad(calidad);
             spingApplication.setFs_16(is);
             setDataInApp();
+            new Spin().saveFS(spingApplication, getApplicationContext());
         }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     void changeColorCalidad(String texts){
@@ -323,8 +321,5 @@ public class AnalizeFirstStepActivity extends AppCompatActivity implements  Adap
         spingApplication.setFs_17(calidad);
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
 
-    }
 }

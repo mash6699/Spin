@@ -27,6 +27,7 @@ import mx.spin.mobile.dao.Equipment;
 import mx.spin.mobile.dao.Pool;
 import mx.spin.mobile.model.Volume;
 import mx.spin.mobile.network.NetConnection;
+import mx.spin.mobile.singleton.Spin;
 import mx.spin.mobile.singleton.SpingApplication;
 import mx.spin.mobile.utils.CalculateVolume;
 import mx.spin.mobile.utils.TextHttpResponseHandlerMessage;
@@ -529,7 +530,8 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
         Log.d(TAG, "setValuesPool:::");
         try{
 
-            piscina.setPool_user_id(Integer.parseInt(spingApplication.getIdUsuario()));
+         //   piscina.setPool_user_id(Integer.parseInt(spingApplication.getIdUsuario()));
+            piscina.setPool_user_id(new Spin().getUserID(getApplicationContext()));
             piscina.setPool_name(ed_namePool.getText().toString());
 
             piscina.setPool_category(String.valueOf(idTipoPool));

@@ -105,27 +105,17 @@ public class PoolDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        SpingApplication local =  new Spin().getPool(getApplicationContext());
+        SpingApplication spin =  new Spin().getPool(getApplicationContext());
 
         boussinesSpin = new BoussinesSpin(this);
         utilViews = new UtilViews().getInstance(getApplicationContext());
-        int idPiscina = spingApplication.getIdPiscina();
+        //int idPiscina = spingApplication.getIdPiscina();
+        int idPiscina = spin.getIdPiscina();
         piscina = boussinesSpin.getPool(idPiscina);
         if(piscina != null){
             Log.d(TAG, "IdPiscina:: " + idPiscina + " Nombre:: " + piscina.getPool_name());
             setPoolInView();
         }
-    }
-
-    @Nullable
-    @OnClick(R.id.btn_bitacora)
-    void goToBitacora(View view){
-        startActivity(new Intent(PoolDetailActivity.this, BitacoraActivity.class));
-    }
-    @Nullable
-    @OnClick(R.id.btn_analizar)
-    void goToAnalizar(View view){
-        startActivity(new Intent(PoolDetailActivity.this, AnalizeFirstStepActivity.class));
     }
 
     void setPoolInView(){
@@ -245,9 +235,17 @@ public class PoolDetailActivity extends AppCompatActivity {
             }
         }
     }
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+
+    @Nullable
+    @OnClick(R.id.btn_bitacora)
+    void goToBitacora(View view){
+        startActivity(new Intent(PoolDetailActivity.this, BitacoraActivity.class));
+    }
+
+    @Nullable
+    @OnClick(R.id.btn_analizar)
+    void goToAnalizar(View view){
+        startActivity(new Intent(PoolDetailActivity.this, AnalizeFirstStepActivity.class));
     }
 
     @Override

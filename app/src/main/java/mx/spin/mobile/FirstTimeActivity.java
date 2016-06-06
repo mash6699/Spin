@@ -38,6 +38,7 @@ import mx.spin.mobile.dao.User;
 import mx.spin.mobile.entitys.pojo.UsuarioReg;
 import mx.spin.mobile.interfaces.FBLoginCompleted;
 import mx.spin.mobile.network.NetConnection;
+import mx.spin.mobile.singleton.Spin;
 import mx.spin.mobile.singleton.SpingApplication;
 import mx.spin.mobile.social.FacebookLoginDelegate;
 import mx.spin.mobile.utils.SpinUtility;
@@ -443,6 +444,7 @@ public class FirstTimeActivity extends AppCompatActivity implements GoogleApiCli
                         Log.d("RegisterOK", responseString);
                         User mUser = new Gson().fromJson(sesion.toString(), User.class);
                         boussinesSpin.insertUser(mUser);
+                        new Spin().saveUserID(String.valueOf(mUser.getId_user()), getApplicationContext());
                         gotoDrawer();
                     }else{
                         String msj = jsonObject.get("msj").toString();

@@ -162,8 +162,10 @@ public class VolumeCalculateActivity extends AppCompatActivity implements View.O
     }
 
     void hiddenkb(){
-        InputMethodManager inputMethodManager = (InputMethodManager)  getApplication().getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
+        if(this.getCurrentFocus() != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getApplication().getSystemService(Activity.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
+        }
     }
 
     private void setActions(){

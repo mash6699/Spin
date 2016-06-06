@@ -20,6 +20,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import mx.spin.mobile.singleton.Spin;
 import mx.spin.mobile.singleton.SpingApplication;
 import mx.spin.mobile.utils.constants.Constants;
 import mx.spin.mobile.utils.UtilViews;
@@ -27,7 +28,8 @@ import mx.spin.mobile.utils.UtilViews;
 public class AnalizeSecondStepActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private final static String TAG = AnalizeSecondStepActivity.class.getName();
-    private SpingApplication spingApplication = SpingApplication.getInstance();
+    //private SpingApplication spingApplication = SpingApplication.getInstance();
+    private SpingApplication spingApplication;
     private UtilViews utilViews;
 
     private List<String> metalesList;
@@ -130,6 +132,8 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
 
         utilViews = new UtilViews().getInstance(getApplicationContext());
 
+        spingApplication = new Spin().getPool(getApplicationContext());
+
         pool_name.setText(spingApplication.getName());
         pool_date.setText(spingApplication.getDate());
 
@@ -177,36 +181,24 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
         for(float d = 0f ; d <= 20 ; d = d + 0.05f){
             listCloroTotal.add("" + String.format(Constants.TWO_DECIMAL, d) + " ppm");
         }
-      /*  ArrayAdapter<String> arrayAdapterCloroDpd = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listCloroDpd);
-        arrayAdapterCloroDpd.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_cloroTotal.setAdapter(arrayAdapterCloroDpd);*/
         sp_cloroTotal.setAdapter(utilViews.getAdapterPH(getApplicationContext(), listCloroTotal));
 
         List<String> listCloroLibre = new ArrayList<String>();
         for(float l = 0f ; l <= 20 ; l = l + 0.05f){
             listCloroLibre.add(""+String.format(Constants.TWO_DECIMAL, l) + " ppm");
         }
-      /*  ArrayAdapter<String> arrayAdapterCloroLibre = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listCloroLibre);
-        arrayAdapterCloroLibre.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_clorolibre.setAdapter(arrayAdapterCloroLibre);*/
         sp_clorolibre.setAdapter(utilViews.getAdapterPH(getApplicationContext(), listCloroLibre));
 
         List<String> listBromo = new ArrayList<String>();
         for(float d = 0f ; d <= 40 ; d = d + 0.05f){
             listBromo.add("" + String.format(Constants.TWO_DECIMAL, d) + " ppm");
         }
-       /* ArrayAdapter<String> arrayAdapterBromo = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listBromo);
-        arrayAdapterBromo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_bromo.setAdapter(arrayAdapterBromo);*/
         sp_bromo.setAdapter(utilViews.getAdapterPH(getApplicationContext(), listBromo));
 
         List<String> listTurbidez = new ArrayList<String>();
         for(float t = 0f ; t <= 5 ; t = t + 0.05f){
             listTurbidez.add(""+ String.format(Constants.TWO_DECIMAL, t) + " NTU");
         }
-    /*    ArrayAdapter<String> arrayAdapterTurbidez = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listTurbidez);
-        arrayAdapterTurbidez.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_turbidez.setAdapter(arrayAdapterTurbidez);*/
         sp_turbidez.setAdapter(utilViews.getAdapterPH(getApplicationContext(), listTurbidez));
 
 
@@ -214,9 +206,6 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
         for(int c = 0 ; c <= 160 ; c = c+10){
             listCYA.add(""+ c + " ppm");
         }
-       /* ArrayAdapter<String> arrayAdapterCYA = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listCYA);
-        arrayAdapterCYA.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_cya.setAdapter(arrayAdapterCYA);*/
         sp_cya.setAdapter(utilViews.getAdapterPH(getApplicationContext(), listCYA));
 
         metalesList  = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.metalesType)));
@@ -249,11 +238,15 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
         spingApplication.setSs_24(String.valueOf(turbidez));
         spingApplication.setSs_26(String.valueOf(cya));
         spingApplication.setSs_27(String.valueOf(bromo));
+
+        new Spin().saveSS(spingApplication, getApplicationContext());
     }
 
     void setDataInApp(){
         try {
             Log.d(TAG, "setDataInApp");
+
+            spingApplication = new Spin().getPoolSS(spingApplication, getApplicationContext());
 
             sp_metales.setSelection(spingApplication.getSsp_25());
 

@@ -35,18 +35,21 @@ public class SpingApplication extends Application{
     private String fres_11;
     private String fcon_11;
     private String frec_11;
+    private int fcolor_11;
 
     private String fs_12;
     private int fsp_12;
     private String fres_12;
     private String fcon_12;
     private String frec_12;
+    private int fcolor_12;
 
     private String fs_13;
     private int fsp_13;
     private String fres_13;
     private String fcon_13;
     private String frec_13;
+    private int fcolor_13;
 
     private String fs_14;
     private int fsp_14;
@@ -56,6 +59,7 @@ public class SpingApplication extends Application{
     private String fres_15;
     private String fcon_15;
     private String frec_15;
+    private int fcolor_15;
 
     private String fs_16;
     private String fs_17;
@@ -71,36 +75,42 @@ public class SpingApplication extends Application{
     private String sres_22;
     private String scon_22;
     private String srec_22;
+    private int scolor_22;
 
     private String ss_23;
     private int ssp_23;
     private String sres_23;
     private String scon_23;
     private String srec_23;
+    private int scolor_23;
 
     private String ss_24;
     private int ssp_24;
     private String sres_24;
     private String scon_24;
     private String srec_24;
+    private int scolor_24;
 
     private String ss_25;
     private int ssp_25;
     private String sres_25;
     private String scon_25;
     private String srec_25;
+    private int scolor_25;
 
     private String ss_26;
     private int ssp_26;
     private String sres_26;
     private String scon_26;
     private String srec_26;
+    private int scolor_26;
 
     private String ss_27;
     private int ssp_27;
     private String sres_27;
     private String scon_27;
     private String srec_27;
+    private int scolor_27;
 
     public SpingApplication(){
 
@@ -805,5 +815,85 @@ public class SpingApplication extends Application{
 
     public void setInstalacionVal(String instalacionVal) {
         this.instalacionVal = instalacionVal;
+    }
+
+    public int getFcolor_11() {
+        return fcolor_11;
+    }
+
+    public void setFcolor_11(int fcolor_11) {
+        this.fcolor_11 = fcolor_11;
+    }
+
+    public int getFcolor_12() {
+        return fcolor_12;
+    }
+
+    public void setFcolor_12(int fcolor_12) {
+        this.fcolor_12 = fcolor_12;
+    }
+
+    public int getFcolor_13() {
+        return fcolor_13;
+    }
+
+    public void setFcolor_13(int fcolor_13) {
+        this.fcolor_13 = fcolor_13;
+    }
+
+    public int getFcolor_15() {
+        return fcolor_15;
+    }
+
+    public void setFcolor_15(int fcolor_15) {
+        this.fcolor_15 = fcolor_15;
+    }
+
+    public int getScolor_22() {
+        return scolor_22;
+    }
+
+    public void setScolor_22(int scolor_22) {
+        this.scolor_22 = scolor_22;
+    }
+
+    public int getScolor_23() {
+        return scolor_23;
+    }
+
+    public void setScolor_23(int scolor_23) {
+        this.scolor_23 = scolor_23;
+    }
+
+    public int getScolor_24() {
+        return scolor_24;
+    }
+
+    public void setScolor_24(int scolor_24) {
+        this.scolor_24 = scolor_24;
+    }
+
+    public int getScolor_25() {
+        return scolor_25;
+    }
+
+    public void setScolor_25(int scolor_25) {
+        this.scolor_25 = scolor_25;
+    }
+
+    public int getScolor_26() {
+        return scolor_26;
+    }
+
+    public void setScolor_26(int scolor_26) {
+        this.scolor_26 = scolor_26;
+    }
+
+    public int getScolor_27() {
+        return scolor_27;
+    }
+
+    public void setScolor_27(int scolor_27) {
+        this.scolor_27 = scolor_27;
     }
 }
