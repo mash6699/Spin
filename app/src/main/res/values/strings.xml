@@ -141,12 +141,13 @@
 
     <string name="msg_generic_error">Lo sentimos ocurrió un error :(</string>
     <string name="msg_send">Enviando</string>
-    <string name="msg_intenet_connection">No tiene conexión a internet.</string>
+    <string name="msg_intenet_connection">No tiene conexión a internet. Offline Mode</string>
     <string name="msg_incomplete_data">Por favor verifica tus datos.</string>
     <string name="msg_incorrect_data">Datos incorrectos. Intente de nuevo.</string>
     <string name="msg_progress_dialog">Obteniendo información</string>
     <string name="msg_load">Cargando</string>
     <string name="msg_load_data">Cargando Datos</string>
+    <string name="msg_equipos">Equipos</string>
     <string name="msg_sin_equipos">No tiene equipos asociados</string>
     <string name="msg_tipo_pscina">Debes seleccionar un tipo de piscina.</string>
     <string name="msg_volume_error">Debes ingresar todos los datos, para realizar el cálculo del volumen.</string>

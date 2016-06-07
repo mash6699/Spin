@@ -41,6 +41,7 @@ public class PoolDao extends AbstractDao<Pool, Long> {
         public final static Property Pool_delete = new Property(15, String.class, "pool_delete", false, "POOL_DELETE");
         public final static Property Pool_status = new Property(16, String.class, "pool_status", false, "POOL_STATUS");
         public final static Property Analysis = new Property(17, String.class, "analysis", false, "ANALYSIS");
+        public final static Property Pool_equipment = new Property(18, String.class, "pool_equipment", false, "POOL_EQUIPMENT");
     };
 
 
@@ -73,7 +74,8 @@ public class PoolDao extends AbstractDao<Pool, Long> {
                 "\"POOL_MODIFY\" TEXT," + // 14: pool_modify
                 "\"POOL_DELETE\" TEXT," + // 15: pool_delete
                 "\"POOL_STATUS\" TEXT," + // 16: pool_status
-                "\"ANALYSIS\" TEXT);"); // 17: analysis
+                "\"ANALYSIS\" TEXT," + // 17: analysis
+                "\"POOL_EQUIPMENT\" TEXT);"); // 18: pool_equipment
     }
 
     /** Drops the underlying database table. */
@@ -176,6 +178,11 @@ public class PoolDao extends AbstractDao<Pool, Long> {
         if (analysis != null) {
             stmt.bindString(18, analysis);
         }
+ 
+        String pool_equipment = entity.getPool_equipment();
+        if (pool_equipment != null) {
+            stmt.bindString(19, pool_equipment);
+        }
     }
 
     /** @inheritdoc */
@@ -205,7 +212,8 @@ public class PoolDao extends AbstractDao<Pool, Long> {
             cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // pool_modify
             cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // pool_delete
             cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // pool_status
-            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17) // analysis
+            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // analysis
+            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18) // pool_equipment
         );
         return entity;
     }
@@ -231,6 +239,7 @@ public class PoolDao extends AbstractDao<Pool, Long> {
         entity.setPool_delete(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
         entity.setPool_status(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
         entity.setAnalysis(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
+        entity.setPool_equipment(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
      }
     
     /** @inheritdoc */

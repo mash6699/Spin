@@ -8,7 +8,7 @@ import android.os.Parcelable;
 /**
  * Entity mapped to table "STATES".
  */
-public class states implements Parcelable{
+public class states implements Parcelable {
 
     private String state_id;
     private String state;
@@ -24,6 +24,17 @@ public class states implements Parcelable{
     protected states(Parcel in) {
         state_id = in.readString();
         state = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(state_id);
+        dest.writeString(state);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<states> CREATOR = new Creator<states>() {
@@ -54,14 +65,4 @@ public class states implements Parcelable{
         this.state = state;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(state_id);
-        parcel.writeString(state);
-    }
 }

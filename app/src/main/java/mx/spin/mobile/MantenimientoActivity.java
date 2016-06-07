@@ -81,6 +81,11 @@ import mx.spin.mobile.utils.constants.Constants;
  */
 public class MantenimientoActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback{
 
+
+    public static final Font RED_NORMAL = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, BaseColor.RED);
+    public static final Font BLUE_BOLD = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.BLUE);
+    public static final Font GREEN_ITALIC = new Font(Font.FontFamily.HELVETICA, 12, Font.ITALIC, BaseColor.GREEN);
+
     private static String TAG = MantenimientoActivity.class.getName();
     //private static SpingApplication spingApplication = SpingApplication.getInstance();
     private static SpingApplication spingApplication;
@@ -432,6 +437,8 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
         @Nullable
         @Bind(R.id.lbl_description_std)
         TextView lbl_std;
+
+
 
 
         public PlaceholderFragment() {

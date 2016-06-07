@@ -8,7 +8,7 @@ import android.os.Parcelable;
 /**
  * Entity mapped to table "USER".
  */
-public class User implements Parcelable{
+public class User implements Parcelable {
 
     private Long id;
     private Integer id_user;
@@ -47,7 +47,6 @@ public class User implements Parcelable{
         profilePicture = in.readString();
         phone = in.readString();
     }
-
     public static final Creator<User> CREATOR = new Creator<User>() {
         @Override
         public User createFromParcel(Parcel in) {
@@ -131,19 +130,19 @@ public class User implements Parcelable{
     public void setTotal_pools(Integer total_pools) {
         this.total_pools = total_pools;
     }
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(country);
+        dest.writeString(state);
+        dest.writeString(mail);
+        dest.writeString(profilePicture);
+        dest.writeString(phone);
+    }
 
     @Override
     public int describeContents() {
         return 0;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(name);
-        parcel.writeString(country);
-        parcel.writeString(state);
-        parcel.writeString(mail);
-        parcel.writeString(profilePicture);
-        parcel.writeString(phone);
-    }
 }

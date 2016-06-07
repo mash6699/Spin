@@ -170,12 +170,17 @@ public class PoolDetailActivity extends AppCompatActivity {
         txt_moto_val.setTypeface(utilViews.setFontNormal());
 
         if(equipmentList.size() > 0){
-            txt_empty_equipos.setText("Equipos");
+            Log.d(TAG, "Servicio");
+            txt_empty_equipos.setText(getResources().getString(R.string.msg_equipos));
             Iterator<Equipment> iterator = equipmentList.iterator();
             while(iterator.hasNext()){
                 Equipment equipment = iterator.next();
                 parseEquipo(equipment);
             }
+        }else  if(piscina.getPool_equipment()!= null){
+            Log.d(TAG, "Local");
+            txt_empty_equipos.setText(getResources().getString(R.string.msg_equipos));
+            parseEquipo(piscina.getPool_equipment().toString());
         }
     }
 

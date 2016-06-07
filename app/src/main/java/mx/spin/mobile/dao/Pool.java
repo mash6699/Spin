@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Entity mapped to table "POOL".
  */
-public class Pool implements Parcelable{
+public class Pool implements Parcelable {
 
     private Long id;
     private Integer pool_id;
@@ -32,6 +32,7 @@ public class Pool implements Parcelable{
     private String pool_delete;
     private String pool_status;
     private String analysis;
+    private String pool_equipment;
 
     public String getmEquipos() {
         return mEquipos;
@@ -53,7 +54,7 @@ public class Pool implements Parcelable{
         this.id = id;
     }
 
-    public Pool(Long id, Integer pool_id, Integer pool_user_id, String pool_name, String pool_customer, String pool_address, String pool_form, String pool_category, String pool_use, String pool_type, String pool_rotation, String pool_volume, String pool_um, String pool_register, String pool_modify, String pool_delete, String pool_status, String analysis) {
+    public Pool(Long id, Integer pool_id, Integer pool_user_id, String pool_name, String pool_customer, String pool_address, String pool_form, String pool_category, String pool_use, String pool_type, String pool_rotation, String pool_volume, String pool_um, String pool_register, String pool_modify, String pool_delete, String pool_status, String analysis, String pool_equipment) {
         this.id = id;
         this.pool_id = pool_id;
         this.pool_user_id = pool_user_id;
@@ -72,6 +73,7 @@ public class Pool implements Parcelable{
         this.pool_delete = pool_delete;
         this.pool_status = pool_status;
         this.analysis = analysis;
+        this.pool_equipment = pool_equipment;
     }
 
     protected Pool(Parcel in) {
@@ -90,6 +92,7 @@ public class Pool implements Parcelable{
         pool_delete = in.readString();
         pool_status = in.readString();
         analysis = in.readString();
+        pool_equipment = in.readString();
     }
 
     public static final Creator<Pool> CREATOR = new Creator<Pool>() {
@@ -248,6 +251,14 @@ public class Pool implements Parcelable{
         this.analysis = analysis;
     }
 
+    public String getPool_equipment() {
+        return pool_equipment;
+    }
+
+    public void setPool_equipment(String pool_equipment) {
+        this.pool_equipment = pool_equipment;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -270,5 +281,6 @@ public class Pool implements Parcelable{
         parcel.writeString(pool_delete);
         parcel.writeString(pool_status);
         parcel.writeString(analysis);
+        parcel.writeString(pool_equipment);
     }
 }

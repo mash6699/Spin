@@ -8,7 +8,7 @@ import android.os.Parcelable;
 /**
  * Entity mapped to table "DEALERS".
  */
-public class dealers implements Parcelable{
+public class dealers implements Parcelable {
 
     private Long id;
     private Integer dealer_id;

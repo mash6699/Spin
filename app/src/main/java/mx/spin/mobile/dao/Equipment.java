@@ -41,6 +41,18 @@ public class Equipment implements Parcelable {
         Equipment = in.readString();
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(pooleq_qty);
+        dest.writeString(pooleq_hp);
+        dest.writeString(Equipment);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
     public static final Creator<Equipment> CREATOR = new Creator<Equipment>() {
         @Override
         public Equipment createFromParcel(Parcel in) {
@@ -109,15 +121,4 @@ public class Equipment implements Parcelable {
         this.Equipment = Equipment;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(pooleq_qty);
-        parcel.writeString(pooleq_hp);
-        parcel.writeString(Equipment);
-    }
 }

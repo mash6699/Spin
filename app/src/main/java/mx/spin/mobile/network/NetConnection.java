@@ -200,8 +200,8 @@ public class NetConnection {
         postValues.put("rotationTime", String.valueOf(pool.getPool_rotation()));
         postValues.put("volume", String.valueOf(pool.getPool_volume()));
         postValues.put("um", String.valueOf(pool.getPool_um()));
-        if(pool.getmEquipos() != null){
-            postValues.put("equipment", pool.getmEquipos().toString().replace("'",""));
+        if(pool.getPool_equipment() != null){
+            postValues.put("equipment", pool.getPool_equipment().toString().replace("'",""));
         }else{
             postValues.put("equipment","");
         }
@@ -225,7 +225,11 @@ public class NetConnection {
         postValues.put("rotationTime", String.valueOf(pool.getPool_rotation()));
         postValues.put("volume", String.valueOf(pool.getPool_volume()));
         postValues.put("um", String.valueOf(pool.getPool_um()));
-        postValues.put("equipment", pool.getmEquipos());
+        if(pool.getPool_equipment() != null){
+            postValues.put("equipment", pool.getPool_equipment().toString().replace("'",""));
+        }else{
+            postValues.put("equipment","");
+        }
         postValues.put("pool_id", String.valueOf(pool.getPool_id()));
         client.post(url, new RequestParams(postValues), responseHandler);
     }
