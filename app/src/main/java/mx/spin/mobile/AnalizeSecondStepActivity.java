@@ -250,39 +250,15 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
             spingApplication = new Spin().getPoolSS(spingApplication, getApplicationContext());
 
             sp_metales.setSelection(spingApplication.getSsp_25());
-
-            if (!spingApplication.getSs_24().isEmpty()) {
-                sp_turbidez.setSelection(spingApplication.getSsp_24());
-            } else {
-                sp_turbidez.setSelection(20);
-            }
-
-            if (spingApplication.getSsp_26() > 0) {
-                sp_cya.setSelection(spingApplication.getSsp_26());
-            } else {
-                sp_cya.setSelection(5);
-            }
+            sp_turbidez.setSelection(spingApplication.getSsp_24());
+            sp_cya.setSelection(spingApplication.getSsp_26());
 
             if (idTipoPiscina == Constants.PISCINA_ABIERTA) {
+                sp_clorolibre.setSelection(spingApplication.getSsp_22());
+                sp_cloroTotal.setSelection(spingApplication.getSsp_21());
 
-                if (spingApplication.getSsp_22() > 0) {
-                    sp_clorolibre.setSelection(spingApplication.getSsp_22());
-                } else {
-                    sp_clorolibre.setSelection(20);
-                }
-
-                if (spingApplication.getSsp_21() > 0) {
-                    sp_cloroTotal.setSelection(spingApplication.getSsp_21());
-                } else {
-                    sp_cloroTotal.setSelection(60);
-
-                }
             } else {
-                if (spingApplication.getSsp_27() > 0) {
-                    sp_bromo.setSelection(spingApplication.getSsp_27());
-                } else {
-                    sp_bromo.setSelection(60);
-                }
+                sp_bromo.setSelection(spingApplication.getSsp_27());
             }
         }catch (Exception ex){
             Log.e(TAG, ex.getMessage());
@@ -301,28 +277,28 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
                         setValueCloramidas();
                         cloroTotal = valueItem;
                         spingApplication.setSsp_21(position);
-//                        spingApplication.setSs_21(String.valueOf(cloroTotal));
+                        spingApplication.setSs_21(String.valueOf(cloroTotal));
                         break;
                     case R.id.sp_clorolibre:
                         setValueCloramidas();
                         cloroLibre = valueItem;
                         spingApplication.setSsp_22(position);
-//                        spingApplication.setSs_22(String.valueOf(cloroLibre));
+                        spingApplication.setSs_22(String.valueOf(cloroLibre));
                         break;
                     case R.id.sp_turbidez:
                         turbidez = valueItem;
                         spingApplication.setSsp_24(position);
-//                        spingApplication.setSs_24(String.valueOf(turbidez));
+                        spingApplication.setSs_24(String.valueOf(turbidez));
                         break;
                     case R.id.sp_cya:
                         cya = valueItem;
                         spingApplication.setSsp_26(position);
-//                        spingApplication.setSs_26(String.valueOf(cya));
+                        spingApplication.setSs_26(String.valueOf(cya));
                         break;
                     case R.id.sp_bromo:
                         bromo = valueItem;
                         spingApplication.setSsp_27(position);
-//                        spingApplication.setSs_27(String.valueOf(bromo));
+                        spingApplication.setSs_27(String.valueOf(bromo));
                         break;
                 }
             }
@@ -344,9 +320,6 @@ public class AnalizeSecondStepActivity extends AppCompatActivity implements Adap
         boolean validate = true;
         double comparator = 0d;
         StringBuilder message = new StringBuilder();
-
-
-        //spingApplication.setSs_27(String.valueOf();
 
         //TODO VALIDAR CLORO
         if(idTipoPiscina == Constants.PISCINA_ABIERTA){

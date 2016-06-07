@@ -85,9 +85,6 @@ public class AnalizeResultActivity extends AppCompatActivity {
     @Nullable
     @Bind(R.id.tv_cloro_libre)
     TextView txt_cloroLibre;
-    /*@Nullable
-    @Bind(R.id.tv_cloro_total)
-    TextView txt_cloroTotal;*/
     @Nullable
     @Bind(R.id.tv_cloramidas)
     TextView txt_cloramidas;
@@ -165,9 +162,7 @@ public class AnalizeResultActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         utilViews = new UtilViews().getInstance(this);
-
-        spingApplication = new Spin().getMANResult(spingApplication, getApplication());
-
+        spingApplication = new Spin().getBalanceAndDesinfeccion(spingApplication, getApplication());
 
         pool_name.setText(spingApplication.getName());
         pool_date.setText(spingApplication.getDate());
@@ -182,7 +177,7 @@ public class AnalizeResultActivity extends AppCompatActivity {
         tabHost.addTab(tab1);
         tabHost.addTab(tab2);
         setFonts();
-        setAnalisiInView();
+        setAnalisisInView();
     }
 
     void setFonts(){
@@ -192,14 +187,12 @@ public class AnalizeResultActivity extends AppCompatActivity {
         pool_date.setTypeface(utilViews.setFontNormal());
     }
 
-    protected void setAnalisiInView(){
+    protected void setAnalisisInView(){
         try{
-            Log.d(TAG, ":::setAnalisiInView:::");
+            Log.d(TAG, ":::setAnalisisInView:::");
 
             tipoPiscina = spingApplication.getTipoPiscina();
 
-         /*   spingApplication = new Spin().getPoolFS(getApplication());
-            spingApplication = new Spin().getPoolSS(getApplication());*/
 
             txt_ph.setText(spingApplication.getFs_11());
             txt_alcalinidad.setText(spingApplication.getFs_12());
@@ -242,6 +235,8 @@ public class AnalizeResultActivity extends AppCompatActivity {
 
             evaluateResults();
 
+
+
         }catch (Exception ex){
             Log.d(TAG, ex.getMessage());
         }
@@ -264,11 +259,14 @@ public class AnalizeResultActivity extends AppCompatActivity {
             if (ph > 7.6d) {
                 result_ph.setText(getResources().getString(R.string.lbl_rango_arriba));
                 result_ph.setTextColor(utilViews.getColorView(ROJO));
+                spingApplication.setFcolor_11(ROJO);
             } else if (ph < 7.4d) {
                 result_ph.setText(getResources().getString(R.string.lbl_rango_debajo));
                 result_ph.setTextColor(utilViews.getColorView(AMARILLO));
+                spingApplication.setFcolor_11(AMARILLO);
             } else {
                 result_ph.setText(getResources().getString(R.string.lbl_rango_dentro));
+                spingApplication.setFcolor_11(0);
             }
 
             spingApplication.setFres_11(result_ph.getText().toString());
@@ -279,11 +277,14 @@ public class AnalizeResultActivity extends AppCompatActivity {
             if (alcali > 120d) {
                 result_alcalindad.setText(getResources().getString(R.string.lbl_rango_arriba));
                 result_alcalindad.setTextColor(utilViews.getColorView(ROJO));
+                spingApplication.setFcolor_12(ROJO);
             } else if (alcali < 80) {
                 result_alcalindad.setText(getResources().getString(R.string.lbl_rango_fuera));
                 result_alcalindad.setTextColor(utilViews.getColorView(AMARILLO));
+                spingApplication.setFcolor_12(AMARILLO);
             } else {
                 result_alcalindad.setText(getResources().getString(R.string.lbl_rango_dentro));
+                spingApplication.setFcolor_12(0);
             }
             spingApplication.setFres_12(result_alcalindad.getText().toString());
         /*
@@ -293,11 +294,14 @@ public class AnalizeResultActivity extends AppCompatActivity {
             if (dureza > 250d) {
                 result_dureza.setText(getResources().getString(R.string.lbl_rango_fuera));
                 result_dureza.setTextColor(utilViews.getColorView(ROJO));
+                spingApplication.setFcolor_13(ROJO);
             } else if (dureza < 150d) {
                 result_dureza.setText(getResources().getString(R.string.lbl_rango_debajo));
                 result_dureza.setTextColor(utilViews.getColorView(AMARILLO));
+                spingApplication.setFcolor_13(AMARILLO);
             } else {
                 result_dureza.setText(getResources().getString(R.string.lbl_rango_dentro));
+                spingApplication.setFcolor_13(0);
             }
             spingApplication.setFres_13(result_dureza.getText().toString());
 
@@ -307,7 +311,9 @@ public class AnalizeResultActivity extends AppCompatActivity {
             if (std > 2500d) {
                 result_std.setText(getResources().getString(R.string.lbl_rango_fuera));
                 result_std.setTextColor(utilViews.getColorView(ROJO));
+                spingApplication.setFcolor_15(ROJO);
             } else {
+                spingApplication.setFcolor_15(0);
                 result_std.setText(getResources().getString(R.string.lbl_rango_dentro));
             }
             spingApplication.setFres_15(result_std.getText().toString());
@@ -318,8 +324,10 @@ public class AnalizeResultActivity extends AppCompatActivity {
             if (turbidez > 0.5d) {
                 result_turbidez.setText(getResources().getString(R.string.lbl_rango_fuera));
                 result_turbidez.setTextColor(utilViews.getColorView(ROJO));
+                spingApplication.setScolor_24(ROJO);
             } else {
                 result_turbidez.setText(getResources().getString(R.string.lbl_rango_dentro));
+                spingApplication.setScolor_24(0);
             }
             spingApplication.setSres_24(result_turbidez.getText().toString());
         /*
@@ -329,14 +337,17 @@ public class AnalizeResultActivity extends AppCompatActivity {
             if (metales.equals("Positivo")) {
                 result_metales.setText(getResources().getString(R.string.lbl_metales_evaluar));
                 result_metales.setTextColor(utilViews.getColorView(ROJO));
+                spingApplication.setScolor_25(ROJO);
             } else {
                 result_metales.setText(getResources().getString(R.string.lbl_metales_ok));
+                spingApplication.setScolor_25(0);
             }
             spingApplication.setSres_25(result_metales.getText().toString());
 
             if (cya > 0d) {
                 result_cya.setText(getResources().getString(R.string.lbl_estabilizador_fuera));
                 result_cya.setTextColor(utilViews.getColorView(ROJO));
+                spingApplication.setScolor_26(ROJO);
             }
 
             spingApplication.setSres_26(result_cya.getText().toString());
@@ -350,6 +361,7 @@ public class AnalizeResultActivity extends AppCompatActivity {
                 if (cya > 0d) {
                     result_cya.setText(getResources().getString(R.string.lbl_estabilizador_fuera));
                     result_cya.setTextColor(utilViews.getColorView(ROJO));
+                    spingApplication.setScolor_26(ROJO);
                 }
                 spingApplication.setSres_26(result_cya.getText().toString());
             /*Cloro Libre
@@ -373,8 +385,10 @@ public class AnalizeResultActivity extends AppCompatActivity {
                 if (cloraminas > 0.3d) {
                     result_cloraminas.setText(getResources().getString(R.string.lbl_cloramidas_ruptura));
                     result_cloraminas.setTextColor(utilViews.getColorView(ROJO));
+                    spingApplication.setScolor_23(ROJO);
                 } else {
                     result_cloraminas.setText(getResources().getString(R.string.lbl_cloramidas_acorde));
+                    spingApplication.setScolor_23(0);
                 }
 
                 spingApplication.setSres_23(result_cloraminas.getText().toString());
@@ -395,16 +409,22 @@ public class AnalizeResultActivity extends AppCompatActivity {
                 if (bromo < 2d) {
                     result_bromo.setText(getResources().getString(R.string.lbl_bromo_debajo));
                     result_bromo.setTextColor(utilViews.getColorView(AMARILLO));
+                    spingApplication.setScolor_27(AMARILLO);
                 } else if (bromo > 5d) {
                     result_bromo.setText(getResources().getString(R.string.lbl_bromo_encima));
                     result_bromo.setTextColor(utilViews.getColorView(ROJO));
+                    spingApplication.setScolor_27(ROJO);
                 } else {
                     result_bromo.setText(getResources().getString(R.string.lbl_bromo_acorde));
+                    spingApplication.setScolor_27(0);
                 }
 
                 spingApplication.setSres_27(result_bromo.getText().toString());
 
             }
+
+
+            new Spin().saveBalanceAndDesinfeccionResults(spingApplication, getApplicationContext());
         }catch (Exception ex){
             Log.e(TAG, ex.getMessage());
         }

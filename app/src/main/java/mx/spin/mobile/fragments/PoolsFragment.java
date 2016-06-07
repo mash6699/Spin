@@ -115,6 +115,8 @@ public class PoolsFragment extends Fragment implements ISpin {
     void gotoDetailPool(int position) {
         try{
 
+            new Spin().clearPreferences(getContext());
+
             piscina = misPiscinas.get(position);
 
             int um = Integer.parseInt(piscina.getPool_um());

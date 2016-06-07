@@ -252,34 +252,38 @@ public class AnalizeFirstStepActivity extends AppCompatActivity implements  Adap
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String text =((CheckedTextView) view).getText().toString();
-        Log.d(TAG, "onItemSelected  text[" + text + "] [" +position + "]");
-        if(!text.isEmpty() && text != null){
-            Double valueItem = utilViews.replaceStringsToDouble(text);
-            switch (parent.getId()){
-                case R.id.sp_ph:
-                    ph = valueItem;
-                    spingApplication.setFsp_11(position);
-                    break;
-                case R.id.sp_alcali:
-                    alcalinidad = valueItem;
-                    spingApplication.setFsp_12(position);
-                    break;
-                case R.id.sp_dureza:
-                    dureza = valueItem;
-                    spingApplication.setFsp_13(position);
-                    break;
-                case R.id.sp_temp:
-                    temp = valueItem;
-                    spingApplication.setFsp_14(position);
-                    break;
-                case R.id.sp_std:
-                    std = valueItem;
-                    spingApplication.setFsp_15(position);
-                    break;
-            }
-            setISinView();
-        }
+      try {
+          String text = ((CheckedTextView) view).getText().toString();
+          Log.d(TAG, "onItemSelected  text[" + text + "] [" + position + "]");
+          if (!text.isEmpty() && text != null) {
+              Double valueItem = utilViews.replaceStringsToDouble(text);
+              switch (parent.getId()) {
+                  case R.id.sp_ph:
+                      ph = valueItem;
+                      spingApplication.setFsp_11(position);
+                      break;
+                  case R.id.sp_alcali:
+                      alcalinidad = valueItem;
+                      spingApplication.setFsp_12(position);
+                      break;
+                  case R.id.sp_dureza:
+                      dureza = valueItem;
+                      spingApplication.setFsp_13(position);
+                      break;
+                  case R.id.sp_temp:
+                      temp = valueItem;
+                      spingApplication.setFsp_14(position);
+                      break;
+                  case R.id.sp_std:
+                      std = valueItem;
+                      spingApplication.setFsp_15(position);
+                      break;
+              }
+              setISinView();
+          }
+      }catch (Exception ex){
+          Log.d(TAG,ex.getMessage());
+      }
     }
 
     void setISinView(){
@@ -291,7 +295,7 @@ public class AnalizeFirstStepActivity extends AppCompatActivity implements  Adap
             calidad = utilViews.getCalidadAgua(indice);
             calidad_agua.setText(calidad);
             changeColorCalidad(calidad);
-            spingApplication.setFs_16(is);
+          //  spingApplication.setFs_16(is);
             setDataInApp();
             new Spin().saveFS(spingApplication, getApplicationContext());
         }

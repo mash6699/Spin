@@ -131,7 +131,6 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
     private static final String FILE_FOLDER = "SpinPDF";
     private static File file;
     private static final String FILE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath();
-    //  private EditText _pdfBodyEDT;
     private boolean isPDFFromHTML = false;
 
 
@@ -148,7 +147,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
         txt_titleToolbar.setText(R.string.title_activity_mantenimiento);
 
 
-        spingApplication = new Spin().getMANResult(spingApplication,getApplicationContext());
+        spingApplication = new Spin().getBalanceAndDesinfeccionResult(spingApplication, getApplicationContext());
 
         pool_name.setText(" " + spingApplication.getName());
         pool_date.setText(" " +spingApplication.getDate());
@@ -277,11 +276,11 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
 
             //TECHADA = 1
             if(instalacion == Constants.PISCINA_TECHADA){
-                bromo         = Double.parseDouble(spingApplication.getSs_27());
-            }else{
                 cloroTotal    = Double.parseDouble(spingApplication.getSs_21());
                 cloroLibre    = Double.parseDouble(spingApplication.getSs_22());
                 cloraminas    = Double.parseDouble(spingApplication.getSs_23());
+            }else{
+                bromo         = Double.parseDouble(spingApplication.getSs_27());
             }
 
             //     }
@@ -630,13 +629,26 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
 
             }
 
-
             lbl_desinfectante.setText(Html.fromHtml(desinfTxt.toString()));
         }
 
         protected void estabilizadorRec(){
             StringBuilder estabTxt = new StringBuilder();
-            //if(cya )  TRIZIDE Y NEUTRACLOR
+            if(instalacion == Constants.PISCINA_ABIERTA){
+                if(cya < 100d){
+                    estabTxt.append("<br /> <b> " + getString(R.string.lbl_recomendacion) +" </b>" + getString(R.string.esta_abierta_50));
+                }else if (cya == 100d){
+                    estabTxt.append("<br /> <b> " + getString(R.string.lbl_recomendacion) +" </b>" + getString(R.string.esta_abierta_51));
+                }else if (cya > 100d){
+                    estabTxt.append("<br /> <b> " + getString(R.string.lbl_recomendacion) +" </b>" + getString(R.string.esta_abierta_52));
+                }
+            }else{
+                if(cya == 0d) {
+                    estabTxt.append("<br /> <b> " + getString(R.string.lbl_recomendacion) +" </b>" + getString(R.string.esta_techada_53));
+                } else if (cya > 0) {
+                    estabTxt.append("<br /> <b> " + getString(R.string.lbl_recomendacion) +" </b>" + getString(R.string.esta_techada_54));
+                }
+            }
 
             lbl_estabilizador.setText(Html.fromHtml(estabTxt.toString()));
         }

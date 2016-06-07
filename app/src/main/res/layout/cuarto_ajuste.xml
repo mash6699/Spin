@@ -34,9 +34,10 @@
                     android:src="@drawable/dural" />
 
                 <TextView
+                    android:gravity="center"
                     android:id="@+id/title_dureza"
                     android:textSize="@dimen/title_size"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/iv_dureza"
@@ -46,7 +47,7 @@
                 <TextView
                     android:id="@+id/lbl_description_dureza"
                     android:textSize="@dimen/content_size"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/title_dureza"
                     android:layout_toRightOf="@+id/iv_dureza"
@@ -89,9 +90,10 @@
                     android:src="@drawable/acidetunkg" />
 
                 <TextView
+                    android:gravity="center"
                     android:id="@+id/title_std"
                     android:textSize="@dimen/title_size"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/iv_std"
@@ -101,7 +103,7 @@
                 <TextView
                     android:id="@+id/lbl_description_std"
                     android:textSize="@dimen/content_size"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/title_std"
                     android:layout_toRightOf="@+id/iv_std"

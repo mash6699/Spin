@@ -18,6 +18,17 @@
     Al finalizar, se debera limpiar sus filtos.</string>
     <!--Turbidez y Metales-->
 
+   <!-- Estabilizador Abiertas-->
+    <string name="esta_abierta_50">Excelente: Manten tu nivel de Estabilizador por debajo de 100 ppm</string>
+    <string name="esta_abierta_51">Cuidado: estas en el limite de Estabilizador de tu piscina, te recomendamos reponer un poco de agua mediante algun retrolavado.</string>
+    <string name="esta_abierta_52">ALERTA: El Estabilizador esta topado a 100 ppm, es necesario que repongas agua mediante un retrolavado para bajar tu nivel.</string>
+   <!-- Estabilizador Abiertas-->
+
+    <!-- Estabilizador Techadas-->
+    <string name="esta_techada_53">Excelente: esta detro del ideal para tu piscina.</string>
+    <string name="esta_techada_54">Cuidado: El Estabilizador estaprohibido en piscinas bajo techo, te recomendamos cambiar tu desinfectante por Clorizide Bromado. Para evitar este problema, evitar la molestia de las Cloraminas y ahorrar en el consumo mensual.</string>
+    <!--Estabilizador Techadas-->
+
 
     <!--CLORO-->
     <string name="cloro_rec_30">Debes agregar %1$s gramos de "TRIZIDE" a tu piscina, estó la llevara a 3 ppm.</string>
