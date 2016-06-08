@@ -87,7 +87,6 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
     public static final Font GREEN_ITALIC = new Font(Font.FontFamily.HELVETICA, 12, Font.ITALIC, BaseColor.GREEN);
 
     private static String TAG = MantenimientoActivity.class.getName();
-    //private static SpingApplication spingApplication = SpingApplication.getInstance();
     private static SpingApplication spingApplication;
     private BoussinesSpin boussinesSpin;
     private static final int REQUEST_PERMISSIONS = 16;
@@ -840,9 +839,6 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
             document.addCreator("www.spingrupo.com");
 
             document.addTitle("Sping Reporte");
-            /*document.setPageSize(PageSize.A4);
-            document.setMargins(36, 36, 36, 36);
-            document.setMarginMirroring(true);*/
 
             //TODO open document
             document.open();
@@ -856,9 +852,6 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
 
             //Close the document
             document.close();
-
-          /*  Snackbar.make( mView.getRootView(),"El PDF se creo correctamente se encuentra en la carpeta " + FILE_FOLDER, Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();*/
 
             openPDF(fileName);
 
@@ -887,17 +880,28 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
     public void openPDF(String name)
     {
         // File pdfFile = new File(Environment.getExternalStorageDirectory() + "/t/" + name);  // -> filename = maven.pdf
-        File pdfFile = new File(name);
-        Uri path = Uri.fromFile(pdfFile);
-        Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
-        pdfIntent.setDataAndType(path, "application/pdf");
-        pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         try{
-            startActivity(pdfIntent);
+
+            SpinTask spinTask = new SpinTask(this);
+            spinTask.execute();
+
+            File pdfFile = new File(name);
+            Uri path = Uri.fromFile(pdfFile);
+
+            if(path!= null){
+                Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
+                pdfIntent.setDataAndType(path, "application/pdf");
+                pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+
+                startActivity(pdfIntent);
+
+            }
         }catch(ActivityNotFoundException e){
             Toast.makeText(MantenimientoActivity.this, "No Application available to view PDF", Toast.LENGTH_SHORT).show();
         }
+
     }
 
 
@@ -906,10 +910,10 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
         protected PdfPTable table;
         protected float tableHeight;
         protected PdfPCell cell;
+        protected PdfPCell cellWithImg;
         protected Image img;
         public HeaderTable() {
             try{
-
                 Drawable drawable = getResources().getDrawable(R.drawable.logo_ajustado);
                 BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
                 Bitmap bitmap = bitmapDrawable.getBitmap();
@@ -918,14 +922,18 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 
                 cell = new PdfPCell(new Phrase("Resultado del Análisis"));
-                img = Image.getInstance(stream.toByteArray());
+                cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
+                cell.setBorder(PdfPCell.NO_BORDER);
 
+                img = Image.getInstance(stream.toByteArray());
                 img.scaleToFit(30, 30);
                 img.setAlignment(Chunk.ALIGN_MIDDLE);
 
+                cellWithImg = new PdfPCell(img, true);
+                cellWithImg.setBorder(PdfPCell.NO_BORDER);
+
                 table = new PdfPTable(2);
                 table.getDefaultCell().setBorder(PdfPCell.NO_BORDER);
-
 
                 table.setTotalWidth(523);
 
@@ -933,7 +941,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
 
                 table.setLockedWidth(true);
 
-                table.addCell(new PdfPCell(img, true));
+                table.addCell(cellWithImg);
                 table.addCell(cell);
 
 
@@ -1100,6 +1108,18 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
         table.addCell(getResources().getString(R.string.lbl_conideal_temperatura));
 
         document.add(table);
+
+        Paragraph saturacion = new Paragraph(getResources().getString(R.string.lbl_indice_saturacion) + spingApplication.getFs_16());
+        saturacion.setAlignment(Paragraph.ALIGN_CENTER);
+        saturacion.setFont(titleFont);
+        document.add(saturacion);
+
+        Paragraph estatus = new Paragraph(getResources().getString(R.string.lbl_estatus) + spingApplication.getFs_17());
+        estatus.setAlignment(Paragraph.ALIGN_CENTER);
+        estatus.setFont(titleFont);
+        document.add(estatus);
+
+
     }
 
     private void addTableDesinfeccion(Document document, Font titleFont) throws DocumentException {
@@ -1196,10 +1216,32 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
 
     private void addMantenimiento(Document document, Font titleFont) throws DocumentException {
         Log.d(TAG,"addMantenimiento");
-        Paragraph mantenimiento = new Paragraph("\nMantenimiento\n\n");
-        mantenimiento.setAlignment(Paragraph.ALIGN_CENTER);
-        mantenimiento.setFont(titleFont);
-        document.add(mantenimiento);
+        Paragraph title = new Paragraph(getResources().getString(R.string.title_activity_mantenimiento));
+        title.setAlignment(Paragraph.ALIGN_CENTER);
+        title.setFont(titleFont);
+        document.add(title);
+
+
+        Paragraph primero = new Paragraph(getResources().getString(R.string.lbl_ajuste_primero));
+        primero.setAlignment(Paragraph.ALIGN_LEFT);
+        primero.setFont(titleFont);
+        document.add(primero);
+
+        Paragraph segundo = new Paragraph(getResources().getString(R.string.lbl_ajuste_segundo));
+        segundo.setAlignment(Paragraph.ALIGN_LEFT);
+        segundo.setFont(titleFont);
+        document.add(segundo);
+
+        Paragraph tercero = new Paragraph(getResources().getString(R.string.lbl_ajuste_tercero));
+        tercero.setAlignment(Paragraph.ALIGN_LEFT);
+        tercero.setFont(titleFont);
+        document.add(tercero);
+
+        Paragraph cuarto = new Paragraph(getResources().getString(R.string.lbl_ajuste_cuarto));
+        cuarto.setAlignment(Paragraph.ALIGN_LEFT);
+        cuarto.setFont(titleFont);
+        document.add(cuarto);
+
     }
 
     class DottedCell implements PdfPCellEvent {
