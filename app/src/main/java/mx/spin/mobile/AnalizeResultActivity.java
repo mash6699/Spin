@@ -25,7 +25,6 @@ import mx.spin.mobile.utils.constants.Constants;
 public class AnalizeResultActivity extends AppCompatActivity {
 
     private final static String TAG = AnalizeResultActivity.class.getName();
-  //  private SpingApplication spingApplication = SpingApplication.getInstance();
     private SpingApplication spingApplication;
     private UtilViews utilViews;
 
@@ -371,13 +370,15 @@ public class AnalizeResultActivity extends AppCompatActivity {
                 if (cloroLibre < 1d) {
                     result_cloroLibre.setText(getResources().getString(R.string.lbl_cloro_debajo));
                     result_cloroLibre.setTextColor(utilViews.getColorView(AMARILLO));
+                    spingApplication.setScolor_22(AMARILLO);
                 } else if (cloroLibre > 5d) {
                     result_cloroLibre.setText(getResources().getString(R.string.lbl_cloro_encima));
                     result_cloroLibre.setTextColor(utilViews.getColorView(ROJO));
+                    spingApplication.setScolor_22(ROJO);
                 } else {
                     result_cloroLibre.setText(getResources().getString(R.string.lbl_cloro_acorde));
                 }
-                spingApplication.setSres_21(result_cloroLibre.getText().toString());
+                spingApplication.setSres_22(result_cloroLibre.getText().toString());
 
             /* Cloramidas
               =+SI(C13>0.3, "HACER UNA CLORACIÓN A PUNTO DE RUPTURA", "ACORDE A NOM 245")

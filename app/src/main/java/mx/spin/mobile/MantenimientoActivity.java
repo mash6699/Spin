@@ -91,7 +91,6 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
     private BoussinesSpin boussinesSpin;
     private static final int REQUEST_PERMISSIONS = 16;
     private UtilViews utilViews;
-    //  private Pool piscina;
 
     private ViewPager mViewPager;
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -111,6 +110,12 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
     static double bromo;
     static double dureza;
     static double std;
+
+    public String fileName;
+    public Date date = new Date();
+    public String timeStamp;
+
+    boolean permissons;
 
     @Nullable
     @Bind(R.id.txt_name)
@@ -150,16 +155,15 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
 
         txt_titleToolbar.setText(R.string.title_activity_mantenimiento);
 
+        timeStamp = new SimpleDateFormat("dd-M-yyyy hh:mm:ss", Locale.getDefault()).format(date);
 
         spingApplication = new Spin().getBalanceAndDesinfeccionResult(spingApplication, getApplicationContext());
 
-        pool_name.setText(" " + spingApplication.getName());
-        pool_date.setText(" " +spingApplication.getDate());
+        pool_name.setText(spingApplication.getName());
+        pool_date.setText(spingApplication.getDate());
 
 
-        int idPiscina = spingApplication.getIdPiscina();
-        //   piscina = boussinesSpin.getPool(idPiscina);
-
+        requestMMPermissions();
 
 
         FloatingActionButton fabSave = (FloatingActionButton) findViewById(R.id.guardar);
@@ -167,7 +171,11 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
             @Override
             public void onClick(View view) {
                 mView =  view;
-                requestMMPermissions();
+                try {
+                    createPdf();
+                }catch (Exception e){
+                    Log.e(TAG, e.getMessage());
+                }
             }
         });
 
@@ -175,10 +183,13 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
         fabSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Se enviara el pdf en un email", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                mView =  view;
 
+                if(fileName != null){
+                    sendPDF(fileName);
+                }else {
+                    createPDF();
+                    sendPDF(fileName);
+                }
             }
         });
 
@@ -231,17 +242,18 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
                 }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        onBackPressed();
                     }
                 }).setTitle(getString(R.string.app_name)).setCancelable(false).create().show();
 
-            }else {
-                createPdf();
+            } else {
+                //createPDF();
+                permissons = true;
             }
 
 
-        } else {
-            createPdf();
+        }else{
+            permissons = true;
         }
     }
 
@@ -252,7 +264,12 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
             case REQUEST_PERMISSIONS:
                 boolean isGranted = PermissionUtil.verifyPermissions(grantResults);
                 if (!isGranted) {
-                    createPdf();
+                    //   createPdf();
+                    Log.d(TAG, "persissions OK");
+                    permissons = true;
+                }else{
+                    Log.d(TAG, "persissions FAILS");
+                    permissons = false;
                 }
             default:
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -804,9 +821,8 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
         try {
             getFile();
             //Create time stamp
-            Date date = new Date ();
-            String timeStamp = new SimpleDateFormat("dd-M-yyyy hh:mm:ss", Locale.getDefault()).format(date);
-            String fileName = FILE_PATH + "/"+ FILE_FOLDER  +  "/"+ spingApplication.getName() +"_" + timeStamp + ".pdf";
+
+            fileName = FILE_PATH + "/"+ FILE_FOLDER  +  "/"+ spingApplication.getName() +"_" + timeStamp + ".pdf";
 
             File myFile = new File(fileName);
             myFile.createNewFile();
@@ -816,19 +832,11 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
             HeaderTable event = new HeaderTable();
 
             Document document = new Document(PageSize.A4, 36, 36, 20 + event.getTableHeight(), 36);
-
             PdfWriter writer = PdfWriter.getInstance(document, output);
-            // writer.setLinearPageMode();
-            // writer.setFullCompression();
-
             writer.setPageEvent(event);
-            // HeaderTable event = new HeaderTable();
 
-
-              /* Create Set Font and its Size */
             Font titleFont= new Font(Font.FontFamily.HELVETICA, Font.BOLD);
             titleFont.setSize(16);
-
             Font fontContent= new Font(Font.FontFamily.HELVETICA, Font.NORMAL);
             fontContent.setSize(12);
 
@@ -837,12 +845,9 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
             document.addCreationDate();
             document.addProducer();
             document.addCreator("www.spingrupo.com");
+            document.addTitle("Reporte");
 
-            document.addTitle("Sping Reporte");
-
-            //TODO open document
             document.open();
-
 
 
             addTablePiscina(document, titleFont);
@@ -855,21 +860,54 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
 
             openPDF(fileName);
 
+        } catch (IOException | DocumentException e) {
+            e.printStackTrace();
+            Log.e("PDF--->",  "exception", e);
+        }
+    }
 
 
-                           /* Inserting Image in PDF */
-         /*   ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100 , stream);
-            Image myImg = Image.getInstance(stream.toByteArray());
-            myImg.setAlignment(Image.MIDDLE);
-            //add image to document
-            document.add(myImg);*/
+    private void createPDF()  {
+        Log.d(TAG, "createPDF" );
+        try {
+            getFile();
+            //Create time stamp
+
+            fileName = FILE_PATH + "/"+ FILE_FOLDER  +  "/"+ spingApplication.getName() +"_" + timeStamp + ".pdf";
+
+            File myFile = new File(fileName);
+            myFile.createNewFile();
+            OutputStream output = new FileOutputStream(myFile);
+
+            // Document document = new Document();
+            HeaderTable event = new HeaderTable();
+
+            Document document = new Document(PageSize.A4, 36, 36, 20 + event.getTableHeight(), 36);
+            PdfWriter writer = PdfWriter.getInstance(document, output);
+            writer.setPageEvent(event);
+
+            Font titleFont= new Font(Font.FontFamily.HELVETICA, Font.BOLD);
+            titleFont.setSize(16);
+            Font fontContent= new Font(Font.FontFamily.HELVETICA, Font.NORMAL);
+            fontContent.setSize(12);
+
+            //TODO document header attributes
+            document.addAuthor("Spin mobile");
+            document.addCreationDate();
+            document.addProducer();
+            document.addCreator("www.spingrupo.com");
+            document.addTitle("Reporte");
+
+            document.open();
 
 
-            //      addContent(document);
+            addTablePiscina(document, titleFont);
+            addTableBalance(document, titleFont);
+            addTableDesinfeccion(document, titleFont);
+            addMantenimiento(document, titleFont);
 
-
+            //Close the document
+            document.close();
 
         } catch (IOException | DocumentException e) {
             e.printStackTrace();
@@ -877,33 +915,39 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
         }
     }
 
-    public void openPDF(String name)
-    {
-        // File pdfFile = new File(Environment.getExternalStorageDirectory() + "/t/" + name);  // -> filename = maven.pdf
-
+    public void openPDF(String name) {
         try{
-
+            Log.d(TAG, "openPDF");
             SpinTask spinTask = new SpinTask(this);
             spinTask.execute();
-
             File pdfFile = new File(name);
             Uri path = Uri.fromFile(pdfFile);
-
             if(path!= null){
                 Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
                 pdfIntent.setDataAndType(path, "application/pdf");
                 pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-
                 startActivity(pdfIntent);
-
             }
         }catch(ActivityNotFoundException e){
-            Toast.makeText(MantenimientoActivity.this, "No Application available to view PDF", Toast.LENGTH_SHORT).show();
+            utilViews.showToastInView( "Ocurrió un error. :(");
         }
-
     }
 
+    public void sendPDF(String fileName){
+        try{
+            File pdf = new File(fileName);
+            Uri uri = Uri.fromFile(pdf);
+            final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+            emailIntent.setType("application/pdf");
+            //    emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,new String[] {TOEmailAddress});
+            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Resultado del Análisis");
+            emailIntent.putExtra(android.content.Intent.EXTRA_TEXT,"Te adjunto el archivo del Análisis. ");
+            emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
+            startActivity(Intent.createChooser(emailIntent,"Send mail..."));
+        }catch(Exception ex){
+            Log.d(TAG, ex.getMessage());
+        }
+    }
 
 
     public class HeaderTable extends PdfPageEventHelper {
@@ -1154,7 +1198,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
         if (spingApplication.getTipoPiscina() ==  Constants.PISCINA_ABIERTA ){
             //TODO CLORO TOTAL
             //TODO CLORMINAS
-            table.addCell(getResources().getString(R.string.lbl_cloro_total) + "\n" + spingApplication.getSres_22().toLowerCase());
+            table.addCell(getResources().getString(R.string.lbl_cloro_libre) + "\n" + spingApplication.getSres_22().toLowerCase());
             c1 = new PdfPCell(new Phrase(spingApplication.getSs_22()));
             c1.setHorizontalAlignment(Element.ALIGN_CENTER);
             c1.setBorder(PdfPCell.NO_BORDER);

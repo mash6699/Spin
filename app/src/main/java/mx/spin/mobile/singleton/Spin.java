@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import mx.spin.mobile.R;
+import mx.spin.mobile.utils.constants.Constants;
 
 /**
  * Created by miguel_angel on 2/06/16.
@@ -15,7 +16,6 @@ public class Spin {
 
     public Spin() {
     }
-
 
     public void clearPreferences(Context context) {
         try {
@@ -142,36 +142,20 @@ public class Spin {
             editor.putString("setSs_26", spin.getSs_26());
 
             //BROMO
-            if (spin.getSs_27() != null) {
+
+            if (spin.getTipoPiscina() != Constants.PISCINA_ABIERTA) {
                 editor.putInt("setSsp_27", spin.getSsp_27());
                 editor.putString("setSs_27", spin.getSs_27());
             } else {
                 //CLORO
                 editor.putInt("setSsp_21", spin.getSsp_21());
                 editor.putString("setSs_21", spin.getSs_21());
-
                 editor.putInt("setSsp_22", spin.getSsp_22());
                 editor.putString("setSs_22", spin.getSs_22());
-
                 editor.putString("setSs_23", spin.getSs_23());
             }
 
-
             editor.commit();
-
-
-        } catch (Exception ex) {
-            Log.d(TAG, " -- " + ex.toString());
-        }
-    }
-
-    public static void saveANResults(SpingApplication spin, Context context) {
-        try {
-            Log.d(TAG, "saveANResults");
-            SharedPreferences sharedPref = context.getSharedPreferences(
-                    context.getString(R.string.spin_pool), Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPref.edit();
-
 
         } catch (Exception ex) {
             Log.d(TAG, " -- " + ex.toString());
@@ -230,11 +214,10 @@ public class Spin {
             editor.putString("setSres_26", spin.getSres_26());
             editor.putInt("setScolor_26", spin.getScolor_26());
 
-            if (spin.getSrec_21() != null) {
+            if (spin.getTipoPiscina() == Constants.PISCINA_ABIERTA) {
                 editor.putString("setSres_21", spin.getSres_21());
-
+                editor.putString("setSres_22", spin.getSres_22());
                 editor.putString("setSres_23", spin.getSres_23());
-                editor.putInt("setScolor_23", spin.getScolor_23());
             } else {
                 editor.putString("setSres_27", spin.getSres_27());
                 editor.putInt("setScolor_27", spin.getScolor_27());
@@ -276,9 +259,8 @@ public class Spin {
             application.setScolor_26(sharedPref.getInt("setScolor_26", 0));
 
             application.setSres_21(sharedPref.getString("setSres_21", ""));
-
+            application.setSres_22(sharedPref.getString("setSres_22", ""));
             application.setSres_23(sharedPref.getString("setSres_23", ""));
-            application.setScolor_23(sharedPref.getInt("setScolor_23", 0));
 
             application.setSres_27(sharedPref.getString("setSres_27", ""));
             application.setScolor_27(sharedPref.getInt("setScolor_27", 0));
@@ -321,7 +303,7 @@ public class Spin {
     }
 
     public static SpingApplication getPoolFS( SpingApplication application , Context context) {
-//        SpingApplication application = new SpingApplication();
+
         Log.d(TAG, "getPoolFS");
         try {
             SharedPreferences sharedPref = context.getSharedPreferences(
@@ -352,7 +334,6 @@ public class Spin {
     }
 
     public static SpingApplication getPoolSS( SpingApplication application, Context context) {
-        //SpingApplication application = new SpingApplication();
         Log.d(TAG, "getPoolSS");
         try {
             SharedPreferences sharedPref = context.getSharedPreferences(
@@ -363,6 +344,8 @@ public class Spin {
 
             application.setSsp_22(sharedPref.getInt("setSsp_22", 20));
             application.setSs_22(sharedPref.getString("setSs_22", null));
+
+            application.setSs_23(sharedPref.getString("setSs_23", null));
 
             application.setSsp_24(sharedPref.getInt("setSsp_24", 20));
             application.setSs_24(sharedPref.getString("setSs_24", null));
@@ -381,7 +364,6 @@ public class Spin {
         }
         return application;
     }
-
 
 
 }
