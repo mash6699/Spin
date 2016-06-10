@@ -32,30 +32,27 @@ public class Spin {
 
     public static void saveUserID(String idUsuario, Context context) {
         try {
-            Log.d(TAG, "saveUserID");
+            Log.d(TAG, "saveUserID" + idUsuario) ;
             SharedPreferences sharedPref = context.getSharedPreferences(
                     context.getString(R.string.spin_pool), Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString("idUsuario", idUsuario);
+            editor.putInt("idUsuario", Integer.parseInt(idUsuario));
             editor.commit();
         } catch (Exception ex) {
-            Log.d(TAG, " -- " + ex.toString());
+            Log.d(TAG, "saveUserID -- " + ex.toString());
         }
     }
 
 
     public static int getUserID(Context context) {
         int id = 0;
-        Log.d(TAG, "getPool");
         try {
             SharedPreferences sharedPref = context.getSharedPreferences(
                     context.getString(R.string.spin_pool), Context.MODE_PRIVATE);
-
-            id = Integer.parseInt(sharedPref.getString("idUsuario", "0"));
-
-
+            id = sharedPref.getInt("idUsuario", 0);
+            Log.d(TAG, "getPool [" + id + "]");
         } catch (Exception ex) {
-            Log.e(TAG, ex.getMessage());
+            Log.e(TAG, "getUserID: " + ex.getMessage());
         }
         return id;
     }

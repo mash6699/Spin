@@ -29,6 +29,7 @@ import mx.spin.mobile.dao.Pool;
 import mx.spin.mobile.dao.User;
 import mx.spin.mobile.network.NetConnection;
 import mx.spin.mobile.services.RegistrationIntentService;
+import mx.spin.mobile.singleton.Spin;
 import mx.spin.mobile.singleton.SpingApplication;
 import mx.spin.mobile.utils.SpinUtility;
 import mx.spin.mobile.utils.constants.JSKeys;
@@ -186,8 +187,17 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
 
-                            spingApplication.setIdUsuario(sesion.optString(JSKeys.ID_USER));
-                            gotoDrawer();
+
+                            if(sesion.has(JSKeys.ID_USER)){
+                                String idUser = sesion.optString(JSKeys.ID_USER);
+                                new Spin().saveUserID(idUser, getApplicationContext());
+                                gotoDrawer();
+                            }else{
+                                utilViews.showToastInView("Intentalo más tarde por favor");
+                            }
+
+
+
                         }
 
                     } else {

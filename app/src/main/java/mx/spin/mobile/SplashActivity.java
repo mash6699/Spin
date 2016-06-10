@@ -12,6 +12,7 @@ import mx.spin.mobile.dao.User;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import mx.spin.mobile.singleton.Spin;
 import mx.spin.mobile.singleton.SpingApplication;
 import mx.spin.mobile.utils.constants.Constants;
 
@@ -58,7 +59,7 @@ public class SplashActivity extends AppCompatActivity {
     void changeActivity(){
         if (usuario.getId_user() != null) {
             Log.d(TAG, "SESSION INICIADA::> " + usuario.getId_user());
-            spingApplication.setIdUsuario(String.valueOf(usuario.getId_user()));
+            new Spin().saveUserID(String.valueOf(usuario.getId_user()), getApplicationContext());
             startActivity(new Intent(this, DrawerActivity.class));
         } else {
             initLogin();
