@@ -13,17 +13,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import mx.spin.mobile.singleton.Spin;
-import mx.spin.mobile.singleton.SpingApplication;
 import mx.spin.mobile.utils.constants.Constants;
 
 public class SplashActivity extends AppCompatActivity {
 
     private static final String TAG = SplashActivity.class.getCanonicalName();
-    //private SpinBusinnes spinBusinnes;
     private BoussinesSpin boussinesSpin;
-    private SpingApplication spingApplication = SpingApplication.getInstance();
-   // private List<User> usuario;
-   private User usuario;
+    private User usuario;
 
     @Override
     public void onStart() {
@@ -34,26 +30,16 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
-        //spinBusinnes = new SpinBusinnes().getInstance(this);
         boussinesSpin = new BoussinesSpin(this);
         usuario = boussinesSpin.getUser();
-      /*  if (usuario.getId_user() != null) {
-            Log.d(TAG, "SESSION INICIADA::> " + usuario.getId_user());
-            spingApplication.setIdUsuario(String.valueOf(usuario.getId_user()));
-            startActivity(new Intent(this, DrawerActivity.class));
-        } else {*/
-            TimerTask task = new TimerTask() {
-                @Override
-                public void run() {
-                  /*  Log.d(TAG, "REGISTRO");
-                    initLogin();*/
-                    changeActivity();
-                }
-            };
-            Timer timer = new Timer();
-            timer.schedule(task, Constants.SPLASH_SCREEN_DELAY);
-      //  }
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                changeActivity();
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(task, Constants.SPLASH_SCREEN_DELAY);
     }
 
     void changeActivity(){

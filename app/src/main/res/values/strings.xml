@@ -40,12 +40,13 @@
     <string name="lbl_btn_bitacora">BITÁCORA</string>
     <string name="lbl_btn_siguiente">SIGUIENTE</string>
     <string name="lbl_btn_resultados">VER RESULTADOS</string>
-    <string name="lbl_btn_calcular">Calcular</string>
+    <string name="lbl_btn_calcular">Calcular </string>
 
     <string name="lbl_btn_guardar_analisis">GUARDAR ESTE ANÁLISIS</string>
     <string name="lbl_btn_enviar_analisis">ENVIAR ESTE ANÁLISIS</string>
     <string name="lbl_btn_donde_comprar_analisis">¿DÓNDE COMPRO LOS QUÍMICOS?</string>
     <string name="lbl_btn_usar_volume">USAR ESTE VOLUMEN</string>
+    <string name="lbl_btn_calcular_volume">CALCULAR VOLUMEN</string>
     <string name="lbl_btn_mantenimiento">Realizar Mantenimiento</string>
 
     <string name="lbl_recovery_1">No existe el email.</string>

@@ -306,7 +306,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
 
             //     }
         }catch (Exception ex){
-            Log.e(TAG, ex.getMessage());
+            Log.e(TAG, "setValues::: " + ex.getMessage());
         }
     }
 

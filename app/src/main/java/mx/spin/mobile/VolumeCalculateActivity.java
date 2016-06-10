@@ -204,7 +204,7 @@ public class VolumeCalculateActivity extends AppCompatActivity implements View.O
     void onTextChanged(CharSequence text) {
         String diametro = text.toString();
         if(!diametro.isEmpty()){
-            Toast.makeText(this, "Text changed: " + text, Toast.LENGTH_LONG).show();
+           // Toast.makeText(this, "Text changed: " + text, Toast.LENGTH_LONG).show();
             updateRadio(diametro);
         } else{
             if(edRadio.isShown()) {

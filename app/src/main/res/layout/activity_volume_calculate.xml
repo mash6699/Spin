@@ -14,260 +14,318 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <ScrollView
+    <!--    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/include_toolbar">-->
+
+    <LinearLayout
+        android:layout_below="@+id/include_toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/include_toolbar">
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:gravity="top"
+        android:layout_alignParentTop="false"
+        android:baselineAligned="false">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_gravity="center_vertical|right"
+            card_view:cardBackgroundColor="@android:color/holo_red_light"
+            card_view:cardCornerRadius="21dp"
+            card_view:cardElevation="6dp">
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:text="@string/lbl_btn_calcelar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:color/transparent"
+                android:padding="12dp"
+                android:textColor="@android:color/white" />
+
+        </android.support.v7.widget.CardView>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="@dimen/activity_horizontal_margin">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center|bottom"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_volume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:singleLine="true"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center|bottom"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_volume"
+                    android:id="@+id/txt_m3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="30sp"
-                    android:textStyle="bold"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="-10dp"
+                    android:layout_marginEnd="-10sp"
+                    android:layout_marginRight="-10sp"
+                    android:text="3"
+                    android:textSize="12sp"
                     android:textColor="@color/white"/>
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/txt_label_metric"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txt_m3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="-10dp"
-                        android:layout_marginEnd="-10sp"
-                        android:layout_marginRight="-10sp"
-                        android:text="3"
-                        android:textSize="12sp"
-                        android:textColor="@color/white"/>
-
-                    <TextView
-                        android:id="@+id/txt_label_metric"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="m"
-                        android:textSize="30sp"
-                        android:textColor="@color/white"/>
-
-                </LinearLayout>
+                    android:layout_gravity="center_horizontal"
+                    android:text="m"
+                    android:textSize="30sp"
+                    android:textColor="@color/white"/>
 
             </LinearLayout>
 
-            <Spinner
-                android:id="@+id/sp_system_metric"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="15dp">
+        </LinearLayout>
 
-            </Spinner>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:text="Unidad de Medida: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_gravity="center_vertical" />
+        <Spinner
+            android:id="@+id/sp_system_metric"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left">
+        </Spinner>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
+                <ImageView
+                    android:id="@+id/imgCalculateVolumeRectanRounded"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/pool_circular" />
 
-                <LinearLayout
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_margin="5dp"
                     android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imgCalculateVolumeRectanRounded"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:src="@mipmap/pool_circular" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:gravity="center"
-                        android:text="@string/lbl_pscina_circular"
-                        android:textSize="12sp"
-                        android:textColor="@color/white"/>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imgCalculateVolumeRectan"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:src="@mipmap/pool_rectangle" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:gravity="center"
-                        android:text="@string/lbl_pscina_rec"
-                        android:textSize="12sp"
-                        android:textColor="@color/white"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imgCalculateVolumeOval"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:src="@mipmap/pool_oval" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:gravity="center"
-                        android:text="@string/lbl_pscina_oval"
-                        android:textSize="12sp"
-                        android:textColor="@color/white"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imgCalculateVolumeBean"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:src="@mipmap/pool_bean" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:gravity="center"
-                        android:text="@string/lbl_pscina_frijol"
-                        android:textSize="12sp"
-                        android:textColor="@color/white"/>
-
-                </LinearLayout>
+                    android:text="@string/lbl_pscina_circular"
+                    android:textSize="12sp"
+                    android:textColor="@color/white"/>
 
             </LinearLayout>
 
-            <include
-                android:id="@+id/layout_circular"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                layout="@layout/circular_pool"
-                android:visibility="gone"/>
-
-            <include
-                android:id="@+id/layout_rectangular"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                layout="@layout/rectangular_pool"
-                android:visibility="gone"/>
-
-            <include
-                android:id="@+id/layout_oval"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                layout="@layout/oval_pool"
-                android:visibility="gone"/>
-
-            <include
-                android:id="@+id/layout_bean"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                layout="@layout/bean_pool"
-                android:visibility="gone"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:id="@+id/imgCalculateVolumeRectan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/pool_rectangle" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <EditText
-                        android:id="@+id/edtxCalculateVolumeProfundidadUno"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/lbl_prof"
-                        android:inputType="numberDecimal"
-                        android:visibility="gone"/>
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <EditText
-                        android:id="@+id/edtxCalculateVolumeProfundidadDos"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/lbl_prof_m"
-                        android:inputType="numberDecimal"
-                        android:visibility="gone"/>
-
-                </android.support.design.widget.TextInputLayout>
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="@string/lbl_pscina_rec"
+                    android:textSize="12sp"
+                    android:textColor="@color/white"/>
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgCalculateVolumeOval"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/pool_oval" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="@string/lbl_pscina_oval"
+                    android:textSize="12sp"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgCalculateVolumeBean"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/pool_bean" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="@string/lbl_pscina_frijol"
+                    android:textSize="12sp"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <include
+            android:id="@+id/layout_circular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/circular_pool"
+            android:visibility="gone"/>
+
+        <include
+            android:id="@+id/layout_rectangular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/rectangular_pool"
+            android:visibility="gone"/>
+
+        <include
+            android:id="@+id/layout_oval"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/oval_pool"
+            android:visibility="gone"/>
+
+        <include
+            android:id="@+id/layout_bean"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/bean_pool"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/edtxCalculateVolumeProfundidadUno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/lbl_prof"
+                    android:inputType="numberDecimal"
+                    android:visibility="gone"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/edtxCalculateVolumeProfundidadDos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/lbl_prof_m"
+                    android:inputType="numberDecimal"
+                    android:visibility="gone"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentBottom="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal">
 
             <android.support.v7.widget.CardView
-                android:layout_width="230dp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center_vertical"
                 card_view:cardBackgroundColor="@android:color/white"
                 card_view:cardCornerRadius="21dp"
-                card_view:cardElevation="6dp"
-                android:layout_marginTop="17dp"
-                android:layout_marginBottom="17dp">
+                card_view:cardElevation="6dp">
 
                 <Button
                     android:id="@+id/btnCalculateVolume"
                     android:layout_gravity="center_horizontal"
-                    android:text="@string/lbl_btn_calcular"
+                    android:text="@string/lbl_btn_calcular_volume"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -280,12 +338,13 @@
 
 
             <android.support.v7.widget.CardView
-                android:layout_width="230dp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center_vertical"
                 card_view:cardBackgroundColor="@android:color/white"
                 card_view:cardCornerRadius="21dp"
                 card_view:cardElevation="6dp"
@@ -305,38 +364,45 @@
                     android:textColor="@android:color/holo_blue_dark"/>/>
 
             </android.support.v7.widget.CardView>
-
-
-            <android.support.v7.widget.CardView
-                android:layout_width="230dp"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_gravity="center_horizontal"
-                card_view:cardBackgroundColor="@android:color/white"
-                card_view:cardCornerRadius="21dp"
-                card_view:cardElevation="6dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp">
-
-                <Button
-                    android:id="@+id/btn_cancel"
-                    android:text="@string/lbl_btn_calcelar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:gravity="center"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@android:color/transparent"
-                    android:padding="12dp"
-                    android:textColor="@android:color/holo_blue_dark"/>/>
-
-            </android.support.v7.widget.CardView>
-
-
         </LinearLayout>
 
-    </ScrollView>
+
+
+<!--
+
+        <android.support.v7.widget.CardView
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_gravity="center_horizontal"
+            card_view:cardBackgroundColor="@android:color/holo_red_light"
+            card_view:cardCornerRadius="21dp"
+            card_view:cardElevation="6dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp">
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:text="@string/lbl_btn_calcelar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:color/transparent"
+                android:padding="12dp"
+                android:textColor="@android:color/white"/>
+
+        </android.support.v7.widget.CardView>
+-->
+
+    </LinearLayout>
+
+
+
+    <!--    </ScrollView>-->
 
 </RelativeLayout>
