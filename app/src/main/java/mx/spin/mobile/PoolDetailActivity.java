@@ -209,7 +209,7 @@ public class PoolDetailActivity extends AppCompatActivity {
 
     void parseEquipo(String mEquipo){
         Log.d(TAG,"parseEquipo::: " + mEquipo);
-        String [] item = mEquipo.split(",");
+        String [] item = mEquipo.replace(",''","").split("|");
         if(item.length == 3){
             txt_moto.setVisibility(View.VISIBLE);
             txt_moto_val.setVisibility(View.VISIBLE);
@@ -223,7 +223,7 @@ public class PoolDetailActivity extends AppCompatActivity {
     }
     void parseItemEquipo(String mEquipo){
         Log.d(TAG,"parseItemEquipo::: " + mEquipo);
-        if(!mEquipo.isEmpty()){
+        if(!mEquipo.isEmpty()&& !mEquipo.trim().equals("''")){
             int idEquipo = Integer.parseInt(mEquipo);
             if(idEquipo > 4 && idEquipo < 9){
                 txt_dosi.setVisibility(View.VISIBLE);

@@ -80,7 +80,7 @@ public class PoolsFragment extends Fragment implements ISpin {
 
         utilViews = new UtilViews().getInstance(getContext());
         boussinesSpin = new BoussinesSpin(getActivity());
-        misPiscinas = boussinesSpin.getMyPools();
+
 
         adapterPools = new AdapterPools(getActivity(), R.layout.item_pools, misPiscinas, this);
         listPools.setAdapter(adapterPools);
@@ -88,12 +88,84 @@ public class PoolsFragment extends Fragment implements ISpin {
         adapterPools.notifyDataSetChanged();
 
         setActions();
-        idUsuario = spingApplication.getIdUsuario();
+        refreshPools();
+
 
         txt_header.setTypeface(utilViews.setFontNormal());
 
         return rootView;
     }
+
+    void refreshPools(){
+        Log.d(TAG, "refreshPools");
+        idUsuario = String.valueOf(new Spin().getUserID(getContext()));
+        if(idUsuario != null){
+            if (connection()){
+                Log.d(TAG, "Connections Pools");
+                getAllPools(idUsuario);
+            }else{
+                Log.d(TAG, "Local Pools");
+                loadPiscinasInAdapter();
+            }
+        }
+    }
+
+    void getAllPools(String id){
+        Log.d(TAG, "getAllPools");
+        NetConnection.getMisPiscinas(id, new TextHttpResponseHandlerMessage() {
+
+            public void onStart() {
+                super.onStart();
+                showMessage(getActivity(), getString(R.string.msg_progress_dialog));
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                hideMessage();
+                Log.d(TAG, "onSuccess " + !responseString.isEmpty());
+                try{
+                    if(!responseString.toString().trim().equals("[]")) {
+                        Pool[] mPiscinas = new Gson().fromJson(responseString.toString(), Pool[].class);
+                        if(mPiscinas.length > 0 ){
+                            boussinesSpin.deleteAllPools();
+                            for(int i = 0 ; i < mPiscinas.length; i++){
+                                int idPool = mPiscinas[i].getPool_id();
+                                boussinesSpin.insertPool(mPiscinas[i]);
+
+                                List<Equipment> equipo = mPiscinas[i].equipos;
+                                if(equipo != null){
+                                    for(int e = 0; e< equipo.size(); e++){
+                                        System.out.println("set idPool " + e);
+                                        equipo.get(e).setPool_id(idPool);
+                                    }
+                                    Log.d(TAG, "INSERTA MUCHOS EQUIPOS");
+                                    boussinesSpin.insertAllEquipment(equipo);
+                                }
+                            }
+                            loadPiscinasInAdapter();
+                        }
+                    }else{
+                        loadPiscinasInAdapter();
+                    }
+                }catch (Exception ex){
+                    Log.e(TAG, "Ex::. " + ex.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                hideMessage();
+                try{
+                    Log.d("onFailure",responseString);
+                }catch (Exception ex){
+                    Log.e("onFailure",ex.getMessage());
+                }finally {
+                    utilViews.showToastInView("Lo sentimos ocurrió un error");
+                }
+            }
+        });
+    }
+
 
     void loadPiscinasInAdapter(){
         Log.d(TAG, "loadPiscinasInAdapter");
@@ -231,7 +303,7 @@ public class PoolsFragment extends Fragment implements ISpin {
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 hideMessage();
                 try {
-                    Log.d("ConceptosJSon", responseString);
+                    Log.d("delete", "" +!responseString.isEmpty());
                     JSONObject jsonObject = new JSONObject(responseString);
                     Boolean exito = jsonObject.getBoolean(JSKeys.EXITO);
                     if(exito){
@@ -251,8 +323,6 @@ public class PoolsFragment extends Fragment implements ISpin {
                                 }
                             }
                             loadPiscinasInAdapter();
-                        }else{
-                            loadPiscinasInAdapter();
                         }
 
                         utilViews.showToastInView("La piscina se elimino correctamente.");
@@ -267,6 +337,11 @@ public class PoolsFragment extends Fragment implements ISpin {
                 }
             }
         });
+    }
+
+
+    boolean connection(){
+        return NetConnection.isOnline(getActivity(), true);
     }
 }
 

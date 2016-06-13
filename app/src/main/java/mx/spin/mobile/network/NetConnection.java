@@ -35,14 +35,14 @@ public class NetConnection {
             return true;
         }
 
-        if (showMessage) {
+     /*   if (showMessage) {
             AlertDialog.Builder builder = new AlertDialog.Builder(a);
             builder.setMessage(a.getResources().getString(R.string.msg_intenet_connection))
                     .setCancelable(true)
                     .setPositiveButton(a.getResources().getString(R.string.lbl_btn_ok), null);
             AlertDialog alert = builder.create();
             alert.show();
-        }
+        }*/
         return false;
     }
 
