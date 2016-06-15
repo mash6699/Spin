@@ -28,6 +28,7 @@ public interface SpinImpl {
     Pool getPool(int idPool);
     void deleteAllPools();
     List<Pool> getMyPools();
+    List<Pool> getOfflinePools();
 
     //TODO EQUIPMENT
     void insertEquipment(Equipment equipment);
@@ -50,9 +51,11 @@ public interface SpinImpl {
     List<countries> getCountries();
     void deleteCountries();
 
-    //TODO BITACORA
 
     //TODO ANALISIS
+
+
+    //TODO BITACORA
 
 
     void cleanDB();

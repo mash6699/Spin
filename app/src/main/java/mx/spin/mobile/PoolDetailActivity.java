@@ -208,18 +208,29 @@ public class PoolDetailActivity extends AppCompatActivity {
     }
 
     void parseEquipo(String mEquipo){
-        Log.d(TAG,"parseEquipo::: " + mEquipo);
-        String [] item = mEquipo.replace(",''","").split("|");
-        if(item.length == 3){
+        String listEquipment = mEquipo.replace(",''","");
+        Log.d(TAG,"parseEquipo::: " + listEquipment);
+        String [] item = listEquipment.split("\\|");
+     /*   if(item.length == 3){
             txt_moto.setVisibility(View.VISIBLE);
             txt_moto_val.setVisibility(View.VISIBLE);
             txt_moto_val.setText( getResources().getString(R.string.lbl_cantidad) + " : " + item[1] +
                     " " +  getResources().getString(R.string.lbl_caballaje) + ": " + item[2]);
-        }else{
+        }else{*/
             for(String element: item){
-                parseItemEquipo(element);
+                if(element.length() >= 3){
+                    String [] items = element.split(",");
+                    if(items[0].equals("4")){
+                        txt_moto.setVisibility(View.VISIBLE);
+                        txt_moto_val.setVisibility(View.VISIBLE);
+                        txt_moto_val.setText( getResources().getString(R.string.lbl_cantidad) + " : " + items[1] +
+                                " " +  getResources().getString(R.string.lbl_caballaje) + ": " + items[2]);
+                    }
+                }else {
+                    parseItemEquipo(element);
+                }
             }
-        }
+      //  }
     }
     void parseItemEquipo(String mEquipo){
         Log.d(TAG,"parseItemEquipo::: " + mEquipo);

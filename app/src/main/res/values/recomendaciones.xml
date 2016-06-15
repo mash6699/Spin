@@ -12,8 +12,8 @@
 
     <!--Turbidez y Metales-->
     <string name="turb_rec_20">Excelente, tu piscina esta en buena forma.</string>
-    <string name="turb_rec_21">Para solucionar el problema de Turbidez y Coloración debes agregar %1$s litros de CRISTALIN GREEN en el agua y poner a filtrar por 24 horas.</string>
-    <string name="turb_rec_22">Para solucionar el problema de Coloración debes agregar %1$s litros de CRISTALIN GREEN en el agua y poner a filtrar por 24 horas.
+    <string name="turb_rec_21">Para solucionar el problema de Turbidez y Coloración debes agregar %1$s de CRISTALIN GREEN en el agua y poner a filtrar por 24 horas.</string>
+    <string name="turb_rec_22">Para solucionar el problema de Coloración debes agregar %1$s de CRISTALIN GREEN en el agua y poner a filtrar por 24 horas.
     NOTA: Si el color es Verde militar muy probablemente sea problema de algas, si esto es así se debe hacer una súper cloración antes de agregar CRISTALIN GREEN.
     Al finalizar, se debera limpiar sus filtos.</string>
     <!--Turbidez y Metales-->
@@ -31,11 +31,11 @@
 
 
     <!--CLORO-->
-    <string name="cloro_rec_30">Debes agregar %1$s gramos de "TRIZIDE" a tu piscina, estó la llevara a 3 ppm.</string>
+    <string name="cloro_rec_30">Debes agregar %1$s de "TRIZIDE" a tu piscina, estó la llevara a 3 ppm.</string>
     <string name="cloro_rec_31">Revisa constantemente tus niveles de desinfectante para mantener sana el agua de tu piscina.</string>
     <string name="cloro_rec_32">Si se requiere podrias bajar el nivel de Cloro rapidamente con "NEUTRACLOR" o bien esperar a que baje por el uso normal.</string>
     <string name="cloraminas_rec_33">Excelente tu piscina esta en buen estado.</string>
-    <string name="cloraminas_rec_34">Debes agregar %1$s gramos de "SHOCK CORRECTIVO" a tu piscina y dejar el equipo de su piscina funcionando, estó eliminará las Cloraminas.</string>
+    <string name="cloraminas_rec_34">Debes agregar %1$s de "SHOCK CORRECTIVO" a tu piscina y dejar el equipo de su piscina funcionando, estó eliminará las Cloraminas.</string>
     <!--CLORO-->
 
     <!--BROMO -->

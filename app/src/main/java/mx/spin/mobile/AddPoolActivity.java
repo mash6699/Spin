@@ -713,7 +713,7 @@ public class AddPoolActivity extends AppCompatActivity  implements CompoundButto
 
     void parseVolumeInView(Volume volume){
         ed_volumen.setText(volume.getVolume());
-        sp_systemMetric.setSelection(volume.getUm());
+        sp_systemMetric.setSelection(volume.getUm()-1);
         typePool =  volume.getTipyPool();
     }
 

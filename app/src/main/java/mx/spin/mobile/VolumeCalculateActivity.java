@@ -204,7 +204,7 @@ public class VolumeCalculateActivity extends AppCompatActivity implements View.O
     void onTextChanged(CharSequence text) {
         String diametro = text.toString();
         if(!diametro.isEmpty()){
-           // Toast.makeText(this, "Text changed: " + text, Toast.LENGTH_LONG).show();
+            // Toast.makeText(this, "Text changed: " + text, Toast.LENGTH_LONG).show();
             updateRadio(diametro);
         } else{
             if(edRadio.isShown()) {
@@ -522,41 +522,46 @@ public class VolumeCalculateActivity extends AppCompatActivity implements View.O
     }
 
 
-    protected void calculateVolume(){
+    protected void calculateVolume() {
         Log.d(TAG, "calculateVolume:: " + poolSelected);
-        String mVolume = null;
-        switch (poolSelected) {
-            case Constants.POOL_CIRC:
-                volumen = CalculateVolume.PoolCircular(ancho, pUno, pDos);
-                break;
-            case Constants.POOL_RECT:
-                volumen = CalculateVolume.PoolRectangular(ancho, alto, pUno, pDos);
-                break;
-            case Constants.POOL_OVAL:
-                volumen = CalculateVolume.PoolOval(ancho, alto, pUno, pDos);
-                break;
-            case Constants.POOL_BEAN:
-                volumen = CalculateVolume.PoolBean(ancho, alto, largo, pUno, pDos);
-                break;
+        try {
+            String mVolume = null;
+            switch (poolSelected) {
+                case Constants.POOL_CIRC:
+                    volumen = CalculateVolume.PoolCircular(ancho, pUno, pDos);
+                    break;
+                case Constants.POOL_RECT:
+                    volumen = CalculateVolume.PoolRectangular(ancho, alto, pUno, pDos);
+                    break;
+                case Constants.POOL_OVAL:
+                    volumen = CalculateVolume.PoolOval(ancho, alto, pUno, pDos);
+                    break;
+                case Constants.POOL_BEAN:
+                    volumen = CalculateVolume.PoolBean(ancho, alto, largo, pUno, pDos);
+                    break;
+            }
+
+
+            if (typeSystemMetric == 0) {
+                typeSystemMetric = 1;
+            } else {
+                if (typeSystemMetric == 1) {
+                    mVolume = String.format(Constants.TWO_DECIMAL, volumen);
+                    tv_volume.setText(mVolume);
+                } else {
+                    mVolume = String.format(Constants.TWO_DECIMAL, (volumen * 7.5));
+                    tv_volume.setText(mVolume);
+                }
+
+            }
+
+            volume.setTipyPool(poolSelected);
+            volume.setUm(typeSystemMetric);
+            volume.setVolume(mVolume);
+
+        }catch(Exception ex){
+            Log.d(TAG, ex.getMessage());
         }
-
-
-
-        DecimalFormat precision = new DecimalFormat("0.00");
-        if(typeSystemMetric == 1) {
-            mVolume = String.format(Constants.TWO_DECIMAL,volumen);
-            // tv_volume.setText(precision.format(volumen) );
-            tv_volume.setText(mVolume);
-        }else {
-            //    tv_volume.setText(precision.format(volumen* 7.5) );
-            mVolume = String.format(Constants.TWO_DECIMAL,(volumen * 7.5));
-            tv_volume.setText(mVolume);
-        }
-
-        volume.setTipyPool(poolSelected);
-        volume.setUm(typeSystemMetric);
-        volume.setVolume(mVolume);
-
     }
 
     @Override

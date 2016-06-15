@@ -116,6 +116,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
     public String timeStamp;
 
     boolean permissons;
+    boolean cancelAction;
 
     @Nullable
     @Bind(R.id.txt_name)
@@ -242,6 +243,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
                 }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        cancelAction = true;
                         onBackPressed();
                     }
                 }).setTitle(getString(R.string.app_name)).setCancelable(false).create().show();
@@ -746,7 +748,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
             }
 
             Log.d(TAG, "UM [ "+ um +" ] calcDosificacion = " + dosificacion);
-            return String.format(Constants.TWO_DECIMAL,dosificacion);
+            return convertUM(String.format(Constants.TWO_DECIMAL,dosificacion));
         }
 
         public String turbidezCal(int type){
@@ -768,7 +770,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
             }
 
             Log.d(TAG, "UM [ "+ um +" ] turbidezCal = " + turbCal);
-            return String.format(Constants.TWO_DECIMAL, turbCal);
+            return convertUM(String.format(Constants.TWO_DECIMAL, turbCal));
         }
 
         public Double calcularShock(){
@@ -784,7 +786,7 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
         }
 
 
-        public Double desinfectanteCloro(){
+        public String desinfectanteCloro(){
             double result = 0;
             //TODO SI '=((16 * "VOLUMEN EN METROS CUBICOS") / 10) * (3 - "Cloro Libre")
             if(um == 2){
@@ -794,18 +796,52 @@ public class MantenimientoActivity extends AppCompatActivity implements Activity
                 result = (((16 * volumen) / 10) * (3 - cloroLibre) );
             }
             Log.d(TAG, "desinfectanteCloro: "  + result );
-            return  result;
+            return  convertUM(result);
         }
 
-        public Double desinfectanteCloraminas(){
+        public String desinfectanteCloraminas(){
             double result =   result = (((cloroTotal -cloroLibre) * 10 ) - cloroLibre);
 
             Log.d(TAG, "desinfectanteCloraminas: "  + result );
-            return  result;
+            return  convertUM(result);
         }
 
 
+        public static String convertUM(double gramos){
+            String texto = null;
+            double resultado;
+            //TODO litros
+            if(gramos >= 1000d){
+                resultado = gramos / 1000;
+                texto = resultado + " litros";
+            }
+            else{
+                //TODO GAMOS
+                resultado = gramos;
+                texto =  resultado + " gramos";
+            }
+            return texto;
+        }
+
+        public static String convertUM(String gram){
+            String texto = null;
+            double resultado;
+            double gramos = Double.parseDouble(gram);
+            //TODO litros
+            if(gramos >= 1000d){
+                resultado = gramos / 1000;
+                texto = resultado + " litros";
+            }
+            else{
+                //TODO GAMOS
+                resultado = gramos;
+                texto =  resultado + " gramos";
+            }
+            return texto;
+        }
+
     }
+
 
 
 

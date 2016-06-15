@@ -113,6 +113,14 @@ public class BoussinesSpin extends SpinFactory implements SpinImpl {
     }
 
     @Override
+    public List<Pool> getOfflinePools() {
+        Log.d(TAG, "getOfflinePools");
+        PoolDao poolDao = daoSession.getPoolDao();
+        List<Pool> pool = poolDao.queryBuilder().where(PoolDao.Properties.Pool_status.eq(0)).list();
+        return pool;
+    }
+
+    @Override
     public void insertEquipment(Equipment equipment) {
         Log.d(TAG, "insertEquipment");
         EquipmentDao equipmentDao = daoSession.getEquipmentDao();

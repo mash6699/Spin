@@ -124,8 +124,10 @@ public class PoolsFragment extends Fragment implements ISpin {
                 hideMessage();
                 Log.d(TAG, "onSuccess " + !responseString.isEmpty());
                 try{
-                    if(!responseString.toString().trim().equals("[]")) {
-                        Pool[] mPiscinas = new Gson().fromJson(responseString.toString(), Pool[].class);
+                    JSONObject jsonObject = new JSONObject(responseString);
+                    JSONArray piscinas = (JSONArray) jsonObject.get("piscinas");
+                    if(!piscinas.toString().trim().equals("[]")){
+                        Pool[] mPiscinas = new Gson().fromJson(piscinas.toString(), Pool[].class);
                         if(mPiscinas.length > 0 ){
                             boussinesSpin.deleteAllPools();
                             for(int i = 0 ; i < mPiscinas.length; i++){
@@ -171,6 +173,7 @@ public class PoolsFragment extends Fragment implements ISpin {
         Log.d(TAG, "loadPiscinasInAdapter");
         misPiscinas.clear();
         misPiscinas.addAll(boussinesSpin.getMyPools());
+        Log.d(TAG, "PISCINAS OFFLINE::: " + boussinesSpin.getOfflinePools().size() );
         adapterPools.notifyDataSetChanged();
     }
 
@@ -338,7 +341,6 @@ public class PoolsFragment extends Fragment implements ISpin {
             }
         });
     }
-
 
     boolean connection(){
         return NetConnection.isOnline(getActivity(), true);
